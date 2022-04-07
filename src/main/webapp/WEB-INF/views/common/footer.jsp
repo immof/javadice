@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-		<footer>
+	
 			<div class="footer">
 				<img class="footerlogo" src="/img/javadice_logo.png">
 
@@ -31,4 +31,3 @@
 				</div>
 
 			</div>
-		</footer>
