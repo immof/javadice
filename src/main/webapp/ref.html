@@ -1,605 +1,560 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>기본디자인아이템</title>
-    <!-- 구글 폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Rubik+Moonrocks&display=swap" rel="stylesheet">
-    <!-- 구글 아이콘 -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <!-- jquery -->
-    <script src="js/jquery-3.6.0.js"></script>
-    <!-- 기본 CSS -->
-    <link rel="stylesheet" href="css/default.css" />
-    <link rel="stylesheet" href="css/sweetalert2.min.css" />
-    <!-- 기본 js -->
-    <script src="js/default.js"></script>
-    <script src="js/sweetalert2.all.min.js"></script>
-    <style>
-      .flex-wrap {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .flex-wrap > div {
-        margin-right: 20px;
-      }
-      .bg {
-        color: #fff;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="header-top">
-        <div class="site-logo">
-          <a href="#">
-            <img src="./img/javadice_logo.png" style="width: 280px;">
-          </a>
-        </div>
-        <div class="header-link">
-          <li><a href="#" class="f-light fc-1">예약조회</a></li>
-          <li><a href="#" class="f-light fc-1">로그인</a></li>
-          <li>
-            <a href="#" class="f-light fc-2">
-              <span class="material-icons">perm_identity</span>
-              <span class="material-icons">expand_more</span>
-            </a>
-            <ul class="login-sub-navi">
-              <li><a href="#" class="f-light fc-1">sub-1</a></li>
-              <li><a href="#" class="f-light fc-1">sub-2</a></li>
-              <li><a href="#" class="f-light fc-1">sub-3</a></li>
-            </ul>
-          </li>
-        </div>
-      </div>
-      <div class="header-bottom">
-        <nav>
-          <ul class="navi">
-            <li><a href="#">메뉴-1</a></li>
-            <li><a href="#">메뉴-2</a></li>
-            <li><a href="#">메뉴-3</a></li>
-            <li><a href="#">메뉴-4</a></li>
-            <li>
-              <a href="#">메뉴-5
-                <span class="material-icons">expand_more</span>
-              </a>
-              <ul class="sub-navi">
-                <li><a href="#">sub-1</a></li>
-                <li><a href="#">sub-2</a></li>
-                <li><a href="#">sub-3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    <div class="page-content">
-      <div class="flex-wrap">
-        <div>
-          <h2>폰트</h2>
-          <div class="f-thin">가나다 abc ABC 0123</div>
-          <div class="f-light">가나다 abc ABC 0123</div>
-          <div class="f-medium">가나다 abc ABC 0123</div>
-          <div class="f-bold">가나다 abc ABC 0123</div>
-          <div class="f-black">가나다 abc ABC 0123</div>
-          <div class="f-title">GFS Didot</div>
-        </div>
-        <div>
-          <h2>글씨 색</h2>
-          <div class="fc-1">가나다 abc ABC 0123</div>
-          <div class="fc-2">가나다 abc ABC 0123</div>
-          <div class="fc-3">가나다 abc ABC 0123</div>
-          <div class="fc-4">가나다 abc ABC 0123</div>
-          <div class="fc-5">가나다 abc ABC 0123</div>
-          <div class="fc-6">가나다 abc ABC 0123</div>
-          <div class="fc-7">가나다 abc ABC 0123</div>
-          <div class="fc-8">가나다 abc ABC 0123</div>
-          <div class="fc-9">가나다 abc ABC 0123</div>
-        </div>
-        <div>
-          <h2>배경 색</h2>
-          <div class="bg-1 bg">가나다 abc ABC 0123</div>
-          <div class="bg-2 bg">가나다 abc ABC 0123</div>
-          <div class="bg-3 bg">가나다 abc ABC 0123</div>
-          <div class="bg-4 bg">가나다 abc ABC 0123</div>
-          <div class="bg-5 bg">가나다 abc ABC 0123</div>
-          <div class="bg-6 bg">가나다 abc ABC 0123</div>
-          <div class="bg-7 bg">가나다 abc ABC 0123</div>
-          <div class="bg-8 bg">가나다 abc ABC 0123</div>
-        </div>
-      </div>
-      <div>
-        <h2>벨트</h2>
-        <h3 class="belt">NOTICE</h3>
-      </div>
-      <br />
-      <div>
-        <h2>테이블 디자인</h2>
-        <h3>tbl</h3>
-        <table class="tbl">
-          <tr class="tr-1">
-            <th>ththth-1</th>
-            <td>tdtdtd-1</td>
-            <td>tdtdtd-1</td>
-            <td>tdtdtd-1</td>
-            <td>tdtdtd-1</td>
-          </tr>
-          <tr class="tr-2">
-            <th>ththth-2</th>
-            <td>tdtdtd-2</td>
-            <td>tdtdtd-2</td>
-            <td>tdtdtd-2</td>
-            <td>tdtdtd-2</td>
-          </tr>
-          <tr class="tr-3">
-            <th>ththth-3</th>
-            <td>tdtdtd-3</td>
-            <td>tdtdtd-3</td>
-            <td>tdtdtd-3</td>
-            <td>tdtdtd-3</td>
-          </tr>
-          <tr class="tr-4">
-            <th>ththth-4</th>
-            <td>tdtdtd-4</td>
-            <td>tdtdtd-4</td>
-            <td>tdtdtd-4</td>
-            <td>tdtdtd-4</td>
-          </tr>
-          <tr class="tr-5">
-            <th>ththth-5</th>
-            <td>tdtdtd-5</td>
-            <td>tdtdtd-5</td>
-            <td>tdtdtd-5</td>
-            <td>tdtdtd-5</td>
-          </tr>
-        </table>
-        <h3>tbl tbl-hover</h3>
-        <table class="tbl tbl-hover">
-          <tr class="tr-1">
-            <th>ththth-1</th>
-            <td>tdtdtd-1</td>
-            <td>tdtdtd-1</td>
-            <td>tdtdtd-1</td>
-            <td>tdtdtd-1</td>
-          </tr>
-          <tr class="tr-2">
-            <th>ththth-2</th>
-            <td>tdtdtd-2</td>
-            <td>tdtdtd-2</td>
-            <td>tdtdtd-2</td>
-            <td>tdtdtd-2</td>
-          </tr>
-          <tr class="tr-3">
-            <th>ththth-3</th>
-            <td>tdtdtd-3</td>
-            <td>tdtdtd-3</td>
-            <td>tdtdtd-3</td>
-            <td>tdtdtd-3</td>
-          </tr>
-          <tr class="tr-4">
-            <th>ththth-4</th>
-            <td>tdtdtd-4</td>
-            <td>tdtdtd-4</td>
-            <td>tdtdtd-4</td>
-            <td>tdtdtd-4</td>
-          </tr>
-          <tr class="tr-5">
-            <th>ththth-5</th>
-            <td>tdtdtd-5</td>
-            <td>tdtdtd-5</td>
-            <td>tdtdtd-5</td>
-            <td>tdtdtd-5</td>
-          </tr>
-        </table>
-      </div>
-      <br />
-      <div>
-        <h2>버튼디자인</h2>
-        <h3>버튼색</h3>
-        <button class="btn bc1">bc1</button>
-        <button class="btn bc2">bc2</button>
-        <button class="btn bc3">bc3</button>
-        <button class="btn bc4">bc4</button>
-        <button class="btn bc5">bc5</button>
-        <button class="btn bc6">bc6</button>
-        <button class="btn bc7">bc7</button>
-        <button class="btn bc8">bc8</button>
-        <hr />
-        <h3>버튼크기</h3>
-        <button class="btn bc1 bs1">size1</button>
-        <button class="btn bc1 bs2">size2</button>
-        <button class="btn bc1 bs3">size3</button>
-        <button class="btn bc1 bs4">size4</button>
-      </div>
-      <br />
-      <div>
-        <h2>입력양식</h2>
-        <input type="text" class="input-form" placeholder="input" />
-        <br>
-        <select class="input-form">
-          <option>value1</option>
-          <option>value2</option>
-          <option>value3</option>
-        </select>
-        <textarea class="input-form" placeholder="textarea"></textarea>
-        <input type="text" class="input-form" placeholder="disabled" disabled />
-        <input type="text" class="input-form" placeholder="readonly" readonly />
-      </div>
-      <br />
-      <div>
-        <h2>페이지처리</h2>
-      
-        <ul class="pagination circle-style">
-          <li>
-            <a class="page-item" href="#"
-              ><span class="material-icons">keyboard_double_arrow_left</span></a
-            >
-          </li>
-          <li>
-            <a class="page-item" href="#"
-              ><span class="material-icons">chevron_left </span></a
-            >
-          </li>
-          <li><a class="page-item" href="#">1</a></li>
-          <li><a class="page-item" href="#">2</a></li>
-          <li><a class="page-item" href="#">3</a></li>
-          <li><a class="page-item active-page" href="#">4</a></li>
-          <li><a class="page-item" href="#">5</a></li>
-          <li>
-            <a class="page-item" href="#"
-              ><span class="material-icons"> chevron_right </span></a
-            >
-          </li>
-          <li>
-            <a class="page-item" href="#"
-              ><span class="material-icons"
-                >keyboard_double_arrow_right</span
-              ></a
-            >
-          </li>
-        </ul>
-      </div>
-      <br />
-      <div>
-        <h2>프로모션 효과</h2>
-      <hr>
-         <!-- promotion wrap start-->
-         <div class="promotion-main-wrap">
-          <!-- <a href="#" target="_blank"> -->
-              <div class="promotion-main-item promo1">
-                  <div class="promotion-main-img">
-                      <img src="img/promo_big.jpg">
-                  </div>
-                  <div class="promotion-main-content">
-                      <p class="promotion-title">Breakfast Promotion</p>
-                      <hr>
-                      <p class="promotion-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다. </p>
-                      <button>자세히 보기</button>
-                  </div>
-              </div>
-              <div class="promotion-main-item promo2">
-                  <div class="promotion-main-img">
-                      <img src="img/promo_big.jpg">
-                  </div>
-                  <div class="promotion-main-content">
-                    <p class="promotion-title promo2Title">Breakfast Promotion</p>
-                    <hr>
-                    <p class="promotion-subTitle2">신선한 식재료로 최고의 퀄티를 제공합니다. </p>
-                    <!-- <button>자세히 보기</button> -->
-                  </div>
-              </div>
-              <div class="promotion-main-item promo3">
-                  <div class="promotion-main-img promo3-1">
-                      <img src="img/promo_big.jpg">
-                  </div>
-                  <div class="promotion-main-content">
-                      <p class="promotion-title">Breakfast Promotion</p>
-                      <hr>
-                      <p class="promotion-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다. </p>
-                      <button class="bc4">자세히 보기</button>
-                  </div>
-              </div>
-              <!-- </a> -->
-          </div>
-          <!-- promotion wrap end-->
-          <br><hr><br>
-                  <!-- promotion wrap start-->
-          <div class="promo-wrap">
-            <!-- <a href="#" target="_blank"> -->
-                <div class="promo-item promo4">
-                    <div class="promo-img">
-                        <img src="img/promo_big.jpg">
-                    </div>
-                    <div class="promo-content">
-                        <p class="promo-title">Breakfast Promotion</p>
-                        <hr>
-                        <p class="promo-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다. </p>
-                    </div>
-                </div>
-                <div class="promo-item promo2">
-                    <div class="promo-img">
-                        <img src="img/promo_big.jpg">
-                    </div>
-                    <div class="promo-content">
-                        <hr>
-                        <p class="promo-title">Breakfast Promotion</p>
-                        <button>자세히 보기</button>
-                    </div>
-                </div>
-                <div class="promo-item promo3">
-                    <div class="promo-img promo3-1">
-                        <img src="img/promo_big.jpg">
-                    </div>
-                    <div class="promo-content">
-                        <p class="promo-title">Breakfast Promotion</p>
-                        <hr>
-                        <p class="promo-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다. </p>
-                        <button>자세히 보기</button>
-                    </div>
-                </div>
-                <!-- </a> -->
-            </div>
-            <!-- promotion wrap end-->
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>기본디자인아이템</title>
+<!-- 구글 폰트-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Rubik+Moonrocks&display=swap"
+	rel="stylesheet">
+<!-- 구글 아이콘 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!-- jquery -->
+<script src="js/jquery-3.6.0.js"></script>
+<!-- 기본 CSS -->
+<link rel="stylesheet" href="css/default.css" />
+<link rel="stylesheet" href="css/sweetalert2.min.css" />
+<!-- 기본 js -->
+<script src="js/default.js"></script>
+<script src="js/sweetalert2.all.min.js"></script>
+<style>
+.flex-wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
 
-      <br />
-      <div>
-        <h2>문의하기 댓글</h2>
-        <table class="ask-comment">
-          <tr class="comment-info">
-            <td><span class="material-icons">account_circle</span> 관리자</td>
-            <td>2022-03-28</td>
-          </tr>
-          <tr class="comment-content">
-            <td colspan="2">
-              <p>
-                댓글 내용<br>
-                댓글 내용
-              </p>
-            </td>
-          </tr>
-          <tr class="comment-link">
-            <td colspan="2">
-              <a href="#">수정</a>
-              <a href="#">삭제</a>
-              <a href="#">답글달기</a>
-            </td>
-          </tr>
-        </table>
-        <div class="ask-comment-reply">
-          <span class="material-icons">subdirectory_arrow_right</span>
-          <table class="ask-comment">
-            <tr class="comment-info">
-              <td><span class="material-icons">insert_emoticon</span> 작성자</td>
-              <td>2022-03-28</td>
-            </tr>
-            <tr class="comment-content">
-              <td colspan="2">
-                <p>
-                  댓글 내용<br>
-                댓글 내용
-                </p>
-              </td>
-            </tr>
-            <tr class="comment-link">
-              <td colspan="2">
-                <a href="#">수정</a>
-                <a href="#">삭제</a>
-                <a href="#">답글달기</a>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <br><br>
-        <ul class="ask-comment-write">
-          <li>
-            <span class="material-icons">account_circle</span>
-          </li>
-          <li>
-            <textarea placeholder="내용을 입력해주세요."></textarea>
-          </li>
-          <li>
-            <button class="bc2">등록</button>
-          </li>
-        </ul>
-        <br><br>
-        <h2>리뷰 댓글</h2>
-        <table class="review">
-          <tr class="review-info">
-            <td rowspan="3">
-              <img src="img/boy (1).png">
-              <div>1일전</div>
-            </td>
-            <td>
-              <div class="star-wrap">
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span>4.5</span>
-                <div class="star-on">
-                    <div>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                    </div>
-                </div>
-            </div>
-            </td>
-            <td class="review-book-info">
-              <span>객실타입 : </span>
-              <span>스위트</span>
-              <span>| 인원 : </span>
-              <span>성인 2, 소아 1</span>
-              <span>| 김*딩님 </span>
-            </td>
-            <td>
-              <button class="bc3">삭제</button>
-            </td>
-          </tr>
-          <tr class="review-content">
-            <td colspan="3">
-              <p>
-                내용내용내용내용내용내용<br>
-                내용내용내용내용내용내용<br>
-              </p>
-              <div class="review-image">
-              </div>
-            </td>
-          </tr>
-        </table>
-        <table class="review">
-          <tr class="review-info">
-            <td rowspan="3">
-              <img src="img/girl (1).png">
-              <div>1개월전</div>
-            </td>
-            <td>
-              <div class="star-wrap">
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span class="material-icons">star_border</span>
-                <span>4.5</span>
-                <div class="star-on">
-                    <div>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                        <span class="material-icons">star</span>
-                    </div>
-                </div>
-            </div>
-            </td>
-            <td class="review-book-info">
-              <span>객실타입 : </span>
-              <span>스위트</span>
-              <span>| 인원 : </span>
-              <span>성인 2, 소아 1</span>
-              <span>| 김*딩님 </span>
-            </td>
-            <td>
-              <button class="bc3">삭제</button>
-            </td>
-          </tr>
-          <tr class="review-content">
-            <td colspan="3">
-              <p>
-                내용내용내용내용내용내용<br>
-                내용내용내용내용내용내용<br>
-                내용내용내용내용내용내용<br>
-                내용내용내용내용내용내용<br>
-                내용내용내용내용내용내용<br>
-              </p>
-              <div class="review-image">
-                <img src="img/고해상도 1.jpg">
-                <img src="img/고해상도 2.jpg">
-                <img src="img/고해상도 3.jpg">
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <br />
-      <div>
-        <h2>모달</h2>
-        <button class="btn bc3 modal-open-btn" target="#test-modal">
-          모달
-        </button>
-      </div>
-      <br>
-      <div>
-      	<h2>alert 라이브러리</h2>
-      	<button class="btn bc44" onclick="alertFunc('success')">성공</button>
-      	<button class="btn bc66" onclick="alertFunc('error')">에러</button>
-      	<button class="btn bc55" onclick="alertFunc('warning')">경고</button>
-      	<button class="btn bc88" onclick="alertFunc('info')">정보</button>
-      </div>
-    </div>
+.flex-wrap>div {
+	margin-right: 20px;
+}
 
-    
-      <div class="footer">
-        <img class="footerlogo" src="/img/javadice_logo.png">
+.bg {
+	color: #fff;
+}
+</style>
+</head>
+<body>
+	<header>
+		<div class="header-top">
+			<div class="site-logo">
+				<a href="#"> <img src="./img/javadice_logo.png"
+					style="width: 280px;">
+				</a>
+			</div>
+			<div class="header-link">
+				<li><a href="#" class="f-light fc-1">예약조회</a></li>
+				<li><a href="#" class="f-light fc-1">로그인</a></li>
+				<li><a href="#" class="f-light fc-2"> <span
+						class="material-icons">perm_identity</span> <span
+						class="material-icons">expand_more</span>
+				</a>
+					<ul class="login-sub-navi">
+						<li><a href="#" class="f-light fc-1">sub-1</a></li>
+						<li><a href="#" class="f-light fc-1">sub-2</a></li>
+						<li><a href="#" class="f-light fc-1">sub-3</a></li>
+					</ul></li>
+			</div>
+		</div>
+		<div class="header-bottom">
+			<nav>
+				<ul class="navi">
+					<li><a href="#">메뉴-1</a></li>
+					<li><a href="#">메뉴-2</a></li>
+					<li><a href="#">메뉴-3</a></li>
+					<li><a href="#">메뉴-4</a></li>
+					<li><a href="#">메뉴-5 <span class="material-icons">expand_more</span>
+					</a>
+						<ul class="sub-navi">
+							<li><a href="#">sub-1</a></li>
+							<li><a href="#">sub-2</a></li>
+							<li><a href="#">sub-3</a></li>
+						</ul></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div class="page-content">
+		<div class="flex-wrap">
+			<div>
+				<h2>폰트</h2>
+				<div class="f-thin">가나다 abc ABC 0123</div>
+				<div class="f-light">가나다 abc ABC 0123</div>
+				<div class="f-medium">가나다 abc ABC 0123</div>
+				<div class="f-bold">가나다 abc ABC 0123</div>
+				<div class="f-black">가나다 abc ABC 0123</div>
+				<div class="f-title">GFS Didot</div>
+			</div>
+			<div>
+				<h2>글씨 색</h2>
+				<div class="fc-1">가나다 abc ABC 0123</div>
+				<div class="fc-2">가나다 abc ABC 0123</div>
+				<div class="fc-3">가나다 abc ABC 0123</div>
+				<div class="fc-4">가나다 abc ABC 0123</div>
+				<div class="fc-5">가나다 abc ABC 0123</div>
+				<div class="fc-6">가나다 abc ABC 0123</div>
+				<div class="fc-7">가나다 abc ABC 0123</div>
+				<div class="fc-8">가나다 abc ABC 0123</div>
+				<div class="fc-9">가나다 abc ABC 0123</div>
+			</div>
+			<div>
+				<h2>배경 색</h2>
+				<div class="bg-1 bg">가나다 abc ABC 0123</div>
+				<div class="bg-2 bg">가나다 abc ABC 0123</div>
+				<div class="bg-3 bg">가나다 abc ABC 0123</div>
+				<div class="bg-4 bg">가나다 abc ABC 0123</div>
+				<div class="bg-5 bg">가나다 abc ABC 0123</div>
+				<div class="bg-6 bg">가나다 abc ABC 0123</div>
+				<div class="bg-7 bg">가나다 abc ABC 0123</div>
+				<div class="bg-8 bg">가나다 abc ABC 0123</div>
+			</div>
+		</div>
+		<div>
+			<h2>벨트</h2>
+			<h3 class="belt">NOTICE</h3>
+		</div>
+		<br />
+		<div>
+			<h2>테이블 디자인</h2>
+			<h3>tbl</h3>
+			<table class="tbl">
+				<tr class="tr-1">
+					<th>ththth-1</th>
+					<td>tdtdtd-1</td>
+					<td>tdtdtd-1</td>
+					<td>tdtdtd-1</td>
+					<td>tdtdtd-1</td>
+				</tr>
+				<tr class="tr-2">
+					<th>ththth-2</th>
+					<td>tdtdtd-2</td>
+					<td>tdtdtd-2</td>
+					<td>tdtdtd-2</td>
+					<td>tdtdtd-2</td>
+				</tr>
+				<tr class="tr-3">
+					<th>ththth-3</th>
+					<td>tdtdtd-3</td>
+					<td>tdtdtd-3</td>
+					<td>tdtdtd-3</td>
+					<td>tdtdtd-3</td>
+				</tr>
+				<tr class="tr-4">
+					<th>ththth-4</th>
+					<td>tdtdtd-4</td>
+					<td>tdtdtd-4</td>
+					<td>tdtdtd-4</td>
+					<td>tdtdtd-4</td>
+				</tr>
+				<tr class="tr-5">
+					<th>ththth-5</th>
+					<td>tdtdtd-5</td>
+					<td>tdtdtd-5</td>
+					<td>tdtdtd-5</td>
+					<td>tdtdtd-5</td>
+				</tr>
+			</table>
+			<h3>tbl tbl-hover</h3>
+			<table class="tbl tbl-hover">
+				<tr class="tr-1">
+					<th>ththth-1</th>
+					<td>tdtdtd-1</td>
+					<td>tdtdtd-1</td>
+					<td>tdtdtd-1</td>
+					<td>tdtdtd-1</td>
+				</tr>
+				<tr class="tr-2">
+					<th>ththth-2</th>
+					<td>tdtdtd-2</td>
+					<td>tdtdtd-2</td>
+					<td>tdtdtd-2</td>
+					<td>tdtdtd-2</td>
+				</tr>
+				<tr class="tr-3">
+					<th>ththth-3</th>
+					<td>tdtdtd-3</td>
+					<td>tdtdtd-3</td>
+					<td>tdtdtd-3</td>
+					<td>tdtdtd-3</td>
+				</tr>
+				<tr class="tr-4">
+					<th>ththth-4</th>
+					<td>tdtdtd-4</td>
+					<td>tdtdtd-4</td>
+					<td>tdtdtd-4</td>
+					<td>tdtdtd-4</td>
+				</tr>
+				<tr class="tr-5">
+					<th>ththth-5</th>
+					<td>tdtdtd-5</td>
+					<td>tdtdtd-5</td>
+					<td>tdtdtd-5</td>
+					<td>tdtdtd-5</td>
+				</tr>
+			</table>
+		</div>
+		<br />
+		<div>
+			<h2>버튼디자인</h2>
+			<h3>버튼색</h3>
+			<button class="btn bc1">bc1</button>
+			<button class="btn bc2">bc2</button>
+			<button class="btn bc3">bc3</button>
+			<button class="btn bc4">bc4</button>
+			<button class="btn bc5">bc5</button>
+			<button class="btn bc6">bc6</button>
+			<button class="btn bc7">bc7</button>
+			<button class="btn bc8">bc8</button>
+			<hr />
+			<h3>버튼크기</h3>
+			<button class="btn bc1 bs1">size1</button>
+			<button class="btn bc1 bs2">size2</button>
+			<button class="btn bc1 bs3">size3</button>
+			<button class="btn bc1 bs4">size4</button>
+		</div>
+		<br />
+		<div>
+			<h2>입력양식</h2>
+			<input type="text" class="input-form" placeholder="input" /> <br>
+			<select class="input-form">
+				<option>value1</option>
+				<option>value2</option>
+				<option>value3</option>
+			</select>
+			<textarea class="input-form" placeholder="textarea"></textarea>
+			<input type="text" class="input-form" placeholder="disabled" disabled />
+			<input type="text" class="input-form" placeholder="readonly" readonly />
+		</div>
+		<br />
+		<div>
+			<h2>페이지처리</h2>
+
+			<ul class="pagination circle-style">
+				<li><a class="page-item" href="#"><span
+						class="material-icons">keyboard_double_arrow_left</span></a></li>
+				<li><a class="page-item" href="#"><span
+						class="material-icons">chevron_left </span></a></li>
+				<li><a class="page-item" href="#">1</a></li>
+				<li><a class="page-item" href="#">2</a></li>
+				<li><a class="page-item" href="#">3</a></li>
+				<li><a class="page-item active-page" href="#">4</a></li>
+				<li><a class="page-item" href="#">5</a></li>
+				<li><a class="page-item" href="#"><span
+						class="material-icons"> chevron_right </span></a></li>
+				<li><a class="page-item" href="#"><span
+						class="material-icons">keyboard_double_arrow_right</span></a>
+				</li>
+			</ul>
+		</div>
+		<br />
+		<div>
+			<h2>프로모션 효과</h2>
+			<hr>
+			<!-- promotion wrap start-->
+			<div class="promotion-main-wrap">
+				<!-- <a href="#" target="_blank"> -->
+				<div class="promotion-main-item promo1">
+					<div class="promotion-main-img">
+						<img src="img/promo_big.jpg">
+					</div>
+					<div class="promotion-main-content">
+						<p class="promotion-title">Breakfast Promotion</p>
+						<hr>
+						<p class="promotion-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다.</p>
+						<button>자세히 보기</button>
+					</div>
+				</div>
+				<div class="promotion-main-item promo2">
+					<div class="promotion-main-img">
+						<img src="img/promo_big.jpg">
+					</div>
+					<div class="promotion-main-content">
+						<p class="promotion-title promo2Title">Breakfast Promotion</p>
+						<hr>
+						<p class="promotion-subTitle2">신선한 식재료로 최고의 퀄티를 제공합니다.</p>
+						<!-- <button>자세히 보기</button> -->
+					</div>
+				</div>
+				<div class="promotion-main-item promo3">
+					<div class="promotion-main-img promo3-1">
+						<img src="img/promo_big.jpg">
+					</div>
+					<div class="promotion-main-content">
+						<p class="promotion-title">Breakfast Promotion</p>
+						<hr>
+						<p class="promotion-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다.</p>
+						<button class="bc4">자세히 보기</button>
+					</div>
+				</div>
+				<!-- </a> -->
+			</div>
+			<!-- promotion wrap end-->
+			<br>
+			<hr>
+			<br>
+			<!-- promotion wrap start-->
+			<div class="promo-wrap">
+				<!-- <a href="#" target="_blank"> -->
+				<div class="promo-item promo4">
+					<div class="promo-img">
+						<img src="img/promo_big.jpg">
+					</div>
+					<div class="promo-content">
+						<p class="promo-title">Breakfast Promotion</p>
+						<hr>
+						<p class="promo-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다.</p>
+					</div>
+				</div>
+				<div class="promo-item promo2">
+					<div class="promo-img">
+						<img src="img/promo_big.jpg">
+					</div>
+					<div class="promo-content">
+						<hr>
+						<p class="promo-title">Breakfast Promotion</p>
+						<button>자세히 보기</button>
+					</div>
+				</div>
+				<div class="promo-item promo3">
+					<div class="promo-img promo3-1">
+						<img src="img/promo_big.jpg">
+					</div>
+					<div class="promo-content">
+						<p class="promo-title">Breakfast Promotion</p>
+						<hr>
+						<p class="promo-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다.</p>
+						<button>자세히 보기</button>
+					</div>
+				</div>
+				<!-- </a> -->
+			</div>
+			<!-- promotion wrap end-->
+
+			<br />
+			<div>
+				<h2>문의하기 댓글</h2>
+				<table class="ask-comment">
+					<tr class="comment-info">
+						<td><span class="material-icons">account_circle</span> 관리자</td>
+						<td>2022-03-28</td>
+					</tr>
+					<tr class="comment-content">
+						<td colspan="2">
+							<p>
+								댓글 내용<br> 댓글 내용
+							</p>
+						</td>
+					</tr>
+					<tr class="comment-link">
+						<td colspan="2"><a href="#">수정</a> <a href="#">삭제</a> <a
+							href="#">답글달기</a></td>
+					</tr>
+				</table>
+				<div class="ask-comment-reply">
+					<span class="material-icons">subdirectory_arrow_right</span>
+					<table class="ask-comment">
+						<tr class="comment-info">
+							<td><span class="material-icons">insert_emoticon</span> 작성자</td>
+							<td>2022-03-28</td>
+						</tr>
+						<tr class="comment-content">
+							<td colspan="2">
+								<p>
+									댓글 내용<br> 댓글 내용
+								</p>
+							</td>
+						</tr>
+						<tr class="comment-link">
+							<td colspan="2"><a href="#">수정</a> <a href="#">삭제</a> <a
+								href="#">답글달기</a></td>
+						</tr>
+					</table>
+				</div>
+				<br>
+				<br>
+				<ul class="ask-comment-write">
+					<li><span class="material-icons">account_circle</span></li>
+					<li><textarea placeholder="내용을 입력해주세요."></textarea></li>
+					<li>
+						<button class="bc2">등록</button>
+					</li>
+				</ul>
+				<br>
+				<br>
+				<h2>리뷰 댓글</h2>
+				<table class="review">
+					<tr class="review-info">
+						<td rowspan="3"><img src="img/boy (1).png">
+							<div>1일전</div></td>
+						<td>
+							<div class="star-wrap">
+								<span class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span>4.5</span>
+								<div class="star-on">
+									<div>
+										<span class="material-icons">star</span> <span
+											class="material-icons">star</span> <span
+											class="material-icons">star</span> <span
+											class="material-icons">star</span> <span
+											class="material-icons">star</span>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td class="review-book-info"><span>객실타입 : </span> <span>스위트</span>
+							<span>| 인원 : </span> <span>성인 2, 소아 1</span> <span>| 김*딩님
+						</span></td>
+						<td>
+							<button class="bc3">삭제</button>
+						</td>
+					</tr>
+					<tr class="review-content">
+						<td colspan="3">
+							<p>
+								내용내용내용내용내용내용<br> 내용내용내용내용내용내용<br>
+							</p>
+							<div class="review-image"></div>
+						</td>
+					</tr>
+				</table>
+				<table class="review">
+					<tr class="review-info">
+						<td rowspan="3"><img src="img/girl (1).png">
+							<div>1개월전</div></td>
+						<td>
+							<div class="star-wrap">
+								<span class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span
+									class="material-icons">star_border</span> <span>4.5</span>
+								<div class="star-on">
+									<div>
+										<span class="material-icons">star</span> <span
+											class="material-icons">star</span> <span
+											class="material-icons">star</span> <span
+											class="material-icons">star</span> <span
+											class="material-icons">star</span>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td class="review-book-info"><span>객실타입 : </span> <span>스위트</span>
+							<span>| 인원 : </span> <span>성인 2, 소아 1</span> <span>| 김*딩님
+						</span></td>
+						<td>
+							<button class="bc3">삭제</button>
+						</td>
+					</tr>
+					<tr class="review-content">
+						<td colspan="3">
+							<p>
+								내용내용내용내용내용내용<br> 내용내용내용내용내용내용<br> 내용내용내용내용내용내용<br>
+								내용내용내용내용내용내용<br> 내용내용내용내용내용내용<br>
+							</p>
+							<div class="review-image">
+								<img src="img/고해상도 1.jpg"> <img src="img/고해상도 2.jpg">
+								<img src="img/고해상도 3.jpg">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br />
+			<div>
+				<h2>모달</h2>
+				<button class="btn bc3 modal-open-btn" target="#test-modal">
+					모달</button>
+			</div>
+			<br>
+			<div>
+				<h2>alert 라이브러리</h2>
+				<button class="btn bc44" onclick="alertFunc('success')">성공</button>
+				<button class="btn bc66" onclick="alertFunc('error')">에러</button>
+				<button class="btn bc55" onclick="alertFunc('warning')">경고</button>
+				<button class="btn bc88" onclick="alertFunc('info')">정보</button>
+			</div>
+		</div>
+
+		<footer>
+			<div class="footer">
+				<img class="footerlogo" src="/img/javadice_logo.png">
 
 
-    <div class="lastfot">
-        <ul class="lastfot1">
-            <div class="lastfot2">
-                <p>
-                    업체명 : 여기서java / 주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩 / 상담가능시간 : 오전 10시 ~ 오후 9시
-                </p>
-            </div>
-            <div class="lastfot3">
-                <p>
-                    계좌번호 : 서울은행 101-2069-7918-01 (주)자바매니지먼트 / 대표자 : 2조플젝 / 사업자등록번호 : 285-87-01580
-                </p>
-            </div>
-            <div class="lastfot4">
-                <p>
-                    전화 : 051-746-1077 / 이메일 : herejava@naver.com 
-                </p>
-            </div>
-        </ul>
-    </div>
+				<div class="lastfot">
+					<ul class="lastfot1">
+						<div class="lastfot2">
+							<p>업체명 : 여기서java / 주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩 / 상담가능시간 :
+								오전 10시 ~ 오후 9시</p>
+						</div>
+						<div class="lastfot3">
+							<p>계좌번호 : 서울은행 101-2069-7918-01 (주)자바매니지먼트 / 대표자 : 2조플젝 /
+								사업자등록번호 : 285-87-01580</p>
+						</div>
+						<div class="lastfot4">
+							<p>전화 : 051-746-1077 / 이메일 : herejava@naver.com</p>
+						</div>
+					</ul>
+				</div>
 
-    <div class="topfot">
-      <ul>
-        <li><a href="#">문의하기</a></li>
-        <li><a href="#">이용약관</a></li>
-        <li><a href="#">자주 묻는 질문</a></li>
-        <li><a href="#">사이트 가이드</a></li>
-      </ul>
-    </div>
+				<div class="topfot">
+					<ul>
+						<li><a href="#">문의하기</a></li>
+						<li><a href="#">이용약관</a></li>
+						<li><a href="#">자주 묻는 질문</a></li>
+						<li><a href="#">사이트 가이드</a></li>
+					</ul>
+				</div>
 
-</div>
-    </footer>
-    <!--예약취소 modal 시작-->
-    <div id="test-modal" class="modal-bg">
-      <div class="modal-wrap">
-        <div class="modal-head">
-          <h2>예약을 정말로 취소하시겠습니까?</h2><br>
-        </div>
-        <div class="modal-content">
-          <table class="modal-content-tbl">
-            <tr>
-              <th class="modal-tbl-th">객실정보</th><br>
-              <td class="modal-tbl-td">로얄스위트</td>
-            </tr>
-            <tr>
-              <th class="modal-tbl-th">체크인</th>
-              <td class="modal-tbl-td">6월15일(수) 15:00</td>
-            </tr>
-            <tr>
-              <th class="modal-tbl-th">체크아웃</th>
-              <td class="modal-tbl-td">6월17일(금) 11:00</td>
-            </tr>
-            <tr>
-              <th class="modal-tbl-th">예약정보</th>
-              <td class="modal-tbl-td">성인3</td>
-            </tr>
-          </table>
-        </div>
-        <div class="modal-foot">
-            <p>취소 후 다시 예약시 다른 예약이 있는 경우 예약이 불가할 수 있습니다.<br>
-            카드결제 취소의 경우 취소 후 영업일 2-3일 내로 처리될 예정입니다.
-            </p>
-            <div class="modal-btns-container">
-              <button class="btn bc3" id="modal-btns-item">예약취소</button>
-              <button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 예약취소 modal 끝 -->
-  </body>
+			</div>
+		</footer>
+		<!--예약취소 modal 시작-->
+		<div id="test-modal" class="modal-bg">
+			<div class="modal-wrap">
+				<div class="modal-head">
+					<h2>예약을 정말로 취소하시겠습니까?</h2>
+					<br>
+				</div>
+				<div class="modal-content">
+					<table class="modal-content-tbl">
+						<tr>
+							<th class="modal-tbl-th">객실정보</th>
+							<br>
+							<td class="modal-tbl-td">로얄스위트</td>
+						</tr>
+						<tr>
+							<th class="modal-tbl-th">체크인</th>
+							<td class="modal-tbl-td">6월15일(수) 15:00</td>
+						</tr>
+						<tr>
+							<th class="modal-tbl-th">체크아웃</th>
+							<td class="modal-tbl-td">6월17일(금) 11:00</td>
+						</tr>
+						<tr>
+							<th class="modal-tbl-th">예약정보</th>
+							<td class="modal-tbl-td">성인3</td>
+						</tr>
+					</table>
+				</div>
+				<div class="modal-foot">
+					<p>
+						취소 후 다시 예약시 다른 예약이 있는 경우 예약이 불가할 수 있습니다.<br> 카드결제 취소의 경우 취소 후
+						영업일 2-3일 내로 처리될 예정입니다.
+					</p>
+					<div class="modal-btns-container">
+						<button class="btn bc3" id="modal-btns-item">예약취소</button>
+						<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 예약취소 modal 끝 -->
+</body>
 </html>
