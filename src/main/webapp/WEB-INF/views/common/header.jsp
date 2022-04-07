@@ -17,6 +17,7 @@
 <!-- 기본 js -->
 <script src="js/default.js"></script>
 <script src="js/sweetalert2.all.min.js"></script>
+<script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous"></script>
 <style>
 .flex-wrap {
 	display: flex;
@@ -57,11 +58,14 @@
 		<div class="header-bottom">
 			<nav>
 				<ul class="navi">
-					<li><a href="#">메뉴-1</a></li>
-					<li><a href="#">메뉴-2</a></li>
-					<li><a href="#">메뉴-3</a></li>
-					<li><a href="#">메뉴-4</a></li>
-					<li><a href="#">메뉴-5 <span class="material-icons">expand_more</span>
+					<li>
+						<i class="fa-solid fa-magnifying-glass"></i>
+						<a href="#">숙소예약</a>
+					</li>
+					<li><a href="#">객실정보</a></li>
+					<li><a href="#">프로모션</a></li>
+					<li><a href="#">오시는길</a></li>
+					<li><a href="#">게시판<span class="material-icons">expand_more</span>
 					</a>
 						<ul class="sub-navi">
 							<li><a href="#">sub-1</a></li>
