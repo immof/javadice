@@ -1,0 +1,16 @@
+#login-modal .input-box {
+  width: 80%;
+  margin: 0 auto;
+  border-bottom: none;
+}
+
+#login-modal .input-box > a:hover {
+  text-decoration: underline;
+}
+#login-modal .modal-foot {
+  width: 80%;
+  margin: 0 auto;
+}
+#login-modal .input-box.link-box {
+  text-align: right;
+}
