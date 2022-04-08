@@ -36,10 +36,6 @@ public class MypageServlet extends HttpServlet {
 		//3.비즈니스로직
 		MemberService service = new MemberService();
 		Member m = service.selecOneMember(memberId);
-		System.out.println(m.getMemberId());
-		System.out.println(m.getMemberName());
-		System.out.println(m.getMemberNick());
-		System.out.println(m.getMemberPhone());
 		//4.결과처리
 
 	}
