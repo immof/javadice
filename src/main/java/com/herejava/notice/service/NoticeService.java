@@ -16,10 +16,7 @@ public class NoticeService {
 	public NoticePageData selecetNoticeList(int reqPage) {
 			Connection conn = JDBCTemplate.getConnection();
 			NoticeDao dao = new NoticeDao();
-			/**
-			 * 
-			 * 페이징 처리
-			 */
+			
 			//1. 결정사항 : 한 페이지당 게시물 수
 			int numPerPage = 10;
 			/*
