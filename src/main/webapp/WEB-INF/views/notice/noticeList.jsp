@@ -55,6 +55,7 @@
 	}
 	#pageNavi{
 			margin:10px;
+			margin-bottom: 20px;
 		}
 	
 	
