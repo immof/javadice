@@ -16,6 +16,7 @@
           flex-grow: 7.5;
           vertical-align: middle;
           display: flex;
+          margin-top: 20px;
         }
         .mypage-header-profile>a{
           margin-right: 15px;
@@ -39,9 +40,10 @@
           border-bottom: solid 2px rgb(167, 167, 167);
         }
         .left-menu{
-            margin-top: 50px;
+            margin-top: 60px;
             flex-grow: 1;
             color: rgb(51, 51, 51);
+            width: 10%;
       
         }
         .left-menu>ul{
@@ -63,6 +65,9 @@
         .left-menu>ul>li>a:hover{
             color: rgb(172, 158, 137);
             font-size: 17px;
+        }
+        .mypage-content-title{
+        	margin-top: 10px;
         }
 
 </style>
