@@ -7,7 +7,7 @@
 .mypage-header {
 	display: flex;
 	height: 150px;
-	background-color: #948465;
+	background-color: #ac9e89;
 }
 
 .mypage-header-space {
@@ -46,7 +46,7 @@
 	margin-top: 3px;
 	height: 30px;
 	font-family: ns-bold;
-	border-bottom: solid 2px #948465;
+	border-bottom: solid 2px #ac9e89;
 }
 
 .left-menu {
@@ -57,8 +57,8 @@
 }
 
 .left-menu>ul {
-	border-top: solid 2px #948465;
-	border-bottom: solid 2px #948465;
+	border-top: solid 2px #ac9e89;
+	border-bottom: solid 2px #ac9e89;
 	margin-left: 30px;
 	list-style-type: none;
 }
@@ -80,7 +80,7 @@
 	font-size: 17px;
 }
 .left-menu hr{
-	background-color: #948465;
+	background-color: #ac9e89;
 	height: 1px;
 	border: none;
 }

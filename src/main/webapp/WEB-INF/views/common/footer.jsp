@@ -16,7 +16,7 @@
 								사업자등록번호 : 285-87-01580</p>
 						</div>
 						<div class="lastfot4">
-							<p>전화 : 051-746-1077 / 이메일 : herejava@naver.com</p>
+							<p>전화 : 1577-7777 / 이메일 : herejava@naver.com</p>
 						</div>
 					</ul>
 				</div>

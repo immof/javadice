@@ -20,18 +20,88 @@
     .loc-info .loc-img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .loc-info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .loc-info .loc-link {color: #5085BB;}
+    #map{
+   		width: 1200px;
+   		height: 500px;
+   		margin: 0;
+    }
+    #direction-info{
+    	display: flex;
+    	justify-content: space-between;
+    	width: 100%;
+    	height: 50px;
+    	border-top: 1px solid #a7a7a7;
+    	border-bottom: 1px solid #a7a7a7;
+    	line-height: 50px;
+    	font-size: 12px;
+    	margin: 0;
+    }
+    #direction-info span{
+    	font-size: 16px;
+    }
+    #direction-info>span:first-child{
+    	font-size: 16px;
+ 		padding-left: 20px;
+    }
+    #loc-btn{
+    	width: 400px;
+    	height: 50px;
+    	font-size: 18px;
+    	padding: 0;
+    	font-weight:bold
+    }
+    .direction-traffic{
+    	display: flex;
+    	justify-content: space-around;
+    	margin-top: 20px;
+    	
+    }
+    .direction-bus{
+    	width:30%;
+    }
+   	.direction-subway{
+    	width: 30%;
+   	}
+   	.direction-car{
+    	width: 30%;
+   	}
+   	.direction-title{
+   		font-size: 18px;
+    	border-bottom: 2px solid #ac9e89;
+   	}
+   
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
-
 	<div class="page-content">
 		<div class="flex-wrap">
-			<div id="map" style="width: 1200px; height: 500px;"></div>
-			<div><a href="https://map.kakao.com/?urlX=477188&urlY=1120681&urlLevel=3&itemId=1139403627">지도에서 보기</a> </div>
+			<div id="map"></div>
+			<div id="direction-info">
+				<span>서울특별시 영등포구 선유동2로 57 이레빌딩</span>|<span>Tel: 1577-7777</span>|<span>Fax: 02-157-7777</span>				
+				<button class="btn bc1" id="loc-btn"
+				onclick="location.href='https://map.kakao.com/?urlX=477188&urlY=1120681&urlLevel=3&itemId=1139403627'"
+				>지도에서 보기</button>
+			</div>
+		</div>
+		<div class="direction-traffic">
+			<div class="direction-bus">
+				<div class="direction-title">버스</div>
+				<div class="direction-content">선유고등학교/(구)강서세무서
+지선 7612         간선 1000 / 1200 / 1300 / 1301 / 1302 / 1400 / 1500 / 1601 / M6628 / M6724
+당산역
+지선 602 / 760 / 5620 / 5714 / 6514 / 6623 / 6631</div>
+			</div>
+			<div class="direction-subway">
+				<div class="direction-title">지하철</div>
+				<div class="direction-content">지하철 2, 9호선 당산역 12번 출구 400m</div>
+			</div>
+			<div class="direction-car">
+				<div class="direction-title">차량</div>
+				<div class="direction-content">당산역 혜화역 1번 출구 → 학교 진입로 앞 정류소(올레AS센터 성균관대입구점 맞은편) → 성균관대학교 정문 → 600주년기념관 → 정차소(농구장 옆)</div>
+			</div>
 		</div>
 	</div>
-
 	<script>
 		// 37.533837,126.896836
 		$(function() {

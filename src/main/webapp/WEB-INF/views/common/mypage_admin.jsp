@@ -7,7 +7,7 @@
 		 .mypage-header{
           display: flex;
           height: 150px;
-          background-color: #948465;
+          background-color: #ac9e89;
         }
         .mypage-header-space{
           flex-grow: 2;
