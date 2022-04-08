@@ -66,7 +66,7 @@
 					</li>
 					<li><a href="#">객실정보</a></li>
 					<li><a href="#">프로모션</a></li>
-					<li><a href="#">오시는길</a></li>
+					<li><a href="/location.do">오시는길</a></li>
 					<li><a href="#">게시판<span class="material-icons">expand_more</span>
 					</a>
 						<ul class="sub-navi">
