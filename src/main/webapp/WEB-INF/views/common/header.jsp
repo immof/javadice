@@ -38,7 +38,7 @@
 	<header>
 		<div class="header-top">
 			<div class="site-logo">
-				<a href="#"> <img src="./img/javadice_logo.png"
+				<a href="/"> <img src="./img/javadice_logo.png"
 					style="width: 280px;">
 				</a>
 			</div>
@@ -70,8 +70,8 @@
 					</a>
 						<ul class="sub-navi">
 							<li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
-							<li><a href="#">sub-2</a></li>
-							<li><a href="#">sub-3</a></li>
+							<li><a href="#">문의사항</a></li>
+							<li><a href="#">자주묻는 질문</a></li>
 						</ul></li>
 				</ul>
 			</nav>
