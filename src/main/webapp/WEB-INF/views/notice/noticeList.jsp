@@ -14,7 +14,7 @@
 	<a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a>
 	<table class="tbl tbl-hover notice-tbl">
 				<tr class="tr-2">
-					<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
+					<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th>
 				</tr>
 	</table>
 	</div>
