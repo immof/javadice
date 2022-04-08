@@ -67,6 +67,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page1-content">
 		<div class="belt">NOTICE</div>
+		<br>
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
 		<div class="page1-title">공지사항</div>

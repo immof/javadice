@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
+<style>
         .noticemenu{
             width: 800px;
+            margin: 0 auto;
+            padding: 0;
         }
         .noticemenu>ul{
             list-style-type: none;
