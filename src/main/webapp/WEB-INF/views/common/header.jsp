@@ -68,7 +68,7 @@
 					<li><a href="#">게시판<span class="material-icons">expand_more</span>
 					</a>
 						<ul class="sub-navi">
-							<li><a href="#">sub-1</a></li>
+							<li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
 							<li><a href="#">sub-2</a></li>
 							<li><a href="#">sub-3</a></li>
 						</ul></li>

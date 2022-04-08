@@ -11,6 +11,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 	공지사항
+	
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
