@@ -17,6 +17,14 @@ public class MemberService {
 		return m;
 	}
 
+	public Member selectOneMember(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		Member m = dao.selectOneMember(conn,member);
+		JDBCTemplate.close(conn);
+		return m;
+	}
+
 	
 	
 	
