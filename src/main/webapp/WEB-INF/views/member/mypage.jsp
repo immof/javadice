@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@include file="/WEB-INF/views/common/page_leftMenu.jsp" %>
 	<h2><%=m.getMemberNick() %>님 마이페이지 입니다. 테스트</h2>
 </body>
 </html>
