@@ -25,11 +25,11 @@ public class NoticeDao {
 			while(rset.next()) {
 				Notice n = new Notice();
 				n.setNoticeNo(rset.getInt("notice_no"));
-				n.setNoticeTitle(rset.getString("notice_title"));
 				n.setNoticeWriter(rset.getString("notice_writer"));
+				n.setNoticeTitle(rset.getString("notice_title"));
 				n.setNoticeContent(rset.getString("notice_content"));
-				n.setNoticeReadCount(rset.getInt("notice_count"));
-				n.setNoticeEnrollDate(rset.getString("notice_date"));
+				n.setNoticeReadCount(rset.getInt("notice_read_count"));
+				n.setNoticeEnrollDate(rset.getString("notice_enroll_date"));
 				n.setFilename(rset.getString("filename"));
 				n.setFilepath(rset.getString("filepath"));
 				list.add(n);
