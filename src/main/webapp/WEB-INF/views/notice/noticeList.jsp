@@ -9,8 +9,9 @@
 <body>
 	
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
+	<div class="belt"></div>
 	<div class="page-content">
-	<div class="page-title">공지사항</div>
+	<div class="page-title"></div>
 	<a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a>
 	<table class="tbl tbl-hover notice-tbl">
 				<tr class="tr-2">
