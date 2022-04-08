@@ -5,10 +5,12 @@
 <html>
 <head>
 <style>
-
+.mypage-content{
+	min-height: 800px;
+}
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 회원 페이지 ::</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>

@@ -43,7 +43,10 @@
 }
 
 .mypage-content-title {
-	border-bottom: solid 2px rgb(167, 167, 167);
+	margin-top: 3px;
+	height: 30px;
+	font-family: ns-bold;
+	border-bottom: solid 2px #948465;
 }
 
 .left-menu {
@@ -54,8 +57,8 @@
 }
 
 .left-menu>ul {
-	border-top: solid 2px rgb(167, 167, 167);
-	border-bottom: solid 2px rgb(167, 167, 167);
+	border-top: solid 2px #948465;
+	border-bottom: solid 2px #948465;
 	margin-left: 30px;
 	list-style-type: none;
 }
@@ -76,9 +79,10 @@
 	color: rgb(172, 158, 137);
 	font-size: 17px;
 }
-
-.mypage-content-title {
-	margin-top: 10px;
+.left-menu hr{
+	background-color: #948465;
+	height: 1px;
+	border: none;
 }
 </style>
 
