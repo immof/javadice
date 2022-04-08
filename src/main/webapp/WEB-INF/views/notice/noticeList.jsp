@@ -41,7 +41,7 @@
 		width:45%;
 	}
 	.notice-tbl tr>th:nth-child(2) {
-		text-align: left;
+		text-align: center;
 	}
 	.notice-tbl tr>th:nth-child(3) {
 		width:15%;
