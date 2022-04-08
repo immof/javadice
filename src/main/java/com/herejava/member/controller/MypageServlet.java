@@ -1,6 +1,8 @@
 package com.herejava.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +39,9 @@ public class MypageServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		Member m = service.selecOneMember(memberId);
 		//4.결과처리
-
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage.jsp");
+		request.setAttribute("member", m);
+		view.forward(request, response);
 	}
 
 	/**
