@@ -52,7 +52,28 @@ public class MemberDao {
 		return m;
 	}//selecOneMember
 
-	
+	public Member selectOneMember(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		String query = "select * from member where member_id = ? and member_pw = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPw());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = getMember(rset);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return m;
+	}//로그인용 DB 조회
 	
 	
 	
