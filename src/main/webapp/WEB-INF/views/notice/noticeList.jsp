@@ -10,7 +10,13 @@
 	
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-	공지사항
+	<div class="page-title">공지사항</div>
+	<a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a>
+	<table class="tbl tbl-hover notice-tbl">
+				<tr class="tr-2">
+					<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th>
+				</tr>
+	</table>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
