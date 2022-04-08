@@ -11,7 +11,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/common/page_leftMenu.jsp" %>
-	<h2><%=m.getMemberNick() %>님 마이페이지 입니다. 테스트</h2>
+	<%@include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="page-content">
+		<div class="flex-wrap">
+			<%@include file="/WEB-INF/views/common/mypage_admin.jsp"%>
+			
+			<div class="mypage-content">
+				<div class="mypage-content-title">회원목록</div>
+			</div>
+
+		</div>
+		<!-- flex-wrap -->
+	</div>
+	<!-- page-content -->
 </body>
+	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </html>
