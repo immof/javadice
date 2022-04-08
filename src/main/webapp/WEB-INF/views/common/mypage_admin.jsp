@@ -72,8 +72,6 @@
 <title>Insert title here</title>
  -->
 </head>
-
-
         <header>
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
