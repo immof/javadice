@@ -33,9 +33,10 @@
 		}
 	.notice-tbl tr{
 		border-bottom: 1px solid #ccc;
+		text-align: center;
 		}
 	.notice-tbl tr>th:first-child {
-		width:10%;
+		width:9%;
 	}
 	.notice-tbl tr>th:nth-child(2) {
 		width:45%;
