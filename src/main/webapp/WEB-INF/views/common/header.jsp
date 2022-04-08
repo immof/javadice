@@ -1,5 +1,7 @@
+<%@page import="com.herejava.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% Member m = (Member)session.getAttribute("m"); %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,9 +46,9 @@
 			<div class="header-link">
 				<li><a href="#" class="f-light fc-1">예약조회</a></li>
 				<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
-				<li><a href="#" class="f-light fc-2"> <span
-						class="material-icons">perm_identity</span> <span
-						class="material-icons">expand_more</span>
+				<li><a href="/mypage.do?memberId=oventest123@gmail.com" class="f-light fc-2"> 
+					<span class="material-icons">perm_identity</span> 
+					<span class="material-icons">expand_more</span>
 				</a>
 					<ul class="login-sub-navi">
 						<li><a href="#" class="f-light fc-1">sub-1</a></li>

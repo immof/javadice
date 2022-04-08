@@ -9,11 +9,23 @@ import common.JDBCTemplate;
 
 public class MemberService {
 
+	public Member selecOneMember(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		Member m = dao.selecOneMember(conn, memberId);
+		JDBCTemplate.close(conn);
+		return m;
+	}
+
 	public Member selectOneMember(Member member) {
 		Connection conn = JDBCTemplate.getConnection();
 		MemberDao dao = new MemberDao();
 		Member m = dao.selectOneMember(conn,member);
-		return null;
+		JDBCTemplate.close(conn);
+		return m;
 	}
 
-}
+	
+	
+	
+}//MemberService class
