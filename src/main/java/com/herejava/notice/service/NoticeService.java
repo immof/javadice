@@ -1,5 +1,11 @@
 package com.herejava.notice.service;
 
-public class NoticeService {
+import java.sql.Connection;
+import java.util.ArrayList;
 
+import common.JDBCTemplate;
+
+
+public class NoticeService {
+	
 }
