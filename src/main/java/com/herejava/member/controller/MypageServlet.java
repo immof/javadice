@@ -15,7 +15,7 @@ import com.herejava.member.vo.Member;
 /**
  * Servlet implementation class MypageServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage.do" })
+@WebServlet(name = "Mypage", urlPatterns = { "/mypage_main.do" })
 public class MypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

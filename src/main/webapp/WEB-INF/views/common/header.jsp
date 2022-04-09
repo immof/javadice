@@ -45,7 +45,7 @@
 			<div class="header-link">
 				<li><a href="#" class="f-light fc-1">예약조회</a></li>
 				<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
-				<li><a href="/mypage.do?memberId=oventest123@gmail.com" class="f-light fc-2"> 
+				<li><a href="/mypage_main.do?memberId=oventest123@gmail.com" class="f-light fc-2"> 
 					<span class="material-icons">perm_identity</span> 
 					<span class="material-icons">expand_more</span>
 				</a>
