@@ -11,11 +11,12 @@
 	}
 	.tbl tr>td:first-child{
 		text-align: left;
-		width: 13%;
+		width: 15%;
 	}
 	.tbl tr>td:nth-child(2){
-		width: 20%;
+		width: 40%;
 	}
+
 	.tbl tr:last-child a{
 		text-decoration: underline;
 	}
@@ -36,35 +37,24 @@
 			<div class="mypage-content">
 				<div class="mypage-content-title">비밀번호 변경하기</div>
 				<div class="member-info">
-					<form action="/memberUpdate.do" method="post">
+					<form action="/memberUpdatePw.do" method="post">
 						<table class="tbl">
 							<tr class="tr-3">
-								<td>이메일(ID)</td>
-								<td><input class="input-form" type="text" placeholder="<%=m.getMemberId() %>" disabled></td>
+								<td>현재 비밀번호</td>
+								<td><input class="input-form" type="text"></td>
+								<td>
 							</tr>
 							<tr class="tr-3">
-								<td>비밀번호</td>
-								<td><input class="input-form" type="text" placeholder="*************" disabled></td>
+								<td>변경할 비밀번호</td>
+								<td><input class="input-form"></td>
 							</tr>
 							<tr class="tr-3">
-								<td>이름</td>
-								<td><input class="input-form" type="text" placeholder="<%=m.getMemberName() %>" ></td>
-							</tr>
-							<tr class="tr-3">
-								<td>닉네임</td>
-								<td><input class="input-form" type="text" placeholder="<%=m.getMemberNick() %>" ></td>
-							</tr>
-							<tr class="tr-3">
-								<td>휴대폰번호</td>
-								<td><input class="input-form" type="text" placeholder="<%=m.getMemberPhone() %>" ></td>
+								<td>비밀번호 확인</td>
+								<td><input class="input-form"></td>
 							</tr>
 							<tr class="tr-3">
 								<td></td>
 								<td><button class="bc1 updateInfo-btn" type="submit" value="">정보 수정하기</button></td>
-							</tr>
-							<tr class="tr-3">
-								<td></td>
-								<td><a href="#" class=fc-8>회원탈퇴</a></td>
 							</tr>
 						</table>
 					</form>
