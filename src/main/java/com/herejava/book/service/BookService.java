@@ -1,7 +1,6 @@
 package com.herejava.book.service;
 
 import java.sql.Connection;
-<<<<<<< HEAD
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,11 +11,6 @@ import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
 import com.herejava.room.dao.RoomDao;
 import com.herejava.room.vo.Room;
-=======
-
-import com.herejava.book.dao.BookDao;
-import com.herejava.book.vo.Book;
->>>>>>> branch 'develop_lsy0' of https://github.com/Pyseon/javadice.git
 
 import common.JDBCTemplate;
 
@@ -86,5 +80,6 @@ public class BookService {
 	}
 	
 	//예약번호로 예약취소(예약상태 취소로 update)하는 service 메소드
+	
 	
 }
