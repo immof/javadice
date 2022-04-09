@@ -110,7 +110,7 @@
               <li><a href="#">문의하기</a></li>
               <hr>
               <li class="f-bold">회원정보</li>
-              <li><a href="#">정보관리</a></li>
+              <li><a href="/mypage_info.do">정보관리</a></li>
               <li><a href="#">비밀번호 변경</a></li>
               <li><a href="#">회원탈퇴</a></li>               
           </ul>
