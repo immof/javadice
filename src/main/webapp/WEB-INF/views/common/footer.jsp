@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	
+
 			<div class="footer">
-				<img class="footerlogo" src="/img/javadice_logo.png">
+				<img class="footerlogo" src="/img/javadice_logo.png" style="width:250px;height:50px;">
 
 
 				<div class="lastfot">
@@ -31,3 +31,4 @@
 				</div>
 
 			</div>
+</f
