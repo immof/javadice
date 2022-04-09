@@ -54,7 +54,7 @@
 				<%} %>
 				<li>
 				<%if(m!=null) { %>
-					<a href="/mypage_info.do?memberId=<%=m.getMemberId() %>" class="f-light fc-2"> 
+					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>" class="f-light fc-2"> 
 						<span class="material-icons">perm_identity</span> 
 						<span class="material-icons">expand_more</span>
 				<%}else { %>
@@ -64,7 +64,7 @@
 					<ul class="login-sub-navi">
 						<li><a href="#" class="f-light fc-1">sub-1</a></li>
 						<li><a href="#" class="f-light fc-1">sub-2</a></li>
-						<li><a  class="f-light fc-1" href="/mypage_info.do?memberId=oventest123@gmail.com">김태선 테스트용</a></li>
+						<li><a  class="f-light fc-1" href="#">sub-3</a></li>
 					</ul>
 				</li>
 			</div>
