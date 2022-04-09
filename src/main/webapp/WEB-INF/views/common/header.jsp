@@ -1,7 +1,6 @@
 <%@page import="com.herejava.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% Member m = (Member)session.getAttribute("m"); %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,13 +65,13 @@
 					</li>
 					<li><a href="#">객실정보</a></li>
 					<li><a href="#">프로모션</a></li>
-					<li><a href="#">오시는길</a></li>
+					<li><a href="/location.do">오시는길</a></li>
 					<li><a href="#">게시판<span class="material-icons">expand_more</span>
 					</a>
 						<ul class="sub-navi">
-							<li><a href="#">sub-1</a></li>
-							<li><a href="#">sub-2</a></li>
-							<li><a href="#">sub-3</a></li>
+							<li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
+							<li><a href="#">문의사항</a></li>
+							<li><a href="#">자주묻는 질문</a></li>
 						</ul></li>
 				</ul>
 			</nav>

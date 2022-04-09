@@ -1,4 +1,4 @@
-package com.herejava.member.controller;
+package com.herejava.notice.service;
 
 import java.io.IOException;
 
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.member.service.MemberService;
-import com.herejava.member.vo.Member;
+import com.herejava.notice.vo.NoticePageData;
+
+
 
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class NoticeListServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage.do" })
-public class MypageServlet extends HttpServlet {
+@WebServlet(name = "NoticeList", urlPatterns = { "/noticeList.do" })
+public class NoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public NoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +32,18 @@ public class MypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.인코딩
-		request.setCharacterEncoding("utf-8");
-		//2.값추출
-		String memberId = request.getParameter("memberId");
-		//3.비즈니스로직
-		MemberService service = new MemberService();
-		Member m = service.selecOneMember(memberId);
-		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/member_page.jsp");
-		request.setAttribute("member", m);
-		view.forward(request, response);
+		//1. 인코딩
+				request.setCharacterEncoding("utf-8");
+				//2. 값추출
+				int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+				//3. 비즈니스로직
+				NoticeService service = new NoticeService();
+				NoticePageData npd = service.selecetNoticeList(reqPage);
+				//4. 결과처리\
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
+				request.setAttribute("list", npd.getList());
+				request.setAttribute("pageNavi", npd.getPageNavi());
+				view.forward(request, response);
 	}
 
 	/**

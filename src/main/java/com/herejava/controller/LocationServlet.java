@@ -1,4 +1,4 @@
-package com.herejava.member.controller;
+package com.herejava.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.member.service.MemberService;
-import com.herejava.member.vo.Member;
-
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class LocationServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage.do" })
-public class MypageServlet extends HttpServlet {
+@WebServlet(name = "Location", urlPatterns = { "/location.do" })
+public class LocationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public LocationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,13 +31,9 @@ public class MypageServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		String memberId = request.getParameter("memberId");
 		//3.비즈니스로직
-		MemberService service = new MemberService();
-		Member m = service.selecOneMember(memberId);
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/member_page.jsp");
-		request.setAttribute("member", m);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/etc/location.jsp");
 		view.forward(request, response);
 	}
 

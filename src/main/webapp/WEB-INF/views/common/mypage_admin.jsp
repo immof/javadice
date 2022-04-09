@@ -7,7 +7,7 @@
 		 .mypage-header{
           display: flex;
           height: 150px;
-          background-color: #948465;
+          background-color: #ac9e89;
         }
         .mypage-header-space{
           flex-grow: 2;
@@ -35,9 +35,12 @@
           padding: 27px;
         }
         
-        .mypage-content-title{
-          border-bottom: solid 2px rgb(167, 167, 167);
-        }
+		.mypage-content-title {
+		  margin-top: 3px;
+	      height: 30px;
+	      font-family: ns-bold;
+	      border-bottom: solid 2px rgb(167, 167, 167);
+		}
         .left-menu{
             margin-top: 50px;
             flex-grow: 1;
