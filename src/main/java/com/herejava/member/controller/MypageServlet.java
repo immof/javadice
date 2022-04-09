@@ -39,7 +39,7 @@ public class MypageServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		Member m = service.selecOneMember(memberId);
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
 		request.setAttribute("member", m);
 		view.forward(request, response);
 	}

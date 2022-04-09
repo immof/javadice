@@ -1,7 +1,7 @@
 package com.herejava.book.vo;
 
 public class Book {
-	private int bookNo;
+	private long bookNo;
 	private int roomNo;
 	private int memberNo;
 	private int bookPeople;
@@ -15,8 +15,8 @@ public class Book {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Book(int bookNo, int roomNo, int memberNo, int bookPeople, String bookName, String bookPhone, String bookDay,
-			int bookState, String checkIn, String checkOut) {
+	public Book(long bookNo, int roomNo, int memberNo, int bookPeople, String bookName, String bookPhone,
+			String bookDay, int bookState, String checkIn, String checkOut) {
 		super();
 		this.bookNo = bookNo;
 		this.roomNo = roomNo;
@@ -29,10 +29,10 @@ public class Book {
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 	}
-	public int getBookNo() {
+	public long getBookNo() {
 		return bookNo;
 	}
-	public void setBookNo(int bookNo) {
+	public void setBookNo(long bookNo) {
 		this.bookNo = bookNo;
 	}
 	public int getRoomNo() {
