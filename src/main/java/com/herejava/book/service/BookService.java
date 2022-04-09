@@ -18,4 +18,6 @@ public class BookService {
 		return b;
 	}
 	
+	//예약번호로 예약취소(예약상태 취소로 update)하는 service 메소드
+	
 }
