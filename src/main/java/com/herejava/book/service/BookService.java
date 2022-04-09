@@ -9,7 +9,7 @@ import common.JDBCTemplate;
 
 public class BookService {
 
-	//예약 객체 1개 가져오는 service 메소드
+	//예약번호로 객체 1개 가져오는 service 메소드
 	public Book selectOneBook(int bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();

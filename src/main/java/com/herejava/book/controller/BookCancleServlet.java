@@ -13,16 +13,16 @@ import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
 
 /**
- * Servlet implementation class BookViewServlet
+ * Servlet implementation class BookCancleServlet
  */
-@WebServlet(name = "BookView", urlPatterns = { "/bookView.do" })
-public class BookViewServlet extends HttpServlet {
+@WebServlet(name = "BookCancle", urlPatterns = { "/bookCancle.do" })
+public class BookCancleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookViewServlet() {
+    public BookCancleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,9 @@ public class BookViewServlet extends HttpServlet {
 		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
 		BookService service = new BookService();
 		Book b = service.selectOneBook(bookNo);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
+		System.out.println(bookNo);
+		System.out.println(b);
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/book/bookCancel.jsp");
 		request.setAttribute("b", b);
 		view.forward(request, response);
 	}

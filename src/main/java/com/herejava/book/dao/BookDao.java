@@ -11,12 +11,13 @@ import common.JDBCTemplate;
 
 public class BookDao {
 	
-	//예약 객체 1개 가져오는 dao 메소드
+	//예약번호로 예약객체 1개 가져오는 dao 메소드
 	public Book selectOneBook(Connection conn, int bookNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Book b = null;
 		String query = "select * from book where book_no=?";
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bookNo);
