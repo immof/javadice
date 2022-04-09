@@ -15,7 +15,7 @@ import com.herejava.member.vo.Member;
 /**
  * Servlet implementation class MypageServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage.do" })
+@WebServlet(name = "Mypage", urlPatterns = { "/mypage_main.do" })
 public class MypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,7 +39,7 @@ public class MypageServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		Member m = service.selecOneMember(memberId);
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/member_page.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main.jsp");
 		request.setAttribute("member", m);
 		view.forward(request, response);
 	}
