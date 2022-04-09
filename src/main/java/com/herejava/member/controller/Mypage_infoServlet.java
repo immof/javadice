@@ -13,16 +13,16 @@ import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
 
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class Mypage_infoServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage_main.do" })
-public class MypageServlet extends HttpServlet {
+@WebServlet(name = "Mypage_info", urlPatterns = { "/mypage_info.do" })
+public class Mypage_infoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public Mypage_infoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,9 +38,9 @@ public class MypageServlet extends HttpServlet {
 		//3.비즈니스로직
 		MemberService service = new MemberService();
 		Member m = service.selectOneMember(memberId);
-		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
-		request.setAttribute("member", m);
+		//4. 결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_info.jsp");
+		request.setAttribute("m", m);
 		view.forward(request, response);
 	}
 

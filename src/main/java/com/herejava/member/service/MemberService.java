@@ -9,7 +9,7 @@ import common.JDBCTemplate;
 
 public class MemberService {
 
-	public Member selecOneMember(String memberId) {
+	public Member selectOneMember(String memberId) {
 		Connection conn = JDBCTemplate.getConnection();
 		MemberDao dao = new MemberDao();
 		Member m = dao.selecOneMember(conn, memberId);
