@@ -10,7 +10,7 @@ import common.JDBCTemplate;
 public class BookDao {
 	
 	//예약번호로 예약객체 1개 가져오는 dao 메소드
-	public Book selectOneBook(Connection conn, int bookNo) {
+	public Book selectOneBook(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Book b = null;
@@ -18,11 +18,11 @@ public class BookDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bookNo);
+			pstmt.setLong(1, bookNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				b = new Book();
-				b.setBookNo(rset.getInt("book_no"));
+				b.setBookNo(rset.getLong("book_no"));
 				b.setRoomNo(rset.getInt("room_no"));
 				b.setMemberNo(rset.getInt("member_no"));
 				b.setBookPeople(rset.getInt("book_people"));
