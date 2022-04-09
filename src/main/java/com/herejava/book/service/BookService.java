@@ -1,6 +1,7 @@
 package com.herejava.book.service;
 
 import java.sql.Connection;
+<<<<<<< HEAD
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,11 @@ import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
 import com.herejava.room.dao.RoomDao;
 import com.herejava.room.vo.Room;
+=======
+
+import com.herejava.book.dao.BookDao;
+import com.herejava.book.vo.Book;
+>>>>>>> branch 'develop_lsy0' of https://github.com/Pyseon/javadice.git
 
 import common.JDBCTemplate;
 
@@ -70,4 +76,13 @@ public class BookService {
 		return list;	//여기서 반환되는 roomCount는 해당 room의 총 갯수가 아니라 예약 가능한 room의 갯수임
 	}
 
+	//예약번호로 객체 1개 가져오는 service 메소드
+	public Book selectOneBook(int bookNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		Book b = dao.selectOneBook(conn, bookNo);
+		JDBCTemplate.close(conn);
+		return b;
+	}
+	
 }

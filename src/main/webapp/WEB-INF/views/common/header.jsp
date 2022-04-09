@@ -38,7 +38,7 @@
 	<header>
 		<div class="header-top">
 			<div class="site-logo">
-				<a href="/"> <img src="./img/javadice_logo.png"
+				<a href="/index.jsp"> <img src="./img/javadice_logo.png"
 					style="width: 280px;">
 				</a>
 			</div>
