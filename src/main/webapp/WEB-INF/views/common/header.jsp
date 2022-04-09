@@ -16,7 +16,7 @@
 <!-- jquery -->
 <script src="js/jquery-3.6.0.js"></script>
 <!-- 기본 CSS -->
-<link rel="stylesheet" href="css/default.css" />
+<link rel="stylesheet" href="css/default_city.css" />
 <link rel="stylesheet" href="css/sweetalert2.min.css" />
 <!-- 기본 js -->
 <script src="js/default.js"></script>
@@ -47,11 +47,19 @@
 			</div>
 			<div class="header-link">
 				<li><a href="#" class="f-light fc-1">예약조회</a></li>
+				<%if(m!=null) { %>
+				<li><a href="#" class="f-light fc-1">로그아웃</a></li>
+				<%}else { %>
 				<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
+				<%} %>
 				<li>
-					<a href="/mypage_main.do?memberId=maxjuny" class="f-light fc-2"> 
+				<%if(m!=null) { %>
+					<a href="/mypage_info.do?memberId=<%=m.getMemberId() %>" class="f-light fc-2"> 
 						<span class="material-icons">perm_identity</span> 
 						<span class="material-icons">expand_more</span>
+				<%}else { %>
+					<a href="/login.do" class="f-light fc-2"> 
+				<%} %>
 					</a>
 					<ul class="login-sub-navi">
 						<li><a href="#" class="f-light fc-1">sub-1</a></li>
