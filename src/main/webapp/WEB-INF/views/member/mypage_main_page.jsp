@@ -16,15 +16,14 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@ include file="/WEB-INF/views/member/memberPage_common.jsp" %>
+			<%@ include file="/WEB-INF/views/member/mypage_common.jsp" %>
 			<div class="mypage-content">
 				<div class="mypage-content-title">최근 예약내역</div>
 				<p>사진</p>
 				<p>객실명이랑 체크인아웃 시간</p>
 				<button>이용예정</button>
 				<a href="#">상세보기></a>
-				<button>예약취소</button>
-		
+				<a href = "#">예약취소</a>
 				<div class="mypage-content-title">내 정보</div>
 				<button target="#">수정하기</button>
 				<table name="my-info">

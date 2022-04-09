@@ -71,7 +71,7 @@ public class BookService {
 		return list;	//여기서 반환되는 roomCount는 해당 room의 총 갯수가 아니라 예약 가능한 room의 갯수임
 	}
 
-	//예약번호로 객체 1개 가져오는 service 메소드
+	// 예약번호로 객체 1개 가져오는 service 메소드
 	public Book selectOneBook(long bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
@@ -79,7 +79,15 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return b;
 	}
-	//예약내역 리스트와 페이지번호(페이징처리) 가져오는 service 메소드
+	// 회원아이디로 객체 1개 가져오는 service 메소드
+	public Book selectOneBook(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		Book b = dao.selectOneBook(conn, memberNo);
+		JDBCTemplate.close(conn);
+		return b;
+	}
+	// 예약내역 리스트와 페이지번호(페이징처리) 가져오는 service 메소드
 	public BookPageData selectBookList(int reqPage) {
 		Connection conn= JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();

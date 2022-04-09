@@ -16,7 +16,7 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@ include file="/WEB-INF/views/member/memberPage_common.jsp"%>
+			<%@ include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
 				<div class="mypage-content-title">내 예약내역</div>
 					<!-- 테스트 시작-->

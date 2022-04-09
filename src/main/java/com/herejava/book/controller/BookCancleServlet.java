@@ -32,10 +32,10 @@ public class BookCancleServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		BookService service = new BookService();
-		Book b = service.selectOneBook(bookNo);
-		System.out.println(bookNo);
+		Book b = service.selectOneBook(memberNo);
+		System.out.println(memberNo);
 		System.out.println(b);
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/book/bookCancel.jsp");
 		request.setAttribute("b", b);
