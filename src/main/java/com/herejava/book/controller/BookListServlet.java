@@ -1,6 +1,7 @@
 package com.herejava.book.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,18 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookPageData;
 
 /**
- * Servlet implementation class BookViewServlet
+ * Servlet implementation class BookListServlet
  */
-@WebServlet(name = "BookView", urlPatterns = { "/bookView.do" })
-public class BookViewServlet extends HttpServlet {
+@WebServlet(name = "BookList", urlPatterns = { "/bookList.do" })
+public class BookListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookViewServlet() {
+    public BookListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +33,19 @@ public class BookViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//예약리스트 불러오는 servlet
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		long bookNo = Long.parseLong(request.getParameter("bookNo"));
+		//2. 값추출
+		String memberId = request.getParameter("memberId");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		//3. 비즈니스로직
 		BookService service = new BookService();
-		Book b = service.selectOneBook(bookNo);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
-		request.setAttribute("b", b);
+		BookPageData bpd = service.selectBookList(reqPage);
+		//4. 화면출력
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookList.jsp");
+		request.setAttribute("list", bpd.getList());
+		request.setAttribute("pageNavi", bpd.getPageNavi());
 		view.forward(request, response);
 	}
 

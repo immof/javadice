@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookPageData;
 import com.herejava.room.dao.RoomDao;
 import com.herejava.room.vo.Room;
 
@@ -71,15 +72,84 @@ public class BookService {
 	}
 
 	//예약번호로 객체 1개 가져오는 service 메소드
-	public Book selectOneBook(int bookNo) {
+	public Book selectOneBook(long bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
 		Book b = dao.selectOneBook(conn, bookNo);
 		JDBCTemplate.close(conn);
 		return b;
 	}
-	
-	//예약번호로 예약취소(예약상태 취소로 update)하는 service 메소드
-	
+	//예약내역 리스트와 페이지번호(페이징처리) 가져오는 service 메소드
+	public BookPageData selectBookList(int reqPage) {
+		Connection conn= JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		
+		//numPerPage = 한 페이지당 게시물 수 
+		int numPerPage = 4;
+		
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage + 1;
+		ArrayList<Book> list = dao.selectBookList(conn,start,end);
+		//페이징처리
+		int totalCount = dao.totalBookCount(conn);
+		
+		int totalPage = 0;
+		if(totalPage%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		int pageNaviSize = 5; 
+		
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		//페이지숫자
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' active-page href='/noticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo<=totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul>";
+		BookPageData bpd = new BookPageData(list, pageNavi);
+		JDBCTemplate.close(conn);
+		return bpd;
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
