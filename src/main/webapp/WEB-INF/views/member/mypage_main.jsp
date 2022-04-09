@@ -18,7 +18,7 @@
 	@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			@include file="/WEB-INF/views/member/memberPage_common.jsp"%>
+			@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
 				<div class="mypage-content-title">콘텐츠 제목입니다. 제목쓰시면 콘텐츠영역 줄 위에 쓰여집니다.</div>
 			</div>
