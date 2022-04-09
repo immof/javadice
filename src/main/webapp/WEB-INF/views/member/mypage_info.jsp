@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%
-		Member m = (Member)request.getAttribute("m");
-	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +35,7 @@
 </head>
 <body>
 <!-- 회원정보 관리 페이지입니다. -->
-	<%@include file="/WEB-INF/views/common/header.jsp"%>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
 			<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
