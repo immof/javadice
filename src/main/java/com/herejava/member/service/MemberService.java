@@ -1,6 +1,7 @@
 package com.herejava.member.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.herejava.member.dao.MemberDao;
 import com.herejava.member.vo.Member;
@@ -23,6 +24,14 @@ public class MemberService {
 		Member m = dao.selectOneMember(conn,member);
 		JDBCTemplate.close(conn);
 		return m;
+	}
+
+	public ArrayList<Member> selectAllMember() {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		ArrayList<Member> list = dao.selectAllMember(conn);
+		JDBCTemplate.close(conn);
+		return list;
 	}
 
 	
