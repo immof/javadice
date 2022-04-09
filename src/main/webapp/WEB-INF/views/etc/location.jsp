@@ -90,7 +90,7 @@
 				<div class="direction-content">선유고등학교/(구)강서세무서
 지선 7612         간선 1000 / 1200 / 1300 / 1301 / 1302 / 1400 / 1500 / 1601 / M6628 / M6724
 당산역
-지선 602 / 760 / 5620 / 5714 / 6514 / 6623 / 6631</div>
+지선 602 / 760 / 5620 / 5714 / 6514 / 6623 / 6631 </div>
 			</div>
 			<div class="direction-subway">
 				<div class="direction-title">지하철</div>
