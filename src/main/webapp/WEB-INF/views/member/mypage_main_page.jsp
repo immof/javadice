@@ -19,29 +19,34 @@
 			<%@ include file="/WEB-INF/views/member/mypage_common.jsp" %>
 			<div class="mypage-content">
 				<div class="mypage-content-title">최근 예약내역</div>
-				<p>사진</p>
-				<p>객실명이랑 체크인아웃 시간</p>
-				<button>이용예정</button>
-				<a href="#">상세보기></a>
-				<a href = "#">예약취소</a>
-				<div class="mypage-content-title">내 정보</div>
-				<button target="#">수정하기</button>
+				<table name="my-book-tbl">
+					<tr>
+						<td>객실사진</td>
+						<td>로얄스위트</td>
+						<td>체크인/체크아웃</td>
+						<td>이용상태</td>
+						<td><a href="#">상세보기></a></td>
+						<a href="/bookCancle.do?memberNo=30 ">예약취소</a>
+					</tr>
+				</table>
+				<br><br><br><br>
+				<div class="mypage-content-title">내 정보<a href="#">수정하기</a></div>
 				<table name="my-info">
 					<tr>
-						<th>이메일</th><br>
-						<td></td>
+						<th>이메일</th>
+						<td><%=m.getMemberId() %></td>
 					</tr>
 					<tr>
 						<th>닉네임</th><br>
-						<td></td>
+						<td><%=m.getMemberNick() %></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th><br>
-						<td></td>
+						<td><%=m.getMemberPw() %></td>
 					</tr>
 					<tr>
 						<th>휴대폰번호</th>
-						<td></td>
+						<td><%=m.getMemberPhone() %></td>
 					</tr>
 				</table>
 			</div>

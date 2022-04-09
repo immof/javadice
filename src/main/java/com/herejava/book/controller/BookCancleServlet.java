@@ -35,8 +35,6 @@ public class BookCancleServlet extends HttpServlet {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		BookService service = new BookService();
 		Book b = service.selectOneBook(memberNo);
-		System.out.println(memberNo);
-		System.out.println(b);
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/book/bookCancel.jsp");
 		request.setAttribute("b", b);
 		view.forward(request, response);

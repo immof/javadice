@@ -79,7 +79,7 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return b;
 	}
-	// 회원아이디로 객체 1개 가져오는 service 메소드
+	// 회원번호로 객체 1개 가져오는 service 메소드
 	public Book selectOneBook(int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();

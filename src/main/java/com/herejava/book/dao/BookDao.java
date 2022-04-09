@@ -115,12 +115,12 @@ public class BookDao {
 		}
 		return result;
 	}
-	//회원아이디로 예약객체 1개 가져오는 dao 메소드
+	//회원번호로 예약객체 1개 가져오는 dao 메소드
 	public Book selectOneBook(Connection conn, int memberNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Book b = null;
-		String query = "select * from book where member_id=?";
+		String query = "select * from book where member_no=?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
