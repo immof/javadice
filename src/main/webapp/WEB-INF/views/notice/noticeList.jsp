@@ -33,9 +33,10 @@
 		}
 	.notice-tbl tr{
 		border-bottom: 1px solid #ccc;
+		text-align: center;
 		}
 	.notice-tbl tr>th:first-child {
-		width:10%;
+		width:9%;
 	}
 	.notice-tbl tr>th:nth-child(2) {
 		width:45%;
@@ -54,6 +55,7 @@
 	}
 	#pageNavi{
 			margin:10px;
+			margin-bottom: 20px;
 		}
 	
 	
@@ -66,6 +68,9 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page1-content">
 		<div class="belt">NOTICE</div>
+		<br>
+		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
+		<br>
 		<div class="page1-title">공지사항</div>
 		<!-- <a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a> -->
 		<hr>
