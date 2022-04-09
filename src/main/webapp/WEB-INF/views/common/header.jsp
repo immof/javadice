@@ -41,7 +41,7 @@
 	<header>
 		<div class="header-top">
 			<div class="site-logo">
-				<a href="/index.jsp"> <img src="./img/javadice_logo.png"
+				<a href="/"> <img src="./img/javadice_logo.png"
 					style="width: 280px;">
 				</a>
 			</div>
@@ -56,7 +56,7 @@
 					<ul class="login-sub-navi">
 						<li><a href="#" class="f-light fc-1">sub-1</a></li>
 						<li><a href="#" class="f-light fc-1">sub-2</a></li>
-						<li><a  class="f-light fc-1" href="/mypage_info.do?memberId=<%=m.getMemberId() %>">김태선 테스트용</a></li>
+						<li><a  class="f-light fc-1" href="/mypage_info.do?memberId=oventest123@gmail.com">김태선 테스트용</a></li>
 					</ul>
 				</li>
 			</div>
