@@ -44,9 +44,17 @@ public class LoginServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		Member m = service.selectOneMember(member);
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/");
-		HttpSession session = request.getSession();
-		session.setAttribute("m", m);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(m!=null) {
+			request.setAttribute("title", "로그인 성공");
+			request.setAttribute("icon", "success");
+			HttpSession session = request.getSession();
+			session.setAttribute("m", m);
+		}else {
+			request.setAttribute("title", "로그인 실패");
+			request.setAttribute("icon", "error");
+		}
+		request.setAttribute("loc", "/");
 		view.forward(request, response);
 	}
 
