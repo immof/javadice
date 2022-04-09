@@ -34,13 +34,9 @@ public class Mypage_infoServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		String memberId = request.getParameter("memberId");
 		//3.비즈니스로직
-		MemberService service = new MemberService();
-		Member m = service.selectOneMember(memberId);
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_info.jsp");
-		request.setAttribute("m", m);
 		view.forward(request, response);
 	}
 
