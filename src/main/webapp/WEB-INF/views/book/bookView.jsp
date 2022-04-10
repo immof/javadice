@@ -1,8 +1,11 @@
+<%@page import="oracle.net.aso.r"%>
 <%@page import="com.herejava.book.vo.Book"%>
+<%@page import="com.herejava.room.vo.Room"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
     	Book b = (Book)request.getAttribute("b");
+    	Room r = (Room)request.getAttribute("r");
     %>
 <!DOCTYPE html>
 <html>
@@ -13,18 +16,36 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<ul>
-			<li><%=b.getBookNo() %></li>
-			<li><%=b.getRoomNo() %></li>
-			<li><%=b.getMemberNo() %></li>
-			<li><%=b.getBookPeople() %></li>
-			<li><%=b.getBookName() %></li>
-			<li><%=b.getBookPhone() %></li>
-			<li><%=b.getBookDay() %></li>
-			<li><%=b.getBookState() %></li>
-			<li><%=b.getCheckIn() %></li>
-			<li><%=b.getCheckOut() %></li>
-		</ul>
+		<table>
+			<tr>
+				<td><%=r.getFilepath() %></td>
+			</tr>
+			<tr>
+				<th>객실정보</th>
+				<td><%=b.getBookNo() %></td>
+			</tr>
+			<tr>
+				<th>체크인</th>
+				<td><%=b.getCheckIn() %> 15:00</td>
+			</tr><tr>
+				<th>체크아웃</th>
+				<td><%=b.getCheckOut() %> 11:00</td>
+			</tr><tr>
+				<th>예약정보</th>
+				<td>성인 <%=b.getBookPeople() %></td>
+			</tr><tr>
+				<th>예약자명</th>
+				<td><%=b.getBookNo() %></td>
+			</tr><tr>
+				<th>전화번호</th>
+				<td><%=b.getBookNo() %></td>
+			</tr>
+		</table>
+		<table>
+			<th>총 결제금액</th>
+			<td>xxxxx 원</td>
+			<button>예약취소</button>
+		</table>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

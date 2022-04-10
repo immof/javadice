@@ -44,7 +44,7 @@ public class BookListServlet extends HttpServlet {
 		BookPageData bpd = service.selectBookList(reqPage);
 		//4. 화면출력
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookList.jsp");
-		request.setAttribute("list", bpd.getList());
+		request.setAttribute("list", bpd.getBookList());
 		request.setAttribute("pageNavi", bpd.getPageNavi());
 		view.forward(request, response);
 	}

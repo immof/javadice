@@ -3,6 +3,8 @@ package com.herejava.member.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.herejava.book.dao.BookDao;
+import com.herejava.book.vo.Book;
 import com.herejava.member.dao.MemberDao;
 import com.herejava.member.vo.Member;
 
@@ -33,6 +35,15 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	
+	//예약리스트 전체 가져오는 메소드
+		public ArrayList<Book> selectAllBook(){
+			Connection conn = JDBCTemplate.getConnection();
+			BookDao dao = new BookDao();
+			ArrayList<Book> list = dao.selectAllBook(conn);
+			JDBCTemplate.close(conn);
+			return list;
+		}
 
 	
 	

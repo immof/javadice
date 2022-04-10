@@ -14,7 +14,6 @@ import com.herejava.room.dao.RoomDao;
 import com.herejava.room.vo.Room;
 
 import common.JDBCTemplate;
-
 public class BookService {
 	
 	public ArrayList<Room> selectSearchRoom(Book book) {
@@ -71,7 +70,7 @@ public class BookService {
 		return list;	//여기서 반환되는 roomCount는 해당 room의 총 갯수가 아니라 예약 가능한 room의 갯수임
 	}
 
-	// 예약번호로 객체 1개 가져오는 service 메소드
+	// 예약번호로 객체 1개 가져오는 메소드
 	public Book selectOneBook(long bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
@@ -79,7 +78,8 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return b;
 	}
-	// 회원번호로 객체 1개 가져오는 service 메소드
+	
+	// 회원번호로 객체 1개 가져오는 메소드
 	public Book selectOneBook(int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
@@ -87,7 +87,8 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return b;
 	}
-	// 예약내역 리스트와 페이지번호(페이징처리) 가져오는 service 메소드
+	
+	// 요청페이지로 예약리스트 + 페이지번호 가져오는 메소드
 	public BookPageData selectBookList(int reqPage) {
 		Connection conn= JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
@@ -149,6 +150,28 @@ public class BookService {
 		return bpd;
 	}
 	
+	//최신순으로 예약리스트 전체 가져오는 메소드
+	public ArrayList<Book> selectAllBook(){
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		ArrayList<Book> list = dao.selectAllBook(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+	//예약번호로 예약취소(update)하는 메소드
+	public int updateBook(int bookNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		int result = dao.updateBook(conn,bookNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }
 
 

@@ -1,6 +1,7 @@
 package com.herejava.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.herejava.book.vo.Book;
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
 
@@ -38,9 +40,11 @@ public class MypageServlet extends HttpServlet {
 		//3.비즈니스로직
 		MemberService service = new MemberService();
 		Member m = service.selectOneMember(memberId);
+		ArrayList<Book> bookList = service.selectAllBook();
 		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
 		request.setAttribute("member", m);
+		request.setAttribute("bookList", bookList);
 		view.forward(request, response);
 	}
 

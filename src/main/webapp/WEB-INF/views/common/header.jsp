@@ -1,8 +1,11 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.herejava.member.vo.Member"%>
+<%@page import="com.herejava.book.vo.Book"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%
     	Member m = (Member)session.getAttribute("m");
+    	ArrayList<Book> bookList = (ArrayList<Book>)session.getAttribute("bookList");
     %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">

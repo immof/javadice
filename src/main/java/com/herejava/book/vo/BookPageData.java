@@ -4,23 +4,22 @@ import java.util.ArrayList;
 
 public class BookPageData {
 
-	private ArrayList<Book> list;
+	private ArrayList<Book> bookList;
 	private String pageNavi;
-	
 	public BookPageData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BookPageData(ArrayList<Book> list, String pageNavi) {
+	public BookPageData(ArrayList<Book> bookList, String pageNavi) {
 		super();
-		this.list = list;
+		this.bookList = bookList;
 		this.pageNavi = pageNavi;
 	}
-	public ArrayList<Book> getList() {
-		return list;
+	public ArrayList<Book> getBookList() {
+		return bookList;
 	}
-	public void setList(ArrayList<Book> list) {
-		this.list = list;
+	public void setBookList(ArrayList<Book> bookList) {
+		this.bookList = bookList;
 	}
 	public String getPageNavi() {
 		return pageNavi;

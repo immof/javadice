@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	ArrayList<Book> list = (ArrayList<Book>)request.getAttribute("list");
     	String pageNavi = (String)request.getAttribute("pageNavi");
     %>
 <!DOCTYPE html>
@@ -21,7 +20,7 @@
 				<div class="mypage-content-title">내 예약내역</div>
 					<!-- 테스트 시작-->
 					<table class="tbl tbl-hover">
-						<%for(Book b : list) {%>
+						<%for(Book b : bookList) {%>
 						<tr class="tr-1">
 							<td>파일패스</td>
 							<td>로얄스위트</td>
