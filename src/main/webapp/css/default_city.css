@@ -941,14 +941,14 @@ footer {
   padding: 0;
 }
 .footerBox{
-  width: 1200px;
-  height: 190px;
+  width: 1400px;
+  height: 150px;
   margin: 0 auto;
   overflow: hidden;
 }
 .footer-left{
   float: left;
-  width: 800px;
+  width: 900px;
   margin-top: 60px;
 }
 .footer-left>p{
@@ -958,18 +958,18 @@ footer {
 }
 .footer-right-wrap{
   float: left;
-  width: 400px;
+  width: 450px;
   text-align: center;
 }
 .footer-right-wrap>.footerLogo{
   width: 250px;
   height: 50px;
-  margin-top: 40px
+  margin-top: 30px
 }
 .footer-right-bottom{
   overflow: hidden;
-  margin-top: 40px;
-  margin-left: 50px;
+  margin-top: 17px;
+  margin-left: 80px;
   text-align: center;
 }
 .footer-right-bottom>ul>li{

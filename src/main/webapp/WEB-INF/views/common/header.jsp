@@ -38,6 +38,9 @@
 .searchIcon{
 	margin-right: 10px; 
 }
+.header-link{
+	margin-right:40px;
+}
 </style>
 </head>
 	<header>
