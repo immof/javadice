@@ -334,8 +334,8 @@ footer > .footer-content > ul > li > a {
 
 /* 벨트 디자인*/
 .belt{
-  margin: 0;
   padding-top: 120px;
+  margin-bottom: 30px;
   background: url(../img/belt.png) no-repeat 50% 60px;
   text-align: center;
   font-family: 'GFS Didot',serif;
