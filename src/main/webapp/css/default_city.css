@@ -64,7 +64,7 @@ ul, li{
 }
 header {
   min-width: 1200px;
-  margin: 0 auto;
+  margin: 0 ;
 }
 
 /* h e a d e r  - t o p  */
@@ -73,7 +73,11 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #a7a7a7;
+}
+.header-top>.site-logo>a>img{
+  margin-left: 50px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 .header-link{
   line-height: 55px;
@@ -145,6 +149,8 @@ header {
 
 .header-bottom{
   width: 100%;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
 }
 .header-bottom>nav{
   margin: 0 150px;
@@ -156,20 +162,25 @@ nav>ul{
 }
 .navi{
   display: flex;
+  width: 1200px;
+  margin: 0 auto;
   justify-content: space-around;
   align-items: center;
 }
 
 .navi>li>a {
+  display: block;
   color: #333333;
-  line-height: 60px;
-  font-size: 18px;
-  font-weight: 400;
+  width: 150px;
+  height: 85px;
+  line-height: 85px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #FFF;
 }
-.navi > li:hover > a,
-.navi > li:hover > a>span,
-.navi > li:hover > i {
+.navi > li:hover > a {
   color: #998465;
+  border-bottom: 2px solid #ac9e89;
   transition-duration: 0.5s;
 }
 .navi > li:last-child{
@@ -925,57 +936,47 @@ textarea.input-form {
 
 /*푸터*/
 
-.footerlogo{
-  padding: auto;
-  margin-top: 40px;
-  margin-left: 860px;
+footer {
+  background-color: rgb(51, 51, 51);
+  padding: 0;
+}
+.footerBox{
+  width: 1200px;
+  height: 190px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.footer-left{
+  float: left;
+  width: 800px;
+  margin-top: 60px;
+}
+.footer-left>p{
+  font-family: ns-m;
+  font-size: 12px;
+  color: rgb(167, 167, 167);
+}
+.footer-right-wrap{
+  float: left;
+  width: 400px;
+  text-align: center;
+}
+.footer-right-wrap>.footerLogo{
   width: 250px;
   height: 50px;
+  margin-top: 40px
 }
-
-.footer{
-  margin: 0 auto;
-  padding: 0;
-  background-color: rgb(51, 51, 51);
-  height: 190px;
-  width: 1200px;
-}
-
-.topfot{
-  width: 300px;
-  list-style-type: none;
-  height: 40px;
-  margin-left: 850px;
-  margin-top: 30px;
-  float: left;
-}
-
-.topfot>ul>li{
-  margin: 5px;
-  padding: 0;
+.footer-right-bottom{
+  overflow: hidden;
+  margin-top: 40px;
+  margin-left: 50px;
   text-align: center;
+}
+.footer-right-bottom>ul>li{
   float: left;
+  margin: 0 7px;
 }
-
-.topfot>ul>li>a{
-  text-decoration: none;
-  color: rgb(167, 167, 167);
+.footer-right-bottom>ul>li>a{
   font-size: 13px;
-}
-
-.topfot>ul>li:hover>a{
-  text-decoration: underline;
-}
-
-.footer>.lastfot>.lastfot1,p{
-  list-style-type: none;
   color: rgb(167, 167, 167);
-}
-.lastfot1{
-  margin-top: -40px;
-}
-
-.lastfot>.lastfot1{
-  font-size: 12px;
-  margin-left: 30px;
 }
