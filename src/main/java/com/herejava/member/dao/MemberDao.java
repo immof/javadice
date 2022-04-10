@@ -77,13 +77,15 @@ public class MemberDao {
 	}//로그인용 DB 조회
 
 
-	public ArrayList<Member> selectAllMember(Connection conn) {
+	public ArrayList<Member> selectAllMember(Connection conn, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Member> list = new ArrayList<Member>();
-		String query = "select * from member";
+		String query = "select * from (select rownum rnum, m.* from member m) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Member m = getMember(rset);
@@ -99,6 +101,32 @@ public class MemberDao {
 		
 		return list;
 	}
+
+
+	public int totalMemberCount(Connection conn) {
+		PreparedStatement pstmt =null;
+		ResultSet rset = null;
+		int totalMemberCount= 0;
+		String query = "select count(*) c from member";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalMemberCount = rset.getInt("c");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return totalMemberCount;
+	}
+
+
+	
 	
 	
 	
