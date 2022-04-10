@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
+import com.herejava.member.vo.MemberPageData;
 
 /**
  * Servlet implementation class MemberListServlet
@@ -33,10 +34,14 @@ public class MemberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		//값추출
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		MemberService service = new MemberService();
-		ArrayList<Member> list = service.selectAllMember();
+		
+		MemberPageData mpd = service.selectAllMember(reqPage);
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/admin/memberList.jsp");
-		request.setAttribute("list", list);
+		request.setAttribute("list", mpd.getList());
+		request.setAttribute("pageNavi", mpd.getPageNavi());
 		view.forward(request, response);
 	}
 
