@@ -293,7 +293,7 @@ footer > .footer-content > ul > li > a {
 
 /* 배경 색*/
 .bg-1 {
-  color: #333333;
+  background-color: #333333;
 }
 .bg-2 {
   background-color: #555555;
