@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,12 +54,10 @@ public class BookSearchServlet extends HttpServlet {
 		//3.비즈니스로직
 		BookService service = new BookService();
 		ArrayList<Room> list = service.selectSearchRoom(book);
-		for(Room r : list) {
-			System.out.println(r.getRoomCount());
-		}
-		
 		//4.결과처리
-	
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/room/roomSearch.jsp");
+		request.setAttribute("list", list);
+		view.forward(request, response);
 	}
 
 	/**
