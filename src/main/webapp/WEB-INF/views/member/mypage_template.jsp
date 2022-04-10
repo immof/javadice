@@ -13,18 +13,18 @@
 <title>:: 회원 페이지 ::</title>
 </head>
 <body>
-<!-- 
-마이페이지 기본템플릿
-	@include file="/WEB-INF/views/common/header.jsp" %>
+
+<!--  마이페이지 기본템플릿  -->
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			@include file="/WEB-INF/views/member/mypage_common.jsp"%>
+			<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
 				<div class="mypage-content-title">콘텐츠 제목입니다. 제목쓰시면 콘텐츠영역 줄 위에 쓰여집니다.</div>
 			</div>
 		</div>
 	</div>
-	@include file="/WEB-INF/views/common/footer.jsp"%>
- -->
+	<%@include file="/WEB-INF/views/common/footer.jsp"%>
+
 </body>
 </html>

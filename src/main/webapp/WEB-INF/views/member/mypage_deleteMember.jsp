@@ -4,21 +4,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>::비밀번호 변경::</title>
+<title>::회원탈퇴::</title>
 <style>
-	.tbl input{
+	.info-tbl{
+		width: 60%;
+		margin: 150px auto;
+	}
+	.info-tbl tr{
+		height: 50px;
+	}
+	.info-tbl input{
 		border: 1px solid #a7a7a7;
 	}
-	.tbl tr>td:first-child{
-		text-align: left;
-		width: 15%;
+	
+	.info-tbl tr>td:first-child{
+		width: 10%;
+		text-align: center;
 	}
-	.tbl tr>td:nth-child(2){
-		width: 40%;
+	
+	.info-tbl tr>td:nth-child(2){
+		width: 20%;
 	}
-
-	.tbl tr:last-child a{
-		text-decoration: underline;
+	.info-tbl tr:nth-child(3)>td{
+		vertical-align: top;
 	}
 	
 	.updateInfo-btn{
@@ -35,26 +43,30 @@
 		<div class="flex-wrap">
 			<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
-				<div class="mypage-content-title">비밀번호 변경하기</div>
+				<div class="mypage-content-title">회원탈퇴</div>
 				<div class="member-info">
 					<form action="/memberUpdatePw.do" method="post">
-						<table class="tbl">
+						<table class="info-tbl">
 							<tr class="tr-3">
-								<td>현재 비밀번호</td>
-								<td><input class="input-form" type="text"></td>
+								<td></td>
 								<td>
-							</tr>
-							<tr class="tr-3">
-								<td>변경할 비밀번호</td>
-								<td><input class="input-form"></td>
+									<h4>정말로 탈퇴하시겠습니까?</h4>
+									<h6 style="color: #a7a7a7;">탈퇴하시면 정보를 복구할 수 없습니다.</h6>
+								</td>
 							</tr>
 							<tr class="tr-3">
 								<td>비밀번호 확인</td>
-								<td><input class="input-form"></td>
+								<td>
+									<input class="input-form">
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><p class="fc-9"></p></td>	
 							</tr>
 							<tr class="tr-3">
 								<td></td>
-								<td><button class="bc1 updateInfo-btn" type="submit" value="">비밀번호 변경하기</button></td>
+								<td><button class="bc3 updateInfo-btn" type="submit" value="">탈퇴하기</button></td>
 							</tr>
 						</table>
 					</form>
