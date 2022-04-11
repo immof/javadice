@@ -76,7 +76,7 @@ public class BookDao {
 		ResultSet rset = null;
 		ArrayList<BookData> list = new ArrayList<BookData>();
 		String query = "SELECT * FROM\r\n" + "(SELECT ROWNUM AS RNUM,\r\n" + "N.*FROM\r\n"
-				+ "(SELECT FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
+				+ "(SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
 				+ "FROM BOOK\r\n" + "JOIN ROOM USING(ROOM_NO)\r\n" + "WHERE MEMBER_NO=?\r\n"
 				+ "ORDER BY BOOK_NO DESC)N)\r\n" + "WHERE RNUM BETWEEN ? AND ?";
 		try {
@@ -87,6 +87,7 @@ public class BookDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				BookData bd = new BookData();
+				bd.setBookNo(rset.getLong("book_no"));
 				bd.setFilePath(rset.getString("filepath"));
 				bd.setRoomName(rset.getString("room_name"));
 				bd.setCheckIn(rset.getString("check_in"));
@@ -113,7 +114,7 @@ public class BookDao {
 		ResultSet rset = null;
 		ArrayList<BookData> list = new ArrayList<BookData>();
 		String query = "SELECT * FROM\r\n" + "(SELECT ROWNUM AS RNUM,\r\n" + "N.*FROM\r\n"
-				+ "(SELECT FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
+				+ "(SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
 				+ "FROM BOOK\r\n" + "JOIN ROOM USING(ROOM_NO)\r\n" + "WHERE MEMBER_NO=?\r\n"
 				+ "ORDER BY BOOK_NO DESC)N)\r\n";
 		try {
@@ -122,6 +123,7 @@ public class BookDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				BookData bd = new BookData();
+				bd.setBookNo(rset.getLong("book_no"));
 				bd.setFilePath(rset.getString("filepath"));
 				bd.setRoomName(rset.getString("room_name"));
 				bd.setCheckIn(rset.getString("check_in"));
@@ -254,7 +256,7 @@ public class BookDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		BookData bd = null;
-		String query = "SELECT FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE FROM BOOK JOIN ROOM USING(ROOM_NO) WHERE BOOK_NO=?";
+		String query = "SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE FROM BOOK JOIN ROOM USING(ROOM_NO) WHERE BOOK_NO=?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -262,6 +264,7 @@ public class BookDao {
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				bd = new BookData();
+				bd.setBookNo(rset.getLong("book_no"));
 				bd.setFilePath(rset.getString("filepath"));
 				bd.setRoomName(rset.getString("room_name"));
 				bd.setCheckIn(rset.getString("check_in"));
@@ -270,7 +273,6 @@ public class BookDao {
 				bd.setBookPeople(rset.getInt("book_people"));
 				bd.setBookName(rset.getString("book_name"));
 				bd.setBookPhone(rset.getString("book_phone"));
-				System.out.println("dao : " + bd);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

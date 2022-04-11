@@ -44,13 +44,13 @@
 					 <% if(list.size() == 2) {
 							for(int i=0;i<2;i++) {
 								BookData bd = list.get(i);%>
-								<span><%=bd.getFilePath() %></span>
+								<span><img src="/img/<%=bd.getFilePath()%>"/></span>
 								<span><h4><%=bd.getRoomName() %></h4></span>
 								<span><%=bd.getCheckIn() %></span>
 								<span><%=bd.getCheckOut() %></span>
 								<span><%=bd.getBookState() %></span>
-								<span><%=list.add(bd) %>
-								<span><a href="/bookView.do?bookNo=30">상세보기></a></span>
+									  <%=list.add(bd) %>
+								<span><a href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></span>
 								<button class="btn bc3 modal-open-btn" target="#test-modal">
 									예약취소</button>
 								<hr>
@@ -101,13 +101,13 @@
 								<%} %>
 							<%}else if(list.size() == 1) {
 								BookData bd = list.get(0);%>
-								<span><%=bd.getFilePath() %></span>
+								<span><img src="/img/<%=bd.getFilePath()%>"/></span>
 								<span><h4><%=bd.getRoomName() %></h4></span>
 								<span><%=bd.getCheckIn() %></span>
 								<span><%=bd.getCheckOut() %></span>
 								<span><%=bd.getBookState() %></span>
 								<span><%=list.add(bd) %>
-								<span><a href="/bookView.do?bookNo=3">상세보기></a></span>
+								<span><a href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></span>
 								<button class="btn bc3 modal-open-btn" target="#test-modal">
 									예약취소</button>
 								<hr>
