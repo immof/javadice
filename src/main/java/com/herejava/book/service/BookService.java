@@ -170,7 +170,7 @@ public class BookService {
 	}
 
 	//예약번호로 예약취소(update)하는 메소드
-	public int updateBook(int bookNo) {
+	public int updateBook(long bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
 		int result = dao.updateBook(conn,bookNo);
@@ -187,7 +187,7 @@ public class BookService {
 	public BookData getBook(long bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
-		BookData bd = dao.getBook(conn, bookNo);
+		BookData bd = dao.getBook(conn,bookNo);
 		JDBCTemplate.close(conn);
 		return bd;
 	}

@@ -60,11 +60,8 @@
 				<%} %>
 				<li>
 				<%if(m!=null) { %>
-<<<<<<< HEAD
-					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo() %>" class="f-light fc-2"> 
-=======
-					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
->>>>>>> branch 'master' of https://github.com/Pyseon/javadice.git
+					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
+
 						<span class="material-icons">perm_identity</span> 
 						<span class="material-icons">expand_more</span>
 				<%}else { %>

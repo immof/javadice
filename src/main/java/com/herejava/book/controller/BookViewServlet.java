@@ -35,9 +35,9 @@ public class BookViewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
 		BookService service = new BookService();
-		BookData b = service.selectOneBook(bookNo);
+		BookData bd = service.getBook(bookNo);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
-		request.setAttribute("b", b);
+		request.setAttribute("bd", bd);
 		view.forward(request, response);
 	}
 

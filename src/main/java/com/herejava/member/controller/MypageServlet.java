@@ -44,14 +44,13 @@ public class MypageServlet extends HttpServlet {
 		//3.비즈니스로직
 		//member 객체 
 		MemberService service = new MemberService();
-		Member m = service.selectOneMember(memberId);
-		//ArrayList<BookData> 리스트
 		BookService bookService = new BookService();
+		Member m = service.selectOneMember(memberId);
 		ArrayList<BookData> list = bookService.selectAllBook(memberNo);
 		//4.결과처리
 		if(memberLevel==1) {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
-			request.setAttribute("member", m);
+			request.setAttribute("m", m);
 			request.setAttribute("list", list);
 			view.forward(request, response);
 		}else {
