@@ -37,14 +37,14 @@ public class BookListServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
-		String memberId = request.getParameter("memberId");
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		//3. 비즈니스로직
 		BookService service = new BookService();
-		BookPageData bpd = service.selectBookList(reqPage);
+		BookPageData bpd = service.selectBookList(memberNo, reqPage);
 		//4. 화면출력
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookList.jsp");
-		request.setAttribute("list", bpd.getList());
+		request.setAttribute("list", bpd.getBookList());
 		request.setAttribute("pageNavi", bpd.getPageNavi());
 		view.forward(request, response);
 	}
