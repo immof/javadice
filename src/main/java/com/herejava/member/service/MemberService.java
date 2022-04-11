@@ -2,6 +2,8 @@ package com.herejava.member.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+
+import com.herejava.book.dao.BookCheckPage;
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
 import com.herejava.member.dao.MemberDao;
@@ -108,5 +110,6 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
   
 }//MemberService class

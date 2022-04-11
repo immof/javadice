@@ -66,6 +66,7 @@
 		.eTitle{
 			width: 100px;
 			background-color: rgb(245, 245, 245);
+			line-height: 30px;
 		}
 		.file{
 			width: 100px;
@@ -121,14 +122,15 @@
 				</td>
 			</tr>
 		</table>
+		<span style="line-height:150%;">
 		<br>
-		<br>
+		</span>
 		<table class="tbl" id="noticeEview">
-			<tr class="tr-1">
+			<tr class="tr-1 eview">
 				<th class="td-3 eTitle">이전글<span class="material-icons icon1">expand_less</span></th>
 				<td colspan="5" onclick=""><%=n.getNoticeTitle() %></td>
 			</tr>
-			<tr class="tr-1">
+			<tr class="tr-1 eview">
 				<th class="td-3 eTitle">다음글<span class="material-icons icon1">expand_more</span></th>
 				<td colspan="5" onclick=""><%=n.getNoticeTitle() %></td>
 			</tr>
