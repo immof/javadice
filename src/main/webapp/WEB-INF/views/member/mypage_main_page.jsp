@@ -39,10 +39,6 @@
 			<%@ include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
 				<div class="mypage-content-title">최근 예약내역</div>
-				<!-- 
-				1. list에서 객체 모두 꺼내옴 
-				2. 그중 한 객체만 선택해서(예약번호로) 여기에서 예약객체 하나 완성
-				-->
 				
 			 <% if(list.size() != 0) {
 					for(int i=0;i<2;i++) {
