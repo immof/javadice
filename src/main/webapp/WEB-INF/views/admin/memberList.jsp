@@ -48,6 +48,5 @@
 		<!-- flex-wrap -->
 	</div>
 	<!-- page-content -->
-	
 </body>
 </html>

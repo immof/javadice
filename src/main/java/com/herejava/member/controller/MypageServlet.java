@@ -35,13 +35,20 @@ public class MypageServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
 		String memberId = request.getParameter("memberId");
+		int memberLevel = Integer.parseInt(request.getParameter("memberLevel"));
 		//3.비즈니스로직
 		MemberService service = new MemberService();
 		Member m = service.selectOneMember(memberId);
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
-		request.setAttribute("member", m);
-		view.forward(request, response);
+		
+		if(memberLevel==1) {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
+			request.setAttribute("member", m);
+			view.forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_page.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**
