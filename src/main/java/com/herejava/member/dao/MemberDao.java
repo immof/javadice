@@ -101,39 +101,5 @@ public class MemberDao {
 		return list;
 	}
 	
-	//예약리스트 전체 가져오는 메소드
-		public ArrayList<Book> selectAllBook(Connection conn) {
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			ArrayList<Book> list = new ArrayList<Book>();
-			String query = "select * from book";
-			try {
-				pstmt = conn.prepareStatement(query);
-				rset = pstmt.executeQuery();
-				while(rset.next()) {
-					Book b = new Book();
-					b.setBookNo(rset.getLong("book_no"));
-					b.setRoomNo(rset.getInt("room_no"));
-					b.setMemberNo(rset.getInt("member_no"));
-					b.setBookPeople(rset.getInt("book_people"));
-					b.setBookName(rset.getString("book_name"));
-					b.setBookPhone(rset.getString("book_phone"));
-					b.setBookDay(rset.getString("book_day"));
-					b.setBookState(rset.getInt("book_state"));
-					b.setCheckIn(rset.getString("check_in"));
-					b.setCheckOut(rset.getString("check_out"));
-					list.add(b);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				JDBCTemplate.close(rset);
-				JDBCTemplate.close(pstmt);
-			}
-			return list;
-		}
-		
-	
 	
 }//MemberDao class

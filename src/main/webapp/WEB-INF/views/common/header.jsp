@@ -1,11 +1,9 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.herejava.member.vo.Member"%>
 <%@page import="com.herejava.book.vo.Book"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%
     	Member m = (Member)session.getAttribute("m");
-    	ArrayList<Book> bookList = (ArrayList<Book>)session.getAttribute("bookList");
     %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +55,7 @@
 				<%} %>
 				<li>
 				<%if(m!=null) { %>
-					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>" class="f-light fc-2"> 
+					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo() %>" class="f-light fc-2"> 
 						<span class="material-icons">perm_identity</span> 
 						<span class="material-icons">expand_more</span>
 				<%}else { %>

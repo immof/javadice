@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookData;
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
 
@@ -37,14 +39,39 @@ public class MypageServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
 		String memberId = request.getParameter("memberId");
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		//3.비즈니스로직
+		//member 객체 
 		MemberService service = new MemberService();
 		Member m = service.selectOneMember(memberId);
-		ArrayList<Book> bookList = service.selectAllBook();
+		//ArrayList<BookData> 리스트
+		BookService bookService = new BookService();
+		ArrayList<BookData> list = bookService.selectAllBook(memberNo);
 		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
 		request.setAttribute("member", m);
-		request.setAttribute("bookList", bookList);
+		request.setAttribute("list", list);
+		/*
+		if(list.size() == 2) {
+			//예약 2개 출력
+			for(int i=0;i<2;i++) {
+				Book b = list.get(i);//리스트에서 예약객체 1개 가져옴
+				b.getRoomNo();//방 넘버(=방 이름)
+				b.getCheckIn();//체크인날짜
+				b.getCheckOut();//체크아웃날짜
+				b.getBookState();//예약상태
+			}
+		}else if(list.size() == 1) {
+			//예약 1개 출력
+			Book b = list.get(0);//리스트에서 예약객체 1개 가져옴
+			b.getRoomNo();//방 넘버(=방 이름)
+			b.getCheckIn();//체크인날짜
+			b.getCheckOut();//체크아웃날짜
+			b.getBookState();//예약상태
+		}else {
+			//최근 예약내역이 없습니다.
+		}
+		*/
 		view.forward(request, response);
 	}
 

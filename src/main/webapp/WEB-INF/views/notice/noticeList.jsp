@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	ArrayList<Notice> noticeList = (ArrayList<Notice>)request.getAttribute("noticeList");
+    	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
     	String pageNavi = (String)request.getAttribute("pageNavi");
     %>
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
 					<tr class="tr-2">
 						<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th>
 					</tr>
-					<%for(Notice n : noticeList){ %>
+					<%for(Notice n : list){ %>
 				<tr class="tr-1">
 					<td><%=n.getNoticeNo() %></td>
 					<td><a href="/noticeView.do?noticeNo=<%=n.getNoticeNo() %>">

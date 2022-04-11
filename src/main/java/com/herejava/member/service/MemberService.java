@@ -36,16 +36,5 @@ public class MemberService {
 		return list;
 	}
 	
-	//예약리스트 전체 가져오는 메소드
-		public ArrayList<Book> selectAllBook(){
-			Connection conn = JDBCTemplate.getConnection();
-			BookDao dao = new BookDao();
-			ArrayList<Book> list = dao.selectAllBook(conn);
-			JDBCTemplate.close(conn);
-			return list;
-		}
-
-	
-	
 	
 }//MemberService class

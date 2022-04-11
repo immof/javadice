@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookData;
 import com.herejava.book.vo.BookPageData;
 import com.herejava.room.dao.RoomDao;
 import com.herejava.room.vo.Room;
@@ -70,7 +71,7 @@ public class BookService {
 		return list;	//여기서 반환되는 roomCount는 해당 room의 총 갯수가 아니라 예약 가능한 room의 갯수임
 	}
 
-	// 예약번호로 객체 1개 가져오는 메소드
+	// 예약번호로 예약 1개 가져오는 메소드
 	public Book selectOneBook(long bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
@@ -79,7 +80,7 @@ public class BookService {
 		return b;
 	}
 	
-	// 회원번호로 객체 1개 가져오는 메소드
+	// 회원번호로 예약 1개 가져오는 메소드
 	public Book selectOneBook(int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
@@ -88,8 +89,8 @@ public class BookService {
 		return b;
 	}
 	
-	// 요청페이지로 예약리스트 + 페이지번호 가져오는 메소드
-	public BookPageData selectBookList(int reqPage) {
+	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드
+	public BookPageData selectBookList(int memberNo, int reqPage) {
 		Connection conn= JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
 		
@@ -98,7 +99,7 @@ public class BookService {
 		
 		int end = reqPage*numPerPage;
 		int start = end - numPerPage + 1;
-		ArrayList<Book> list = dao.selectBookList(conn,start,end);
+		ArrayList<BookData> list = dao.selectBookList(conn,memberNo,start,end);
 		//페이징처리
 		int totalCount = dao.totalBookCount(conn);
 		
@@ -115,7 +116,7 @@ public class BookService {
 		String pageNavi = "<ul class='pagination circle-style'>";
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class='page-item' href='/bookList.do?reqPage="+(pageNo-1)+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
@@ -123,12 +124,12 @@ public class BookService {
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' active-page href='/noticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item' active-page href='/bookList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item' href='/bookList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -140,7 +141,7 @@ public class BookService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-item' href='/bookList.do?reqPage="+pageNo+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -150,7 +151,16 @@ public class BookService {
 		return bpd;
 	}
 	
-	//최신순으로 예약리스트 전체 가져오는 메소드
+	//멤버번호로 예약리스트 가져오는 메소드
+	public ArrayList<BookData> selectAllBook(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		ArrayList<BookData> list = dao.selectAllBook(conn, memberNo);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+	//예약리스트 최신순으로 전체 가져오는 메소드
 	public ArrayList<Book> selectAllBook(){
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
@@ -158,7 +168,7 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
-	
+
 	//예약번호로 예약취소(update)하는 메소드
 	public int updateBook(int bookNo) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -172,6 +182,16 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	//예약번호로 예약(방사진/방이름/체크인/체크아웃/예약상태/이용자숫자/예약자명/예약자전화번호) 1개 가져오는 메소드
+	public BookData getBook(long bookNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		BookData bd = dao.getBook(conn, bookNo);
+		JDBCTemplate.close(conn);
+		return bd;
+	}
+	
 }
 
 
