@@ -54,6 +54,10 @@
 #timeLimit>span{
 	color: red;
 }
+.join-p{
+		text-align: center;
+		font-size: 18px;
+	}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -108,14 +112,23 @@
 						<td colspan="2"><input type="text" name="memberPhone" class="input-form" placeholder="ex)010-1234-1234"></td>
 					</tr>
 					<tr class="form-input">
-						<td colspan="2"><input type="submit" class="bc1 bs4" value="가입하기"></td>
+						<td colspan="2"><input type="submit" class="bc1 bs4" id="join-submit" value="가입하기"></td>
 					</tr>
 				</table>
 			</form>
 		</div>
 	</div>
+	<p class="join-p" style="color:#333; font-size:18px;">
+	이미 가입된 회원이라고 나오시나요?<br>
+	이메일로 비밀번호를 찾을 수 있습니다.
+	</p>
+	<br><br>
+	<p class="join-p" ><a href="/passReset.do" style="color:#ccc;">비밀번호 찾으러 가기</a></p>
+	<br><br><br><br>
+		
 	<script>
 		const checkArr = [false,false,false,false,false,false];
+		let authChk = 0;
 		
 		const id = $("[name=memberId]");
 		id.on("change",function(){
@@ -223,14 +236,20 @@
 		function sendMail(){
 			if(checkArr[0]){
 				const email = $("[name=memberId]").val();
-				alert("이메일로 인증번호가 발송되었습니다. 메일함을 확인해주세요.");
 				$.ajax({
 					url : "/sendMail.do",
 					data : {email:email},
 					type : "post",
 					success : function(data){
-						mailCode = data;
-						authTime();
+						console.log(data);
+						if(data == "null"){
+							alert("이미 가입된 이메일입니다.");
+						}else{
+							alert("이메일로 인증번호가 발송되었습니다. 메일함을 확인해주세요.");
+							mailCode = data;
+							authTime();	
+						}
+						
 					},
 					error : function(){
 						console.log("sendMail 에러");
@@ -274,6 +293,7 @@
 								$("[name=memberId]").attr("readonly",true);
 								clearInterval(intervalId);
 								msg.text("");
+								authChk++;
 							}
 						}else{
 							alert("인증코드를 확인하세요");
@@ -297,6 +317,7 @@
 						}else{
 							if(confirm("해당 닉네임은 사용가능합니다. 사용하시겠습니까?")){
 								$("[name=memberNick]").attr("readonly",true);
+								authChk++;
 							}
 						}
 					},
@@ -304,6 +325,18 @@
 						console.log("nickChkBtn ajax 에러");
 					}
 				});	
+			}
+		})
+		
+		$("#join-submit").on("click",function(e){
+			let count = 0;
+			for(let i = 0;i<checkArr.length;i++){
+				if(checkArr[i]){
+					count++;
+				}
+			}
+			if(count != 6 || authChk != 2){
+				e.preventDefault();
 			}
 		})
 	</script>
