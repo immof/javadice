@@ -13,7 +13,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		취소완료 시발
+		취소완료
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
