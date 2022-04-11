@@ -1,8 +1,8 @@
 package com.herejava.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,18 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
 
-
 /**
- * Servlet implementation class SendMailServlet
+ * Servlet implementation class JoinServlet
  */
-@WebServlet(name = "SendMail", urlPatterns = { "/sendMail.do" })
-public class SendMailServlet extends HttpServlet {
+@WebServlet(name = "Join", urlPatterns = { "/join.do" })
+public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendMailServlet() {
+    public JoinServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,17 +34,25 @@ public class SendMailServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		String email = request.getParameter("email");
+		String memberId = request.getParameter("memberId");
+		String memberPw = request.getParameter("memberPw");
+		String memberName = request.getParameter("memberName");
+		String memberNick = request.getParameter("memberNick");
+		String memberPhone = request.getParameter("memberPhone");
 		//3.비즈니스로직
-		String code = null;
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setMemberPw(memberPw);
+		m.setMemberName(memberName);
+		m.setMemberNick(memberNick);
+		m.setMemberPhone(memberPhone);
 		MemberService service = new MemberService();
-		Member m = service.selectOneMember(email);
-		if(m == null) {
-			code = new MailSender().sendMail(email);
-		}
+		int result = service.insertMember(m);
 		//4.결과처리
-		PrintWriter out = response.getWriter();
-		out.print(code);
+		RequestDispatcher view = request.getRequestDispatcher("/login.do");
+		request.setAttribute("memberId", memberId);
+		request.setAttribute("memberPw", memberPw);
+		view.forward(request, response);
 	}
 
 	/**
