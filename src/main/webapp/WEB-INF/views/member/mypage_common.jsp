@@ -40,7 +40,7 @@
 .mypage-content {
 	flex-grow: 15;
 	min-height: 680px;
-	padding: 27px;
+	margin: 27px 0 27px 57px;
 }
 
 .mypage-content-title {
@@ -54,7 +54,6 @@
 	margin-top: 60px;
 	flex-grow: 1;
 	color: rgb(51, 51, 51);
-	width: 10%;
 }
 
 .left-menu>ul {
@@ -78,7 +77,6 @@
 
 .left-menu>ul>li>a:hover {
 	color: rgb(172, 158, 137);
-	font-size: 17px;
 }
 .left-menu hr{
 	background-color: #ac9e89;
@@ -116,5 +114,4 @@
               <li><a href="/mypage_deleteMember.do">회원탈퇴</a></li>               
           </ul>
       </div>
-
 </html>

@@ -28,11 +28,6 @@
 	display: flex;
 	flex-wrap: wrap;
 }
-
-.flex-wrap>div {
-	margin-right: 20px;
-}
-
 .bg {
 	color: #fff;
 }

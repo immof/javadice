@@ -2,13 +2,11 @@ package com.herejava.member.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
 import com.herejava.member.dao.MemberDao;
 import com.herejava.member.vo.Member;
 import com.herejava.member.vo.MemberPageData;
-
 import common.JDBCTemplate;
 
 public class MemberService {
@@ -90,5 +88,25 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return mpd;
 	}
-	
+	public int memberNickChk(String memberNick) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		int result = dao.memberNickChk(conn, memberNick);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+  public int insertMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		int result = dao.insertMember(conn,m);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+  
 }//MemberService class
