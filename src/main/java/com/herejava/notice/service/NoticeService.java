@@ -3,6 +3,7 @@ package com.herejava.notice.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.herejava.notice.controller.NoticeViewData;
 import com.herejava.notice.dao.NoticeDao;
 import com.herejava.notice.vo.Notice;
 import com.herejava.notice.vo.NoticePageData;
@@ -86,6 +87,11 @@ public class NoticeService {
 			JDBCTemplate.close(conn);
 			return npd;
 		}
+
+	public NoticeViewData selecetNoticeView(int noticeNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	}
 	
 
