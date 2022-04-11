@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.herejava.book.vo.Book;
 import com.herejava.member.vo.Member;
 
 import common.JDBCTemplate;
@@ -172,7 +173,6 @@ public class MemberDao {
 	}
 
 
-	
 	
 	
 	

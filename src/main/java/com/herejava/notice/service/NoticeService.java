@@ -3,10 +3,10 @@ package com.herejava.notice.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.herejava.notice.controller.NoticeViewData;
 import com.herejava.notice.dao.NoticeDao;
 import com.herejava.notice.vo.Notice;
 import com.herejava.notice.vo.NoticePageData;
+
 
 import common.JDBCTemplate;
 
@@ -20,12 +20,6 @@ public class NoticeService {
 			
 			//1. 결정사항 : 한 페이지당 게시물 수
 			int numPerPage = 10;
-			/*
-			 reqPage=1 				- > 1 and 10
-			 reqPage=2 				- > 11 and 20
-			 reqPage=3 				- > 21 and 30
-			 게시물 rownum 범위 계산
-			 */
 			int end = reqPage*numPerPage;
 			int start = end - numPerPage + 1;
 			ArrayList<Notice> list = dao.selectNoticeList(conn,start,end);
@@ -41,10 +35,6 @@ public class NoticeService {
 			}
 			//페이지 네비게이션의 길이 지정
 			int pageNaviSize = 5;
-			//페이지 모양 지정
-			// 1~5 페이지 요청 시 - > 1 2 3 4 5
-			// 6 ~ 10 페이지 요청 시 -> 6 7 8 9 10
-			
 			//페이지 네비게이션 시작 번호 계산
 			int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
 			
@@ -88,10 +78,22 @@ public class NoticeService {
 			return npd;
 		}
 
-	public NoticeViewData selecetNoticeView(int noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Notice selectOneNotice(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		NoticeDao dao = new NoticeDao();
+		int result = dao.updateReadCount(conn, noticeNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+			JDBCTemplate.close(conn);
+			return null;
+		}
+		Notice n = dao.selectOneNotice(conn,noticeNo);
+		JDBCTemplate.close(conn);
+		return n;
 	}
+
 	}
 	
 
