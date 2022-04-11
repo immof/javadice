@@ -57,7 +57,7 @@
 				<%} %>
 			</div>
 		</div>
-		<div class="header-bottom">
+      <div class="header-bottom">
          <nav>
             <ul class="navi">
                <li>
