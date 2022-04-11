@@ -89,6 +89,14 @@ public class MemberService {
 		return mpd;
 	}
 
+	public int memberNickChk(String memberNick) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		int result = dao.memberNickChk(conn, memberNick);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 	
 
 	

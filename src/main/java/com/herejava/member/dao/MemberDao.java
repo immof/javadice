@@ -126,6 +126,30 @@ public class MemberDao {
 	}
 
 
+	public int memberNickChk(Connection conn, String memberNick) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select * from member where member_nick = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberNick);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = 1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
 	
 	
 	
