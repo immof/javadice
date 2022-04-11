@@ -36,9 +36,14 @@
 .bg {
 	color: #fff;
 }
+.searchIcon{
+	margin-right: 10px; 
+}
+.header-link{
+	margin-right:40px;
+}
 </style>
 </head>
-<body>
 	<header>
 		<div class="header-top">
 			<div class="site-logo">
@@ -55,7 +60,11 @@
 				<%} %>
 				<li>
 				<%if(m!=null) { %>
+<<<<<<< HEAD
 					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo() %>" class="f-light fc-2"> 
+=======
+					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
+>>>>>>> branch 'master' of https://github.com/Pyseon/javadice.git
 						<span class="material-icons">perm_identity</span> 
 						<span class="material-icons">expand_more</span>
 				<%}else { %>
@@ -74,8 +83,7 @@
 			<nav>
 				<ul class="navi">
 					<li>
-						<i class="fa-solid fa-magnifying-glass"></i>
-						<a href="#">숙소예약</a>
+						<a href="#"><i class="fa-solid fa-magnifying-glass searchIcon"></i>숙소예약</a>
 					</li>
 					<li><a href="#">객실정보</a></li>
 					<li><a href="#">프로모션</a></li>

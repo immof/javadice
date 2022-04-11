@@ -54,6 +54,7 @@
     	display: flex;
     	justify-content: space-around;
     	margin-top: 20px;
+    	margin-bottom: 150px;
     	
     }
     .direction-bus{
@@ -69,12 +70,12 @@
    		font-size: 18px;
     	border-bottom: 2px solid #ac9e89;
    	}
-   
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="page-content">
+		<div class="belt locBelt">LOCATION</div>
 		<div class="flex-wrap">
 			<div id="map"></div>
 			<div id="direction-info">
