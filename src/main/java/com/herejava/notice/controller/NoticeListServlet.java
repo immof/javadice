@@ -1,4 +1,4 @@
-package com.herejava.notice.service;
+package com.herejava.notice.controller;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.herejava.notice.service.NoticeService;
 import com.herejava.notice.vo.NoticePageData;
 
 
