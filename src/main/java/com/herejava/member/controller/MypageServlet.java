@@ -72,6 +72,24 @@ public class MypageServlet extends HttpServlet {
 			//최근 예약내역이 없습니다.
 		}
 		*/
+		/*
+		1. list에서 객체 모두 꺼내옴 
+		2. 그중 한 객체만 선택해서(예약번호로) 여기에서 예약객체 하나 완성
+		*/
+		
+		//만약 예약내역이 있으면
+		
+		if(list.size() != 0) {
+			for(int i=0;i<list.size();i++) {
+				BookData b = list.get(i);//리스트에서 예약객체 1개 가져옴
+				b.getRoomName();//방 넘버(=방 이름)
+				b.getCheckIn();//체크인날짜
+				b.getCheckOut();//체크아웃날짜
+				b.getBookState();//예약상태
+				list.add(b);
+			}
+		}
+		
 		view.forward(request, response);
 	}
 

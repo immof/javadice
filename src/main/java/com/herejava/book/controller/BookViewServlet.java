@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookData;
 
 /**
  * Servlet implementation class BookViewServlet
@@ -34,7 +35,7 @@ public class BookViewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
 		BookService service = new BookService();
-		Book b = service.selectOneBook(bookNo);
+		BookData b = service.selectOneBook(bookNo);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
 		request.setAttribute("b", b);
 		view.forward(request, response);

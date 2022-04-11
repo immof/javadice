@@ -1,9 +1,10 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.herejava.book.vo.Book"%>
+<%@page import="com.herejava.book.vo.BookData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
     	String pageNavi = (String)request.getAttribute("pageNavi");
+    	ArrayList<BookData> list = (ArrayList<BookData>)request.getAttribute("list");
     %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,7 @@
 				<div class="mypage-content-title">내 예약내역</div>
 					<!-- 테스트 시작-->
 					<table class="tbl tbl-hover">
-						<%for(Book b : bookList) {%>
+						<%for(BookData b : list) {%>
 						<tr class="tr-1">
 							<td>파일패스</td>
 							<td>로얄스위트</td>
