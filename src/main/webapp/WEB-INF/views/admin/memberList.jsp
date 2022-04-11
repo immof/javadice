@@ -12,9 +12,7 @@
 <meta charset="UTF-8">
 <title>회원목록</title>
 <style>
-.mypage-content-title>span{
 
-}
 #searchMember{
 	width:170px; 
 	height:30px;
@@ -30,7 +28,10 @@
 			<div class="mypage-content">
 				<div class="mypage-content-title">
 					<span>회원목록</span>
-					<input type="text" id="searchMember" placeholder="회원 검색(아이디)" >
+					<form action="/searchMember.do">
+						<input type="text" name="searchMember" placeholder="회원 검색(아이디/이름/닉네임)" >
+						<button type="submit" class="material-icons">search</button>
+					</form>
 				</div>
 				
 				<table class="tbl tbl-hover">
@@ -59,5 +60,8 @@
 	</div>
 	<!-- page-content -->
 	<%@include file="/WEB-INF/views/common/footer.jsp"  %>
+	<script>
+		
+	</script>
 </body>
 </html>
