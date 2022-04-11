@@ -59,7 +59,7 @@
 				<%} %>
 				<li>
 				<%if(m!=null) { %>
-					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>" class="f-light fc-2"> 
+					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
 						<span class="material-icons">perm_identity</span> 
 						<span class="material-icons">expand_more</span>
 				<%}else { %>
