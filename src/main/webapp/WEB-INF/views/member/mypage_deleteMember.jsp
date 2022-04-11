@@ -74,6 +74,13 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$("#checkName").change(function(){
+			//현재비밀번호 확인 ajax 만들기
+		});
+	});
+	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
