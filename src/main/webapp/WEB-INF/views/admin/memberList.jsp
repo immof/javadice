@@ -12,17 +12,26 @@
 <meta charset="UTF-8">
 <title>회원목록</title>
 <style>
-	
+.mypage-content-title>span{
+
+}
+#searchMember{
+	width:170px; 
+	height:30px;
+}
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
+			<%@include file="/WEB-INF/views/admin/mypage_common.jsp"%>
 			
 			<div class="mypage-content">
-				<div class="mypage-content-title">회원목록</div>
+				<div class="mypage-content-title">
+					<span>회원목록</span>
+					<input type="text" id="searchMember" placeholder="회원 검색(아이디)" >
+				</div>
 				
 				<table class="tbl tbl-hover">
 					<tr class="tr-3">
@@ -46,7 +55,9 @@
 			
 		</div>
 		<!-- flex-wrap -->
+		
 	</div>
 	<!-- page-content -->
+	<%@include file="/WEB-INF/views/common/footer.jsp"  %>
 </body>
 </html>

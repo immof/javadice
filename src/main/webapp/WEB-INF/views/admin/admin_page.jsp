@@ -14,16 +14,16 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
+			<%@include file="/WEB-INF/views/admin/mypage_common.jsp"%>
 			
 			<div class="mypage-content">
-				<div class="mypage-content-title">회원목록</div>
+				<div class="mypage-content-title">예약관리</div>
 			</div>
 
 		</div>
 		<!-- flex-wrap -->
 	</div>
 	<!-- page-content -->
-</body>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
+</body>
 </html>
