@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.herejava.member.vo.Member"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,7 @@
 .mypage-content {
 	flex-grow: 15;
 	min-height: 680px;
-	padding: 27px;
+	margin: 27px 0 27px 57px;
 }
 
 .mypage-content-title {
@@ -53,7 +54,6 @@
 	margin-top: 60px;
 	flex-grow: 1;
 	color: rgb(51, 51, 51);
-	width: 10%;
 }
 
 .left-menu>ul {
@@ -77,7 +77,6 @@
 
 .left-menu>ul>li>a:hover {
 	color: rgb(172, 158, 137);
-	font-size: 17px;
 }
 .left-menu hr{
 	background-color: #ac9e89;
@@ -102,7 +101,7 @@
         <div class="left-menu">
           <ul>
               <li class="f-bold">예약정보</li>
-              <li class="f-bold"><a href="#">예약내역</a></li>
+              <li class="f-bold"><a href="/bookList.do?memberNo=2&reqPage=1">예약내역</a></li>
               <hr>
               <li class="f-bold">활동정보</li>
               <li><a href="#">적립금</a></li>
@@ -115,5 +114,4 @@
               <li><a href="/mypage_deleteMember.do">회원탈퇴</a></li>               
           </ul>
       </div>
-
 </html>

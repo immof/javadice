@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JAVADICE CITY LOGIN</title>
+<title>JAVADICE CITY</title>
 <style>
 	h1{
 		text-align: center;
@@ -12,7 +12,7 @@
 		font-size: 40px; 
 	}
 	.input-wrap{
-		width: 520px;
+		width: 450px;
 		margin: 0 auto;
 		margin-top: 75px;
 		padding: 40px;
@@ -68,9 +68,8 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<div class="belt"></div>
-		<h1>로그인</h1>
-		<hr>
+		<div class="belt">로그인</div>
+		<br><br><hr>
 		<form action="/login.do" method="post">
 			<div class=input-wrap>
 				<div class="login-input">
@@ -90,7 +89,7 @@
 		회원은 결제 금액의 10%가 적립됩니다.
 		</p>
 		<br><br>
-		<p class="login-p" ><a href="#" style="color:#ccc;">회원 가입 하러 가기</a></p>
+		<p class="login-p" ><a href="/joinFrm.do" style="color:#ccc;">회원 가입 하러 가기</a></p>
 		<br><br><br><br>
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -1,4 +1,5 @@
 <%@page import="com.herejava.member.vo.Member"%>
+<%@page import="com.herejava.book.vo.Book"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%
@@ -27,11 +28,6 @@
 	display: flex;
 	flex-wrap: wrap;
 }
-
-.flex-wrap>div {
-	margin-right: 20px;
-}
-
 .bg {
 	color: #fff;
 }
@@ -59,7 +55,8 @@
 				<%} %>
 				<li>
 				<%if(m!=null) { %>
-					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
+					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
+
 						<span class="material-icons">perm_identity</span> 
 						<span class="material-icons">expand_more</span>
 				<%}else { %>
