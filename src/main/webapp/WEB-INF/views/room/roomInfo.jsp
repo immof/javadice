@@ -10,7 +10,7 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
+			<%@include file="/WEB-INF/views/admin/mypage_common.jsp"%>
 			
 			<div class="mypage-content">
 				<div class="mypage-content-title">객실관리</div>

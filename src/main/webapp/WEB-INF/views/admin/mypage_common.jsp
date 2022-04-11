@@ -31,7 +31,6 @@
         }
         .mypage-content{
           flex-grow: 15;
-          height: 500px;
           padding: 27px;
         }
         
@@ -80,14 +79,14 @@
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
             <div class="mypage-header-profile">
-              <img src="./img/sun.png" alt="" style="width: 50px; height: 50px;">
+              <img src="/img/girl (1).png" alt="" style="width: 50px; height: 50px;">
               <span class="mypage-header-nick">관리자</span>
           </div>
         </header>
         
         <div class="left-menu">
           <ul>
-              <li><a href="/bookCheck.do">예약관리</a></li>
+              <li><a href="#">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
               <li><a href="/roomInfo.do">객실관리</a></li>
               <li><a href="#">공지사항</a></li>
