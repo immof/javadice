@@ -11,11 +11,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style>
+		#noticeEview td, #noticeEview th{
+			border: 1px solid #A7A7A7;
+		}
 		#noticeView th, #noticeView td{
 			border: 1px solid #A7A7A7;
 		}
+		.tbl{
+			border-radius: 10px;
+		}
 		#noticeContent{
-			min-height: 300px;
+			min-height: 400px;
 			text-align: left;
 			font-family: ns-light;
 		}
@@ -23,13 +29,14 @@
 		width: 900px;
 		margin: 0 auto;
 		overflow: hidden;
-		margin-bottom: 10px;
+		margin-bottom: 40px;
 		flex-grow: 1;
 		}
 		.page1-title{
 		font-family: ns-bold;
-   	    padding: 20px 0px;
-    	font-size: 1.3rem;
+   	    padding: 10px 0px;
+    	font-size: 1.2rem;
+    	border-bottom: solid 1px #A7A7A7;
 		}
 		.nc_title{
 			font-family: ns-light;
@@ -38,11 +45,25 @@
 			 width: 700px;
 		}
 		.btn {
-			width:100px;
-			height: 50px;
-			margin-left: 700px;
-			font-size: 14px;
+			width:90px;
+			height: 40px;
+			margin-left: 720px;
 			border-radius: 10px;
+		}
+		.page1-title>.btn{
+			font-size: 14px;
+			text-align: center;
+			line-height: 10px;
+		}
+		.tbl>tr>.nc_title {
+			text-align: left;
+		}
+		.eTitle{
+			width: 100px;
+		}
+		.file{
+			width: 100px;
+			background-color: rgb(245, 245, 245);
 		}
 	</style>
 </head>
@@ -57,12 +78,10 @@
 		<div class="page1-title">공지사항
 			<button class="btn bc2" onclick="home();">목록으로</button> 
 		</div>
-		
-		<hr color=#A7A7A7>
 		<br>
 		<br>
 		<table class="tbl" id="noticeView">
-			<tr class="tr-3">
+			<tr class="tr-2">
 				<th class="nc_title"><%=n.getNoticeTitle() %></th>
 				<th><%=n.getNoticeEnrollDate() %></th>
 			</tr>
@@ -80,14 +99,32 @@
 			</tr>
 			<%} %>
 		</table>
-
-		</div>
+		<span style="line-height:120%"><br></span>
+		<table class="tbl" id="noticeView" style="line-height:140%">
+			<tr class="tr-1">
+				<th class="td-3 file">첨부파일</th>
+				<td colspan="5">
+					<%if(n.getFilename() != null) {%>
+						<a href="/fileDown.do?noticeNo=<%=n.getNoticeNo() %>"><%=n.getFilename() %></a>
+					<%} %>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<table class="tbl1" id="noticeEview">
+			<tr class="tr-1">
+				<th class="td-3 eTitle">이전목록</th>
+				<td colspan="5"><%=n.getNoticeTitle() %></td>
+			</tr>
+		</table>
+		
 		<script>
 			function home(){
-				location.href="/noticeList.do?reqPage=1";
+				history.back();
 			}
 		</script>
-	
+		</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
