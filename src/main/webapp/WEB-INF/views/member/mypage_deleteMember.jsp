@@ -57,16 +57,16 @@
 							<tr class="tr-3">
 								<td>비밀번호 확인</td>
 								<td>
-									<input class="input-form">
+									<input type="password" class="input-form" id="currentPw">
 								</td>
 							</tr>
 							<tr>
-								<td></td>
+								<td><input type="hidden" id="currentId" value=<%=m.getMemberId() %>></td>
 								<td><p class="fc-9"></p></td>	
 							</tr>
 							<tr class="tr-3">
 								<td></td>
-								<td><button class="bc3 updateInfo-btn" type="submit" value="">탈퇴하기</button></td>
+								<td><button class="bc3 updateInfo-btn" type="button" value="">탈퇴하기</button></td>
 							</tr>
 						</table>
 					</form>
@@ -76,10 +76,63 @@
 	</div>
 	<script>
 	$(function(){
-		$("#checkName").change(function(){
-			//현재비밀번호 확인 ajax 만들기
+		let inputCheck = false;
+		$(".updateInfo-btn").on("click",function(){
+			console.log(inputCheck);
+			if(inputCheck){
+				const memberId = $("#currentId").val();
+				$.ajax({
+					url: "/deleteMember.do",
+					type: "get",
+					data: {memberId: memberId},
+				success: function(data){
+					location.href = "/";
+					}	
+				})
+			}else{
+				const title = "비밀번호를 확인해주세요";
+				const icon = "warning";
+				toastShow(title,icon);
+			}
 		});
-	});
+		$("#currentPw").change(function(){
+			const memberPw = $("#currentPw").val();
+			const memberId = $("#currentId").val();
+			$.ajax({
+				url: "/checkPw.do",
+				type: "post",
+				data: {memberPw: memberPw, memberId: memberId},
+				success: function(data){
+					if(data == "1"){
+						$(".fc-9").text("");
+						inputCheck = true;
+					}else if(data == "0"){
+						$(".fc-9").text("비밀번호를 확인해주세요.").css("color","#c87431");
+						inputCheck = false;
+					}	
+				},
+			})
+		});
+		//토스트 알림 함수		
+		function toastShow(title, icon){
+			const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 1500,
+		    timerProgressBar: true,
+		    didOpen: (toast) => {
+		     // toast.addEventListener('mouseenter', Swal.stopTimer)
+		      toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		 	})
+		
+		  Toast.fire({
+		    title: title,
+		    icon: icon
+		  })
+		}//토스트 끝
+	});//로드시
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
