@@ -449,7 +449,7 @@ footer > .footer-content > ul > li > a {
   font-size: 1em;
 }
 .bs6 {
-  padding: 9px 32px;
+  padding: 5px 28px;
   border-radius: 4px;
   font-size: 1.2em;
 }
@@ -457,6 +457,19 @@ footer > .footer-content > ul > li > a {
   padding: 4px 10px;
   border-radius: 4px;
 }
+
+/* image 디자인 */
+.img-0 {
+  margin: 10px;
+  width: 150px;
+	height: 90px;
+}
+.img-1 {
+  margin: 20px;
+	width: 450px;
+	height: 300px;
+}
+
 /* input 디자인 */
 .input-form {
   width: 100%;
