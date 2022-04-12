@@ -7,9 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.herejava.book.dao.BookCheckPage;
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookCheckPage;
 import com.herejava.book.vo.BookData;
 import com.herejava.book.vo.BookPageData;
 import com.herejava.member.vo.MemberPageData;
@@ -197,13 +197,15 @@ public class BookService {
 	public BookCheckPage selectAllBook1(int reqPage) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
+		
+		
 		int numPerPage = 10;
 		int end = reqPage*numPerPage;
 		int start = end-numPerPage+1;
-		ArrayList<Book> book = dao.selectAllBook1(conn,start,end);
+		ArrayList<Book> list = dao.selectAllBook1(conn,start,end);
 		//페이징처리
 		
-				int totalBookCount = dao.totalBookCount(conn);	//전체회원수
+				int totalBookCount = dao.totalBookCount(conn);
 				int totalPage = 0;	// 전체 페이지수
 				if(totalBookCount % numPerPage == 0) {
 					totalPage = totalBookCount / numPerPage;
@@ -219,7 +221,7 @@ public class BookService {
 				//이전버튼
 				if(pageNo != 1) {
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/bookCheck.do?reqPage="+(pageNo-1)+"'>";
+					pageNavi += "<a class='page-item' href='/bookcheck.do?reqPage="+(pageNo-1)+"'>";
 					pageNavi += "<span class='material-icons'>chevron_left</span>";
 					pageNavi += "</a></li>";
 				}
@@ -227,12 +229,12 @@ public class BookService {
 				for(int i=0;i<pageNaviSize;i++) {
 					if(pageNo == reqPage) {
 						pageNavi += "<li>";
-						pageNavi += "<a class='page-item active-page' href='/bookCheck.do?reqPage="+pageNo+"'>";
+						pageNavi += "<a class='page-item active-page' href='/bookcheck.do?reqPage="+pageNo+"'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					}else {
 						pageNavi += "<li>";
-						pageNavi += "<a class='page-item' href='/bookCheck.do?reqPage="+pageNo+"'>";
+						pageNavi += "<a class='page-item' href='/bookcheck.do?reqPage="+pageNo+"'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					}
@@ -244,12 +246,12 @@ public class BookService {
 				//다음버튼
 				if(pageNo <= totalPage) {
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/bookCheck.do?reqPage="+pageNo+"'>";		//위에 pageNo++로 이미 숫자가 커졌기때문에 pageNo+1이 아니다
+					pageNavi += "<a class='page-item' href='/bookcheck.do?reqPage="+pageNo+"'>";		//위에 pageNo++로 이미 숫자가 커졌기때문에 pageNo+1이 아니다
 					pageNavi += "<span class='material-icons'>chevron_right</span>";
 					pageNavi += "</a></li>";
 				}
 				pageNavi += "</ul>";
-				BookCheckPage bcp = new BookCheckPage(book,pageNavi);
+				BookCheckPage bcp = new BookCheckPage(list,pageNavi);
 				
 				JDBCTemplate.close(conn);
 				return bcp;
