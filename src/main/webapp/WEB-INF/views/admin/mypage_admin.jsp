@@ -31,8 +31,8 @@
         }
         .mypage-content{
           flex-grow: 15;
-          height: 500px;
           padding: 27px;
+          overflow: hidden;
         }
         
 		.mypage-content-title {
@@ -89,7 +89,7 @@
               <li><a href="/bookcheck.do?reqPage=1">예약관리</a></li>
               <li><a href="#">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
-              <li><a href="#">객실관리</a></li>
+              <li><a href="">객실관리</a></li>
               <li><a href="#">공지사항</a></li>
               <li><a href="#">문의내역</a></li>
               <li><a href="#">프로모션</a></li>                  

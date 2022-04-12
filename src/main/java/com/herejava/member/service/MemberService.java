@@ -2,6 +2,7 @@ package com.herejava.member.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import com.herejava.book.dao.BookCheckPage;
 import com.herejava.book.dao.BookDao;
@@ -171,6 +172,30 @@ public MemberPageData searchMember(String searchMember, int reqPage) {
 	
 	JDBCTemplate.close(conn);
 	return mpd;
+}
+
+public boolean delMember(String memberNoArr) {
+	Connection conn = JDBCTemplate.getConnection();
+	MemberDao dao = new MemberDao();
+	
+	//데이터편집
+	StringTokenizer sT = new StringTokenizer(memberNoArr,"/");
+	boolean result = true;
+	while(sT.hasMoreTokens()) {
+		int memberNo = Integer.parseInt(sT.nextToken());
+		int chkResult = dao.delMember(conn,memberNo);
+		if(chkResult == 0) {
+			result = false;
+			break;
+		}
+	}
+	if(result) {
+		JDBCTemplate.commit(conn);
+	}else {
+		JDBCTemplate.rollback(conn);
+	}
+	JDBCTemplate.close(conn);
+	return result;
 }
 
   
