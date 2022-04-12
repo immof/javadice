@@ -199,7 +199,7 @@ public class BookService {
 		BookDao dao = new BookDao();
 		
 		
-		int numPerPage = 10;
+		int numPerPage = 8;
 		int end = reqPage*numPerPage;
 		int start = end-numPerPage+1;
 		ArrayList<Book> list = dao.selectAllBook1(conn,start,end);
