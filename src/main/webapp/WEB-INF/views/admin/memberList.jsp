@@ -12,7 +12,6 @@
 <meta charset="UTF-8">
 <title>회원목록</title>
 <style>
-
 #searchMember{
 	width:170px; 
 	height:30px;
@@ -23,7 +22,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@include file="/WEB-INF/views/admin/mypage_common.jsp"%>
+			<%@include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
 			
 			<div class="mypage-content">
 				<div class="mypage-content-title">
@@ -33,8 +32,7 @@
 						<button type="submit" class="material-icons">search</button>
 					</form>
 				</div>
-				
-				<table class="tbl tbl-hover">
+					<table class="tbl tbl-hover">
 					<tr class="tr-3">
 						<th>번호</th><th>아이디</th><th>이름</th><th>닉네임</th><th>핸드폰번호</th><th>적립금</th><th>등급</th><th>예약내역</th>
 					</tr>
@@ -56,7 +54,6 @@
 			
 		</div>
 		<!-- flex-wrap -->
-		
 	</div>
 	<!-- page-content -->
 	<%@include file="/WEB-INF/views/common/footer.jsp"  %>

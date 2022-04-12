@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/Pyseon/javadice.git
+<%@page import="oracle.net.aso.r"%>
 <%@page import="com.herejava.book.vo.BookData"%>
 <%@page import="com.herejava.room.vo.Room"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

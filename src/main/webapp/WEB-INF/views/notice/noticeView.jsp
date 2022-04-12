@@ -5,6 +5,8 @@
     <%
     	Notice n = (Notice)request.getAttribute("n");//근데여기선 쓰고있고
     %>
+   <!-- 구글 아이콘 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +49,10 @@
 		.btn {
 			width:90px;
 			height: 40px;
+			border-radius: 5px;
 			margin-left: 720px;
+		}
+		.tbl>.tr-1,.tr-2{
 			border-radius: 10px;
 		}
 		.page1-title>.btn{
@@ -60,10 +65,15 @@
 		}
 		.eTitle{
 			width: 100px;
+			background-color: rgb(245, 245, 245);
+			line-height: 30px;
 		}
 		.file{
 			width: 100px;
 			background-color: rgb(245, 245, 245);
+		}
+		.tr-2>.nc_title{
+			text-align: left;
 		}
 	</style>
 </head>
@@ -74,6 +84,8 @@
 		<br>
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
+		<br>
+		<Br>
 		<br>
 		<div class="page1-title">공지사항
 			<button class="btn bc2" onclick="home();">목록으로</button> 
@@ -99,7 +111,7 @@
 			</tr>
 			<%} %>
 		</table>
-		<span style="line-height:120%"><br></span>
+		<span style="line-height:80%"></span>
 		<table class="tbl" id="noticeView" style="line-height:140%">
 			<tr class="tr-1">
 				<th class="td-3 file">첨부파일</th>
@@ -110,12 +122,17 @@
 				</td>
 			</tr>
 		</table>
+		<span style="line-height:150%;">
 		<br>
-		<br>
-		<table class="tbl1" id="noticeEview">
-			<tr class="tr-1">
-				<th class="td-3 eTitle">이전목록</th>
-				<td colspan="5"><%=n.getNoticeTitle() %></td>
+		</span>
+		<table class="tbl" id="noticeEview">
+			<tr class="tr-1 eview">
+				<th class="td-3 eTitle">이전글<span class="material-icons icon1">expand_less</span></th>
+				<td colspan="5" onclick=""><%=n.getNoticeTitle() %></td>
+			</tr>
+			<tr class="tr-1 eview">
+				<th class="td-3 eTitle">다음글<span class="material-icons icon1">expand_more</span></th>
+				<td colspan="5" onclick=""><%=n.getNoticeTitle() %></td>
 			</tr>
 		</table>
 		
