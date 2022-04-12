@@ -241,7 +241,6 @@
 					data : {email:email},
 					type : "post",
 					success : function(data){
-						console.log(data);
 						if(data == "null"){
 							alert("이미 가입된 이메일입니다.");
 						}else{
@@ -249,7 +248,6 @@
 							mailCode = data;
 							authTime();	
 						}
-						
 					},
 					error : function(){
 						console.log("sendMail 에러");
@@ -335,7 +333,7 @@
 					count++;
 				}
 			}
-			if(count != 6 || authChk != 2){
+			if(count != 6 || authChk < 2){
 				e.preventDefault();
 			}
 		})
