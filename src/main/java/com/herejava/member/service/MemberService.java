@@ -2,6 +2,7 @@ package com.herejava.member.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
@@ -28,6 +29,21 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return m;
 	}
+	public Member selectOneMember2(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		Member m = dao.selectOneMember2(conn,member);
+		JDBCTemplate.close(conn);
+		return m;
+	}//회원페이지 정보수정 용
+	
+	public Member selectOneMember3(String memberNick) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		Member m = dao.selectOneMember3(conn,memberNick);
+		JDBCTemplate.close(conn);
+		return m;
+	}//회원페이지 닉네임 중복체크용
 
 	public MemberPageData selectAllMember(int reqPage) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -94,6 +110,45 @@ public class MemberService {
 		Connection conn = JDBCTemplate.getConnection();
 		MemberDao dao = new MemberDao();
 		int result = dao.memberNickChk(conn, memberNick);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+  public int updateMember(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		int result = dao.updateMember(conn, member);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+  
+	public int updatePw(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		int result = dao.updatePw(conn, member);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteMember(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		MemberDao dao = new MemberDao();
+		int result = dao.deleteMember(conn, memberId);
+    if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
@@ -171,6 +226,30 @@ public MemberPageData searchMember(String searchMember, int reqPage) {
 	
 	JDBCTemplate.close(conn);
 	return mpd;
+}
+
+public boolean delMember(String memberNoArr) {
+	Connection conn = JDBCTemplate.getConnection();
+	MemberDao dao = new MemberDao();
+	
+	//데이터편집
+	StringTokenizer sT = new StringTokenizer(memberNoArr,"/");
+	boolean result = true;
+	while(sT.hasMoreTokens()) {
+		int memberNo = Integer.parseInt(sT.nextToken());
+		int chkResult = dao.delMember(conn,memberNo);
+		if(chkResult == 0) {
+			result = false;
+			break;
+		}
+	}
+	if(result) {
+		JDBCTemplate.commit(conn);
+	}else {
+		JDBCTemplate.rollback(conn);
+	}
+	JDBCTemplate.close(conn);
+	return result;
 }
 
   

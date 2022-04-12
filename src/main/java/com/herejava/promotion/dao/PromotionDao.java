@@ -65,7 +65,6 @@ public class PromotionDao {
 			if(rset.next()) {
 				totalCount = rset.getInt("cnt");
 			}
-			System.out.println(totalCount);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

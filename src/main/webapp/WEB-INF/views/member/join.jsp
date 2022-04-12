@@ -236,6 +236,7 @@
 		function sendMail(){
 			if(checkArr[0]){
 				const email = $("[name=memberId]").val();
+				alert("아이디를 조회하는 중입니다.");
 				$.ajax({
 					url : "/sendMail.do",
 					data : {email:email},

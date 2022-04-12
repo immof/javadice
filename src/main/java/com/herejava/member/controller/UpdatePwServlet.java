@@ -3,27 +3,27 @@ package com.herejava.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
 
 /**
- * Servlet implementation class JoinServlet
+ * Servlet implementation class UpdatePwServlet
  */
-@WebServlet(name = "Join", urlPatterns = { "/join.do" })
-public class JoinServlet extends HttpServlet {
+@WebServlet(name = "UpdatePw", urlPatterns = { "/updatePw.do" })
+public class UpdatePwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinServlet() {
+    public UpdatePwServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,33 +35,23 @@ public class JoinServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		String memberId = request.getParameter("memberId");
-		String memberPw = request.getParameter("memberPw");
-		String memberName = request.getParameter("memberName");
-		String memberNick = request.getParameter("memberNick");
-		String memberPhone = request.getParameter("memberPhone");
+		Member member = new Member();
+		member.setMemberId(request.getParameter("memberId"));
+		member.setMemberPw(request.getParameter("memberPw"));
+		System.out.println("입력한 pw> "+member.getMemberPw());
 		//3.비즈니스로직
-		Member m = new Member();
-		m.setMemberId(memberId);
-		m.setMemberPw(memberPw);
-		m.setMemberName(memberName);
-		m.setMemberNick(memberNick);
-		m.setMemberPhone(memberPhone);
 		MemberService service = new MemberService();
-		int result = service.insertMember(m);
+		int result = service.updatePw(member);
+		Member m = service.selectOneMember2(member);
+		System.out.println("거쳐나온 pw> "+m.getMemberPw());
 		//4.결과처리
-		if(result>0) {
-			RequestDispatcher view  = request.getRequestDispatcher("/login.do");
-			request.setAttribute("memberId", memberId);
-			request.setAttribute("memberPw", memberPw);
-			view.forward(request, response);
-		} else {
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('회원가입 중 오류가 발생하였습니다. 다시 가입하여주세요.')");
-			out.println("history.back()");
-			out.println("</script>");
+		PrintWriter out = response.getWriter();
+		if(result > 0 && m!=null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("m", m);
+			out.print(1);
+		}else {
+			out.print(0);
 		}
 	}
 
