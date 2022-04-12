@@ -31,8 +31,8 @@
         }
         .mypage-content{
           flex-grow: 15;
-          height: 500px;
           padding: 27px;
+          overflow: hidden;
         }
         
 		.mypage-content-title {
