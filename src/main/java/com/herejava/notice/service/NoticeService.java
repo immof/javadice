@@ -94,6 +94,13 @@ public class NoticeService {
 		return n;
 	}
 
+	public Notice selectTwoNoitce(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		NoticeDao dao = new NoticeDao();
+		int result= dao.selectTwoNotice(conn, noticeNo);
+		return null;
+	}
+
 	}
 	
 

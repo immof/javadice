@@ -71,23 +71,23 @@
 				</li>
 			</div>
 		</div>
-		<div class="header-bottom">
-			<nav>
-				<ul class="navi">
-					<li>
-						<a href="#"><i class="fa-solid fa-magnifying-glass searchIcon"></i>숙소예약</a>
-					</li>
-					<li><a href="#">객실정보</a></li>
-					<li><a href="#">프로모션</a></li>
-					<li><a href="/location.do">오시는길</a></li>
-					<li><a href="#">게시판<span class="material-icons">expand_more</span>
-					</a>
-						<ul class="sub-navi">
-							<li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
-							<li><a href="#">문의사항</a></li>
-							<li><a href="#">자주묻는 질문</a></li>
-						</ul></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
+      <div class="header-bottom">
+         <nav>
+            <ul class="navi">
+               <li>
+                  <a href="#"><i class="fa-solid fa-magnifying-glass searchIcon"></i>숙소예약</a>
+               </li>
+               <li><a href="#">객실정보</a></li>
+               <li><a href="#">프로모션</a></li>
+               <li><a href="/location.do">오시는길</a></li>
+               <li><a href="#">게시판<span class="material-icons">expand_more</span>
+               </a>
+                  <ul class="sub-navi">
+                     <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
+                     <li><a href="#">문의사항</a></li>
+                     <li><a href="#">자주묻는 질문</a></li>
+                  </ul></li>
+            </ul>
+         </nav>
+      </div>
+   </header>

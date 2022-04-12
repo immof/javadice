@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.herejava.book.dao.BookCheckPage;
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookData;
@@ -112,7 +113,7 @@ public class BookService {
 		int pageNaviSize = 5; 
 		
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
-		
+		//페이지 네비게이션 제작 시작
 		String pageNavi = "<ul class='pagination circle-style'>";
 		if(pageNo != 1) {
 			pageNavi += "<li>";
@@ -124,7 +125,7 @@ public class BookService {
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' active-page href='/bookList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item active-page' href='/bookList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
@@ -190,6 +191,16 @@ public class BookService {
 		BookData bd = dao.getBook(conn,bookNo);
 		JDBCTemplate.close(conn);
 		return bd;
+	}
+
+	public BookCheckPage selectAllBook1(int reqPage) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		int numPerPage = 10;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		ArrayList<Book> book = dao.selectAllBook1(conn,start,end);
+		return null;
 	}
 	
 }

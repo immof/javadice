@@ -173,6 +173,35 @@ public class MemberDao {
 	}
 
 
+	public ArrayList<Member> searchMember(Connection conn, int start, int end, String searchMember) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Member> list = new ArrayList<Member>();
+		String query = "select * from (select rownum rnum, m.* from (select * from member where member_id = ? or member_name = ? or member_nick = ?) m) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, searchMember);
+			pstmt.setString(2, searchMember);
+			pstmt.setString(3, searchMember);
+			pstmt.setInt(4, start);
+			pstmt.setInt(5, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Member m = getMember(rset);
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return list;
+	}
+
+
 	
 	
 	
