@@ -17,20 +17,29 @@
 	.page-content>div{
 	}
 	.tbl tr>th:first-child {
-		width: 9%;
+		width: 10%;
 	}
 	.tbl tr>th{
-		border-top: 1px solid #ccc;
+		border-top: 1px solid #A7A7A7;
 		background-color: rgb(204,204,204,0.4);
 	}
 	.tbl-hover{
 		margin-top: 20px;
 	}
 	.tbl-hover th, .tbl-hover td{
-			border-bottom: 1px solid #A7A7A7;
+		border-bottom: 1px solid #A7A7A7;
 		}
 	#pageNavi {
 		margin-top: 10px;
+	}
+	#btnbutton{
+		height: 40px;
+		font-size: 13px;
+		line-height: 10px;
+	}
+	#btnbutton>a{
+		color: white;
+		
 	}
 </style>
 </head>
@@ -53,11 +62,13 @@
 							<td><%=b.getBookPeople() %></td>
 							<td><%=b.getCheckIn() %></td>
 							<td><%=b.getCheckOut() %></td>
-							<td><button class="btn bc2">상세보기</button></td>
+							<td><button class="btn bc2" id="btnbutton"><a href="/bookCheckList.do?bookNo=<%=b.getBookNo()%>">상세보기</a></button></td>
 						</tr>
 					<%} %>
 				</table>
 					<div id="pageNavi"><%=pageNavi%></div>
+					
+				
 			</div>
 	</div>
 	</div>
