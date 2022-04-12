@@ -1,8 +1,6 @@
-package com.herejava.book.dao;
+package com.herejava.book.vo;
 
 import java.util.ArrayList;
-
-import com.herejava.book.vo.Book;
 
 public class BookCheckPage {
 	private ArrayList<Book> list;

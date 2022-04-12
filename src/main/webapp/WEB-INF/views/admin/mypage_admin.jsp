@@ -87,7 +87,6 @@
         <div class="left-menu">
           <ul>
               <li><a href="/bookcheck.do?reqPage=1">예약관리</a></li>
-              <li><a href="#">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
               <li><a href="">객실관리</a></li>
               <li><a href="#">공지사항</a></li>

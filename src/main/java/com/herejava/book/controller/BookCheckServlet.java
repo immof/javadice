@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.dao.BookCheckPage;
 import com.herejava.book.service.BookService;
+import com.herejava.book.vo.BookCheckPage;
 
 /**
  * Servlet implementation class BookcheckServlet
