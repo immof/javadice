@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.herejava.book.dao.BookCheckPage;
 import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
 
 /**
- * Servlet implementation class BookCancleServlet
+ * Servlet implementation class BookcheckServlet
  */
-@WebServlet(name = "BookCancle", urlPatterns = { "/bookCancle.do" })
-public class BookCancleServlet extends HttpServlet {
+@WebServlet(name = "BookCheck", urlPatterns = { "/bookcheck.do" })
+public class BookCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookCancleServlet() {
+    public BookCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +31,16 @@ public class BookCancleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		//2. 값추출
-		long bookNo = Long.parseLong(request.getParameter("bookNo"));
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		//3. 비즈니스로직
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		BookService service = new BookService();
-		int result = service.updateBook(bookNo);
-		System.out.println(result);
-		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		
+		BookCheckPage bcp = service.selectAllBook1(reqPage);
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/admin/bookCheck.jsp");
+		request.setAttribute("list", bcp.getList());
+		request.setAttribute("pageNavi", bcp.getPageNavi());
 		view.forward(request, response);
 		
-		if(result>0) {
-			request.setAttribute("title", "성공");
-			request.setAttribute("icon", "succcess");
-		}else {
-			request.setAttribute("title", "실패");
-			request.setAttribute("icon", "error");
-		}
-		request.setAttribute("loc", "/mypage_main.do");
 	}
 
 	/**

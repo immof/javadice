@@ -40,6 +40,7 @@ public class NoticeViewServlet extends HttpServlet {
 				//3. 비즈니스로직
 				NoticeService service = new NoticeService();
 				Notice n = service.selectOneNotice(noticeNo);
+				Notice a = service.selectTwoNoitce(noticeNo);
 				//4. 결과처리
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeView.jsp");
 				request.setAttribute("n", n);

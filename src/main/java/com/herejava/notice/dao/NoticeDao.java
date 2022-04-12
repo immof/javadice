@@ -113,6 +113,14 @@ public class NoticeDao {
 		return result;
 	}
 
+	public int selectTwoNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "SELECT  notice_no FROM notice WHERE notice_no IN ((SELECT notice_no FROM notice WHERE notice_no < {현재글번호} ORDER BY notice_no DESC LIMIT 1),  "
+				+ "(SELECT notice_no FROM notice WHERE notice_no > {현재글번호}  ORDER BY notice_no LIMIT 1))";
+		return 0;
+	}
+
 	
 
 

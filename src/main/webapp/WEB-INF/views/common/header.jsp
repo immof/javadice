@@ -37,24 +37,38 @@
 .header-link{
 	margin-right:40px;
 }
-.header-link>li:first-child{
-  text-align: center;
-}
 </style>
 </head>
 	<header>
 		<div class="header-top">
 			<div class="site-logo">
-				<a href="/"> <img src="./img/javadice_logo.png" style="width: 280px;"></a>
+				<a href="/"> <img src="./img/javadice_logo.png"
+					style="width: 280px;">
+				</a>
 			</div>
 			<div class="header-link">
+				<li><a href="#" class="f-light fc-1">예약조회</a></li>
 				<%if(m!=null) { %>
-					<li><a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-1">마이페이지</a></li>
-					<li><a href="#" class="f-light fc-1">로그아웃</a></li>
+				<li><a href="#" class="f-light fc-1">로그아웃</a></li>
 				<%}else { %>
-					<li><a href="#" class="f-light fc-1">예약조회</a></li>
-					<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
+				<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
 				<%} %>
+				<li>
+				<%if(m!=null) { %>
+					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
+
+						<span class="material-icons">perm_identity</span> 
+						<span class="material-icons">expand_more</span>
+				<%}else { %>
+					<a href="/login.do" class="f-light fc-2"> 
+				<%} %>
+					</a>
+					<ul class="login-sub-navi">
+						<li><a href="#" class="f-light fc-1">sub-1</a></li>
+						<li><a href="#" class="f-light fc-1">sub-2</a></li>
+						<li><a  class="f-light fc-1" href="#">sub-3</a></li>
+					</ul>
+				</li>
 			</div>
 		</div>
 		<div class="header-bottom">

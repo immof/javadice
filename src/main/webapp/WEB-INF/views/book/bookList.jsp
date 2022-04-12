@@ -47,6 +47,10 @@
 		#pageNavi {
 			margin: 30px;
 		}
+		.img-0{
+		width: 150px;
+		height: 90px;
+		}
 </style>
 </head>
 <body>
@@ -61,7 +65,7 @@
 					for (BookData bd : list) {
 					%>
 					<tr class="tr-1">
-						<td><%=bd.getFilePath()%></td>
+						<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
 						<td><%=bd.getRoomName()%></td>
 						<td><%=bd.getCheckIn()%> - <%=bd.getCheckOut()%></td>
 						<td><%=bd.getBookState()%></td>
