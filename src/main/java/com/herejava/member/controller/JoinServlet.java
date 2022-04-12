@@ -1,6 +1,7 @@
 package com.herejava.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,10 +50,19 @@ public class JoinServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		int result = service.insertMember(m);
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/login.do");
-		request.setAttribute("memberId", memberId);
-		request.setAttribute("memberPw", memberPw);
-		view.forward(request, response);
+		if(result>0) {
+			RequestDispatcher view  = request.getRequestDispatcher("/login.do");
+			request.setAttribute("memberId", memberId);
+			request.setAttribute("memberPw", memberPw);
+			view.forward(request, response);
+		} else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('회원가입 중 오류가 발생하였습니다. 다시 가입하여주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
 	}
 
 	/**
