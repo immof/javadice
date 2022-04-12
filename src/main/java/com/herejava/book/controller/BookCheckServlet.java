@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.herejava.book.service.BookService;
+import com.herejava.book.vo.BookCheckPage;
+
 /**
- * Servlet implementation class BookCheckServlet
+ * Servlet implementation class BookcheckServlet
  */
-@WebServlet(name = "BookCheck", urlPatterns = { "/bookCheck.do" })
+@WebServlet(name = "BookCheck", urlPatterns = { "/bookcheck.do" })
 public class BookCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,8 +32,15 @@ public class BookCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookInput.jsp");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		BookService service = new BookService();
+		
+		BookCheckPage bcp = service.selectAllBook1(reqPage);
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/admin/bookCheck.jsp");
+		request.setAttribute("list", bcp.getList());
+		request.setAttribute("pageNavi", bcp.getPageNavi());
 		view.forward(request, response);
+		
 	}
 
 	/**

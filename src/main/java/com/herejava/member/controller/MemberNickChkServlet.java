@@ -1,7 +1,7 @@
 package com.herejava.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,23 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
-import com.herejava.book.vo.BookData;
 import com.herejava.member.service.MemberService;
-import com.herejava.member.vo.Member;
 
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class MemberNickChkServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage_main.do" })
-public class MypageServlet extends HttpServlet {
+@WebServlet(name = "MemberNickChk", urlPatterns = { "/memberNickChk.do" })
+public class MemberNickChkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public MemberNickChkServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,25 +34,13 @@ public class MypageServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		String memberId = request.getParameter("memberId");
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		int memberLevel = Integer.parseInt(request.getParameter("memberLevel"));
+		String memberNick = request.getParameter("nickChk");
 		//3.비즈니스로직
-		//member 객체 
 		MemberService service = new MemberService();
-		BookService bookService = new BookService();
-		Member m = service.selectOneMember(memberId);
-		ArrayList<BookData> list = bookService.selectAllBook(memberNo);
+		int result = service.memberNickChk(memberNick);
 		//4.결과처리
-		if(memberLevel==1) {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
-			request.setAttribute("m", m);
-			request.setAttribute("list", list);
-			view.forward(request, response);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_page.jsp");
-			view.forward(request, response);
-		}
+		PrintWriter out = response.getWriter();
+		out.print(result);
 	}
 
 	/**

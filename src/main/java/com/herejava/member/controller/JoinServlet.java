@@ -1,7 +1,7 @@
 package com.herejava.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,23 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
-import com.herejava.book.vo.BookData;
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
 
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class JoinServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage_main.do" })
-public class MypageServlet extends HttpServlet {
+@WebServlet(name = "Join", urlPatterns = { "/join.do" })
+public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public JoinServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,23 +36,32 @@ public class MypageServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
 		String memberId = request.getParameter("memberId");
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		int memberLevel = Integer.parseInt(request.getParameter("memberLevel"));
+		String memberPw = request.getParameter("memberPw");
+		String memberName = request.getParameter("memberName");
+		String memberNick = request.getParameter("memberNick");
+		String memberPhone = request.getParameter("memberPhone");
 		//3.비즈니스로직
-		//member 객체 
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setMemberPw(memberPw);
+		m.setMemberName(memberName);
+		m.setMemberNick(memberNick);
+		m.setMemberPhone(memberPhone);
 		MemberService service = new MemberService();
-		BookService bookService = new BookService();
-		Member m = service.selectOneMember(memberId);
-		ArrayList<BookData> list = bookService.selectAllBook(memberNo);
+		int result = service.insertMember(m);
 		//4.결과처리
-		if(memberLevel==1) {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
-			request.setAttribute("m", m);
-			request.setAttribute("list", list);
+		if(result>0) {
+			RequestDispatcher view  = request.getRequestDispatcher("/login.do");
+			request.setAttribute("memberId", memberId);
+			request.setAttribute("memberPw", memberPw);
 			view.forward(request, response);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_page.jsp");
-			view.forward(request, response);
+		} else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('회원가입 중 오류가 발생하였습니다. 다시 가입하여주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
 		}
 	}
 

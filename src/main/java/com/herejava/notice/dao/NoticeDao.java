@@ -66,4 +66,63 @@ public class NoticeDao {
 		return result;
 	}
 
+	public Notice selectOneNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Notice n = null;
+		String query = "select * from notice where notice_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				n = new Notice();
+				n.setNoticeNo(rset.getInt("notice_no"));
+				n.setNoticeWriter(rset.getString("notice_writer"));
+				n.setNoticeTitle(rset.getString("notice_title"));
+				n.setNoticeContent(rset.getString("notice_content"));
+				n.setNoticeReadCount(rset.getInt("notice_read_count"));
+				n.setNoticeEnrollDate(rset.getString("notice_enroll_date"));
+				n.setFilename(rset.getString("filename"));
+				n.setFilepath(rset.getString("filepath"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return n;
+	}
+
+	public int updateReadCount(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String qeury = "update notice set notice_read_count = notice_read_count+1 where notice_no=?";
+		try {
+			pstmt = conn.prepareStatement(qeury);
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int selectTwoNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "SELECT  notice_no FROM notice WHERE notice_no IN ((SELECT notice_no FROM notice WHERE notice_no < {현재글번호} ORDER BY notice_no DESC LIMIT 1),  "
+				+ "(SELECT notice_no FROM notice WHERE notice_no > {현재글번호}  ORDER BY notice_no LIMIT 1))";
+		return 0;
+	}
+
+	
+
+
+
 }

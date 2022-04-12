@@ -1,6 +1,7 @@
 package com.herejava.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,23 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
-import com.herejava.book.vo.BookData;
+import com.google.gson.Gson;
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
+import com.herejava.member.vo.MemberPageData;
 
 /**
- * Servlet implementation class MypageServlet
+ * Servlet implementation class SerchMemberServlet
  */
-@WebServlet(name = "Mypage", urlPatterns = { "/mypage_main.do" })
-public class MypageServlet extends HttpServlet {
+@WebServlet(name = "SearchMember", urlPatterns = { "/searchMember.do" })
+public class SearchMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageServlet() {
+    public SearchMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,28 +35,16 @@ public class MypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.인코딩
 		request.setCharacterEncoding("utf-8");
-		//2.값추출
-		String memberId = request.getParameter("memberId");
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		int memberLevel = Integer.parseInt(request.getParameter("memberLevel"));
-		//3.비즈니스로직
-		//member 객체 
+		String searchMember = request.getParameter("searchMember");
 		MemberService service = new MemberService();
-		BookService bookService = new BookService();
-		Member m = service.selectOneMember(memberId);
-		ArrayList<BookData> list = bookService.selectAllBook(memberNo);
-		//4.결과처리
-		if(memberLevel==1) {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
-			request.setAttribute("m", m);
-			request.setAttribute("list", list);
-			view.forward(request, response);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_page.jsp");
-			view.forward(request, response);
-		}
+		int reqPage = 1;
+		MemberPageData mpd = service.searchMember(searchMember,reqPage);
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/admin/memberList.jsp");
+		request.setAttribute("list", mpd.getList());
+		request.setAttribute("pageNavi", mpd.getPageNavi());
+		view.forward(request, response);
+		
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.herejava.book.controller;
+package com.herejava.member.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
-import com.herejava.book.vo.BookData;
+import com.herejava.member.service.MemberService;
 
 /**
- * Servlet implementation class BookViewServlet
+ * Servlet implementation class DelMemberServlet
  */
-@WebServlet(name = "BookView", urlPatterns = { "/bookView.do" })
-public class BookViewServlet extends HttpServlet {
+@WebServlet(name = "DelMember", urlPatterns = { "/delMember.do" })
+public class DelMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookViewServlet() {
+    public DelMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,11 +31,11 @@ public class BookViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		long bookNo = Long.parseLong(request.getParameter("bookNo"));
-		BookService service = new BookService();
-		BookData bd = service.getBook(bookNo);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
-		request.setAttribute("bd", bd);
+		String memberNoArr = request.getParameter("memberNoArr");
+		MemberService service = new MemberService();
+		boolean result = service.delMember(memberNoArr);
+		//4.결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/memberList.do?reqPage=1");
 		view.forward(request, response);
 	}
 

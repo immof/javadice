@@ -24,9 +24,6 @@
 					console.log("함수준비");
 					location.href = "<%=loc %>"
 					toastShow(title, icon);
-			  
-			  
-			  
 		}
 		function toastShow(title, icon){
 					console.log("함수실행?");
@@ -41,15 +38,12 @@
 		      toast.addEventListener('mouseleave', Swal.resumeTimer)
 		    }
 		  })
-
 		  Toast.fire({
 		    title: "<%=title %>",
 		    icon: "<%=icon %>"
 		  })
 			
 		}
-		
-		
 	</script>
 </body>
 </html>

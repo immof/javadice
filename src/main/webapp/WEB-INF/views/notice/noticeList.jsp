@@ -13,8 +13,9 @@
 	.body{
 		margin: 0;
 	}
-	.tr-1{
-		background-color: 
+	.notice-tbl tr>th{
+		border-top: 1px solid #ccc;
+		background-color: rgb(204,204,204,0.4);
 	}
 	.page1-content{
 		width: 900px;
@@ -27,6 +28,9 @@
 		font-family: ns-bold;
    	    padding: 20px 0px;
     	font-size: 1.3rem;
+    	margin-top: 50px;
+    	margin-bottom: 30px;
+    	border-bottom: 2px solid #ccc;
 	}
 	.notice-tbl a:hover{
 			text-decoration: underline;
@@ -73,7 +77,6 @@
 		<br>
 		<div class="page1-title">공지사항</div>
 		<!-- <a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a> -->
-		<hr>
 			<table class="tbl tr-1 notice-tbl">
 					<tr class="tr-2">
 						<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th>
@@ -91,6 +94,7 @@
 				</tr>
 				<%} %>
 		</table>
+		<br>
 		<div id="pageNavi"><%=pageNavi %></div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
