@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	Notice n = (Notice)request.getAttribute("n");//근데여기선 쓰고있고
+    	Notice n = (Notice)request.getAttribute("n");
     %>
    <!-- 구글 아이콘 -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
