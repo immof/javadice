@@ -36,7 +36,7 @@ public class BookCheckServlet extends HttpServlet {
 		BookService service = new BookService();
 		
 		BookCheckPage bcp = service.selectAllBook1(reqPage);
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/admin/bookcheck.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/admin/bookCheck.jsp");
 		request.setAttribute("list", bcp.getList());
 		request.setAttribute("pageNavi", bcp.getPageNavi());
 		view.forward(request, response);

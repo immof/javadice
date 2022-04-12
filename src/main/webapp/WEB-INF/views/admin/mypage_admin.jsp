@@ -42,9 +42,10 @@
 	      border-bottom: solid 2px rgb(167, 167, 167);
 		}
         .left-menu{
-            margin-top: 50px;
+            margin-top: 60px;
             flex-grow: 1;
             color: rgb(51, 51, 51);
+            width: 20%;
       
         }
         .left-menu>ul{
@@ -80,12 +81,12 @@
             <div class="mypage-header-space"></div>
             <div class="mypage-header-profile">
               <img src="./img/sun.png" alt="" style="width: 50px; height: 50px;">
-              <span class="mypage-header-nick">김코딩</span>
+              <span class="mypage-header-nick">관리자</span>
           </div>
         </header>
         <div class="left-menu">
           <ul>
-              <li><a href="/bookCheck.do">예약관리</a></li>
+              <li><a href="/bookcheck.do?reqPage=1">예약관리</a></li>
               <li><a href="#">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
               <li><a href="#">객실관리</a></li>
