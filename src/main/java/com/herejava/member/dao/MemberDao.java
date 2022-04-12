@@ -75,6 +75,50 @@ public class MemberDao {
 		}
 		return m;
 	}//로그인용 DB 조회
+	
+	public Member selectOneMember2(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		String query = "select * from member where member_id = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberId());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = getMember(rset);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return m;
+	}//마이페이지 회원정보 수정용 
+
+	public Member selectOneMember3(Connection conn, String memberNick) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		String query = "select * from member where member_nick = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberNick);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = getMember(rset);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return m;
+	}//마이페이지 닉네임 중복체크용
 
 
 	public ArrayList<Member> selectAllMember(Connection conn, int start, int end) {
@@ -124,6 +168,63 @@ public class MemberDao {
 		
 		return totalMemberCount;
 	}
+
+	public int updateMember(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set member_name=?, member_nick=?, member_phone=? where member_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setString(2, member.getMemberNick());
+			pstmt.setString(3, member.getMemberPhone());
+			pstmt.setString(4, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updatePw(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set member_pw=? where member_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberPw());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int deleteMember(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from member where member_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 
 
 	
