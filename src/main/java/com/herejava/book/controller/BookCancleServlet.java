@@ -31,13 +31,28 @@ public class BookCancleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		//2. 값추출
+		long bookNo = Long.parseLong(request.getParameter("bookNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberId"));
+		//3. 비즈니스로직
 		BookService service = new BookService();
-		Book b = service.selectOneBook(memberNo);
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/book/bookCancel.jsp");
-		request.setAttribute("b", b);
+		int result = service.updateBook(bookNo);
+		//4. 결과처리
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
 		view.forward(request, response);
+		
+		if(result>0) {
+			request.setAttribute("title", "성공");
+			request.setAttribute("msg", "예약이 취소되었습니다.");
+			request.setAttribute("icon", "succcess");
+		}else {
+			request.setAttribute("title", "실패");
+			request.setAttribute("msg", "예약취소 중 에러가 발생했습니다. 다시 시도해주세요.");
+			request.setAttribute("icon", "error");
+		}
+		request.setAttribute("loc", "/mypage_main.do?memberId="+memberNo);
 	}
 
 	/**

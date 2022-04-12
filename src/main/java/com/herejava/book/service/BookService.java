@@ -113,7 +113,7 @@ public class BookService {
 		int pageNaviSize = 5; 
 		
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
-		
+		//페이지 네비게이션 제작 시작
 		String pageNavi = "<ul class='pagination circle-style'>";
 		if(pageNo != 1) {
 			pageNavi += "<li>";
@@ -125,7 +125,7 @@ public class BookService {
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' active-page href='/bookList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item active-page' href='/bookList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
