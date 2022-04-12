@@ -1,4 +1,4 @@
-package com.herejava.room.controller;
+package com.herejava.book.controller;
 
 import java.io.IOException;
 
@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.herejava.book.dao.BookCheckPage;
+import com.herejava.book.service.BookService;
+
 /**
- * Servlet implementation class RoomInfoServlet
+ * Servlet implementation class BookcheckServlet
  */
-@WebServlet(name = "RoomInfo", urlPatterns = { "/roomInfo.do" })
-public class RoomInfoServlet extends HttpServlet {
+@WebServlet(name = "BookCheck", urlPatterns = { "/bookcheck.do" })
+public class BookCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RoomInfoServlet() {
+    public BookCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,8 +32,15 @@ public class RoomInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/room/roomInfo.jsp");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		BookService service = new BookService();
+		
+		BookCheckPage bcp = service.selectAllBook1(reqPage);
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/admin/bookcheck.jsp");
+		request.setAttribute("list", bcp.getList());
+		request.setAttribute("pageNavi", bcp.getPageNavi());
 		view.forward(request, response);
+		
 	}
 
 	/**
