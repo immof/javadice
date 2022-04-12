@@ -131,7 +131,7 @@
 									</p>
 									<div class="modal-btns-container">
 									<button class="btn bc3" id="modal-btns-item">예약취소</button>
-									<input type="button" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>'"/>예약취소_테스트
+									<input type="button" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberNo=<%=m.getMemberNo() %>'"/>예약취소_테스트
 									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 									</div>
 									</div>
