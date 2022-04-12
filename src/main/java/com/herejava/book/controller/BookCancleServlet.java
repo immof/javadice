@@ -35,7 +35,7 @@ public class BookCancleServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
-		int memberNo = Integer.parseInt(request.getParameter("memberId"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		//3. 비즈니스로직
 		BookService service = new BookService();
 		int result = service.updateBook(bookNo);

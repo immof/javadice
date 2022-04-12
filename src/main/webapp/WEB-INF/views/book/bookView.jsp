@@ -27,8 +27,7 @@
 		text-align: left;
 	}
 	.img-1{
-		padding-top: 25px;
-		padding-left: 20px;
+		padding-top: 20px;
 		width: 450px;
 		height: 300px;
 	}
@@ -37,11 +36,12 @@
 		color: rgb(221, 78, 34);
 		font-size: 18px;
 	}
-	#modal-btn-1{
-		
-	}
 	.my_pay_tbl{
 		padding-bottom: 60px;
+	}
+	#hr-0{
+		margin: 22px 0px;
+		border-bottom: solid 1px #ac9e89;
 	}
 </style>
 </head>
@@ -82,7 +82,7 @@
 								<td class="td-1"><%=bd.getBookPhone() %></td>
 							</tr>
 						</table>
-						<hr  />
+						<hr id="hr-0"  />
 						
 						<table class="my_pay_tbl">
 							<tr>
@@ -131,7 +131,7 @@
 									</p>
 									<div class="modal-btns-container">
 									<button class="btn bc3" id="modal-btns-item">예약취소</button>
-									<input type="button" onclick=" location='/bookCancle.do?<%=bd.getBookNo()%>'"/>예약취소_테스트
+									<input type="button" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>'"/>예약취소_테스트
 									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 									</div>
 									</div>

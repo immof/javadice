@@ -15,13 +15,19 @@
 	.mypage-content{
 		min-height: 800px;
 	}
+	.mypage-content-title{
+		margin-top : 15px;
+	}
 	.th-1{
 		text-align: left;
-		padding: 10px 20px;
+		padding-top: 25px;
+		padding-right: 25px;
 	}
 	.td-1{
 		text-align: left;
-		padding: 5px 10px;
+		padding-top: 25px;
+		padding-right: 25px;
+		padding-left: 10px;
 	}
 	.tr-1>*{
 		text-align: left;
@@ -53,56 +59,53 @@
 								<table>
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><h4><%=bd.getRoomName() %></h4></td>
-									<td><%=bd.getCheckIn() %></td>
-									<td><%=bd.getCheckOut() %></td>
-									<td><%=bd.getBookState() %></td>
+									<td><h4><%=bd.getRoomName() %></h4><%=bd.getBookState() %><br>
+										<%=bd.getCheckIn() %> -
+										<%=bd.getCheckOut() %>
+									</td>
 										<%=list.add(bd) %>
 									<td><a href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
 									<td><button class="btn bc3 bs6 modal-open-btn" target="#test-modal">예약취소</td>
 								</tr>
 								</table>
 								<hr>
-								<!-- 모달내용 시작 -->
 								<!--예약취소 modal 시작-->
 								<div id="test-modal" class="modal-bg">
 									<div class="modal-wrap">
-									<div class="modal-head">
-									<h2>예약을 정말로 취소하시겠습니까?</h2>
-									<br>
-									</div>
-									<div class="modal-content">
-									<table class="modal-content-tbl">
-									<tr>
-									<th class="modal-tbl-th">객실정보</th>
-									<br>
-									<td class="modal-tbl-td"><%=bd.getBookName() %></td>
-									</tr>
-									<tr>
-									<th class="modal-tbl-th">체크인</th>
-									<td class="modal-tbl-td"><%=bd.getCheckIn() %> 15:00</td>
-									</tr>
-									<tr>
-									<th class="modal-tbl-th">체크아웃</th>
-									<td class="modal-tbl-td"><%=bd.getCheckOut() %> 11:00</td>
-									</tr>
-									<tr>
-									<th class="modal-tbl-th">예약정보</th>
-									<td class="modal-tbl-td"><%=bd.getBookPeople() %></td>
-									</tr>
-									</table>
-									</div>
-									<div class="modal-foot">
-									<p>
-									취소 후 다시 예약시 다른 예약이 있는 경우 예약이 불가할 수 있습니다.<br> 카드결제 취소의 경우 취소 후
-									영업일 2-3일 내로 처리될 예정입니다.
-									</p>
-									<div class="modal-btns-container">
-									<button class="btn bc3" id="modal-btns-item">예약취소</button>
-									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
-									</div>
-									</div>
-									</div>
+										<div class="modal-head">
+											<h2>예약을 정말로 취소하시겠습니까?</h2>
+											<br>
+										</div>
+										<div class="modal-content">
+											<table class="modal-content-tbl">
+											<tr>
+											<th class="modal-tbl-th">객실정보</th>
+											<td class="modal-tbl-td"><%=bd.getBookName() %></td>
+											</tr>
+											<tr>
+											<th class="modal-tbl-th">체크인</th>
+											<td class="modal-tbl-td"><%=bd.getCheckIn() %> 15:00</td>
+											</tr>
+											<tr>
+											<th class="modal-tbl-th">체크아웃</th>
+											<td class="modal-tbl-td"><%=bd.getCheckOut() %> 11:00</td>
+											</tr>
+											<tr>
+											<th class="modal-tbl-th">예약정보</th>
+											<td class="modal-tbl-td">성인 <%=bd.getBookPeople() %>인</td>
+											</tr>
+											</table>
+										</div>
+										<div class="modal-foot">
+											<p>
+											취소 후 다시 예약시 다른 예약이 있는 경우 예약이 불가할 수 있습니다.<br> 카드결제 취소의 경우 취소 후
+											영업일 2-3일 내로 처리될 예정입니다.
+											</p>
+											<div class="modal-btns-container">
+												<button class="btn bc3" id="modal-btns-item">예약취소</button>
+												<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
+											</div>
+										</div>
 									</div>
 								</div>
 								<!-- 예약취소 modal 끝 -->
@@ -113,13 +116,12 @@
 								<table>
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><h4><%=bd.getRoomName() %></h4>
-										<%=bd.getBookState() %>
-										<%=bd.getCheckIn() %>
+									<td><h4><%=bd.getRoomName() %></h4><%=bd.getBookState() %><br>
+										<%=bd.getCheckIn() %> -
 										<%=bd.getCheckOut() %>
 									</td>
 										  <%=list.add(bd) %>
-									<td><a href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
+									<td><a class="a-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
 									<td><button class="btn bc3 bs6 modal-open-btn" target="#test-modal">예약취소</td>
 								</tr>
 								</table>
@@ -174,9 +176,8 @@
 				
 				<!-- 내정보 시작 -->
 				<div class="mypage-content-title">
-					내 정보 <p class="p-1">수정하기></p>
+					내 정보 
 				</div>
-				
 				<table class="my_info_tbl">
 					<tr class="tr-1">
 						<th class="th-1">이메일</th>
@@ -192,11 +193,10 @@
 						<th class="th-1">휴대폰번호</th>
 						<td class="td-1"><%=m.getMemberPhone() %></td>
 					</tr>
+					<p class="p-1">수정하기></p>
 				</table>
 				<!-- 내정보 끝 -->
 			</div>
-		</div>
-	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
