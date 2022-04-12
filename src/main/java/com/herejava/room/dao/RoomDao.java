@@ -53,6 +53,24 @@ public class RoomDao {
 		return list;
 	}
 
+	public int priceChange(Connection conn, int roomPrice, String roomNo) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		String query = "update room set room_price = ? where room_no =?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, roomPrice);
+			pstmt.setString(2, roomNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 	
 
 }
