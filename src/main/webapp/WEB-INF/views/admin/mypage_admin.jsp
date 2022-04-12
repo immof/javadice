@@ -31,6 +31,7 @@
         }
         .mypage-content{
           flex-grow: 15;
+          height: 500px;
           padding: 27px;
         }
         
@@ -52,16 +53,15 @@
             margin-left: 30px;
             list-style-type: none;
         }
-        
-        .left-menu>ul>li>a{
-        	display: block;
-            text-decoration: none;
-            color: rgb(51, 51, 51);
+        .left-menu>ul>li{
             margin-top: 14px;
             margin-bottom: 8px;
+            padding-left: 25px;
             height: 30px;
-            width: 100px;
-            text-align: center;
+        }
+        .left-menu>ul>li>a{
+            text-decoration: none;
+            color: rgb(51, 51, 51);
         }
         .left-menu>ul>li>a:hover{
             color: rgb(172, 158, 137);
@@ -75,20 +75,20 @@
 <title>Insert title here</title>
  -->
 </head>
-         <header>
+        <header>
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
             <div class="mypage-header-profile">
-              <img src="/img/girl (1).png" alt="" style="width: 50px; height: 50px;">
-              <span class="mypage-header-nick">관리자</span>
+              <img src="./img/sun.png" alt="" style="width: 50px; height: 50px;">
+              <span class="mypage-header-nick">김코딩</span>
           </div>
         </header>
-        
         <div class="left-menu">
           <ul>
+              <li><a href="/bookCheck.do">예약관리</a></li>
               <li><a href="#">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
-              <li><a href="/roomInfo.do">객실관리</a></li>
+              <li><a href="#">객실관리</a></li>
               <li><a href="#">공지사항</a></li>
               <li><a href="#">문의내역</a></li>
               <li><a href="#">프로모션</a></li>                  

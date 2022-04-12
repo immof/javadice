@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookData;
+import com.herejava.member.vo.Member;
 
 import common.JDBCTemplate;
 
@@ -283,6 +284,54 @@ public class BookDao {
 		}
 		return bd;
 	}
+
+	public ArrayList<Book> selectAllBook1(Connection conn, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Book> book = new ArrayList<Book>();
+		String query = "select * from (select r(select rownum rnum, b.* from Book b) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Book b = getBook(rset);
+				book.add(b);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return book;
+	}
+
+	private Book getBook(ResultSet rset) {
+		Book b = new Book();
+		try {
+			b.setBookNo(rset.getInt("book_no"));
+			b.setRoomNo(rset.getInt("room_no"));
+			b.setMemberNo(rset.getInt("member_no"));
+			b.setBookPeople(rset.getInt("book_people"));
+			b.setBookName(rset.getString("book_name"));
+			b.setBookPhone(rset.getString("book_phone"));
+			b.setBookDay(rset.getString("book_day"));
+			b.setBookState(rset.getInt("book_state"));
+			b.setCheckIn(rset.getString("check_in"));
+			b.setCheckOut(rset.getString("check_out"));	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return b;
+	}
+
+
+
 
 	// 예약번호로 예약(방사진/방이름/체크인/체크아웃/예약상태/이용자숫자/예약자명/예약자전화번호) 1개 가져오는 메소드
 
