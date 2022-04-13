@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
     <%
     	Book b = (Book)request.getAttribute("b");
+    	int d = (Integer)request.getAttribute("d");
     %>
 <!DOCTYPE html>
 <html>
@@ -45,19 +46,18 @@
 			<div class="mypage-content">
 				<div class="page1-title">예약 정보 </div>
 				<table class="tbl1">
-					<tr><td class="tdtd">객실정보</td><td>정보</td></tr>
-					<tr><td class="tdtd">체크인</td></tr>
-					<tr><td class="tdtd">체크아웃</td></tr>
-					<tr><td class="tdtd">예약인원</td></tr>
-					<tr><td class="tdtd">예약자명</td></tr>
-					<tr><td class="tdtd">전화번호</td></tr>
-					<tr><td class="tdtd">예약번호</td></tr>
+					<tr><td class="tdtd">객실정보</td><td>db 구현 아직</td></tr>
+					<tr><td class="tdtd">숙박일</td><td><%=d%>박 <%=d+1 %>일</td></tr>
+					<tr><td class="tdtd">예약인원</td><td><%=b.getBookPeople() %></td></tr>
+					<tr><td class="tdtd">예약자명</td><td><%=b.getBookName() %></td></tr>
+					<tr><td class="tdtd">전화번호</td><td><%=b.getBookPhone() %></td></tr>
+					<tr><td class="tdtd">예약번호</td><td><%=b.getBookNo() %></td></tr>
 				</table>
 				<br>
 				<div class="page1-title title2">결제 정보</div>
 				<table class="tbl1 table2">
-					<tr><td class="tdtd">적립금사용</td></tr>
-					<tr><td class="tdtd">결제금액</td></tr>
+					<tr><td class="tdtd">적립금사용</td><td>db 구현 아직</td></tr>
+					<tr><td class="tdtd">결제금액</td><td>db 구현 아직</td></tr>
 				</table>
 				
 			</div>

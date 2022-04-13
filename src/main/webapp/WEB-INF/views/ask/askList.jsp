@@ -1,9 +1,10 @@
-<%@page import="com.herejava.notice.vo.Notice"%>
+<%@page import="com.herejava.ask.vo.Ask"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+    	Member m1 = (Member)request.getAttribute("m1");
+    	ArrayList<Ask> list = (ArrayList<Ask>)request.getAttribute("list");
     	String pageNavi = (String)request.getAttribute("pageNavi");
     %>
 <!DOCTYPE html>
@@ -75,24 +76,23 @@
 		<br>
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
-		<div class="page1-title">공지사항</div>
+		<div class="page1-title">문의사항</div>
 		<!-- <a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a> -->
 			<table class="tbl tr-1 notice-tbl">
 					<tr class="tr-2">
 						<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회</th>
-					</tr>
-					<%for(Notice n : list){ %>
-				<tr class="tr-1">
-					<td><%=n.getNoticeNo() %></td>
-					<td><a href="/noticeView.do?noticeNo=<%=n.getNoticeNo() %>">
-							<%=n.getNoticeTitle() %>
-						</a>
-					</td>
-					<td><%=n.getNoticeWriter() %></td>
-					<td><%=n.getNoticeEnrollDate() %></td>
-					<td><%=n.getNoticeReadCount() %></td>
-				</tr>
-				<%} %>
+					</tr>	
+						<%for(Ask a : list) { %>
+					<tr class="tr-1">
+							<td><%=a.getAskNo() %></td>
+							<td><%=a.getAskTitle() %>
+							<td><%=m1.getMemberNick() %>
+							<td><%=a.getAskEnrollDate() %></td>
+							<td><%=a.getAskReadCount() %></td>	
+					</tr>					
+						<%} %>
+					
+		
 		</table>
 		<br>
 		<div id="pageNavi"><%=pageNavi %></div>
