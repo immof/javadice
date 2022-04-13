@@ -65,8 +65,14 @@
 					for (BookData bd : list) {
 					%>
 					<tr class="tr-1">
-						<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-						<td><%=bd.getRoomName()%></td>
+						<td>
+							<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
+							<img class="img-0" src="/img/<%=bd.getFilePath()%>">
+						</td>
+						<td>
+							<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
+							<%=bd.getRoomName()%>
+						</td>
 						<td><%=bd.getCheckIn()%> - <%=bd.getCheckOut()%></td>
 						<td><%=bd.getBookState()%></td>
 					</tr>
