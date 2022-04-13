@@ -47,6 +47,20 @@ public class MypageServlet extends HttpServlet {
 		BookService bookService = new BookService();
 		Member m = service.selectOneMember(memberId);
 		ArrayList<BookData> list = bookService.selectAllBook(memberNo);
+		//예약상태 변환 테스트
+		//int bState1 = (list.get(i)).getBookState();
+		/*
+		String bookState = "";
+		switch((list.get(i)).getBookState()) {
+			case 0: bookState = "이용예정";
+				break;
+			case 1: bookState = "이용완료";
+				break;
+			case 2: bookState = "취소완료";
+				break;
+		};
+		System.out.println(bState2);
+		*/
 		//4.결과처리
 		if(memberLevel==1) {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");

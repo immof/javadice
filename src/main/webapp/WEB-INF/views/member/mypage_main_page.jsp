@@ -61,13 +61,17 @@
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
 									<td><h4><%=bd.getRoomName() %></h4>
-										<!-- 다시 해야함 -->
-										<%// if(bd.getBookState() == 0) {%>
-										<%// String bookState = String.getBookState(); %>
-										<%// result = bookState.replace("0","예약완료"); %>
-										<%//} %>
+									<%	String bookState = "";
+										switch(bd.getBookState()) {
+											case 0: bookState = "이용예정";
+												break;
+											case 1: bookState = "이용완료";
+												break;
+											case 2: bookState = "취소완료";
+												break;
+										}; %>
+										<%=bookState %>
 										<br>
-										
 										<%=bd.getCheckIn() %> -
 										<%=bd.getCheckOut() %>
 									</td>
@@ -124,7 +128,18 @@
 								<table>
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><h4><%=bd.getRoomName() %></h4><%=bd.getBookState() %><br>
+									<td><h4><%=bd.getRoomName() %></h4>
+									<%	String bookState = "";
+										switch(bd.getBookState()) {
+											case 0: bookState = "이용예정";
+												break;
+											case 1: bookState = "이용완료";
+												break;
+											case 2: bookState = "취소완료";
+												break;
+										}; %>
+										<%=bookState %>
+									<br>
 										<%=bd.getCheckIn() %> -
 										<%=bd.getCheckOut() %>
 									</td>
@@ -196,7 +211,8 @@
 						<td class="td-1"><%=m.getMemberNick() %></td>
 					</tr>	
 						<th class="th-1">비밀번호</th>
-						<td class="td-1"><%=m.getMemberPw() %></td>
+						<td class="td-1" id="mask_pw"><%=m.getMemberPw() %>
+						</td>
 					<tr class="tr-1">	
 						<th class="th-1">휴대폰번호</th>
 						<td class="td-1"><%=m.getMemberPhone() %></td>
@@ -208,7 +224,14 @@
 	<script>
 	$(function(){
 		const cancleBtn =  $("#modal-btns-item");
-		
+		const mask_pw = $("mask_pw.html");
+//비밀번호 마스킹 함수
+		function mask_func(mask_pw){
+			pwLength = mask_pw.length;
+			for(int i=0;i<pwLength;i++){
+				mask_pw.text("*");
+			}
+		};
 
 //토스트 알림 함수		
 		function toastShow(title, icon){
