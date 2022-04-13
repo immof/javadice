@@ -74,7 +74,18 @@
 							<%=bd.getRoomName()%>
 						</td>
 						<td><%=bd.getCheckIn()%> - <%=bd.getCheckOut()%></td>
-						<td><%=bd.getBookState()%></td>
+						<td>
+						<%	String bookState = "";
+						switch(bd.getBookState()) {
+							case 0: bookState = "이용예정";
+								break;
+							case 1: bookState = "이용완료";
+								break;
+							case 2: bookState = "취소완료";
+								break;
+						}; %>
+						<%=bookState %>
+						</td>
 					</tr>
 					<%
 					}

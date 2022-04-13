@@ -151,7 +151,44 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return bpd;
 	}
+
 	
+	// 예약상태에 따라 버튼상태가 바뀌는 메소드
+	public String changeBtn(int bookState, int bookNo){
+		String changeBtn = null;
+		String review = null;
+		switch(bookState) {
+			case 0:
+				//이용예정
+				changeBtn += "<Button class='btn bc3 bs6 modal-open-btn' id='modal-btn-1' target='#test-modal'>";
+				changeBtn += "예약취소";
+				changeBtn += "</Button>";
+				break;
+			case 1: 
+				//이용완료(리뷰x)
+				if(review != null) {
+					changeBtn += "<Button class='btn bc3 bs6' href='#'>";
+					changeBtn += "리뷰쓰기";
+					changeBtn += "</Button>";
+				}else {
+				//이미 리뷰 썼을때 '리뷰보기'버튼으로 변환해야함
+				//이용완료(리뷰o)
+					changeBtn += "<Button class='btn bc3 bs6' href='#'>";
+					changeBtn += "리뷰보기";
+					changeBtn += "</Button>";
+				}
+				break;
+			case 2: 
+				//취소완료
+				changeBtn += "<Button class='btn bc3 bs6'>";
+				changeBtn += "취소완료";
+				changeBtn += "</Button>";
+				break;
+		};
+		return changeBtn;
+	}
+	
+
 	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 -관리자
 	public BookPageData selectBookListAdmin(int memberNo, String memberNick, int reqPage) {
 		Connection conn= JDBCTemplate.getConnection();
@@ -317,7 +354,7 @@ public class BookService {
 				return bcp;
 			}
 
-	//숙박일 수 리턴하느 메소드
+	//숙박일 수 리턴하는 메소드
 	public int diffDays(String checkIn, String checkOut) {
 		Date format1 = null;
 		Date format2 = null;

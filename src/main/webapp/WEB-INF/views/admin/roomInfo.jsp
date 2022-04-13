@@ -52,7 +52,7 @@
 					<%for(Room r : list) {%>
 						<tr class="tr-1">
 								<input type="hidden" id="roomNo" name="roomNo" value="<%=r.getRoomNo()%>" >
-								<td><%=r.getFilepath() %></td>
+								<td><img style="width: 150px; height: 90px;" src="/img/<%=r.getFilepath()%>"></td>
 								<td><%=r.getRoomName()%></td>
 								<td><input id="roomPrice" name="roomPrice" type="number" value="<%=r.getRoomPrice()%>" required style="text-align:right; padding-right:3px"> 원</td>
 								<td><%=r.getRoomCount() %></td>
