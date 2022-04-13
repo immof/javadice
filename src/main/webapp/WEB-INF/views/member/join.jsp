@@ -57,13 +57,14 @@
 .join-p{
 		text-align: center;
 		font-size: 18px;
-	}
+}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="belt">회원가입</div>
 		<div class="join-wrap">
+			<hr><br><br>
 			<form action="join.do" method="post">
 				<table class="join-table">
 					<tr class="form-name">

@@ -40,7 +40,7 @@ public class AdminBookListServlet extends HttpServlet {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		//3. 비즈니스로직
 		BookService service = new BookService();
-		BookPageData bpd = service.selectBookList(memberNo, reqPage);
+		BookPageData bpd = service.selectBookListAdmin(memberNo,memberNick,reqPage);
 		//4. 화면출력
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/oneMemberBookList.jsp");
 		request.setAttribute("list", bpd.getBookList());
