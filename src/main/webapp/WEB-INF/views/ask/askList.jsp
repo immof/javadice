@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	Member m1 = (Member)request.getAttribute("m1");
     	ArrayList<Ask> list = (ArrayList<Ask>)request.getAttribute("list");
     	String pageNavi = (String)request.getAttribute("pageNavi");
     %>
@@ -86,7 +85,7 @@
 					<tr class="tr-1">
 							<td><%=a.getAskNo() %></td>
 							<td><%=a.getAskTitle() %>
-							<td><%=m1.getMemberNick() %>
+							<td><%=a.getMemberNick() %>
 							<td><%=a.getAskEnrollDate() %></td>
 							<td><%=a.getAskReadCount() %></td>	
 					</tr>					

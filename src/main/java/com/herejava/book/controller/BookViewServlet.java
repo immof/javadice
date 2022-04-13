@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,11 +36,18 @@ public class BookViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
+		boolean masterCheck = Boolean.parseBoolean(request.getParameter("masterCheck"));
 		BookService service = new BookService();
 		BookData bd = service.getBook(bookNo);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
-		request.setAttribute("bd", bd);
-		view.forward(request, response);
+		if(masterCheck) {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/adminBookView.jsp");
+			request.setAttribute("bd", bd);
+			view.forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
+			request.setAttribute("bd", bd);
+			view.forward(request, response);
+		}
 	}
 
 	/**

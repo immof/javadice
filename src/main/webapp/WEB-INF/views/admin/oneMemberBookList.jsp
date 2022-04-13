@@ -74,7 +74,7 @@
 								<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
 								<td><%=bd.getRoomName()%></td>
 								<td><%=bd.getCheckIn()%> / <%=bd.getCheckOut()%></td>
-								<td><div class="detailBtn" style="text-decoration: underline;">상세보기></div></td>
+								<td><a class="detailBtn" style="text-decoration: underline;" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">상세보기></a></td>
 								<%if(bd.getBookState()==0){%>
 									<td><div class="btn bc3 delbookbtn">예약취소</div></td>
 								<%}else if(bd.getBookState()==1){%>

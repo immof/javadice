@@ -19,7 +19,7 @@ public class AskDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Ask> list = new ArrayList<Ask>();
-		String query = "select * from (select * from (select rownum as rnum,n. * from (select * from ask order by ask_no desc) n) where rnum between ? and ?)";
+		String query = "select * from (select rownum as rnum,n. * from (select * from ask join member using(member_no)) n) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -29,6 +29,7 @@ public class AskDao {
 				Ask a = new Ask();
 				a.setAskNo(rset.getInt("ask_no"));
 				a.setMemberNo(rset.getInt("member_no"));
+				a.setMemberNick(rset.getString("member_Nick"));
 				a.setAskTitle(rset.getNString("ask_title"));
 				a.setAskContent(rset.getString("ask_content"));
 				a.setAskEnrollDate(rset.getString("ask_enroll_date"));
