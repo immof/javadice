@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.herejava.member.vo.Member"%>
+<%
+	int memberNo = (Integer)request.getAttribute("memberNo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,7 +108,7 @@
               <hr>
               <li class="f-bold">활동정보</li>
               <li><a href="#">적립금</a></li>
-              <li><a href="#">방문후기</a></li>
+              <li><a href="/review.do?memberNo=<%=memberNo %>">방문후기</a></li>
               <li><a href="#">문의하기</a></li>
               <hr>
               <li class="f-bold">회원정보</li>
