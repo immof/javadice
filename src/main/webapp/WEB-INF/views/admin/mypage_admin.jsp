@@ -85,7 +85,8 @@
           </div>
         </header>
         <div class="left-menu">
-          <ul > 
+          <ul >
+       		  <li style="font-weight: bold; font-size:18px;">관리자</li>
               <li><a href="/bookcheck.do?reqPage=1">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
               <li><a href="/roomInfo.do">객실관리</a></li>
