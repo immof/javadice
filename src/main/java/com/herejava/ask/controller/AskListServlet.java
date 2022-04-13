@@ -35,18 +35,12 @@ public class AskListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int reqPage= Integer.parseInt(request.getParameter("reqPage"));
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		System.out.println("memberNo");
 		AskService service = new AskService();
 		AskPageData apd = service.selecetAllAsk(reqPage);
-		
-		
-		Member m1 = service.selecetOneNickName(memberNo);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askList.jsp");
 		request.setAttribute("list", apd.getList());
 		request.setAttribute("pageNavi", apd.getPageNavi());
-		request.setAttribute("m1", m1);
 		view.forward(request, response);
 	}
 
