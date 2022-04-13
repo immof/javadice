@@ -321,6 +321,26 @@ public class MemberDao {
 	}
 
 
+	//비밀번호 찾기
+	public int passChange(Connection conn, String memberId, String memberPw) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set member_pw = ? where member_id = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberPw);
+			pstmt.setString(2, memberId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
 	
 	
 	
