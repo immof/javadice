@@ -3,6 +3,7 @@ package com.herejava.ask.vo;
 public class Ask {
 	private int askNo;
 	private int memberNo;
+	private String memberNick;
 	private String askTitle;
 	private String askContent;
 	private String askEnrollDate;
@@ -14,11 +15,12 @@ public class Ask {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Ask(int askNo, int memberNo, String askTitle, String askContent, String askEnrollDate, String askReadCount,
+	public Ask(int askNo, int memberNo,String memberNick, String askTitle, String askContent, String askEnrollDate, String askReadCount,
 			String filepath1, String filepath2, String filepath3) {
 		super();
 		this.askNo = askNo;
 		this.memberNo = memberNo;
+		this.memberNick = memberNick;
 		this.askTitle = askTitle;
 		this.askContent = askContent;
 		this.askEnrollDate = askEnrollDate;
@@ -83,6 +85,12 @@ public class Ask {
 	}
 	public void setFilepath3(String filepath3) {
 		this.filepath3 = filepath3;
+	}
+	public String getMemberNick() {
+		return memberNick;
+	}
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
 	}
 	
 }
