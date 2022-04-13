@@ -26,7 +26,7 @@
 .tbl-hover th, .tbl-hover td{
 	border-bottom: 1px solid #A7A7A7;
 }
-.modal-open-btn{
+.delBtn{
 	width:100px; 
 	height:35px;
 	line-height: 35px
@@ -64,7 +64,7 @@
 							<td><%=mem.getMemberPhone() %></td>
 							<td><%=mem.getMemberPoint() %></td>
 							<td><%=mem.getMemberLevel() %></td>
-							<td><button class="btn bc2 searchBtn" s>예약조회</button></td>
+							<td><button class="btn bc2 searchBtn" >예약조회</button></td>
 							<td><input type="checkbox" id="delMemberChk"></td>
 						</tr>
 					<%} %>
@@ -72,7 +72,7 @@
 					
 				</table>
 					
-					<button class="btn bc3 modal-open-btn" target="#test-modal" style="padding: 0;">삭제</button>
+					<button class="btn bc3 delBtn" style="padding: 0;">삭제</button>
 					<div id="pageNavi"><%=pageNavi%></div>
 					
 			</div>
@@ -81,18 +81,7 @@
 		<!-- flex-wrap -->
 	</div>
 	<!-- page-content -->
-	<div id="test-modal" class="modal-bg">
-      <div class="modal-wrap ">
-        <div class="modal-head">
-          <h2>회원을 정말로 삭제하시겠습니까?</h2><br>
-        </div>
-        <div class="modal-btns-container">
-          <button class="btn bc3 delBtn " id="modal-btns-item">삭제</button>
-          <button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
-        </div>
-      </div>
-    </div>
-    <!-- modal -->
+
 	<%@include file="/WEB-INF/views/common/footer.jsp"  %>
 	<script>
 		$(".delBtn").on("click",function(){
@@ -101,13 +90,20 @@
 				alert("선택된 회원이 없습니다.");
 				return;
 			}
-			const memberNoArr = new Array();
-			chk.each(function(index,item){
-				memberNoArr.push($(item).parent().parent().children().first().text());
-			});
-			location.href="/delMember.do?memberNoArr="+memberNoArr.join("/");
+			if(confirm("정말 삭제하시겠습니까?")){
+				const memberNoArr = new Array();
+				chk.each(function(index,item){
+					memberNoArr.push($(item).parent().parent().children().first().text());
+				});
+				location.href="/delMember.do?memberNoArr="+memberNoArr.join("/");
+			}
 		});
 		
+		$(".searchBtn").on("click",function(){
+			const memberNo = $(this).parent().parent().children().first().text();
+			const memberNick = $(this).parent().parent().children().eq(3).text();
+			location.href="/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage=1";
+		});
 	</script>
 </body>
 </html>
