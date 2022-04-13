@@ -16,19 +16,14 @@
 .review-wrap{
 	display: flex;
 	width: 800px;
-	/* width: 970px; */
-	/* min-height: 200px; */
-	/* background-color: cadetblue; */
 	margin: 15px 0 15px 15px;
 }
 .review-profile{
-	/* background-color: blanchedalmond; */
 	text-align: center;
 	padding: 10px;
 	padding-top: 20px;
 }
 .review-content{
-	/* background-color: thistle; */
 	padding: 10px;
 	width: 708px;
 }
@@ -49,10 +44,12 @@
 .score-text{
 	padding-left: 7px;
 }
-
 .review-text{
 	border: 1px solid #a7a7a7;
 	padding: 10px;
+
+}
+.view-change{
 	height: 40px;
     display: -webkit-box;
 	overflow: hidden;
@@ -75,7 +72,7 @@
 			<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
 				<div class="mypage-content-title">나의 리뷰</div>
-			<%if(reviewList == null){ %>
+			<%if(reviewList.size() == 0){ %>
 				<div class="empty-msg">아직 작성된 리뷰가 없습니다.</div>
 			<%}else{ %>
 				
@@ -157,7 +154,7 @@
 								<button class="btn bc3 bs6" id="delete-btn">삭제</button>
 							</span>
 						</div>
-						<div class="review-text">
+						<div class="review-text view-change">
 							<p><%=rev.getReviewContent() %></p>
 						</div>
 					</div>
@@ -169,6 +166,13 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(function(){
+			$(".review-text").on("click",function(){
+				$(this).toggleClass("view-change");
+			});
+		});
+	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
