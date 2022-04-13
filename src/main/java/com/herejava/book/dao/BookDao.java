@@ -358,7 +358,6 @@ public class BookDao {
 		}finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
 		return result;
 	}
 

@@ -8,7 +8,7 @@
     %>
     <%
     	BookService service = new BookService();
-    	service.updateBookState();
+    	int result = service.updateBookState();
     %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
