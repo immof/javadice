@@ -77,7 +77,7 @@
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
 		<div class="page1-title">문의사항</div>
-		<!-- <a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a> -->
+		<a class="btn bc1 writeBtn" href="askWriteFrm.do">글쓰기</a>
 			<table class="tbl tr-1 notice-tbl">
 					<tr class="tr-2">
 						<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회</th>

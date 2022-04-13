@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.herejava.ask.vo.Ask;
+import com.herejava.book.vo.Book;
 import com.herejava.member.vo.Member;
 import com.herejava.notice.vo.Notice;
 
