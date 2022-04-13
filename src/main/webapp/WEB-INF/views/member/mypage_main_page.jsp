@@ -44,20 +44,30 @@
 		text-align : center;
 		padding: 100px;
 	}
+	.view-0{
+		text-decoration : underline;
+	}
+	.my_book_tbl{
+		width: 100%;
+	}
+	.my_info_tbl>tr>td:nth-child(3){
+		width: 60%;
+		text-align: right;
+	}
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@ include file="/WEB-INF/views/member/mypage_common.jsp"%>
+			<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
 				<!-- 최근예약내역 시작 -->	
 				<div class="mypage-content-title">최근 예약내역</div>
 					 <% if(list.size() >= 2) {%>
 							<%for(int i=0;i<2;i++) {%>
 								<%BookData bd = list.get(i);%>
-								<table>
+								<table class="my_book_tbl">
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
 									<td><h4><%=bd.getRoomName() %></h4>
@@ -70,14 +80,14 @@
 											case 2: bookState = "취소완료";
 												break;
 										}; %>
-										<%=bookState %>
+										<button class="btn bc1 bs5"><%=bookState %></button>
 										<br>
 										<%=bd.getCheckIn() %> -
 										<%=bd.getCheckOut() %>
 									</td>
 										<%=list.add(bd) %>
-									<td><a href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
-									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
+									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
+										<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								</tr>
 								</table>
 								<hr>
@@ -144,7 +154,7 @@
 										<%=bd.getCheckOut() %>
 									</td>
 										  <%=list.add(bd) %>
-									<td><a class="a-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
+									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
 									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								</tr>
 								</table>
@@ -205,34 +215,38 @@
 					<tr class="tr-1">
 						<th class="th-1">이메일</th>
 						<td class="td-1"><%=m.getMemberId() %></td>
+						<td><a class="p-1" href="/mypage_info.do">수정하기></a></td>
 					</tr>
 					<tr class="tr-1">
 						<th class="th-1">닉네임</th>
 						<td class="td-1"><%=m.getMemberNick() %></td>
 					</tr>	
 						<th class="th-1">비밀번호</th>
-						<td class="td-1" id="mask_pw"><%=m.getMemberPw() %>
+						<td class="td-1">
+						<!-- 비밀번호 마스킹처리 -->
+						<% int pwCount = (m.getMemberPw()).length();%>
+						<% for(int i=0;i<pwCount;i++){%>
+							*
+						<% }%>
+						<!-- 비밀번호 마스킹처리 끝 -->
 						</td>
 					<tr class="tr-1">	
 						<th class="th-1">휴대폰번호</th>
 						<td class="td-1"><%=m.getMemberPhone() %></td>
 					</tr>
-					<p><a class="p-1" href="/mypage_info.do">수정하기></a></p>
+					
 				</table>
 				<!-- 내정보 끝 -->
 			</div>
+		</div>
+	</div>
+	
 	<script>
 	$(function(){
 		const cancleBtn =  $("#modal-btns-item");
-		const mask_pw = $("mask_pw.html");
-//비밀번호 마스킹 함수
-		function mask_func(mask_pw){
-			pwLength = mask_pw.length;
-			for(int i=0;i<pwLength;i++){
-				mask_pw.text("*");
-			}
-		};
 
+		
+		
 //토스트 알림 함수		
 		function toastShow(title, icon){
 		const Toast = Swal.mixin({
