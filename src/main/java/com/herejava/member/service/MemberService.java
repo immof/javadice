@@ -252,5 +252,19 @@ public boolean delMember(String memberNoArr) {
 	return result;
 }
 
+//비밀번호 찾기
+public int passChange(String memberId, String memberPw) {
+	Connection conn = JDBCTemplate.getConnection();
+	MemberDao dao = new MemberDao();
+	int result = dao.passChange(conn, memberId, memberPw);
+	if(result>0) {
+		JDBCTemplate.commit(conn);
+	}else {
+		JDBCTemplate.rollback(conn);
+	}
+	JDBCTemplate.close(conn);
+	return result;
+}
+
   
 }//MemberService class

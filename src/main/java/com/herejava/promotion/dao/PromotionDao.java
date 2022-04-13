@@ -101,4 +101,22 @@ public class PromotionDao {
 		return list;
 	}
 
+	//프로모션 삭제
+	public int deletePromotion(Connection conn, int promotionNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from promotion where promotion_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, promotionNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }
