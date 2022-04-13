@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Mypage_changePwServlet
+ * Servlet implementation class PassResetServlet
  */
-@WebServlet(name = "Mypage_changePw", urlPatterns = { "/mypage_changePw.do" })
-public class Mypage_changePwServlet extends HttpServlet {
+@WebServlet(name = "PassReset", urlPatterns = { "/passReset.do" })
+public class PassResetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Mypage_changePwServlet() {
+    public PassResetServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,8 +33,8 @@ public class Mypage_changePwServlet extends HttpServlet {
 		//2.값추출
 		//3.비즈니스로직
 		//4.결과처리
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_changePw.jsp");
-			view.forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/member/passReset.jsp");
+		view.forward(request, response);
 	}
 
 	/**

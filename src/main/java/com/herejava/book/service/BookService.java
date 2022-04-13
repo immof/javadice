@@ -103,10 +103,9 @@ public class BookService {
 		int start = end - numPerPage + 1;
 		ArrayList<BookData> list = dao.selectBookList(conn,memberNo,start,end);
 		//페이징처리
-		int totalCount = dao.totalBookCount(conn);
-		
+		int totalCount = dao.totalBookCount(conn,memberNo);
 		int totalPage = 0;
-		if(totalPage%numPerPage == 0) {
+		if(totalCount%numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
 		}else {
 			totalPage = totalCount/numPerPage + 1;
@@ -118,7 +117,7 @@ public class BookService {
 		String pageNavi = "<ul class='pagination circle-style'>";
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/bookList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class='page-item' href='/bookList.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
@@ -126,12 +125,12 @@ public class BookService {
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/bookList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item active-page' href='/bookList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/bookList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item' href='/bookList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -144,6 +143,104 @@ public class BookService {
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
 			pageNavi += "<a class='page-item' href='/bookList.do?reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul>";
+		BookPageData bpd = new BookPageData(list, pageNavi);
+		JDBCTemplate.close(conn);
+		return bpd;
+	}
+
+	
+	// 예약상태에 따라 버튼상태가 바뀌는 메소드
+	public String changeBtn(int bookState, int bookNo){
+		String changeBtn = null;
+		String review = null;
+		switch(bookState) {
+			case 0:
+				//이용예정
+				changeBtn += "<Button class='btn bc3 bs6 modal-open-btn' id='modal-btn-1' target='#test-modal'>";
+				changeBtn += "예약취소";
+				changeBtn += "</Button>";
+				break;
+			case 1: 
+				//이용완료(리뷰x)
+				if(review != null) {
+					changeBtn += "<Button class='btn bc3 bs6' href='#'>";
+					changeBtn += "리뷰쓰기";
+					changeBtn += "</Button>";
+				}else {
+				//이미 리뷰 썼을때 '리뷰보기'버튼으로 변환해야함
+				//이용완료(리뷰o)
+					changeBtn += "<Button class='btn bc3 bs6' href='#'>";
+					changeBtn += "리뷰보기";
+					changeBtn += "</Button>";
+				}
+				break;
+			case 2: 
+				//취소완료
+				changeBtn += "<Button class='btn bc3 bs6'>";
+				changeBtn += "취소완료";
+				changeBtn += "</Button>";
+				break;
+		};
+		return changeBtn;
+	}
+	
+
+	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 -관리자
+	public BookPageData selectBookListAdmin(int memberNo, String memberNick, int reqPage) {
+		Connection conn= JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		
+		//numPerPage = 한 페이지당 게시물 수 
+		int numPerPage = 4;
+		
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage + 1;
+		ArrayList<BookData> list = dao.selectBookList(conn,memberNo,start,end);
+		//페이징처리
+		int totalCount = dao.totalBookCount(conn,memberNo);
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		int pageNaviSize = 5; 
+		
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		//페이지 네비게이션 제작 시작
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		//페이지숫자
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo<=totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/adminbookList.do?reqPage="+pageNo+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -257,7 +354,7 @@ public class BookService {
 				return bcp;
 			}
 
-	//숙박일 수 리턴하느 메소드
+	//숙박일 수 리턴하는 메소드
 	public int diffDays(String checkIn, String checkOut) {
 		Date format1 = null;
 		Date format2 = null;

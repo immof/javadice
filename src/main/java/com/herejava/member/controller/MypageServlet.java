@@ -52,10 +52,9 @@ public class MypageServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
 			request.setAttribute("m", m);
 			request.setAttribute("list", list);
-			request.setAttribute("member", m);
 			view.forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_page.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_main.jsp");
 			view.forward(request, response);
 		}
 	}

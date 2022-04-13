@@ -56,7 +56,11 @@
 								<td><img class="img-1" src="/img/<%=bd.getFilePath()%>"></td>
 							</tr>
 						<table class="my_info_tbl">
-							
+						
+							<tr class="tr-1">
+								<th class="th-1">예약번호</th>
+								<td class="td-1"><%=bd.getBookNo() %></td>
+							</tr>
 							<tr class="tr-1">
 								<th class="th-1">객실정보</th>
 								<td class="td-1"><%=bd.getRoomName() %></td>

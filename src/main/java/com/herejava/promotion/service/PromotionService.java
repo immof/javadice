@@ -36,6 +36,20 @@ public class PromotionService {
 		return list;
 	}
 
+	//프로모션 삭제
+	public int deletePromotion(int promotionNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		PromotionDao dao = new PromotionDao();
+		int result = dao.deletePromotion(conn, promotionNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 	
 
 }

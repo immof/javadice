@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.herejava.member.vo.Member"%>
 <%
-	Member member = (Member)request.getAttribute("member");
+	Member member = (Member)session.getAttribute("m");
 %>
 <!DOCTYPE html>
 <html>
@@ -93,7 +93,6 @@
 <title>Insert title here</title>
  -->
 </head>
-	<%if(member != null){ %>
         <header>
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
@@ -118,5 +117,4 @@
               <li><a href="/mypage_deleteMember.do">회원탈퇴</a></li>               
           </ul>
       </div>
-	<%} %>
 </html>
