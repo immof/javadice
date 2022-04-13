@@ -49,7 +49,7 @@
 			<div class="header-link">
 				<li><a href="#" class="f-light fc-1">예약조회</a></li>
 				<%if(m!=null) { %>
-				<li><a href="#" class="f-light fc-1">로그아웃</a></li>
+				<li><a href="/logout.do" class="f-light fc-1">로그아웃</a></li>
 				<%}else { %>
 				<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
 				<%} %>
