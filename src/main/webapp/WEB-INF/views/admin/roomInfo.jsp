@@ -28,6 +28,13 @@
 	.mypage-content{
 	margin-bottom: 100px;
 	}
+	input[type=number]::-webkit-outer-spin-button{-webkit-appearance: none;margin: 0;}
+	input[type=number]::-webkit-inner-spin-button{-webkit-appearance: none;margin: 0;}
+	
+
+
+
+출처: https://webyi.tistory.com/171 [UI DESIGNER & WEB PM]
 </style>
 </head>
 <body>
@@ -41,16 +48,16 @@
 			
 				<table class="tbl tbl-hover">
 					<tr class="tr-3">
-						<th>객실 이미지</th><th>객실명</th><th>가격</th><th>방갯수</th><th>기준인원/최대인원</th><th>가격수정</th>
+						<th>객실 이미지</th><th>객실명</th><th>가격</th><th>방갯수</th><th>최대인원</th><th>가격수정</th>
 					<%for(Room r : list) {%>
 						<tr class="tr-1">
 							<form action="priceChange.do">
-								<input type="hidden" id="roomNo" name="roomNo" value="<%=r.getRoomNo()%>">
+								<input type="hidden" id="roomNo" name="roomNo" value="<%=r.getRoomNo()%>" >
 								<td><%=r.getFilepath() %></td>
 								<td><%=r.getRoomName()%></td>
-								<td><input id="roomPrice" name="roomPrice" type="number" value="<%=r.getRoomPrice()%>" required> 원</td>
+								<td><input id="roomPrice" name="roomPrice" type="number" value="<%=r.getRoomPrice()%>" required style="text-align:right; padding-right:3px"> 원</td>
 								<td><%=r.getRoomCount() %></td>
-								<td>기준인원/<%=r.getRoomCapacity()%>인</td>
+								<td><%=r.getRoomCapacity()%>인</td>
 								<td><button class="btn bc2">수정</button></td>
 							</form>
 						</tr>
