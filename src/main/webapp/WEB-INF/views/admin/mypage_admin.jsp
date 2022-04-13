@@ -1,5 +1,9 @@
+<%@page import="com.herejava.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% 
+    Member loginM = (Member)session.getAttribute("m");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,12 +84,13 @@
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
             <div class="mypage-header-profile">
-              <img src="./img/sun.png" alt="" style="width: 50px; height: 50px;">
-              <span class="mypage-header-nick">관리자</span>
+              <img src="/img/<%=loginM.getFilepath() %>" alt="" style="width: 50px; height: 50px;">
+              <span class="mypage-header-nick"><%=loginM.getMemberNick() %></span>
           </div>
         </header>
         <div class="left-menu">
-          <ul > 
+          <ul >
+       		  <li style="font-weight: bold; font-size:18px;">관리자</li>
               <li><a href="/bookcheck.do?reqPage=1">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
               <li><a href="/roomInfo.do">객실관리</a></li>
