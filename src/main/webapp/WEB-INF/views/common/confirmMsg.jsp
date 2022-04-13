@@ -19,21 +19,22 @@
 	<script>
 		window.onload = function(){
 			Swal.fire({
-				  title: "<%=title%>",
-				  text: "<%=msg%>",
-				  icon: "<%=icon%>",
+				  title: 'Are you sure?',
+				  text: "You won't be able to revert this!",
+				  icon: 'warning',
 				  showCancelButton: true,
 				  confirmButtonColor: '#3085d6',
 				  cancelButtonColor: '#d33',
-				  confirmButtonText: '삭제',
-				  cancelButtonText: '취소'
+				  confirmButtonText: 'Yes, delete it!'
 				}).then((result) => {
-					  if(result.value){
-						  location.href="<%=loc%>";
-					  }
-					
+				  if (result.isConfirmed) {
+				    Swal.fire(
+				      'Deleted!',
+				      'Your file has been deleted.',
+				      'success'
+				    )
+				  }
 				})
-			})
 		}
 	</script>
 </body>
