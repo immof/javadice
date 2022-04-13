@@ -80,8 +80,9 @@ public class BookDao {
 				+ "(SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
 				+ "FROM BOOK\r\n" + "JOIN ROOM USING(ROOM_NO)\r\n" + "WHERE MEMBER_NO=?\r\n"
 				+ "ORDER BY BOOK_NO DESC)N)\r\n" + "WHERE RNUM BETWEEN ? AND ?";
+		String query2 = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no))b where member_no=? order by check_in desc) where rnum between ? and ?";
 		try {
-			pstmt = conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query2);
 			pstmt.setInt(1, memberNo);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
@@ -144,7 +145,30 @@ public class BookDao {
 		}
 		return list;
 	}
-
+	
+	
+	// 회원한명 전체예약갯수 세는 dao 메소드
+	public int totalBookCount(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) as cnt from book where member_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	// 전체 예약갯수 세는 dao 메소드
 	public int totalBookCount(Connection conn) {
 		PreparedStatement pstmt = null;
