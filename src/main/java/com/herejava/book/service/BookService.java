@@ -370,6 +370,21 @@ public class BookService {
 		return diffDays;
 	}
 	
+	//현재날짜 기준 예약상태(숙박완료로) 최신화 시켜주는 메소드
+	public int updateBookState() {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		int result = dao.updateBookState(conn);
+		JDBCTemplate.close(conn);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
 }
 
 

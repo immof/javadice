@@ -1,9 +1,14 @@
+<%@page import="com.herejava.book.service.BookService"%>
 <%@page import="com.herejava.member.vo.Member"%>
 <%@page import="com.herejava.book.vo.Book"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%
     	Member m = (Member)session.getAttribute("m");
+    %>
+    <%
+    	BookService service = new BookService();
+    	service.updateBookState();
     %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">

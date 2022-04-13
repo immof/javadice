@@ -5,7 +5,7 @@
 <%
 	ArrayList<BookData> list = (ArrayList<BookData>) request.getAttribute("list");
 	String pageNavi = (String) request.getAttribute("pageNavi");
-	String memberNick = (String) request.getAttribute("memberNick");
+	Member mem = (Member) request.getAttribute("mem");
 %>
 <!DOCTYPE html>
 <html>
@@ -37,13 +37,18 @@
 	.subMenuTab>ul>li{
 		margin: 30px 10px;
 		float:left;
-		height: 40px;
-		line-height: 40px;
-		width: 150px;
 		border: 1px solid #dcdcdc;
 	}
 	.subMenuTab>ul>li>a{
 		font-size: 20px;
+		display: block;
+		height: 40px;
+		line-height: 40px;
+		width: 150px;
+		background-color: rgba(172,158,137,0.15);
+	}
+	.subMenuTab>ul>li>a:hover{
+		background-color: rgba(172,158,137,0.5);
 	}
 	
 </style>
@@ -54,11 +59,11 @@
 		<div class="flex-wrap">
 			<%@ include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
 			<div class="mypage-content">
-				<div class="mypage-content-title"><%=memberNick %>님의 예약내역</div>
+				<div class="mypage-content-title"><%=mem.getMemberNick() %>님의 예약내역</div>
 					
 					<div class="subMenuTab">
 						<ul>
-							<li style="margin-left:100px;"><a href="#">전체보기</a></li>
+							<li style="margin-left:100px;"><a href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1">전체보기</a></li>
 							<li><a href="#">이용예정</a></li>
 							<li><a href="#">이용완료</a></li>
 							<li><a href="#">취소내역</a></li>
