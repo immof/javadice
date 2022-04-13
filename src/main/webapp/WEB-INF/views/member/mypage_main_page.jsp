@@ -40,8 +40,9 @@
 		width: 150px;
 		height: 90px;
 	}
-	h3 {
+	.h3-0{
 		text-align : center;
+		padding: 100px;
 	}
 </style>
 </head>
@@ -65,7 +66,7 @@
 									</td>
 										<%=list.add(bd) %>
 									<td><a href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
-									<td><button class="btn bc3 bs6 modal-open-btn" target="#test-modal">예약취소</td>
+									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								</tr>
 								</table>
 								<hr>
@@ -102,7 +103,7 @@
 											영업일 2-3일 내로 처리될 예정입니다.
 											</p>
 											<div class="modal-btns-container">
-												<button class="btn bc3" id="modal-btns-item">예약취소</button>
+												<input type="button" class="btn bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
 												<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 											</div>
 										</div>
@@ -122,7 +123,7 @@
 									</td>
 										  <%=list.add(bd) %>
 									<td><a class="a-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
-									<td><button class="btn bc3 bs6 modal-open-btn" target="#test-modal">예약취소</td>
+									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								</tr>
 								</table>
 								<hr>
@@ -160,7 +161,7 @@
 									영업일 2-3일 내로 처리될 예정입니다.
 									</p>
 									<div class="modal-btns-container">
-									<button class="btn bc3" id="modal-btns-item">예약취소</button>
+									<input type="button" class="btn bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
 									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 									</div>
 									</div>
@@ -170,7 +171,7 @@
 								<!-- 예약취소 modal 끝 -->
 								<!-- 모달 내용 끝-->
 							<%}else { %>
-								<h3>최근 예약내역이 없습니다.</h3>
+								<h3 class="h3-0">최근 예약내역이 없습니다.</h3>
 						<%} %>
 				<!-- 최근예약내역 끝 -->
 				
@@ -193,10 +194,37 @@
 						<th class="th-1">휴대폰번호</th>
 						<td class="td-1"><%=m.getMemberPhone() %></td>
 					</tr>
-					<p class="p-1">수정하기></p>
+					<p><a class="p-1" href="/mypage_info.do">수정하기></a></p>
 				</table>
 				<!-- 내정보 끝 -->
 			</div>
+	<script>
+	$(function(){
+		const cancleBtn =  $("#modal-btns-item");
+		
+
+//토스트 알림 함수		
+		function toastShow(title, icon){
+		const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: 1500,
+	    timerProgressBar: true,
+	    didOpen: (toast) => {
+	     // toast.addEventListener('mouseenter', Swal.stopTimer)
+	      toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	 	})
+	
+	  Toast.fire({
+	    title: title,
+	    icon: icon
+	  })}//토스트 끝
+	});
+	
+	
+	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

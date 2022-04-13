@@ -130,8 +130,7 @@
 									영업일 2-3일 내로 처리될 예정입니다.
 									</p>
 									<div class="modal-btns-container">
-									<button class="btn bc3" id="modal-btns-item">예약취소</button>
-									<input type="button" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberNo=<%=m.getMemberNo() %>'"/>예약취소_테스트
+									<input type="button" class="btn bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
 									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 									</div>
 									</div>
