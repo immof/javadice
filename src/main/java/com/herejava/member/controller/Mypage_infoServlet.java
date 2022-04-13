@@ -36,6 +36,7 @@ public class Mypage_infoServlet extends HttpServlet {
 		//2.값추출
 		//3.비즈니스로직
 		//4. 결과처리
+		System.out.println("인포서블릿은왓니?");
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_info.jsp");
 		view.forward(request, response);
 	}
