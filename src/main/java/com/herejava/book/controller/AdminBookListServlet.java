@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.BookPageData;
+import com.herejava.member.service.MemberService;
+import com.herejava.member.vo.Member;
 
 /**
  * Servlet implementation class AdminBookListServlet
@@ -40,12 +42,15 @@ public class AdminBookListServlet extends HttpServlet {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		//3. 비즈니스로직
 		BookService service = new BookService();
+		//데이터 가져오기 전에 예약상태 현재 날짜 기준으로 최신화 시켜주기
 		BookPageData bpd = service.selectBookListAdmin(memberNo,memberNick,reqPage);
+		MemberService serviceM = new MemberService();
+		Member mem = serviceM.selectOneMember3(memberNick);
 		//4. 화면출력
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/oneMemberBookList.jsp");
 		request.setAttribute("list", bpd.getBookList());
 		request.setAttribute("pageNavi", bpd.getPageNavi());
-		request.setAttribute("memberNick", memberNick);
+		request.setAttribute("mem", mem);
 		view.forward(request, response);
 	}
 
