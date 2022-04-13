@@ -54,13 +54,20 @@
 			<div class="mypage-content">
 				<!-- 최근예약내역 시작 -->	
 				<div class="mypage-content-title">최근 예약내역</div>
-					 <% if(list.size() >= 2) {
-							for(int i=0;i<2;i++) {
-								BookData bd = list.get(i);%>
+					 <% if(list.size() >= 2) {%>
+							<%for(int i=0;i<2;i++) {%>
+								<%BookData bd = list.get(i);%>
 								<table>
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><h4><%=bd.getRoomName() %></h4><%=bd.getBookState() %><br>
+									<td><h4><%=bd.getRoomName() %></h4>
+										<!-- 다시 해야함 -->
+										<%// if(bd.getBookState() == 0) {%>
+										<%// String bookState = String.getBookState(); %>
+										<%// result = bookState.replace("0","예약완료"); %>
+										<%//} %>
+										<br>
+										
 										<%=bd.getCheckIn() %> -
 										<%=bd.getCheckOut() %>
 									</td>
