@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
+import com.herejava.member.service.MemberService;
+import com.herejava.member.vo.Member;
 
 /**
  * Servlet implementation class BookCancleServlet
@@ -35,14 +37,14 @@ public class BookCancleServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		String memberId = request.getParameter("memberId");
 		//3. 비즈니스로직
 		BookService service = new BookService();
+		MemberService service2 = new MemberService();
 		int result = service.updateBook(bookNo);
-		System.out.println(result);
+		Member member = service2.selectOneMember(memberId);
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		view.forward(request, response);
 		
 		if(result>0) {
 			request.setAttribute("title", "성공");
@@ -51,9 +53,10 @@ public class BookCancleServlet extends HttpServlet {
 			request.setAttribute("title", "실패");
 			request.setAttribute("icon", "error");
 		}
-		request.setAttribute("loc", "/mypage_main.do");
+		request.setAttribute("loc", "/mypage_main.do?memberNo="+member.getMemberNo()+"&memberId="+member.getMemberId()+"&memberLevel="+member.getMemberLevel());
+		view.forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
