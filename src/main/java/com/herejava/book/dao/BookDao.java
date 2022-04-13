@@ -71,7 +71,7 @@ public class BookDao {
 		return result;
 	}
 
-	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드
+	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 (최신 예약 날짜 순으로 정렬)
 	public ArrayList<BookData> selectBookList(Connection conn, int memberNo, int start, int end) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -80,7 +80,7 @@ public class BookDao {
 				+ "(SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
 				+ "FROM BOOK\r\n" + "JOIN ROOM USING(ROOM_NO)\r\n" + "WHERE MEMBER_NO=?\r\n"
 				+ "ORDER BY BOOK_NO DESC)N)\r\n" + "WHERE RNUM BETWEEN ? AND ?";
-		String query2 = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no))b where member_no=? order by check_in desc) where rnum between ? and ?";
+		String query2 = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? order by book_day desc) where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query2);
 			pstmt.setInt(1, memberNo);
