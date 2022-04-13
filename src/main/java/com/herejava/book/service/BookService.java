@@ -256,6 +256,22 @@ public class BookService {
 				JDBCTemplate.close(conn);
 				return bcp;
 			}
+
+	//숙박일 수 리턴하느 메소드
+	public int diffDays(String checkIn, String checkOut) {
+		Date format1 = null;
+		Date format2 = null;
+		try {
+			format1 = new SimpleDateFormat("yyyy-MM-dd").parse(checkOut);
+			format2 = new SimpleDateFormat("yyyy-MM-dd").parse(checkIn);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		long diffSec = (format1.getTime() - format2.getTime()) / 1000;
+		long diffDaysLong = diffSec / (24*60*60);
+		int diffDays = (int)diffDaysLong;
+		return diffDays;
+	}
 	
 }
 
