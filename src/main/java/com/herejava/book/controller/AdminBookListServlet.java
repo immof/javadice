@@ -1,4 +1,4 @@
-package com.herejava.member.controller;
+package com.herejava.book.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.member.service.MemberService;
-import com.herejava.member.vo.Member;
+import com.herejava.book.service.BookService;
+import com.herejava.book.vo.BookPageData;
 
 /**
- * Servlet implementation class Mypage_infoServlet
+ * Servlet implementation class AdminBookListServlet
  */
-@WebServlet(name = "Mypage_info", urlPatterns = { "/mypage_info.do" })
-public class Mypage_infoServlet extends HttpServlet {
+@WebServlet(name = "AdminBookList", urlPatterns = { "/adminBookList.do" })
+public class AdminBookListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Mypage_infoServlet() {
+    public AdminBookListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +31,21 @@ public class Mypage_infoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.인코딩
+		//관리자가 회원 예약 리스트 블러오는 servlet
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		//2.값추출
-		//3.비즈니스로직
-		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_info.jsp");
+		//2. 값추출
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		String memberNick = request.getParameter("memberNick");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		//3. 비즈니스로직
+		BookService service = new BookService();
+		BookPageData bpd = service.selectBookList(memberNo, reqPage);
+		//4. 화면출력
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/oneMemberBookList.jsp");
+		request.setAttribute("list", bpd.getBookList());
+		request.setAttribute("pageNavi", bpd.getPageNavi());
+		request.setAttribute("memberNick", memberNick);
 		view.forward(request, response);
 	}
 

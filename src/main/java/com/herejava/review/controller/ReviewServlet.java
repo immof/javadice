@@ -32,8 +32,7 @@ public class ReviewServlet extends HttpServlet {
 		int memberNo= Integer.parseInt(request.getParameter("memberNo")); 
 		//3.비즈니스로직
 		//4.결과처리
-		System.out.println(memberNo);
-			
+		
 		
 	}
 

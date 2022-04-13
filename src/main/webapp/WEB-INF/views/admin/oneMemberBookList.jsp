@@ -5,6 +5,7 @@
 <%
 	ArrayList<BookData> list = (ArrayList<BookData>) request.getAttribute("list");
 	String pageNavi = (String) request.getAttribute("pageNavi");
+	String memberNick = (String) request.getAttribute("memberNick");
 %>
 <!DOCTYPE html>
 <html>
@@ -57,22 +58,16 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="page-content">
 		<div class="flex-wrap">
-			<%@ include file="/WEB-INF/views/member/mypage_common.jsp"%>
+			<%@ include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
 			<div class="mypage-content">
-				<div class="mypage-content-title">내 예약내역</div>
+				<div class="mypage-content-title"><%=memberNick %>님의 예약내역</div>
 				<table class="tbl tbl-hover">
 					<%
 					for (BookData bd : list) {
 					%>
 					<tr class="tr-1">
-						<td>
-							<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
-							<img class="img-0" src="/img/<%=bd.getFilePath()%>">
-						</td>
-						<td>
-							<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
-							<%=bd.getRoomName()%>
-						</td>
+						<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
+						<td><%=bd.getRoomName()%></td>
 						<td><%=bd.getCheckIn()%> - <%=bd.getCheckOut()%></td>
 						<td><%=bd.getBookState()%></td>
 					</tr>

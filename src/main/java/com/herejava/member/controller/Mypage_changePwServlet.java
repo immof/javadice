@@ -33,9 +33,8 @@ public class Mypage_changePwServlet extends HttpServlet {
 		//2.값추출
 		//3.비즈니스로직
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_changePw.jsp");
-		view.forward(request, response);
-		
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_changePw.jsp");
+			view.forward(request, response);
 	}
 
 	/**
