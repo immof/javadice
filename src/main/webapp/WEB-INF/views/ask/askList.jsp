@@ -81,7 +81,7 @@
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
 		<div class="page1-title">문의사항
-			<a class="btn bc1 writeBtn" href="askWrite.do">글쓰기</a>
+			<a class="btn bc1 writeBtn" href="askWriteFrm.do">글쓰기</a>
 		</div>
 			<table class="tbl tr-1 notice-tbl">
 					<tr class="tr-2">

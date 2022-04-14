@@ -110,6 +110,19 @@ public class AskService {
 		JDBCTemplate.close(conn);
 		return null;
 	}
+	
+	public int insertAsk(Ask a) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.insertAsk(conn,a);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 	
 	
