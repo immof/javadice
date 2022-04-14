@@ -419,6 +419,10 @@ footer > .footer-content > ul > li > a {
   background-color: #666;
   cursor: pointer;
 }
+.bc6{
+  background-color: #432f31;
+  color: #fff;
+}
 .bc11{
   background-color: yellowgreen;
   color: #fff;
@@ -444,14 +448,14 @@ footer > .footer-content > ul > li > a {
   font-size: 1.2em;
 }
 .bs5 {
-  padding: 2.5px 10px;
-  border-radius: 3px;
-  font-size: 1em;
+  padding: 1.5px 8px;
+  border-radius: 2px;
+  font-size: 15px;
 }
 .bs6 {
-  padding: 5px 28px;
-  border-radius: 4px;
-  font-size: 1.2em;
+  padding: 4px 21px;
+  border-radius: 3px;
+  font-size: 18px;
 }
 .bs7 {
   padding: 4px 10px;

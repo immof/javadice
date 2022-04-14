@@ -153,39 +153,13 @@ public class BookService {
 	}
 
 	
-	// 예약상태에 따라 버튼상태가 바뀌는 메소드
-	public String changeBtn(int bookState, int bookNo){
-		String changeBtn = null;
-		String review = null;
-		switch(bookState) {
-			case 0:
-				//이용예정
-				changeBtn += "<Button class='btn bc3 bs6 modal-open-btn' id='modal-btn-1' target='#test-modal'>";
-				changeBtn += "예약취소";
-				changeBtn += "</Button>";
-				break;
-			case 1: 
-				//이용완료(리뷰x)
-				if(review != null) {
-					changeBtn += "<Button class='btn bc3 bs6' href='#'>";
-					changeBtn += "리뷰쓰기";
-					changeBtn += "</Button>";
-				}else {
-				//이미 리뷰 썼을때 '리뷰보기'버튼으로 변환해야함
-				//이용완료(리뷰o)
-					changeBtn += "<Button class='btn bc3 bs6' href='#'>";
-					changeBtn += "리뷰보기";
-					changeBtn += "</Button>";
-				}
-				break;
-			case 2: 
-				//취소완료
-				changeBtn += "<Button class='btn bc3 bs6'>";
-				changeBtn += "취소완료";
-				changeBtn += "</Button>";
-				break;
-		};
-		return changeBtn;
+	// 예약번호로 리뷰갯수 리턴하는 메소드
+	public int getReview(long bookNo){
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		int result = dao.getReview(conn,bookNo);
+		JDBCTemplate.close(conn);
+		return result;
 	}
 	
 
@@ -267,6 +241,7 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+
 
 	//예약번호로 예약취소(update)하는 메소드
 	public int updateBook(long bookNo) {

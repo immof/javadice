@@ -54,7 +54,7 @@ public class BookCancleServlet extends HttpServlet {
 			request.setAttribute("msg", "관리자에게 문의하세요.");
 			request.setAttribute("icon", "error");
 		}
-		request.setAttribute("loc", "index.jsp");
+		request.setAttribute("loc", "/index.jsp");
 		view.forward(request, response);
 	}
 	

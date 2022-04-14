@@ -60,6 +60,10 @@
 			font-weight: bold;
 			padding: 45px 0px;
 		}
+		.test-modal{
+			top: 0px;
+			left: 0px;
+		}
 </style>
 </head>
 <body>
@@ -75,42 +79,72 @@
 						<th>객실타입</th>
 						<th>이용날짜</th>
 						<th>예약상태</th>
-						<th>리뷰어쩌고</th>
+						<th>리뷰작성</th>
 					</tr>
 				</table>
 				<hr class="hr-0">
-
 				<table class="tbl tbl-hover">
 					<%
 					if(list.size()>0){
 						for (BookData bd : list) {
 						%>
-						<tr class="tr-1">
-							<td>
-								<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
-								<img class="img-0" src="/img/<%=bd.getFilePath()%>">
-							</td>
-							<td>
-								<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
-								<%=bd.getRoomName()%>
-							</td>
-							<td><%=bd.getCheckIn()%> - <%=bd.getCheckOut()%></td>
-							<td>
-							<%	String bookState = "";
-							switch(bd.getBookState()) {
-								case 0: bookState = "이용예정";
-									break;
-								case 1: bookState = "이용완료";
-									break;
-								case 2: bookState = "취소완료";
-									break;
-							}; %>
-							<%=bookState %>
-							</td>
-							<td>
-								#
-							</td>
-						</tr>
+								<tr>
+									<td>
+										<img class="img-0" src="/img/<%=bd.getFilePath()%>">
+									</td>
+									<td>
+										<p class="p-0"><%=bd.getRoomName() %></p>
+									</td>
+									<%	String bookState = null;
+										switch(bd.getBookState()) {
+											case 0: bookState = "이용예정";%>
+												<td>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+												</td>
+												<td><%=bookState %></td>
+												<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>	
+											<%	break;
+											case 1: bookState = "이용완료";
+												//리뷰o
+												if(0 == 0){
+											%>
+													<td>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+													</td>
+													<td><%=bookState %></td>
+													<td><a class="btn bc3 bs6" href="#">리뷰보기</a></td>	
+											<% 	//리뷰x
+												}else{
+											%>
+													<td>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+													</td>
+													<td><%=bookState %></td>
+													<td><a class="btn bc3 bs6" href="#">리뷰쓰기</a></td>	
+												<%break;											
+											 }//예약취소
+											case 2: bookState = "취소완료";
+											%>
+													<td>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+													</td>
+													<td><%=bookState %></td>
+													<td><button class="btn bc3 bs6">취소완료</button></td>	
+											<%break;
+										};  %>
+								</tr>
 						<%
 						}
 					}else {

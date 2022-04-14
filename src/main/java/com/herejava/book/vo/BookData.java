@@ -10,12 +10,13 @@ public class BookData {
 	private int bookPeople;
 	private String bookName;
 	private String bookPhone;
+	private int reviewNo;
 	public BookData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public BookData(long bookNo, String filePath, String roomName, String checkIn, String checkOut, int bookState,
-			int bookPeople, String bookName, String bookPhone) {
+			int bookPeople, String bookName, String bookPhone, int reviewNo) {
 		super();
 		this.bookNo = bookNo;
 		this.filePath = filePath;
@@ -26,6 +27,7 @@ public class BookData {
 		this.bookPeople = bookPeople;
 		this.bookName = bookName;
 		this.bookPhone = bookPhone;
+		this.reviewNo = reviewNo;
 	}
 	public long getBookNo() {
 		return bookNo;
@@ -80,6 +82,12 @@ public class BookData {
 	}
 	public void setBookPhone(String bookPhone) {
 		this.bookPhone = bookPhone;
+	}
+	public int getReviewNo() {
+		return reviewNo;
+	}
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 	
 }
