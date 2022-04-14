@@ -103,16 +103,7 @@
 					<div id="noticeContent"><%=a.getAskContentBr() %></div>
 				</td>
 			</tr>
-			<!-- 
-			<%if(m!= null && m.getMemberId().equals(a.getMemberNo())) {%>
-			<tr class="tr-1">
-				<th colspan=6>
-					<a class="btn bc1" href="/noticeUpdateFrm.do?noticeNo=<%=a.getAskNo() %>">수정</a>
-					<button class="btn bc1" onclick="noticeDelete('<%=a.getAskNo() %>');">삭제</button>
-				</th>
-			</tr>
-			<%} %>
-			 -->
+			 
 		</table>
 		<span style="line-height:80%"></span>
 		<table class="tbl" id="noticeView" style="line-height:140%">
@@ -135,6 +126,18 @@
 				</td>
 			</tr>
 		</table>
+		<%if(m!= null && m.getMemberId().equals(a.getMemberNick())) {%>
+		<table class="tbl" id="noticeView">
+			<tr class="tr-1">
+				<td colspan="5">
+					<a class="btn bc1" href="/askUpdateFrm.do?noticeNo=<%=a.getAskNo() %>">수정</a>
+					<button class="btn bc1" onclick="askDelete('<%=a.getAskNo() %>');">삭제</button>
+				</td>
+			</tr>
+			</table>
+		<%} %>
+		
+			
 		<span style="line-height:150%;">
 		<br>
 		</span>
