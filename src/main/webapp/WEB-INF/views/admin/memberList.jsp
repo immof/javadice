@@ -22,17 +22,28 @@
 }
 .mypage-content-title>form{
 	float: right;
+	display: flex;
 }
 .tbl-hover th, .tbl-hover td{
 	border-bottom: 1px solid #A7A7A7;
 }
+.tbl-hover{
+	margin-top: 20px;
+}
 .delBtn{
 	width:100px; 
-	height:35px;
-	line-height: 35px
+	height:45px;
+	margin-top: 20px;
+	line-height: 45px;
+	float:right;
+}
+.searchBtn{
+	height: 40px;
+	line-height: 40px;
+	
 }
 #pageNavi {
-	margin-top: 10px;
+	margin-top: 30px;
 }
 </style>
 </head>
@@ -44,9 +55,9 @@
 			
 			<div class="mypage-content">
 				<div class="mypage-content-title">
-					<span>회원 목록</span>
+					<span style="font-family: ns-bold;">회원 목록</span>
 					<form action="/searchMember.do">
-						<input type="text" name="searchMember" placeholder="회원 검색(아이디/이름/닉네임)" >
+						<input type="text" name="searchMember" placeholder="회원 검색(아이디/이름/닉네임)" style="height:29px; width:230px; padding-left:5px;" >
 						<button type="submit" class="material-icons">search</button>
 					</form>
 				</div>
@@ -64,7 +75,7 @@
 							<td><%=mem.getMemberPhone() %></td>
 							<td><%=mem.getMemberPoint() %></td>
 							<td><%=mem.getMemberLevel() %></td>
-							<td><button class="btn bc2 searchBtn" >예약조회</button></td>
+							<td><button class="btn bc2 searchBtn" style="padding: 0 10px;" >예약조회</button></td>
 							<td><input type="checkbox" id="delMemberChk"></td>
 						</tr>
 					<%} %>
@@ -102,7 +113,7 @@
 		$(".searchBtn").on("click",function(){
 			const memberNo = $(this).parent().parent().children().first().text();
 			const memberNick = $(this).parent().parent().children().eq(3).text();
-			location.href="/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage=1";
+			location.href="/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage=1&chk=3";
 		});
 	</script>
 </body>
