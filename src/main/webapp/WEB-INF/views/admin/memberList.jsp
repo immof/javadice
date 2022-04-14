@@ -102,7 +102,7 @@
 		$(".searchBtn").on("click",function(){
 			const memberNo = $(this).parent().parent().children().first().text();
 			const memberNick = $(this).parent().parent().children().eq(3).text();
-			location.href="/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage=1";
+			location.href="/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage=1&chk=3";
 		});
 	</script>
 </body>
