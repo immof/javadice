@@ -47,20 +47,22 @@
 						<tr class="tr-1">
 							<th class="td-3">제목</th>
 							<td colspan="3">
-								<input type="text" name="noticeTitle" class="input-form">
+								<input type="text" name="askTitle" class="input-form">
 							</td>
 						</tr>
 						<tr class="tr-1">
 							<th class="td-3">작성자</th>
 							<td>
-								<input type="hidden" name="noticeWriter" value="<%=m.getMemberNick() %>">
+								<input type="hidden" name="memberNick" value="<%=m.getMemberNo() %>">
 								<%=m.getMemberNick() %>
 							</td>
 							<th class="td-3">첨부파일</th>
-							<td><input type="file" name="file"></td>
+							<td><input type="file" name="file1"></td>
+							<td><input type="file" name="file2"></td>
+							<td><input type="file" name="file3"></td>
 						</tr>
 						<tr class="tr-1">
-							<td colspan="4" style="text-align: left;"><textarea id="noticeContent" name="noticeContent" class="input-form"></textarea>
+							<td colspan="4" style="text-align: left;"><textarea id="noticeContent" name="askContent" class="input-form"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -79,6 +81,7 @@
 				}
 			}
 		});
+		
 		function uploadImage(file,editor){
 			//ajax통해 서버에 이미지를 업로드하고 업로드 경로를 받아옴
 			//form태그와 동일한 효과를 내는 FormData 객체 생성
@@ -103,7 +106,6 @@
 		
 		}
 	</script>
-	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
