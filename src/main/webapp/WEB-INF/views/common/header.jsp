@@ -23,6 +23,9 @@
 <script src="js/default.js"></script>
 <script src="js/sweetalert2.all.min.js"></script>
 <script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous"></script>
+<script src="./summernote/summernote-lite.js"></script>
+<script src="./summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="./summernote/summernote-lite.css">
 <style>
 .flex-wrap {
 	display: flex;
