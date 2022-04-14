@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>:: 회원 페이지 ::</title>
+<script src="/js/sweetalert2.min.js"></script>
 <style>
 	.mypage-content{
 		min-height: 800px;
@@ -277,50 +278,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<script>
-	$(function(){
-		const checkCancle = [false];
-		$(".cancleBtn").on("click"function(){
-			if(checkCancle){
-				const cancleBook = $("")
-				$.ajax({
-					url: "/cancleBook.do",
-					type: "get",
-					data: {bookNo: bookNo},
-					success: function(data){
-						if(data == 1){
-							const title = "예약이 취소되었습니다. 마이페이지로 돌아갑니다.";
-							const icon = "success";
-						}else{
-							const title = "예약취소에 실패했습니다. 문제가 계속되는 경우 관리자에게 문의하세요.";
-							const icon = "warning";
-						}	
-						location.href = "/";
-				});
-		});
-
-		
-		//토스트 알림 함수		
-		function toastShow(title, icon){
-		const Toast = Swal.mixin({
-	    toast: true,
-	    position: 'center-center',
-	    showConfirmButton: false,
-	    timer: 1500,
-	    timerProgressBar: true,
-	    didOpen: (toast) => {
-	     // toast.addEventListener('mouseenter', Swal.stopTimer)
-	      toast.addEventListener('mouseleave', Swal.resumeTimer)
-	    }
-	 	})
-	
-	  Toast.fire({
-	    title: title,
-	    icon: icon
-	  })}//토스트 끝
-	});
-	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

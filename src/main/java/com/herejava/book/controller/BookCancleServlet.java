@@ -44,16 +44,17 @@ public class BookCancleServlet extends HttpServlet {
 		int result = service.updateBook(bookNo);
 		Member member = service2.selectOneMember(memberId);
 		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/etc/msg.jsp");
 		
 		if(result>0) {
-			request.setAttribute("title", "성공");
+			request.setAttribute("title", "예약취소에 성공했습니다.메인페이지로 돌아갑니다.");
 			request.setAttribute("icon", "succcess");
 		}else {
-			request.setAttribute("title", "실패");
+			request.setAttribute("title", "예약취소에 실패했습니다.문제가 계속될 경우 관리자에게 문의하십시오.");
 			request.setAttribute("icon", "error");
 		}
-		request.setAttribute("loc", "/mypage_main.do?memberNo="+member.getMemberNo()+"&memberId="+member.getMemberId()+"&memberLevel="+member.getMemberLevel());
+		request.setAttribute("loc", "index.jsp");
+		//request.setAttribute("loc", "/mypage_main.do?memberNo="+member.getMemberNo()+"&memberId="+member.getMemberId()+"&memberLevel="+member.getMemberLevel());
 		view.forward(request, response);
 	}
 	
