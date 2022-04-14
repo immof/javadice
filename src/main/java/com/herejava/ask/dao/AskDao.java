@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.herejava.ask.vo.Ask;
-import com.herejava.member.vo.Member;
-import com.herejava.notice.vo.Notice;
+import com.herejava.ask.vo.AskComment;
 
 import common.JDBCTemplate;
 
@@ -18,7 +17,7 @@ public class AskDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Ask> list = new ArrayList<Ask>();
-		String query = "select * from (select rownum as rnum,n. * from (select * from ask join member using(member_no)) n) where rnum between ? and ?";
+		String query = "select * from(select * from (select rownum as rnum,n. * from (select * from ask join member using(member_no) order by ask_no desc) n) where rnum between ? and ?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -70,34 +69,112 @@ public class AskDao {
 		return result;
 	}
 
-	public Member selectOneNickName(Connection conn, int memberNo) {
+	public Ask selectOneAsk(Connection conn, int askNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Member m1 = null;
-		String query = "select * from member where member_no=?";
-		
+		Ask a = null;
+		String query = "select * from ask join member using(member_no) where ask_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, memberNo);
+			pstmt.setInt(1, askNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				m1 = new Member();
-				m1.setMemberNo(rset.getInt("member_no"));
-				m1.setMemberId(rset.getString("member_id"));
-				m1.setMemberPw(rset.getString("member_pw"));
-				m1.setMemberName(rset.getString("member_name"));
-				m1.setMemberNick(rset.getString("member_nick"));
-				m1.setMemberPhone(rset.getString("member_phone"));
-				m1.setMemberPoint(rset.getInt("member_point"));
-				m1.setMemberLevel(rset.getInt("member_level"));
-				m1.setFilepath(rset.getString("filepath"));
+				a = new Ask();
+				a.setAskNo(rset.getInt("ask_no"));
+				a.setMemberNo(rset.getInt("member_no"));
+				a.setMemberNick(rset.getString("member_Nick"));
+				a.setAskTitle(rset.getNString("ask_title"));
+				a.setAskContent(rset.getString("ask_content"));
+				a.setAskEnrollDate(rset.getString("ask_enroll_date"));
+				a.setAskReadCount(rset.getString("ask_read_count"));
+				a.setFilepath1(rset.getString("filepath1"));
+				a.setFilepath2(rset.getString("filepath2"));
+				a.setFilepath3(rset.getString("filepath3"));
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return m1;
+		return a;
 	}
+
+	public ArrayList<AskComment> selectAskComment(Connection conn, int askNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AskComment> list = new ArrayList<AskComment>();
+		String query = "select * from ask_comment where ask_comment_ref=? and ask_ref is null";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, askNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				AskComment a = new AskComment();
+				a.setAskCommentNo(rset.getInt("ask_comment_no"));
+				a.setAskCommentWriter(rset.getString("ask_comment_writer"));
+				a.setAskRef(rset.getInt("ask_ref"));
+				a.setAskCommentRef(rset.getInt("ask_comment_ref"));
+				a.setAskCommentContent(rset.getString("ask_comment_content"));
+				a.setAskCommentEnrollDate(rset.getString("ask_comment_enroll_date"));
+				list.add(a);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<AskComment> selectAskReComment(Connection conn, int askNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AskComment> list = new ArrayList<AskComment>();
+		String query = "select * from ask_comment where ask_comment_ref=? and ask_ref is null";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, askNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				AskComment a = new AskComment();
+				a.setAskCommentNo(rset.getInt("ask_comment_no"));
+				a.setAskCommentWriter(rset.getString("ask_comment_writer"));
+				a.setAskRef(rset.getInt("ask_ref"));
+				a.setAskCommentRef(rset.getInt("ask_comment_ref"));
+				a.setAskCommentContent(rset.getString("ask_comment_content"));
+				a.setAskCommentEnrollDate(rset.getString("ask_comment_enroll_date"));
+				list.add(a);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public int updateReadCount(Connection conn, int askNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query= "update ask set ask_read_count = ask_read_count+1 where ask_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, askNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
 }

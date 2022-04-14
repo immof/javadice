@@ -190,7 +190,7 @@ public class BookService {
 	
 
 	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 -관리자
-	public BookPageData selectBookListAdmin(int memberNo, String memberNick, int reqPage) {
+	public BookPageData selectBookListAdmin(int memberNo, String memberNick, int reqPage, int chk) {
 		Connection conn= JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
 		
@@ -199,9 +199,9 @@ public class BookService {
 		
 		int end = reqPage*numPerPage;
 		int start = end - numPerPage + 1;
-		ArrayList<BookData> list = dao.selectBookList(conn,memberNo,start,end);
+		ArrayList<BookData> list = dao.selectBookList(conn,memberNo,start,end,chk);
 		//페이징처리
-		int totalCount = dao.totalBookCount(conn,memberNo);
+		int totalCount = dao.totalBookCount(conn,memberNo,chk);
 		int totalPage = 0;
 		if(totalCount%numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -215,7 +215,7 @@ public class BookService {
 		String pageNavi = "<ul class='pagination circle-style'>";
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class='page-item' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+(pageNo-1)+"&chk="+chk+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
@@ -223,12 +223,12 @@ public class BookService {
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item active-page' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+pageNo+"&chk="+chk+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+pageNo+"&chk="+chk+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -240,7 +240,7 @@ public class BookService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/adminbookList.do?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-item' href='/adminBookList.do?memberNo="+memberNo+"&memberNick="+memberNick+"&reqPage="+pageNo+"&chk="+chk+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 		}
