@@ -63,6 +63,40 @@
 	padding: 50px;
 	border-bottom: 1px solid #ac9e89;
 }
+.rv-wrap{
+	height:605px;
+	overflow: hidden;
+}
+#review-page-title{
+	display: flex;
+	justify-content: space-between;
+}
+#view-change-btn{
+	width: 120px;
+	font-size: 18px;
+	text-align: right;
+	background-color: transparent;
+	border: none;
+}
+#view-change-btn>i{
+	color: #ac9e89;
+}
+#view-change-btn:hover>span{
+	color: #998465;
+	cursor: pointer;
+}
+.review-img-wrap{
+	display: flex;
+	margin-top: 30px;
+}
+.review-img{
+	/* flex-grow: 1; */
+	justify-items: center;
+}
+.review-img img{
+	width: 150px;
+	height: 84px;
+}
 </style>
 </head>
 <body>
@@ -71,12 +105,14 @@
 		<div class="flex-wrap">
 			<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
-				<div class="mypage-content-title">나의 리뷰</div>
+				<div class="mypage-content-title" id="review-page-title">
+					<h4>나의 리뷰</h4>
+					<button class="view-change-btn" id="view-change-btn"><span>전체보기 </span><i class="fa-solid fa-caret-down"></i></button>
+				</div>
+				<div class="review-all-wrap rv-wrap">
 			<%if(reviewList.size() == 0){ %>
 				<div class="empty-msg">아직 작성된 리뷰가 없습니다.</div>
 			<%}else{ %>
-				
-			<%} %>
 			<%for(ReviewList rev : reviewList){ %>
 			<%
 				Date today = new Date();
@@ -87,7 +123,7 @@
 				     String msg = null;
 				     if(diffDays < 30){
 				    	 msg = diffDays + "일 전";
-				     }else if(diffDays >= 30){
+				     }else if(diffDays >= 30 && diffDays < 360){
 				    	 msg = (int)(Math.floor(diffDays/30)) + "개월 전";
 				     }else if(diffDays >=360){
 				    	 msg = (int)(Math.floor((diffDays/30)/12)) + "년 전";
@@ -150,27 +186,51 @@
 							<span class="room-type">객실타입: 스탠다드</span>
 							<%} %>
 							<span class="review-button">
-								<button class="btn bc4 bs6" id="update-btn">수정</button>
+								<button class="btn bc4 bs6" id="update-btn" onclick="location.href='review_writeFrm.do'">수정</button>
 								<button class="btn bc3 bs6" id="delete-btn">삭제</button>
 							</span>
 						</div>
 						<div class="review-text view-change">
 							<p><%=rev.getReviewContent() %></p>
+							<div class="review-img-wrap">
+								<div class="review-img">
+								<%if(rev.getFilepath1() != null){ %>
+									<img src="./review_img/<%=rev.getFilepath1() %>" onerror="this.src='./review_img/no-image.jpg'">
+								<%} %>
+								</div>
+								<div class="review-img">
+								<%if(rev.getFilepath2() != null){ %>
+									<img src="./review_img/<%=rev.getFilepath2() %>" onerror="this.src='./review_img/no-image.jpg'">
+								<%} %>	
+								</div>
+								<div class="review-img">
+								<%if(rev.getFilepath3() != null){ %>
+									<img src="./review_img/<%=rev.getFilepath3() %>" onerror="this.src='./review_img/no-image.jpg'">
+								<%} %>		
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			<%} %>		
-				<div>
-				
-				</div>	
+				<%} %>
+			<%} %>	
 			</div>
-		</div>
+			</div> <!-- my page-content -->
+		</div> <!--  f l e x - wrap -->
 	</div>
 	<script>
 		$(function(){
 			$(".review-text").on("click",function(){
 				$(this).toggleClass("view-change");
 			});
+			$("#view-change-btn").on("click", function(){
+				$(".review-all-wrap").toggleClass("rv-wrap");
+				if($("#view-change-btn>span").text() == "전체보기 "){
+					$("#view-change-btn>span").text("간략히 보기 ");
+				}else{
+					$("#view-change-btn>span").text("전체보기 ");
+				}
+			})
 		});
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

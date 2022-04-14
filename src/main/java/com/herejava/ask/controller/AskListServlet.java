@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.ask.service.AskService;
 import com.herejava.ask.vo.AskPageData;
+import com.herejava.book.vo.Book;
 import com.herejava.member.vo.Member;
 
 /**

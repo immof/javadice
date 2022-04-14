@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(m!=null) {
 			request.setAttribute("title", "로그인 성공");
+			request.setAttribute("msg", "환영합니다.");
 			request.setAttribute("icon", "success");
 			HttpSession session = request.getSession();
 			session.setAttribute("m", m);

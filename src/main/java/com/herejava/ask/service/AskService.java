@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 import com.herejava.ask.dao.AskDao;
 import com.herejava.ask.vo.Ask;
+import com.herejava.ask.vo.AskComment;
 import com.herejava.ask.vo.AskPageData;
+import com.herejava.ask.vo.AskViewData;
 import com.herejava.member.vo.Member;
+import com.herejava.notice.vo.Notice;
 
 import common.JDBCTemplate;
 
@@ -76,14 +79,51 @@ public class AskService {
 		JDBCTemplate.close(conn);
 		return apd;
 	}
-
-	public Member selecetOneNickName(int memberNo) {
+	
+	//문의하기 자세히 보기 서블렛
+	public AskViewData selectAskView(int askNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		AskDao dao = new AskDao();
-		Member m1 = dao.selectOneNickName(conn,memberNo);
+		
+		Ask a = dao.selectOneAsk(conn, askNo);
+		
+		ArrayList<AskComment> commentList = dao.selectAskComment(conn,askNo);
+		ArrayList<AskComment> reCommentList = dao.selectAskReComment(conn,askNo);
+		
 		JDBCTemplate.close(conn);
-		return m1;
+		AskViewData avd = new AskViewData(a, commentList, reCommentList);
+		return avd;
 	}
+
+	public Notice selectOneAsk(int askNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.updateReadCount(conn, askNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+			JDBCTemplate.close(conn);
+			return null;
+		}
+		Ask a = dao.selectOneAsk(conn, askNo);
+		JDBCTemplate.close(conn);
+		return null;
+	}
+	
+	public int insertAsk(Ask a) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.insertAsk(conn,a);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 	
 	
 
