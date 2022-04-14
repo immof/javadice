@@ -97,8 +97,8 @@
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
             <div class="mypage-header-profile">
-              <img src="./img/sun.png" alt="" style="width: 50px; height: 50px;">
-              <span class="mypage-header-nick">김코딩님 회원페이지</span>
+              <img src="../profile_img/<%=member.getFilepath() %>" alt="" style="width: 50px; height: 50px;">
+              <span class="mypage-header-nick"><%=member.getMemberNick() %></span>
           </div>
         </header>
         <div class="left-menu">

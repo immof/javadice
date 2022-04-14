@@ -343,6 +343,23 @@ public class BookDao {
 		
 		return list;
 	}
+	
+	//현재날짜 기준 예약상태(숙박완료로) 최신화 시켜주는 메소드
+	public int updateBookState(Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query ="update book set book_state = 1 where book_state = 0 and (to_date(check_out) < SYSDATE)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 
 

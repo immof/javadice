@@ -1,4 +1,4 @@
-package com.herejava.book.controller;
+package com.herejava.ask.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
-import com.herejava.book.vo.BookData;
+import com.herejava.ask.service.AskService;
+import com.herejava.ask.vo.AskPageData;
+import com.herejava.member.vo.Member;
 
 /**
- * Servlet implementation class BookCheckListServlet
+ * Servlet implementation class AskListServlet
  */
-@WebServlet(name = "BookCheckList", urlPatterns = { "/bookCheckList.do" })
-public class BookCheckListServlet extends HttpServlet {
+@WebServlet(name = "AskList", urlPatterns = { "/askList.do" })
+public class AskListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookCheckListServlet() {
+    public AskListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +34,14 @@ public class BookCheckListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		long bookNo = Long.parseLong(request.getParameter("bookNo"));
+		int reqPage= Integer.parseInt(request.getParameter("reqPage"));
+		AskService service = new AskService();
+		AskPageData apd = service.selecetAllAsk(reqPage);
 		
-		BookService service = new BookService();
-		Book b = service.selectOneBook(bookNo);
-		int d = service.diffDays(b.getCheckIn(), b.getCheckOut());
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/bookcheckList.jsp");
-		request.setAttribute("b", b);
-		request.setAttribute("d", d);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askList.jsp");
+		request.setAttribute("list", apd.getList());
+		request.setAttribute("pageNavi", apd.getPageNavi());
 		view.forward(request, response);
-		
 	}
 
 	/**

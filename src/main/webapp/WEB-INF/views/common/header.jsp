@@ -1,9 +1,14 @@
+<%@page import="com.herejava.book.service.BookService"%>
 <%@page import="com.herejava.member.vo.Member"%>
 <%@page import="com.herejava.book.vo.Book"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%
     	Member m = (Member)session.getAttribute("m");
+    %>
+    <%
+    	BookService service = new BookService();
+    	int result = service.updateBookState();
     %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +42,10 @@
 .header-link{
 	margin-right:40px;
 }
+.header-link>li{
+	text-align: center;
+	margin-right:40px;
+}
 </style>
 </head>
 	<header>
@@ -47,28 +56,13 @@
 				</a>
 			</div>
 			<div class="header-link">
-				<li><a href="#" class="f-light fc-1">예약조회</a></li>
 				<%if(m!=null) { %>
-				<li><a href="/logout.do" class="f-light fc-1">로그아웃</a></li>
-				<%}else { %>
-				<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
+					<li><a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2">마이페이지</a></li>
+					<li><a href="/logout.do" class="f-light fc-1">로그아웃</a></li>
+				<%}else {%>
+					<li><a href="#" class="f-light fc-1">예약조회</a></li>
+					<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
 				<%} %>
-				<li>
-				<%if(m!=null) { %>
-					<a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2"> 
-
-						<span class="material-icons">perm_identity</span> 
-						<span class="material-icons">expand_more</span>
-				<%}else { %>
-					<a href="/login.do" class="f-light fc-2"> 
-				<%} %>
-					</a>
-					<ul class="login-sub-navi">
-						<li><a href="#" class="f-light fc-1">sub-1</a></li>
-						<li><a href="#" class="f-light fc-1">sub-2</a></li>
-						<li><a  class="f-light fc-1" href="#">sub-3</a></li>
-					</ul>
-				</li>
 			</div>
 		</div>
 		<div class="header-bottom">
@@ -84,7 +78,7 @@
                </a>
                   <ul class="sub-navi">
                      <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
-                     <li><a href="#">문의사항</a></li>
+                     <li><a href="/askList.do?reqPage=1">문의사항</a></li>
                      <li><a href="#">자주묻는 질문</a></li>
                   </ul></li>
             </ul>

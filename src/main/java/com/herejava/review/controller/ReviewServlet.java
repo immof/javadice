@@ -1,11 +1,18 @@
 package com.herejava.review.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.herejava.review.service.ReviewService;
+import com.herejava.review.vo.Review;
+import com.herejava.review.vo.ReviewList;
 
 /**
  * Servlet implementation class ReviewServlet
@@ -31,9 +38,12 @@ public class ReviewServlet extends HttpServlet {
 		//2.값추출
 		int memberNo= Integer.parseInt(request.getParameter("memberNo")); 
 		//3.비즈니스로직
+		ReviewService service = new ReviewService();
+		ArrayList<ReviewList> reviewList = service.myReview(memberNo);
 		//4.결과처리
-		
-		
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_review.jsp");
+		request.setAttribute("reviewList", reviewList);
+		view.forward(request, response);
 	}
 
 	/**

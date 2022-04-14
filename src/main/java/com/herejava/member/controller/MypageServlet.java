@@ -54,7 +54,7 @@ public class MypageServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			view.forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_page.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_main.jsp");
 			view.forward(request, response);
 		}
 	}
