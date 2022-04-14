@@ -32,9 +32,19 @@
 	.tr-1>*{
 		text-align: left;
 	}
+	.p-0{
+		font-weight: bold;
+		font-size: 18px;
+		display: inline-block;
+		margin-right: 40px;
+	}
 	.p-1{
 		text-align: right;
 		text-decoration : underline;
+	}
+	.p-2{
+		font-size: 16px;
+		margin-top: 5px;
 	}
 	.img-0{
 		width: 150px;
@@ -54,6 +64,18 @@
 		width: 60%;
 		text-align: right;
 	}
+	h4 {
+		display:inline-block;
+	}
+	.hr-0{
+		color: #ac9e89;
+	}
+	.mypage-content-title>.title1{
+		margin-top: 10px;
+	}
+	.my_book_wrap{
+		margin-bottom: 36px;
+	}
 </style>
 </head>
 <body>
@@ -64,13 +86,14 @@
 			<div class="mypage-content">
 				<!-- 최근예약내역 시작 -->	
 				<div class="mypage-content-title">최근 예약내역</div>
+					<div class="my_book_wrap">
 					 <% if(list.size() >= 2) {%>
 							<%for(int i=0;i<2;i++) {%>
 								<%BookData bd = list.get(i);%>
 								<table class="my_book_tbl">
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><h4><%=bd.getRoomName() %></h4>
+									<td><p class="p-0"><%=bd.getRoomName() %></p>
 									<%	String bookState = "";
 										switch(bd.getBookState()) {
 											case 0: bookState = "이용예정";
@@ -82,15 +105,20 @@
 										}; %>
 										<button class="btn bc1 bs5"><%=bookState %></button>
 										<br>
-										<%=bd.getCheckIn() %> -
-										<%=bd.getCheckOut() %>
+										<p class="p-2">
+											<%=bd.getCheckIn() %> -
+											<%=bd.getCheckOut() %>
+										</p>
 									</td>
 										<%=list.add(bd) %>
 									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
-										<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
+									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
+									
 								</tr>
 								</table>
-								<hr>
+								<%if(i == 0) {%>
+									<hr class="hr-0">
+								<%}%>
 								<!--예약취소 modal 시작-->
 								<div id="test-modal" class="modal-bg">
 									<div class="modal-wrap">
@@ -138,7 +166,7 @@
 								<table>
 								<tr>
 									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><h4><%=bd.getRoomName() %></h4>
+									<td><p class="p-0"><%=bd.getRoomName() %></p>
 									<%	String bookState = "";
 										switch(bd.getBookState()) {
 											case 0: bookState = "이용예정";
@@ -150,15 +178,16 @@
 										}; %>
 										<%=bookState %>
 									<br>
+										<p class="p-2">
 										<%=bd.getCheckIn() %> -
 										<%=bd.getCheckOut() %>
+										</p>
 									</td>
 										  <%=list.add(bd) %>
 									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
 									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								</tr>
 								</table>
-								<hr>
 								<!-- 모달내용 시작 -->
 								<!--예약취소 modal 시작-->
 								<div id="test-modal" class="modal-bg">
@@ -206,9 +235,9 @@
 								<h3 class="h3-0">최근 예약내역이 없습니다.</h3>
 						<%} %>
 				<!-- 최근예약내역 끝 -->
-				
+			</div>
 				<!-- 내정보 시작 -->
-				<div class="mypage-content-title">
+				<div class="mypage-content-title title1">
 					내 정보 
 				</div>
 				<table class="my_info_tbl">
