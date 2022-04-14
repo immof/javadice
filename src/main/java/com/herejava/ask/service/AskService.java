@@ -9,6 +9,7 @@ import com.herejava.ask.vo.AskComment;
 import com.herejava.ask.vo.AskPageData;
 import com.herejava.ask.vo.AskViewData;
 import com.herejava.member.vo.Member;
+import com.herejava.notice.vo.Notice;
 
 import common.JDBCTemplate;
 
@@ -92,6 +93,22 @@ public class AskService {
 		JDBCTemplate.close(conn);
 		AskViewData avd = new AskViewData(a, commentList, reCommentList);
 		return avd;
+	}
+
+	public Notice selectOneAsk(int askNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.updateReadCount(conn, askNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+			JDBCTemplate.close(conn);
+			return null;
+		}
+		Ask a = dao.selectOneAsk(conn, askNo);
+		JDBCTemplate.close(conn);
+		return null;
 	}
 
 	

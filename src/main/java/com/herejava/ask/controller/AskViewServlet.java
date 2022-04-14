@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.ask.service.AskService;
 import com.herejava.ask.vo.AskViewData;
+import com.herejava.notice.vo.Notice;
 
 /**
  * Servlet implementation class AskViewServlet
@@ -37,6 +38,7 @@ public class AskViewServlet extends HttpServlet {
 		
 		AskService service = new AskService();
 		AskViewData avd = service.selectAskView(askNo);
+		Notice n = service.selectOneAsk(askNo);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askView.jsp");
 		request.setAttribute("a", avd.getA());

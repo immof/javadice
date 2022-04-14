@@ -8,9 +8,6 @@ import java.util.ArrayList;
 
 import com.herejava.ask.vo.Ask;
 import com.herejava.ask.vo.AskComment;
-import com.herejava.book.vo.Book;
-import com.herejava.member.vo.Member;
-import com.herejava.notice.vo.Notice;
 
 import common.JDBCTemplate;
 
@@ -160,6 +157,23 @@ public class AskDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+
+	public int updateReadCount(Connection conn, int askNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query= "update ask set ask_read_count = ask_read_count+1 where ask_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, askNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 
