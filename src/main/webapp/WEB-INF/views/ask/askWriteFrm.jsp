@@ -13,9 +13,6 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	<script src="/summernote/summernote-lite.js"></script>
-	<script src="/summernote/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/summernote/summernote-lite.css">
 	<div class="page1-content">
 		<div class="belt">NOTICE</div>
 		<br>
