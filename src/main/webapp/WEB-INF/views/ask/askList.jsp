@@ -61,7 +61,12 @@
 			margin:10px;
 			margin-bottom: 20px;
 		}
-	
+	.writeBtn{
+		margin-left: 730px;
+		width: 80px;
+		height: 40px;
+		line-height: 10px;
+	}
 	
 </style>
 <meta charset="UTF-8">
@@ -75,8 +80,9 @@
 		<br>
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
-		<div class="page1-title">문의사항</div>
-		<!-- <a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a> -->
+		<div class="page1-title">문의사항
+			<a class="btn bc1 writeBtn" href="askWriteFrm.do">글쓰기</a>
+		</div>
 			<table class="tbl tr-1 notice-tbl">
 					<tr class="tr-2">
 						<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회</th>
@@ -84,7 +90,9 @@
 						<%for(Ask a : list) { %>
 					<tr class="tr-1">
 							<td><%=a.getAskNo() %></td>
-							<td><%=a.getAskTitle() %>
+							<td><a href="/askView.do?askNo=<%=a.getAskNo() %>">
+								<%=a.getAskTitle() %>							
+							</a>
 							<td><%=a.getMemberNick() %>
 							<td><%=a.getAskEnrollDate() %></td>
 							<td><%=a.getAskReadCount() %></td>	

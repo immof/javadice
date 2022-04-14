@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.ask.service.AskService;
-import com.herejava.ask.vo.AskPageData;
-import com.herejava.book.vo.Book;
-import com.herejava.member.vo.Member;
+import com.herejava.ask.vo.AskViewData;
 
 /**
- * Servlet implementation class AskListServlet
+ * Servlet implementation class AskViewServlet
  */
-@WebServlet(name = "AskList", urlPatterns = { "/askList.do" })
-public class AskListServlet extends HttpServlet {
+@WebServlet(name = "AskView", urlPatterns = { "/askView.do" })
+public class AskViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AskListServlet() {
+    public AskViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +33,16 @@ public class AskListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int reqPage= Integer.parseInt(request.getParameter("reqPage"));
-		AskService service = new AskService();
-		AskPageData apd = service.selecetAllAsk(reqPage);
+		int askNo = Integer.parseInt(request.getParameter("askNo"));
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askList.jsp");
-		request.setAttribute("list", apd.getList());
-		request.setAttribute("pageNavi", apd.getPageNavi());
+		AskService service = new AskService();
+		AskViewData avd = service.selectAskView(askNo);
+		
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askView.jsp");
+		request.setAttribute("a", avd.getA());
+		request.setAttribute("commentList", avd.getCommentList());
+		request.setAttribute("reCommentList", avd.getReCommentList());
+	
 		view.forward(request, response);
 	}
 
