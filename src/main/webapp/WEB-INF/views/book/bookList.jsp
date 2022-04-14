@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 예약내역 ::</title>
 <style>
 		.notice-tbl a:hover {
 			text-decoration: underline;
@@ -48,8 +48,11 @@
 			margin: 30px;
 		}
 		.img-0{
-		width: 150px;
-		height: 90px;
+			width: 150px;
+			height: 90px;
+		}
+		.hr-0{
+			color: #ac9e89;
 		}
 </style>
 </head>
@@ -60,7 +63,18 @@
 			<%@ include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
 				<div class="mypage-content-title">내 예약내역</div>
+				<table class="tbl my_book_list_tbl">
+					<tr class="tr-1 tr-head">
+						<th>객실정보</th>
+						<th>객실타입</th>
+						<th>이용날짜</th>
+						<th>예약상태</th>
+						<th>리뷰어쩌고</th>
+					</tr>
+				</table>
+				<hr class="hr-0">
 				<table class="tbl tbl-hover">
+						
 					<%
 					for (BookData bd : list) {
 					%>

@@ -142,7 +142,7 @@ public class BookService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/bookList.do?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-item' href='/bookList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 		}

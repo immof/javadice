@@ -84,16 +84,23 @@
 		<div class="flex-wrap">
 			<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 			<div class="mypage-content">
+			
 				<!-- 최근예약내역 시작 -->	
 				<div class="mypage-content-title">최근 예약내역</div>
 					<div class="my_book_wrap">
-					 <% if(list.size() >= 2) {%>
-							<%for(int i=0;i<2;i++) {%>
-								<%BookData bd = list.get(i);%>
+					
+					 <%
+					 	if(list.size() >= 2) {
+							for(int i=0;i<2;i++) {
+								BookData bd = list.get(i);
+					%>
 								<table class="my_book_tbl">
 								<tr>
-									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><p class="p-0"><%=bd.getRoomName() %></p>
+									<td>
+										<img class="img-0" src="/img/<%=bd.getFilePath()%>">
+									</td>
+									<td>
+										<p class="p-0"><%=bd.getRoomName() %></p>
 									<%	String bookState = "";
 										switch(bd.getBookState()) {
 											case 0: bookState = "이용예정";
@@ -110,7 +117,7 @@
 											<%=bd.getCheckOut() %>
 										</p>
 									</td>
-										<%=list.add(bd) %>
+										<%list.add(bd); %>
 									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
 									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 									
@@ -183,7 +190,7 @@
 										<%=bd.getCheckOut() %>
 										</p>
 									</td>
-										  <%=list.add(bd) %>
+										  <%list.add(bd); %>
 									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
 									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								</tr>
@@ -244,6 +251,7 @@
 					<tr class="tr-1">
 						<th class="th-1">이메일</th>
 						<td class="td-1"><%=m.getMemberId() %></td>
+						<td><pre>                                                                                                                                                  </pre></td>
 						<td><a class="p-1" href="/mypage_info.do">수정하기></a></td>
 					</tr>
 					<tr class="tr-1">

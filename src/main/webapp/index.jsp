@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인 페이지</title>
+<title>JAVADICE CITY에 오신걸 환영합니다</title>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
