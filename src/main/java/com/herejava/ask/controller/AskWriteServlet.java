@@ -41,7 +41,7 @@ public class AskWriteServlet extends HttpServlet {
 				//2-1. 파일업로드
 				//1) 파일 업로드 경로 지정
 				String root = getServletContext().getRealPath("/"); //webapp폴더 절대 경로를 구함
-				String saveDirectory = root+"upload/notice";
+				String saveDirectory = root+"upload/ask";
 				System.out.println("파일 저장 경로 : "+saveDirectory);
 				//2) 파일업로드 최대 용량 지정
 				int maxSize = 10*1024*1024;
@@ -53,14 +53,14 @@ public class AskWriteServlet extends HttpServlet {
 				
 				//request - > MultipartReqeust로 변환되면서 파일이 업로드
 				//2-3. 값을 추출
-				String memberNick = mRequest.getParameter("memberNick");
+				int memberNo = Integer.parseInt(mRequest.getParameter("memberNo"));
 				String askTitle = mRequest.getParameter("askTitle");
 				String askContent = mRequest.getParameter("askContent");
 				String filepath1 = mRequest.getParameter("filepath1");
 				String filepath2 = mRequest.getParameter("filepath2");
 				String filepath3 = mRequest.getParameter("filepath3");
 				Ask a = new Ask();
-				a.setMemberNick(memberNick);
+				a.setMemberNo(memberNo);
 				a.setAskTitle(askTitle);
 				a.setAskContent(askContent);
 				a.setFilepath1(filepath1);

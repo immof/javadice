@@ -182,7 +182,7 @@ public class AskDao {
 		String query = "insert into values(ask_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),0,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, a.getMemberNick());//
+			pstmt.setInt(1, a.getMemberNo());//
 			pstmt.setString(2, a.getAskTitle());
 			pstmt.setString(3, a.getAskContent());
 			pstmt.setString(4, a.getFilepath1());
