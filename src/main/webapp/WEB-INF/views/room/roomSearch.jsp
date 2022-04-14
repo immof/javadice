@@ -6,12 +6,20 @@
 <%
 ArrayList<Room> list = (ArrayList<Room>)request.getAttribute("list");
 DecimalFormat formatter = new DecimalFormat("###,###");
+String checkIn = (String)request.getAttribute("checkIn");
+String checkOut = (String)request.getAttribute("checkOut");
+int bookPeople = (Integer)request.getAttribute("bookPeople");
+int diffDays = (Integer)request.getAttribute("diffDays");
+String alert = (String)request.getAttribute("alert");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>JAVADICE CITY</title>
+<!--풀캘린터 CDN -->
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet'>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
 <style>
 table{
 	border-spacing : 0;
@@ -109,12 +117,132 @@ table{
 .index>.selected>span{
 	background-color: rgb(172, 158, 137);
 }
+/*풀캘린더 디자인*/
+.calendar-wrap{
+	width: 600px;
+	margin: 0 auto;
+	padding-top: 10px;
+}
+.calendar-wrap .fc-button{
+	background-color: #998465;
+	border: 1px solid #ccc;
+}
+.calendar-wrap .fc-button span{
+	color: #fff;
+}
+.fc .fc-button-primary:disabled{
+	background-color: #432f31;
+	border-none;
+}
+/*서치바 디자인*/
+.search-head{
+	width: 100%;
+	background-color: #ac9e89;
+}
+.search-tab{
+	width: 900%;
+	height: 50px;
+	line-height: 50px;
+	padding: 50px 80px;
+}
+.search-content>span>span>p{
+	display: inline-block;
+	font-weight: 900;
+}
+.search-content>span>span>span{
+	padding-left: 20px;
+	font-size: 30px;
+	color: #fff;
+}
+.search-content>span{
+	width: 1050px;
+	display: flex;
+	justify-content: space-between;
+}
+.search-content>span>button{
+	width: 200px;
+	padding: 0;
+	height: 60px;
+	background-color: #ac9e89;
+	border: 1px solid #fff;
+	color: #fff;
+	font-size: 20px;
+}
+.search-content>span>button:hover{
+	background-color: #685f51;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+.search-head{
+	position: relative;
+}
+.search-head>p{
+	position: absolute;
+	color: #fff;
+	top: 10px;
+	left: 20px;
+}
+.search-head>p:hover{
+	cursor: pointer;
+}
+#park{
+	color: #fff;
+	padding-top: 5px;
+}
+#peopleVal{
+	padding-left: 0px;
+}
+.peopleBtn{
+	color: #fff;
+	padding: 0 10px;
+	font-size: 20px;
+}
+.peopleBtn:hover{
+	cursor: pointer;
+}
+.checkDate:hover{
+	cursor: pointer;
+}
+
 </style>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<div class="belt"></div>
+		<div class="search-head">
+			<p id="call">▲ 달력 숨기기</p>
+			<div class="search-tab">
+				<div class="search-content">
+					<span>
+						<span>
+							<p>체크인</p>
+							<span id="checkIn" class="checkDate"><%=checkIn %></span>
+						</span>
+						<span>
+							<p id="park"><%=diffDays %>박</p>
+						</span>
+						<span>
+							<p>체크아웃</p>
+							<span id="checkOut" class="checkDate"><%=checkOut %></span>
+						</span>
+						<span>
+							<p>숙박인원</p>
+							<p class="peopleBtn">&lt</p>
+							<span id="peopleVal"><%=bookPeople %></span><span style="padding-left:0;">인</span>
+							<p class="peopleBtn">&gt</p>
+						</span>
+						<button class="searchBtn">검색</button>	
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="calendar-wrap">
+				<div id="calendar"></div>
+		</div>
+		<div class="belt">숙소예약</div><br>
 		<div class="index-wrap">
 		<ul class= "index">
 			<li class="selected">───<span>1</span>객실 선택</li>
@@ -126,7 +254,7 @@ table{
 			<div class="room-wrap">
 				<table class="room-show">
 					<tr class="tr-1 room-name">
-						<td class="room-image" rowspan="4"><img src="aa.jpg"></td>
+						<td class="room-image" rowspan="4"><img src="/img/room/<%=r.getFilepath()%>"></td>
 						<th><span></span><%=r.getRoomName() %></th>
 						<td>
 						<%
@@ -182,6 +310,93 @@ table{
 		<%} %>
 	</div>
 	<br><br><br><br>
+	<script>
+		<%if(alert != null){%>
+			alert("<%=alert%>");
+		<%}%>
+		//달력 보였다 숨겼다
+		$("#call").on("click",function(){
+			const calendar = $(".calendar-wrap");
+			calendar.slideToggle();
+			if($(this).text()=="▲ 달력 숨기기"){
+				$(this).text("▼ 달력 보이기");
+			}else{
+				$(this).text("▲ 달력 숨기기");
+			}
+		});
+		//달력 만들기
+		document.addEventListener('DOMContentLoaded', function() {
+	        var calendarEl = document.getElementById('calendar');
+	        var calendar = new FullCalendar.Calendar(calendarEl, {
+	          initialView: 'dayGridMonth',
+	          selectable: true,
+	          select: function(info){
+	        		//숙박일수
+	        	  	let park = (info.end-info.start)/(1000*60*60*24)-1;
+	        	  	//체크인
+	        	  	const checkIn = info.startStr;
+	        	  	//체크아웃 쪼개기
+	        	  	let endStr = info.endStr;
+	        	  	let year = endStr.substr(0,4);
+	        	  	let month = endStr.substr(5,2);
+	        	  	let day = endStr.substr(8,2)-1;
+	        	  	//하루 클릭시
+	        	  	if(checkIn.substr(8,2)==day){
+	        	  		day++;
+	        	  		park = 1;
+	        	  	}
+	        	  	//체크아웃 구하기
+	        	  	if(day<10){
+	        	  		day = "0"+day;
+	        	  	}
+	        	  	//드래그 해서 말일 선택시
+	        	  	if(day=="00"){
+	        	  		let endDayMonth = month-1;
+	        	  		let endDay = new Date(year,endDayMonth,day);
+	        	  		if(endDayMonth < 10){
+	        	  			month = "0" + endDayMonth;
+	        	  			console.log(month);
+	        	  		}else{
+	        	  			month = endDayMonth;
+	        	  		}
+	        	  		day = endDay.getDate();
+	        	  	}
+	        	  	//체크아웃 합치기
+	        	  	const checkOut = year+"-"+month+"-"+day;
+	        	    $("#checkIn").text(checkIn);
+	        	    $("#checkOut").text(checkOut);
+	        	    if(park<10){
+	        	    	$("#park").text("0"+park+" 박");	
+	        	    }else{
+	        	    	$("#park").text(park+" 박");
+	        	    }
+	          }
+	        });
+	        calendar.render();
+	      });
+		//숙박인원 증가 감소
+		$(".checkDate").on("click",function(){
+			$("#call").click();
+		});
+		$(".peopleBtn").on("click",function(){
+			const peopleVal = Number($("#peopleVal").text());
+			if($(this).text() == "<"){
+				if(peopleVal > 1){
+					$("#peopleVal").text(peopleVal-1);
+				}
+			}else{
+				$("#peopleVal").text(peopleVal+1);
+			}
+		})
+		$(".searchBtn").on("click",function(){
+			const checkIn = $("#checkIn").text();
+			const checkOut = $("#checkOut").text();
+			const bookPeople = $("#peopleVal").text();
+			$(location).attr('href','/bookSearch.do?checkIn='+checkIn+'&checkOut='+checkOut+'&bookPeople='+bookPeople);
+		})
+		//처음부터 안보이면 달력 뭉개져서 로딩하고 숨김
+		$("#call").click();
+	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
