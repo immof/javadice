@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./css/review.css" />
+
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -14,24 +16,62 @@
 			<div class="mypage-content">
 				<div class="mypage-content-title">리뷰 쓰기</div>
 					<form action="/noticeWrite.do" method="post" enctype="multipart/form-data">
-						<table class="tbl" id="noticeWrite">
+						<table class="tbl" id="noticeWrite" border="1">
+							<input type="hidden" name="noticeWriter" value="<%=member.getMemberNo() %>">
 							<tr class="tr-1">
-								<th class="td-3">제목</th>
-								<td colspan="3">
-									<input type="text" name="noticeTitle" class="input-form">
-								</td>
-							</tr>
-							<tr class="tr-1">
-								<th class="td-3">작성자</th>
-								<td>
-									<input type="hidden" name="noticeWriter" value="<%=member.getMemberNo() %>">
-									<%=member.getMemberNick() %>
-								</td>
-								<th class="td-3">첨부파일</th>
-								<td><input type="file" name="file"></td>
+								<th class="td-3">
+									<select class="all_star">
+  <option selected="selected" value="1">모든 별점 보기</option>
+  <option class="star_5 fa">&#xf005 &#xf005 &#xf005 &#xf005 &#xf005</option>
+  <option class="star_4">&#xf005 &#xf005 &#xf005 &#xf005</option>
+  <option class="star_3">&#xf005 &#xf005 &#xf005</option>
+  <option class="star_2">&#xf005 &#xf005</option>
+  <option class="star_1">&#xf005</option>
+</select>
+								</th>
 							</tr>
 							<tr class="tr-1">
 								<td colspan="4" style="text-align: left;"><textarea id="noticeContent" name="noticeContent" class="input-form"></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="4" style="padding:0;">
+										<div class="row row-images">
+										  <div class="column image_container">
+											<div class="post-image-collection" style="height: 143px; padding:0; padding-left:16px;">
+											  <div class="post-image post-image-placeholder mrm mts empty">
+												<div class="upload-section">
+												  <input type="file" id="Photofile1" class="upload-img" required accept="image/*" />
+												  <label class="icon-camera" for="Photofile1">
+													<img src="https://cdn.onlinewebfonts.com/svg/img_104650.png" />
+												  </label>
+												  <p class="uppercase">Photo 1</p>
+												</div>
+												<div class="preview-section"></div>
+											  </div>
+											  <div class="post-image post-image-placeholder mrm mts empty">
+												<div class="upload-section">
+												  <input type="file" id="Photofile2" class="upload-img" required accept="image/*" />
+												  <label class="icon-camera" for="Photofile2">
+													<img src="https://cdn.onlinewebfonts.com/svg/img_104650.png" />
+												  </label>
+												  <p class="uppercase">Photo 2</p>
+												</div>
+												<div class="preview-section"></div>
+											  </div>
+											  <div class="post-image post-image-placeholder mrm mts empty">
+												<div class="upload-section">
+												  <input type="file" id="Photofile3" class="upload-img" required accept="image/*" />
+												  <label class="icon-camera" for="Photofile3">
+													<img src="https://cdn.onlinewebfonts.com/svg/img_104650.png" style="color:#ac9e89">
+												  </label>
+												  <p class="uppercase">Photo 3</p>
+												</div>
+												<div class="preview-section"></div>
+											  </div>
+											</div>
+										  </div>
+										</div>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="4"><button type="submit" class="btn bc1 bs4">리뷰 등록</button>
@@ -41,6 +81,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="./js/review.js"></script>
 		<script>
 				$("#noticeContent").summernote({
 					height : 400,
