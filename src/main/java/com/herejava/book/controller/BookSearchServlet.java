@@ -43,10 +43,11 @@ public class BookSearchServlet extends HttpServlet {
 		//2.값추출
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
+		int bookPeople = Integer.parseInt(request.getParameter("bookPeople"));
+		System.out.println(checkIn);
+		System.out.println(checkOut);
+		System.out.println(bookPeople);
 		//int bookPeople = Integer.parseInt(request.getParameter("bookPeople"));
-		checkIn = "2022-04-20";
-		checkOut = "2022-04-24";
-		int bookPeople = 5;
 		Book book = new Book();
 		book.setCheckIn(checkIn);
 		book.setCheckOut(checkOut);
