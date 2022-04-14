@@ -46,13 +46,13 @@ public class BookCancleServlet extends HttpServlet {
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
-			request.setAttribute("title", "예약취소성공");
+			request.setAttribute("title", "예약취소 성공");
 			request.setAttribute("msg", "메인페이지로 돌아갑니다.");
-			request.setAttribute("icon", "succcess");
+			request.setAttribute("icon", "success");
 		}else {
-			request.setAttribute("title", "예약취소실패");
+			request.setAttribute("title", "예약취소 실패");
 			request.setAttribute("msg", "관리자에게 문의하세요.");
-			request.setAttribute("icon", "error");
+			request.setAttribute("icon", "warning");
 		}
 		request.setAttribute("loc", "/index.jsp");
 		view.forward(request, response);

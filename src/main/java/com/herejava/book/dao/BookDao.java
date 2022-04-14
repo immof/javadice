@@ -391,7 +391,7 @@ public class BookDao {
 	public int updateBookState(Connection conn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query ="update book set book_state = 1 where book_state = 0 and (to_date(check_out) < SYSDATE)";
+		String query ="update book set book_state = 1 where book_state = 0 and (to_date(check_in) < SYSDATE)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			result = pstmt.executeUpdate();
