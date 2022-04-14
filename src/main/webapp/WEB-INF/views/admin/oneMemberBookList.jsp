@@ -83,19 +83,21 @@
 								<td><%=bd.getCheckIn()%> / <%=bd.getCheckOut()%></td>
 								<td><a class="detailBtn" style="text-decoration: underline;" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">상세보기></a></td>
 								<%if(bd.getBookState()==0){%>
-									<td><div class="btn bc3 delbookbtn">예약취소</div></td>
+									<td><a class="btn bc3 delbookbtn" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">예약취소</a></td>
 								<%}else if(bd.getBookState()==1){%>
 									<td><div class="btn bc1 reviewBtn">리뷰보기</div></td>
 								<%}else if(bd.getBookState()==2){%>
 									<td><div class="btn" style="background-color: #a7a7a7;color: #fff;">취소완료</div></td>
 								<%}%>
 							</tr>
+							
 						<%} %>
 						</table>
 						<div id="pageNavi"><%=pageNavi%></div>
 					<%}else{%>
 						<h4 style="margin: 50px; text-align:center">예약한 내역이 없습니다.</h4>
 					<%} %>
+					
 					
 			</div>
 		</div>
@@ -119,6 +121,7 @@
 				break
 			}
 		});
+		
 	</script>
 </body>
 </html>

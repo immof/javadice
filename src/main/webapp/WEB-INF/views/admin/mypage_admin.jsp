@@ -37,31 +37,34 @@
           flex-grow: 15;
           padding: 27px;
           overflow: hidden;
+          margin-bottom: 100px;
         }
         
 		.mypage-content-title {
 		  margin-top: 3px;
-	      height: 30px;
+	      height: 40px;
 	      font-family: ns-bold;
+	      font-size: 20px;
 	      border-bottom: solid 2px rgb(167, 167, 167);
 		}
         .left-menu{
-            margin-top: 60px;
+            margin-top: 70px;
             flex-grow: 1;
             color: rgb(51, 51, 51);
-            width: 20%;
+            
       
         }
         .left-menu>ul{
             border-top: solid 2px rgb(167, 167, 167);
             border-bottom: solid 2px rgb(167, 167, 167);
-            margin-left: 30px;
+            padding:0 30px;
             list-style-type: none;
+            width: 100px;
         }
         .left-menu>ul>li{
             margin-top: 14px;
             margin-bottom: 8px;
-            padding-left: 25px;
+            text-align: center;
             height: 30px;
         }
         .left-menu>ul>li>a{
