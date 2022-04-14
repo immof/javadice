@@ -179,10 +179,10 @@ public class AskDao {
 	public int insertAsk(Connection conn, Ask a) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into ask join member using(member_no) values(ask_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),0,?,?,?)";
+		String query = "insert into values(ask_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),0,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, a.getMemberNick());
+			pstmt.setString(1, a.getMemberNick());//
 			pstmt.setString(2, a.getAskTitle());
 			pstmt.setString(3, a.getAskContent());
 			pstmt.setString(4, a.getFilepath1());
