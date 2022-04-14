@@ -40,10 +40,10 @@ public class AdminBookListServlet extends HttpServlet {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		String memberNick = request.getParameter("memberNick");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int chk = Integer.parseInt(request.getParameter("chk"));
 		//3. 비즈니스로직
 		BookService service = new BookService();
-		//데이터 가져오기 전에 예약상태 현재 날짜 기준으로 최신화 시켜주기
-		BookPageData bpd = service.selectBookListAdmin(memberNo,memberNick,reqPage);
+		BookPageData bpd =	service.selectBookListAdmin(memberNo,memberNick,reqPage,chk);
 		MemberService serviceM = new MemberService();
 		Member mem = serviceM.selectOneMember3(memberNick);
 		//4. 화면출력
@@ -51,6 +51,7 @@ public class AdminBookListServlet extends HttpServlet {
 		request.setAttribute("list", bpd.getBookList());
 		request.setAttribute("pageNavi", bpd.getPageNavi());
 		request.setAttribute("mem", mem);
+		request.setAttribute("chk", chk);
 		view.forward(request, response);
 	}
 

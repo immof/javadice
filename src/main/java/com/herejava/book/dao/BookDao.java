@@ -71,18 +71,28 @@ public class BookDao {
 		return result;
 	}
 
-	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 (최신 예약 날짜 순으로 정렬)
-	public ArrayList<BookData> selectBookList(Connection conn, int memberNo, int start, int end) {
+	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 (최신 예약 날짜 순으로 정렬) -관리자
+	public ArrayList<BookData> selectBookList(Connection conn, int memberNo, int start, int end, int chk) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<BookData> list = new ArrayList<BookData>();
-		String query = "SELECT * FROM\r\n" + "(SELECT ROWNUM AS RNUM,\r\n" + "N.*FROM\r\n"
-				+ "(SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
-				+ "FROM BOOK\r\n" + "JOIN ROOM USING(ROOM_NO)\r\n" + "WHERE MEMBER_NO=?\r\n"
-				+ "ORDER BY BOOK_NO DESC)N)\r\n" + "WHERE RNUM BETWEEN ? AND ?";
-		String query2 = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? order by book_day desc) where rnum between ? and ?";
+		String query ="";
+		switch(chk) {
+			case 0:
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=0 order by book_day desc) where rnum between ? and ?";
+				break;
+			case 1:
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=1 order by book_day desc) where rnum between ? and ?";
+				break;
+			case 2: 
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=2 order by book_day desc) where rnum between ? and ?";
+				break;
+			case 3:
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? order by book_day desc) where rnum between ? and ?";
+				break;
+		}
 		try {
-			pstmt = conn.prepareStatement(query2);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memberNo);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
@@ -169,6 +179,42 @@ public class BookDao {
 		}
 		return result;
 	}
+	// 회원한명 전체예약갯수 세는 dao 메소드 - 관리자
+	public int totalBookCount(Connection conn, int memberNo, int chk) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query ="";
+		switch(chk) {
+			case 0:
+				query = "select count(*) as cnt from book where member_no = ? and book_state=0";
+				break;
+			case 1:
+				query = "select count(*) as cnt from book where member_no = ? and book_state=1";
+				break;
+			case 2: 
+				query = "select count(*) as cnt from book where member_no = ? and book_state=2";
+				break;
+			case 3:
+				query = "select count(*) as cnt from book where member_no = ?";
+				break;
+		}
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}	
 	// 전체 예약갯수 세는 dao 메소드
 	public int totalBookCount(Connection conn) {
 		PreparedStatement pstmt = null;
@@ -359,6 +405,41 @@ public class BookDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+	
+	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 (최신 예약 날짜 순으로 정렬)
+	public ArrayList<BookData> selectBookList(Connection conn, int memberNo, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<BookData> list = new ArrayList<BookData>();
+		String query ="select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? order by book_day desc) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				BookData bd = new BookData();
+				bd.setBookNo(rset.getLong("book_no"));
+				bd.setFilePath(rset.getString("filepath"));
+				bd.setRoomName(rset.getString("room_name"));
+				bd.setCheckIn(rset.getString("check_in"));
+				bd.setCheckOut(rset.getString("check_out"));
+				bd.setBookState(rset.getInt("book_state"));
+				bd.setBookPeople(rset.getInt("book_people"));
+				bd.setBookName(rset.getString("book_name"));
+				bd.setBookPhone(rset.getString("book_phone"));
+				list.add(bd);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 
 

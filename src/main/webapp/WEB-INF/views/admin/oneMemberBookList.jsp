@@ -6,7 +6,9 @@
 	ArrayList<BookData> list = (ArrayList<BookData>) request.getAttribute("list");
 	String pageNavi = (String) request.getAttribute("pageNavi");
 	Member mem = (Member) request.getAttribute("mem");
+	int check = (int)request.getAttribute("chk");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,13 +62,13 @@
 			<%@ include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
 			<div class="mypage-content">
 				<div class="mypage-content-title"><%=mem.getMemberNick() %>님의 예약내역</div>
-					
+					<input type="hidden" class="check" value="<%=check%>">
 					<div class="subMenuTab">
 						<ul>
-							<li style="margin-left:100px;"><a href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1">전체보기</a></li>
-							<li><a href="#">이용예정</a></li>
-							<li><a href="#">이용완료</a></li>
-							<li><a href="#">취소내역</a></li>
+							<li style="margin-left:100px;"><a class="btn3" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=3">전체보기</a></li>
+							<li><a class="btn0" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=0">이용예정</a></li>
+							<li><a class="btn1" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=1">이용완료</a></li>
+							<li><a class="btn2" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=2">취소내역</a></li>
 						</ul>
 					</div>
 					<% if(list.size()!=0){ %>
@@ -81,13 +83,14 @@
 								<td><%=bd.getCheckIn()%> / <%=bd.getCheckOut()%></td>
 								<td><a class="detailBtn" style="text-decoration: underline;" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">상세보기></a></td>
 								<%if(bd.getBookState()==0){%>
-									<td><div class="btn bc3 delbookbtn">예약취소</div></td>
+									<td><a class="btn bc3 delbookbtn" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">예약취소</a></td>
 								<%}else if(bd.getBookState()==1){%>
 									<td><div class="btn bc1 reviewBtn">리뷰보기</div></td>
 								<%}else if(bd.getBookState()==2){%>
 									<td><div class="btn" style="background-color: #a7a7a7;color: #fff;">취소완료</div></td>
 								<%}%>
 							</tr>
+							
 						<%} %>
 						</table>
 						<div id="pageNavi"><%=pageNavi%></div>
@@ -95,9 +98,30 @@
 						<h4 style="margin: 50px; text-align:center">예약한 내역이 없습니다.</h4>
 					<%} %>
 					
+					
 			</div>
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<script>
+		$(document).ready(function(){
+			const check = $(".check").val();
+			switch(check){
+			case "3":
+				$(".btn3").css('background-color','rgba(172,158,137,0.5)');
+				break
+			case "0":
+				$(".btn0").css('background-color','rgba(172,158,137,0.5)');
+				break
+			case "1":
+				$(".btn1").css('background-color','rgba(172,158,137,0.5)');
+				break
+			case "2":
+				$(".btn2").css('background-color','rgba(172,158,137,0.5)');
+				break
+			}
+		});
+		
+	</script>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class Review_writeFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/view/member/review_writeFrm.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/review_writeFrm.jsp");
 		view.forward(request, response);
 	}
 
