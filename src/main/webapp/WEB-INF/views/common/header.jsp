@@ -1,9 +1,14 @@
+<%@page import="com.herejava.book.service.BookService"%>
 <%@page import="com.herejava.member.vo.Member"%>
 <%@page import="com.herejava.book.vo.Book"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%
     	Member m = (Member)session.getAttribute("m");
+    %>
+    <%
+    	BookService service = new BookService();
+    	int result = service.updateBookState();
     %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +69,7 @@
          <nav>
             <ul class="navi">
                <li>
-                  <a href="#"><i class="fa-solid fa-magnifying-glass searchIcon"></i>숙소예약</a>
+                  <a href="/bookSearch.do?checkIn=2020-01-01&checkOut=2020-01-02&bookPeople=1"><i class="fa-solid fa-magnifying-glass searchIcon"></i>숙소예약</a>
                </li>
                <li><a href="#">객실정보</a></li>
                <li><a href="/promotionList.do">프로모션</a></li>
