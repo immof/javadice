@@ -229,7 +229,7 @@
 									영업일 2-3일 내로 처리될 예정입니다.
 									</p>
 									<div class="modal-btns-container">
-									<input type="button" class="btn bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
+									<input type="button" class="btn bc3 cancleBtn" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
 									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 									</div>
 									</div>
@@ -280,11 +280,28 @@
 	
 	<script>
 	$(function(){
-		const cancleBtn =  $("#modal-btns-item");
+		const checkCancle = [false];
+		$(".cancleBtn").on("click"function(){
+			if(checkCancle){
+				const cancleBook = $("")
+				$.ajax({
+					url: "/cancleBook.do",
+					type: "get",
+					data: {bookNo: bookNo},
+					success: function(data){
+						if(data == 1){
+							const title = "예약이 취소되었습니다. 마이페이지로 돌아갑니다.";
+							const icon = "success";
+						}else{
+							const title = "예약취소에 실패했습니다. 문제가 계속되는 경우 관리자에게 문의하세요.";
+							const icon = "warning";
+						}	
+						location.href = "/";
+				});
+		});
 
 		
-		
-//토스트 알림 함수		
+		//토스트 알림 함수		
 		function toastShow(title, icon){
 		const Toast = Swal.mixin({
 	    toast: true,
@@ -303,8 +320,6 @@
 	    icon: icon
 	  })}//토스트 끝
 	});
-	
-	
 	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

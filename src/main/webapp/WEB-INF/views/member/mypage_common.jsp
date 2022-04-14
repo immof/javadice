@@ -104,7 +104,7 @@
         <div class="left-menu">
           <ul>
               <li class="f-bold">예약정보</li>
-              <li class="f-bold"><a href="/bookList.do?memberNo=2&reqPage=1">예약내역</a></li>
+              <li class="f-bold"><a href="/bookList.do?memberNo=<%=member.getMemberNo() %>&reqPage=1">예약내역</a></li>
               <hr>
               <li class="f-bold">활동정보</li>
               <li><a href="#">적립금</a></li>

@@ -54,6 +54,12 @@
 		.hr-0{
 			color: #ac9e89;
 		}
+		.p-0{
+			text-align: center;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 45px 0px;
+		}
 </style>
 </head>
 <body>
@@ -73,37 +79,44 @@
 					</tr>
 				</table>
 				<hr class="hr-0">
+
 				<table class="tbl tbl-hover">
-						
 					<%
-					for (BookData bd : list) {
+					if(list.size()>0){
+						for (BookData bd : list) {
+						%>
+						<tr class="tr-1">
+							<td>
+								<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
+								<img class="img-0" src="/img/<%=bd.getFilePath()%>">
+							</td>
+							<td>
+								<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
+								<%=bd.getRoomName()%>
+							</td>
+							<td><%=bd.getCheckIn()%> - <%=bd.getCheckOut()%></td>
+							<td>
+							<%	String bookState = "";
+							switch(bd.getBookState()) {
+								case 0: bookState = "이용예정";
+									break;
+								case 1: bookState = "이용완료";
+									break;
+								case 2: bookState = "취소완료";
+									break;
+							}; %>
+							<%=bookState %>
+							</td>
+							<td>
+								#
+							</td>
+						</tr>
+						<%
+						}
+					}else {
 					%>
-					<tr class="tr-1">
-						<td>
-							<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
-							<img class="img-0" src="/img/<%=bd.getFilePath()%>">
-						</td>
-						<td>
-							<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>">
-							<%=bd.getRoomName()%>
-						</td>
-						<td><%=bd.getCheckIn()%> - <%=bd.getCheckOut()%></td>
-						<td>
-						<%	String bookState = "";
-						switch(bd.getBookState()) {
-							case 0: bookState = "이용예정";
-								break;
-							case 1: bookState = "이용완료";
-								break;
-							case 2: bookState = "취소완료";
-								break;
-						}; %>
-						<%=bookState %>
-						</td>
-					</tr>
-					<%
-					}
-					%>
+					<p class="p-0">예약내역이 없습니다.</p>
+					<%} %>
 				</table>
 				<div id="pageNavi"><%=pageNavi%></div>
 			</div>
