@@ -151,8 +151,9 @@
 									<td>
 										<a type="button" class="btn bc4 bs6" href="/review_writeFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
-												<%break;											
-											 }//예약취소
+																							
+											<% }//예약취소
+											break;
 											case 2: bookState = "취소완료";
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
@@ -336,7 +337,7 @@
 								<!-- 모달 내용 끝-->
 							<%}else { %>
 								<h3 class="h3-0">최근 예약내역이 없습니다.</h3>
-						<%}; %>
+						<%} %>
 				<!-- 최근예약내역 끝 -->
 					</div><!-- my_book_wrap 끝 -->
 					<!-- my_info_tbl 시작 -->
