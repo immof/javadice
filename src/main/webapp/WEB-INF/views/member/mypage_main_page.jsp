@@ -125,7 +125,7 @@
 											<%	break;
 											case 1: bookState = "이용완료";
 												//리뷰o
-												if(1 == 0){
+												if(bd.getReviewNo() != 0){
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
 													<p class="p-2">
@@ -137,7 +137,7 @@
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
-										<a class="btn bc2 bs6" href="#">리뷰보기</a>
+										<a class="btn bc2 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
 												}else{
