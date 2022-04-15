@@ -1,4 +1,4 @@
-package com.herejava.review.controller;
+package com.herejava.notice.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
-
 /**
- * Servlet implementation class Review_writeFrmServlet
+ * Servlet implementation class TermsOfServiceServlet
  */
-@WebServlet(name = "Review_writeFrm", urlPatterns = { "/review_writeFrm.do" })
-public class Review_writeFrmServlet extends HttpServlet {
+@WebServlet(name = "TermsOfService", urlPatterns = { "/termsOfService.do" })
+public class TermsOfServiceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Review_writeFrmServlet() {
+    public TermsOfServiceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +28,12 @@ public class Review_writeFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1.인코딩
 		request.setCharacterEncoding("utf-8");
-		long bookNo = Long.parseLong(request.getParameter("bookNo"));
-		BookService service = new BookService();
-		Book b = service.selectOneBook(bookNo);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/review_writeFrm.jsp");
-		request.setAttribute("b", b);
+		//2.값추출
+		//3.비즈니스로직
+		//4.결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/etc/termsOfService.jsp");
 		view.forward(request, response);
 	}
 

@@ -40,4 +40,30 @@ public class ReviewService {
 		return result;
 	}
 
+	public int revieWrite(Review rev) {
+		Connection conn = JDBCTemplate.getConnection();
+		ReviewDao dao = new ReviewDao();
+		int result = dao.reviewWrite(conn, rev);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int reviewDelete(int reviewNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ReviewDao dao = new ReviewDao();
+		int result = dao.reviewDelete(conn, reviewNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

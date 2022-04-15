@@ -15,6 +15,9 @@ import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookData;
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
+import com.herejava.review.service.ReviewService;
+import com.herejava.review.vo.Review;
+import com.herejava.review.vo.ReviewList;
 
 /**
  * Servlet implementation class MypageServlet
@@ -45,13 +48,16 @@ public class MypageServlet extends HttpServlet {
 		//member 객체 
 		MemberService service = new MemberService();
 		BookService bookService = new BookService();
+		ReviewService reviewService = new ReviewService();
 		Member m = service.selectOneMember(memberId);
 		ArrayList<BookData> list = bookService.selectAllBook(memberNo);
+		ArrayList<ReviewList> reviewList = reviewService.myReview(memberNo);
 		//4.결과처리
 		if(memberLevel==1) {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_main_page.jsp");
 			request.setAttribute("m", m);
 			request.setAttribute("list", list);
+			request.setAttribute("reviewList", reviewList);
 			view.forward(request, response);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_main.jsp");

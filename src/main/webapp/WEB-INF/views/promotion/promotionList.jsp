@@ -43,6 +43,20 @@ h3{
 	background-color: #eee;
 	transition: 0.5s;
 }
+.list-button{
+	width: 300px;
+	text-align: right;
+	position: relative;
+}
+.list-button>button{
+	width: 140px;
+	height: 50px;
+	padding: 0;
+	border: none;
+	position: absolute;
+	left: 880px;
+	
+}
 
 </style>
 </head>
@@ -51,6 +65,13 @@ h3{
 	<div class="page-content">
 		<div class="belt">Promotion</div>
 		<h3>JAVADICE CITY 에서 준비한 특별한 프로모션 상품들을 경험해보세요.</h3>
+		<%if(m != null){
+			if(m.getMemberLevel() == 0){ %>
+				<div class="list-button">
+					<button class="bc1 bs2 promotion-write" onclick="location.href='/promotionInsertFrm.do'">글쓰기</button>
+				</div>
+			<%	}
+		} %>
 		<div class="content-wrap">
 		
 		</div>

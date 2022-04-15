@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	Book b = (Book)request.getAttribute("b");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +18,20 @@
   text-indent: -9999px;
   cursor: pointer;
 }
+.starR.on{
+	background-position:0 0;
+}
+.image_container{
+	width:160px;
+	height:95px;
+}
+.image_container img{
+	width:160px;
+	height:90px;
+}
+.tbl input{
+	width:190px;
+}
 .starR.on{background-position:0 0;}
 </style>
 </head>
@@ -27,7 +44,8 @@
 				<div class="mypage-content-title">리뷰 쓰기</div>
 					<form action="/reviewWrite.do" method="post" enctype="multipart/form-data">
 						<table class="tbl" id="reviewWrite" border="0">
-							<input type="hidden" name="reviewWriter" value="<%=member.getMemberNo() %>">
+							<input type="hidden" name="memberNo" value="<%=member.getMemberNo() %>">
+							<input type="hidden" name="bookNo" value="<%=b.getBookNo() %>">
 							<input type="hidden" id="star-score" name="star-score" value="4">
 							<tr class="tr-1">
 								<th class="td-3"  style="padding-bottom: 0px; text-align:left;">
@@ -40,13 +58,23 @@
 									</div>
 								</th>
 								<td style="padding-bottom: 0px; text-align:right;">
-									객실명: 스위트
+									<%if(b.getRoomNo() == 6){ %>
+									객실타입: 로얄스위티
+							 		<%}else if(b.getRoomNo() == 7){ %>
+									객실타입: 프리미어 스위트
+							 		<%}else if(b.getRoomNo() == 8){ %>
+									객실타입: 프리미어
+							 		<%}else if(b.getRoomNo() == 9){ %>
+									객실타입: 디럭스
+							 		<%}else if(b.getRoomNo() == 10){ %>
+									객실타입: 스탠다드
+									<%} %>
 								</td>
 								<td style="padding-bottom: 0px; text-align:right;">
-									인원: 2명
+									인원: <%=b.getBookPeople() %>명
 								</td>
 								<td style="padding-bottom: 0px; text-align:right;">
-									이용기간: 2022-03-10 ~ 2022-03-11
+									이용기간: <%=b.getCheckIn() %> ~ <%=b.getCheckOut() %> 
 								</td>
 														</tr>
 							<tr class="tr-1">

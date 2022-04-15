@@ -97,7 +97,7 @@
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
             <div class="mypage-header-profile">
-              <img src="../profile_img/<%=member.getFilepath() %>" alt="" style="width: 50px; height: 50px;">
+              <img src="./profile_img/<%=member.getFilepath() %>" alt="" style="width: 50px; height: 50px;">
               <span class="mypage-header-nick"><%=member.getMemberNick() %></span>
           </div>
         </header>
@@ -109,7 +109,7 @@
               <li class="f-bold">활동정보</li>
               <li><a href="#">적립금</a></li>
               <li><a href="/review.do?memberNo=<%=member.getMemberNo() %>">방문후기</a></li>
-              <li><a href="#">문의하기</a></li>
+              <li><a href="/askList.do?reqPage=1">문의하기</a></li>
               <hr>
               <li class="f-bold">회원정보</li>
               <li><a href="/mypage_info.do">정보관리</a></li>

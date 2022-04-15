@@ -47,7 +47,7 @@
 			font-size: 20px;
 			 width: 700px;
 		}
-		.btn {
+		.home {
 			width:90px;
 			height: 40px;
 			border-radius: 5px;
@@ -76,6 +76,11 @@
 		.tr-2>.nc_title{
 			text-align: left;
 		}
+		
+		.bss6 {
+			margin: 0 auto;
+			margin-top: 30px;
+		}
 	</style>
 </head>
 <body>
@@ -89,7 +94,7 @@
 		<Br>
 		<br>
 		<div class="page1-title">문의사항
-			<button class="btn bc2" onclick="home();">목록으로</button> 
+			<button class="btn bc1 home" onclick="home();">목록으로</button> 
 		</div>
 		<br>
 		<br>
@@ -109,31 +114,35 @@
 		<table class="tbl" id="noticeView" style="line-height:140%">
 			<tr class="tr-1">
 				<th class="td-3 file">첨부파일</th>
-				<td colspan="5">
+				<td>
 					<%if(a.getFilepath1() != null) {%>
-						<a href="/fileDown.do?noticeNo=<%=a.getFilepath1() %>"></a>
+						<a href="/fileDown.do?askNo=<%=a.getFilepath1() %>"><%=a.getFilepath1() %></a>
 					<%} %>
 				</td>
 				<td colspan="5">
 					<%if(a.getFilepath2() != null) {%>
-						<a href="/fileDown.do?noticeNo=<%=a.getFilepath2() %>"></a>
+						<a href="/fileDown.do?noticeNo=<%=a.getFilepath2() %>"><%=a.getFilepath2() %></a>
 					<%} %>
 				</td>
 				<td colspan="5">
 					<%if(a.getFilepath3() != null) {%>
-						<a href="/fileDown.do?noticeNo=<%=a.getFilepath3() %>"></a>
+						<a href="/fileDown.do?noticeNo=<%=a.getFilepath3() %>"><%=a.getFilepath3() %></a>
 					<%} %>
 				</td>
 			</tr>
 		</table>
-		<%if(m!= null && m.getMemberId().equals(a.getMemberNick())) {%>
+		<%if(m != null && m.getMemberNo() == a.getMemberNo()) {%>
 		<table class="tbl" id="noticeView">
 			<tr class="tr-1">
-				<td colspan="5">
-					<a class="btn bc1" href="/askUpdateFrm.do?noticeNo=<%=a.getAskNo() %>">수정</a>
-					<button class="btn bc1" onclick="askDelete('<%=a.getAskNo() %>');">삭제</button>
-				</td>
 			</tr>
+			</table>
+			<table class="bss6">
+				<tr>
+					<td>
+						<a class="btn bc1 bs6" href="/askUpdateFrm.do?noticeNo=<%=a.getAskNo() %>">수정</a>
+						<button class="btn bc1 bs6" onclick="askDelete('<%=a.getAskNo() %>');">삭제</button>
+					</td>
+				</tr>
 			</table>
 		<%} %>
 		

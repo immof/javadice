@@ -86,7 +86,7 @@ table{
 	font-weight: 700;
 	color: #ccc;
 }
-.room-capacity>td>button{
+.room-capacity>td>a>button{
 	border: none;
 	padding: 0;
 	height: 50px;
@@ -297,13 +297,17 @@ table{
 					</tr>
 					<tr class="tr-1 room-capacity">
 						<td colspan="3">객실 최대 인원 : <span><%=r.getRoomCapacity() %></span></td>
-						<td><button class="bc1 bs4">
+						<td>
+							<a href="/bookInfoInput.do?roomNo=<%=r.getRoomNo() %>&roomPrice=<%=r.getRoomPrice() %>&bookPeople=<%=bookPeople %>&checkIn=<%=checkIn %>&checkOut=<%=checkOut %>&payStayDay=<%=diffDays %>" >
+								<button class="bc1 bs4">
 							<%if(r.getRoomCount() != 0){ %>
 							<%=price %> KRW
 							<%}else{ %>
 							예약불가
 							<%} %>
-						</button></td> 
+								</button>
+							</a>
+						</td> 
 					</tr>
 				</table>
 			</div>
