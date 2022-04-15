@@ -315,6 +315,7 @@
                 <input type="hidden" id="payRoomPrice" value="<%=roomPrice%>">
                 <input type="hidden" id="payStayDay" value="<%=payStayDay %>">
                 <input type="hidden" id="pointRate" value="<%=pointRate %>">
+                <input type="hidden" id="roomName" value="<%=roomName %>">
             </form>
             	<div class=btnBox>
                 	<div class="btn bc1" id="paymentBtn">결제하기</div> 
@@ -479,7 +480,7 @@
 	  					url : "/InsertBook.do",
 	  					type : "post",
 	  					data : {price:price, roomNo:roomNo,bookName:bookName,bookPhone:bookPhone,MemberNo:MemberNo,payStayDay:payStayDay,memberPoint:memberPoint,
-	  						payRoomPrice:payRoomPrice,usePoint:usePoint,checkIn:checkIn,checkout:checkout,bookPeople:bookPeople,plusPoint:plusPoint},
+	  						payRoomPrice:payRoomPrice,usePoint:usePoint,checkIn:checkIn,checkout:checkout,bookPeople:bookPeople,plusPoint:plusPoint,roomName:roomName},
 	  					success : function(data){
 	  						result.text(data);
 	  						console.log(data);

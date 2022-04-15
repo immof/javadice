@@ -12,15 +12,16 @@ public class BookPay {
 	private String checkIn;
 	private String checkOut;
 	private int memberPoint;
-	private int usePoint;
+	private int minusPoint;
 	private int plusPoint;
+	private String roomName;
 	public BookPay() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public BookPay(int memberNo, int roomNo, String bookName, int bookPeople, String bookPhone, int payAmount,
-			int payStayDay, int payRoomPrice, String checkIn, String checkOut, int memberPoint, int usePoint,
-			int plusPoint) {
+			int payStayDay, int payRoomPrice, String checkIn, String checkOut, int memberPoint, int minusPoint,
+			int plusPoint, String roomName) {
 		super();
 		this.memberNo = memberNo;
 		this.roomNo = roomNo;
@@ -33,8 +34,9 @@ public class BookPay {
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.memberPoint = memberPoint;
-		this.usePoint = usePoint;
+		this.minusPoint = minusPoint;
 		this.plusPoint = plusPoint;
+		this.roomName = roomName;
 	}
 	public int getMemberNo() {
 		return memberNo;
@@ -102,11 +104,11 @@ public class BookPay {
 	public void setMemberPoint(int memberPoint) {
 		this.memberPoint = memberPoint;
 	}
-	public int getUsePoint() {
-		return usePoint;
+	public int getMinusPoint() {
+		return minusPoint;
 	}
-	public void setUsePoint(int usePoint) {
-		this.usePoint = usePoint;
+	public void setMinusPoint(int minusPoint) {
+		this.minusPoint = minusPoint;
 	}
 	public int getPlusPoint() {
 		return plusPoint;
@@ -114,8 +116,11 @@ public class BookPay {
 	public void setPlusPoint(int plusPoint) {
 		this.plusPoint = plusPoint;
 	}
-
-	
-	
+	public String getRoomName() {
+		return roomName;
+	}
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
 	
 }
