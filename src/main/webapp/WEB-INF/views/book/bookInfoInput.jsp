@@ -12,7 +12,7 @@
 		String checkOut = (String)request.getAttribute("checkOut");
 		int payStayDay = (int)(request.getAttribute("payStayDay"));
 		String roomName = (String)request.getAttribute("roomName");
-		
+		int totalPrice = roomPrice*payStayDay;
 		
     	
     %>
@@ -275,13 +275,13 @@
                     </div>
                         <%
                         String stringPrice = formatter.format(roomPrice);
-                       	String stringtotalPrice = formatter.format(roomPrice*payStayDay);
+                       	String stringTotalPrice = formatter.format(totalPrice);
                         %>
                     <div class="info-right" >
                         <p class="title">객실요금</p>
                         <pre class="content" id="sub-title" style="list-style-type: initial;"> -  <%=roomName %> (<%=payStayDay %>박) = <%=stringPrice %> 원 * <%=payStayDay %> 박</pre>
-                        <input type="hidden" id="totalPrice" value="<%= roomPrice*payStayDay%>">
-                        <p  class="content" id="totalPrice" ><%=stringtotalPrice %> 원</p>
+                        <input type="hidden" id="totalPrice" value="<%= totalPrice%>">
+                        <p  class="content" id="stringTotalPrice" ><%=stringTotalPrice %> 원</p>
                         <p class="title">적립금 사용</p>
                         <%if(m!=null) {%>
                         	<p class="content point"  id="point"></p>
@@ -291,7 +291,7 @@
                         <hr>
                         <div class="payAmount">
                             <span class="title">총 요금</span>
-                            <span class="content" id="payAmount"></span>
+                            <span style="float:right;font-size:30px;margin-left:17px;"> 원</span><span class="content" id="stringPayAmount"></span>
                         </div>
                     </div>
                 </div>
@@ -311,7 +311,7 @@
 				<input type="hidden" id="roomCapacity" value="<%=roomCapacity%>">        
 				 
 				     
-                <input type="hidden" id="payAmount" value="<%=roomPrice*payStayDay%>">
+                <input type="hidden" id="payAmount" >
                 <input type="hidden" id="payRoomPrice" value="<%=roomPrice%>">
                 <input type="hidden" id="payStayDay" value="<%=payStayDay %>">
             </form>
@@ -338,6 +338,7 @@
 	<script>
 		
 		let checkArr = [false,false,true];
+		let usePoint = 0;
 		
 		//point입력시 오른쪽 box에 사용 포인트 자동으로 입력(천단위로 콤마)해주게 하는 코드 
 		$(document).ready(function(){
@@ -349,12 +350,12 @@
 		$(document).ready(function(){
 			let totalPrice = $("#totalPrice").val();
 			totalPrice = totalPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			$("#payAmount").text(totalPrice+' 원');
+			$("#stringPayAmount").text(totalPrice);
 		});
 		
 		$("#usePoint").keyup(function(){
 			const memberPoint = $("#memberPoint").val();
-			let usePoint = $(this).val();
+			usePoint = $(this).val();
 			const totalPrice = $("#totalPrice").val();
 			
 			//포인트 유효성검사
@@ -368,10 +369,9 @@
             	checkArr[2]=true;
             }
 			
-			let payAmount = totalPrice-usePoint;
-			usePointString = usePoint.replace(/\B(?=(\d{3})+(?!\d))/g, ",").toString();
-			$("#point").text('-   '+usePointString+' 원');
-			$("#payAmount").text(payAmount+' 원');
+			let payAmount = totalPrice-$("#usePoint").val();
+			$("#point").text('-   '+$("#usePoint").val()+' 원');
+			$("#stringPayAmount").text(payAmount);
 		});
 		//총 금액
 		
@@ -419,6 +419,7 @@
 				$("#usePoint").val(0);
 				checkArr[2]=true;
 			}
+			$("#payAmount").val($("#totalPrice").val()-usePoint);
             let count = 0;
             for(let i = 0;i<checkArr.length;i++){
                 if(checkArr[i]){
@@ -431,9 +432,15 @@
           		console.log(checkArr[2]);
           		alert("정보를 확인하세요");
           	}else{
-          		console.log("결제API실행");
-          	}
-        })
+          		//모든 유효성 검사가 완료되면 결제 API 실행!!
+          		
+       			const price = $("#stringPayAmount").text();
+				
+          		
+        			
+        			
+          	}//else끝
+        });//결제버튼 클릭시 이벤트
 		
 		
 		
