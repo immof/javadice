@@ -15,7 +15,7 @@
             <p class="main-img-title">
                 <span class="main-img-top-title">자바다이스 시티</span>
                 <strong class="main-strong-title">JAVADICE CITY</strong>
-                <span class="main-strong-content">서울에서 맞이하는 달콤한 휴식, 자바다이스와 함께하세요.</span>
+                <span class="main-strong-content">도심 한가운데에서 맞이하는 달콤한 휴식, 자바다이스와 함께하세요.</span>
                 <a class="main-img-btn">예약하기</a>
                 </p>
         </div>
