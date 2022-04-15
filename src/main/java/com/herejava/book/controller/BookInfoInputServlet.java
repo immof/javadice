@@ -37,6 +37,7 @@ public class BookInfoInputServlet extends HttpServlet {
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
 		int payStayDay = Integer.parseInt(request.getParameter("payStayDay"));
+		String roomName = request.getParameter("roomName");
 		/*
 		System.out.println(roomNo);
 		System.out.println(roomPrice);
@@ -44,6 +45,7 @@ public class BookInfoInputServlet extends HttpServlet {
 		System.out.println(checkIn);
 		System.out.println(checkOut);
 		System.out.println(payStayDay);
+		System.out.println(roomName);
 		*/
 		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookInfoInput.jsp");
@@ -53,6 +55,7 @@ public class BookInfoInputServlet extends HttpServlet {
 		request.setAttribute("checkIn", checkIn);
 		request.setAttribute("checkOut", checkOut);
 		request.setAttribute("payStayDay", payStayDay);
+		request.setAttribute("roomName", roomName);
 		view.forward(request, response);
 	}
 

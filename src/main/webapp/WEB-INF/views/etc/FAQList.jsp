@@ -4,8 +4,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JAVADICE CITY</title>
 </head>
+<style>
+	.body{
+		margin: 0;
+	}
+	.notice-tbl tr>th{
+		border-top: 1px solid #ccc;
+		background-color: rgb(204,204,204,0.4);
+	}
+	.page1-content{
+		width: 900px;
+		margin: 0 auto;
+		overflow: hidden;
+		margin-bottom: 10px;
+		flex-grow: 1;
+	}
+	.page1-title{
+		font-family: ns-bold;
+   	    padding: 20px 0px;
+    	font-size: 1.3rem;
+    	margin-top: 50px;
+    	margin-bottom: 30px;
+    	border-bottom: 2px solid #ccc;
+	}
+</style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page1-content">
