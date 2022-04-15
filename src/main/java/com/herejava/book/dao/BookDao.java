@@ -126,10 +126,7 @@ public class BookDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<BookData> list = new ArrayList<BookData>();
-		String query = "SELECT * FROM\r\n" + "(SELECT ROWNUM AS RNUM,\r\n" + "N.*FROM\r\n"
-				+ "(SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE \r\n"
-				+ "FROM BOOK\r\n" + "JOIN ROOM USING(ROOM_NO)\r\n" + "WHERE MEMBER_NO=?\r\n"
-				+ "ORDER BY BOOK_NO DESC)N)\r\n";
+		String query = "SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE FROM BOOK JOIN ROOM USING(ROOM_NO) WHERE MEMBER_NO=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memberNo);
@@ -442,9 +439,30 @@ public class BookDao {
 		}
 		return list;
 	}
+	
+	// 예약번호로 리뷰갯수 리턴하는 메소드
+	public int getReview(Connection conn, long bookNo) {
+		//리뷰 존재여부 리턴받음
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) from review where book_no= ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bookNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
-
-
-	// 예약번호로 예약(방사진/방이름/체크인/체크아웃/예약상태/이용자숫자/예약자명/예약자전화번호) 1개 가져오는 메소드
 
 }

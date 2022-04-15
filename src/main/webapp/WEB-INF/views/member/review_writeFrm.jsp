@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./css/review.css" />
 <style>
 .starR{
   background: url(./img/ico_review.png) no-repeat right 0;
@@ -56,43 +55,17 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="4" style="padding:0;">
-										<div class="row row-images">
-										  <div class="column image_container">
-											<div class="post-image-collection" style="height: 143px; padding:0; padding-left:16px;">
-											  <div class="post-image post-image-placeholder mrm mts empty">
-												<div class="upload-section">
-												  <input type="file" name="photofile1" id="Photofile1" class="upload-img" required accept="image/*" />
-												  <label class="icon-camera" for="Photofile1">
-													<img src="./img/add_img.png" />
-												  </label>
-												  <p class="uppercase">사진 추가</p>
-												</div>
-												<div class="preview-section"></div>
-											  </div>
-											  <div class="post-image post-image-placeholder mrm mts empty">
-												<div class="upload-section">
-												  <input type="file" name="photofile2" id="Photofile2" class="upload-img" required accept="image/*" />
-												  <label class="icon-camera" for="Photofile2">
-													<img src="./img/add_img.png" />
-												  </label>
-												  <p class="uppercase">사진 추가</p>
-												</div>
-												<div class="preview-section"></div>
-											  </div>
-											  <div class="post-image post-image-placeholder mrm mts empty">
-												<div class="upload-section">
-												  <input type="file" name="photofile3"  id="Photofile3" class="upload-img" required accept="image/*" />
-												  <label class="icon-camera" for="Photofile3">
-													<img src="./img/add_img.png">
-												  </label>
-												  <p class="uppercase">사진 추가</p>
-												</div>
-												<div class="preview-section"></div>
-											  </div>
-											</div>
-										  </div>
-										</div>
+								<td>
+									<input type="file" name="image1" accept="image/*" onchange="setThumbnail1(event);"/> 
+									<div class="image_container" id="ic1"><img src="" id="img1" onerror="this.src='./review_img/no-image.jpg'" /></div> 
+								</td>
+								<td>
+									<input type="file" name="image2" accept="image/*" onchange="setThumbnail2(event);"/> 
+									<div class="image_container" id="ic2"><img src="" id="img2" onerror="this.src='./review_img/no-image.jpg'" /></div> 
+								</td>
+								<td>
+									<input type="file" name="image3" accept="image/*" onchange="setThumbnail3(event);"/> 
+									<div class="image_container" id="ic3"><img src="" id="img3" onerror="this.src='./review_img/no-image.jpg'" /></div> 
 								</td>
 							</tr>
 							<tr>
@@ -103,15 +76,48 @@
 			</div>
 		</div>
 	</div>
-	<script src="./js/review.js"></script>
 		<script>
-		$('.starRev span').click(function(){
-			  $(this).parent().children('span').removeClass('on');
-			  $(this).addClass('on').prevAll('span').addClass('on');
-			  let score = $(this).text();
-			  $("#star-score").val(score);
-			  return false;
-			});
+		$(function(){
+			$('.starRev span').click(function(){
+				  $(this).parent().children('span').removeClass('on');
+				  $(this).addClass('on').prevAll('span').addClass('on');
+				  let score = $(this).text();
+				  $("#star-score").val(score);
+				  return false;
+				});
+		});
+		
+		function setThumbnail1(event) {
+			var reader = new FileReader(); 
+			
+			reader.onload = function(event) { 
+				var img = document.getElementById("img1"); 
+				img.setAttribute("src", event.target.result); 
+				}; 
+				
+				reader.readAsDataURL(event.target.files[0]); 
+			}
+		function setThumbnail2(event) {
+			var reader = new FileReader(); 
+			
+			reader.onload = function(event) { 
+				var img = document.getElementById("img2"); 
+				img.setAttribute("src", event.target.result); 
+				}; 
+				
+				reader.readAsDataURL(event.target.files[0]); 
+			}
+		function setThumbnail3(event) {
+			var reader = new FileReader(); 
+			
+			reader.onload = function(event) { 
+				var img = document.getElementById("img3"); 
+				img.setAttribute("src", event.target.result); 
+				}; 
+				
+				reader.readAsDataURL(event.target.files[0]); 
+			}
+
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>

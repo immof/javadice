@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>:: 회원 페이지 ::</title>
+<script src="/js/sweetalert2.min.js"></script>
 <style>
 	.mypage-content{
 		min-height: 800px;
@@ -87,33 +88,91 @@
 				<!-- 최근예약내역 시작 -->	
 				<div class="mypage-content-title">최근 예약내역</div>
 					<div class="my_book_wrap">
-					 <% if(list.size() >= 2) {%>
-							<%for(int i=0;i<2;i++) {%>
-								<%BookData bd = list.get(i);%>
+				<!-- 예약리스트 시작 -->	
+					 <%
+					 	if(list.size() >= 2) {
+							for(int i=0;i<2;i++) {
+								BookData bd = list.get(i);
+					 %>
 								<table class="my_book_tbl">
 								<tr>
-									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><p class="p-0"><%=bd.getRoomName() %></p>
-									<%	String bookState = "";
-										switch(bd.getBookState()) {
-											case 0: bookState = "이용예정";
-												break;
-											case 1: bookState = "이용완료";
-												break;
-											case 2: bookState = "취소완료";
-												break;
-										}; %>
-										<button class="btn bc1 bs5"><%=bookState %></button>
-										<br>
-										<p class="p-2">
-											<%=bd.getCheckIn() %> -
-											<%=bd.getCheckOut() %>
-										</p>
+									<!-- 객실 사진 -->
+									<td>
+										<img class="img-0" src="/img/<%=bd.getFilePath()%>">
 									</td>
-										<%=list.add(bd) %>
-									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
-									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
-									
+									<!-- 객실 이름/예약상태/숙박일자 -->
+									<td>
+										<p class="p-0"><%=bd.getRoomName() %></p>
+									<%	String bookState = null;
+										switch(bd.getBookState()) {
+											case 0: bookState = "이용예정";%>
+												<button class="btn bc3 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<!-- 상세보기 -->
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<!-- 리뷰버튼 
+									<button type="button" onclick="location.href='joinUs.jsp' ">회원가입</button>
+									-->
+									<td>
+										<button type="button" class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
+									</td>	
+											<%	break;
+											case 1: bookState = "이용완료";
+												//리뷰o
+												if(1 == 0){
+											%>
+													<button class="btn bc7 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<td>
+										<button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button>
+									</td>	
+											<% 	//리뷰x
+												}else{
+											%>
+													<button class="btn bc10 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<td>
+										<button type="button" class="btn bc4 bs6" onclick="#">리뷰쓰기</button>
+									</td>	
+												<%break;											
+											 }//예약취소
+											case 2: bookState = "취소완료";
+											%>
+													<button class="btn bc7 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<td>
+										<button class="btn bc7 bs6">취소완료</button>
+									</td>	
+											<%break;
+										}; 
+										list.add(bd); %>
 								</tr>
 								</table>
 								<%if(i == 0) {%>
@@ -163,70 +222,117 @@
 								<%} %>
 							<%}else if(list.size() == 1) {
 								BookData bd = list.get(0);%>
-								<table>
+								<table class="my_book_tbl">
 								<tr>
-									<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
-									<td><p class="p-0"><%=bd.getRoomName() %></p>
-									<%	String bookState = "";
-										switch(bd.getBookState()) {
-											case 0: bookState = "이용예정";
-												break;
-											case 1: bookState = "이용완료";
-												break;
-											case 2: bookState = "취소완료";
-												break;
-										}; %>
-										<%=bookState %>
-									<br>
-										<p class="p-2">
-										<%=bd.getCheckIn() %> -
-										<%=bd.getCheckOut() %>
-										</p>
+									<td>
+										<img class="img-0" src="/img/<%=bd.getFilePath()%>">
 									</td>
-										  <%=list.add(bd) %>
-									<td><a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a></td>
-									<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
+									<td>
+										<p class="p-0"><%=bd.getRoomName() %></p>
+									<%	String bookState = null;
+										switch(bd.getBookState()) {
+											case 0: bookState = "이용예정";%>
+												<button class="btn bc3 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<td>
+										<button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
+									</td>	
+											<%	break;
+											case 1: bookState = "이용완료";
+												//리뷰o
+												if(1 == 0){
+											%>
+													<button class="btn bc7 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<td>
+										<button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button>
+									</td>	
+											<% 	//리뷰x
+												}else{
+											%>
+													<button class="btn bc10 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<td>
+										<button type="button" class="btn bc4 bs6" onclick="#">리뷰쓰기</button>
+									</td>	
+												<%break;											
+											 }//예약취소
+											case 2: bookState = "취소완료";
+											%>
+													<button class="btn bc7 bs5"><%=bookState %></button><br>
+													<p class="p-2">
+														<%=bd.getCheckIn() %> -
+														<%=bd.getCheckOut() %>
+													</p>
+									</td>
+									<td>
+										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
+									</td>
+									<td>
+										<button class="btn bc7 bs6">취소완료</button>
+									</td>	
+											<%break;
+										}; %>
 								</tr>
 								</table>
 								<!-- 모달내용 시작 -->
 								<!--예약취소 modal 시작-->
 								<div id="test-modal" class="modal-bg">
 									<div class="modal-wrap">
-									<div class="modal-head">
-									<h2>예약을 정말로 취소하시겠습니까?</h2>
-									<br>
-									</div>
-									<div class="modal-content">
-									<table class="modal-content-tbl">
-									<tr>
-									<th class="modal-tbl-th">객실정보</th>
-									<td class="modal-tbl-td"><%=bd.getRoomName() %></td>
-									</tr>
-									<tr>
-									<th class="modal-tbl-th">체크인</th>
-									<td class="modal-tbl-td"><%=bd.getCheckIn() %> 15:00</td>
-									</tr>
-									<tr>
-									<th class="modal-tbl-th">체크아웃</th>
-									<td class="modal-tbl-td"><%=bd.getCheckOut() %> 11:00</td>
-									</tr>
-									<tr>
-									<th class="modal-tbl-th">예약정보</th>
-									<td class="modal-tbl-td">성인 <%=bd.getBookPeople() %>인</td>
-									</tr>
-									</table>
-									</div>
-									<div class="modal-foot">
-									<p>
-									취소 후 다시 예약시 다른 예약이 있는 경우 예약이 불가할 수 있습니다.<br> 카드결제 취소의 경우 취소 후
-									영업일 2-3일 내로 처리될 예정입니다.
-									</p>
-									<div class="modal-btns-container">
-									<input type="button" class="btn bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
-									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
-									</div>
-									</div>
-									</div>
+										<div class="modal-head">
+											<h2>예약을 정말로 취소하시겠습니까?</h2><br>
+										</div>
+										<div class="modal-content">
+											<table class="modal-content-tbl">
+											<tr>
+												<th class="modal-tbl-th">객실정보</th>
+												<td class="modal-tbl-td"><%=bd.getRoomName() %></td>
+											</tr>
+											<tr>
+												<th class="modal-tbl-th">체크인</th>
+												<td class="modal-tbl-td"><%=bd.getCheckIn() %> 15:00</td>
+											</tr>
+											<tr>
+												<th class="modal-tbl-th">체크아웃</th>
+												<td class="modal-tbl-td"><%=bd.getCheckOut() %> 11:00</td>
+											</tr>
+											<tr>
+												<th class="modal-tbl-th">예약정보</th>
+												<td class="modal-tbl-td">성인 <%=bd.getBookPeople() %>인</td>
+											</tr>
+											</table>
+										</div>
+										<div class="modal-foot">
+											<p>
+											취소 후 다시 예약시 다른 예약이 있는 경우 예약이 불가할 수 있습니다.<br> 카드결제 취소의 경우 취소 후
+											영업일 2-3일 내로 처리될 예정입니다.
+											</p>
+											<div class="modal-btns-container">
+												<input type="button" class="btn bc3 cancleBtn" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
+												<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
+											</div>
+										</div>
 									</div>
 								</div>
 								<!-- 예약취소 modal 끝 -->
@@ -235,69 +341,39 @@
 								<h3 class="h3-0">최근 예약내역이 없습니다.</h3>
 						<%} %>
 				<!-- 최근예약내역 끝 -->
-			</div>
-				<!-- 내정보 시작 -->
-				<div class="mypage-content-title title1">
-					내 정보 
-				</div>
-				<table class="my_info_tbl">
-					<tr class="tr-1">
-						<th class="th-1">이메일</th>
-						<td class="td-1"><%=m.getMemberId() %></td>
-						<td><a class="p-1" href="/mypage_info.do">수정하기></a></td>
-					</tr>
-					<tr class="tr-1">
-						<th class="th-1">닉네임</th>
-						<td class="td-1"><%=m.getMemberNick() %></td>
-					</tr>	
-						<th class="th-1">비밀번호</th>
-						<td class="td-1">
-						<!-- 비밀번호 마스킹처리 -->
-						<% int pwCount = (m.getMemberPw()).length();%>
-						<% for(int i=0;i<pwCount;i++){%>
-							*
-						<% }%>
-						<!-- 비밀번호 마스킹처리 끝 -->
-						</td>
-					<tr class="tr-1">	
-						<th class="th-1">휴대폰번호</th>
-						<td class="td-1"><%=m.getMemberPhone() %></td>
-					</tr>
-					
-				</table>
-				<!-- 내정보 끝 -->
-			</div>
-		</div>
-	</div>
-	
-	<script>
-	$(function(){
-		const cancleBtn =  $("#modal-btns-item");
-
-		
-		
-//토스트 알림 함수		
-		function toastShow(title, icon){
-		const Toast = Swal.mixin({
-	    toast: true,
-	    position: 'center-center',
-	    showConfirmButton: false,
-	    timer: 1500,
-	    timerProgressBar: true,
-	    didOpen: (toast) => {
-	     // toast.addEventListener('mouseenter', Swal.stopTimer)
-	      toast.addEventListener('mouseleave', Swal.resumeTimer)
-	    }
-	 	})
-	
-	  Toast.fire({
-	    title: title,
-	    icon: icon
-	  })}//토스트 끝
-	});
-	
-	
-	</script>
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+					</div><!-- my_book_wrap 끝 -->
+					<!-- my_info_tbl 시작 -->
+					<div class="mypage-content-title title1">내 정보</div>
+					<table class="my_info_tbl">
+						<tr class="tr-1">
+							<th class="th-1">이메일</th>
+							<td class="td-1"><%=m.getMemberId() %></td>
+							<td><pre>                                                                                                                                                  </pre></td>
+							<td><a class="p-1" href="/mypage_info.do">수정하기></a></td>
+						</tr>
+						<tr class="tr-1">
+							<th class="th-1">닉네임</th>
+							<td class="td-1"><%=m.getMemberNick() %></td>
+						</tr>	
+						<tr class="tr-1">
+							<th class="th-1">비밀번호</th>
+							<td class="td-1">
+							<!-- 비밀번호 마스킹처리 -->
+							<% int pwCount = (m.getMemberPw()).length();%>
+							<% for(int i=0;i<pwCount;i++){%>
+								*
+							<% }%>
+							<!-- 비밀번호 마스킹처리 끝 -->
+							</td>
+						</tr>
+						<tr class="tr-1">
+							<th class="th-1">휴대폰번호</th>
+							<td class="td-1"><%=m.getMemberPhone() %></td>
+						</tr>
+					</table><!-- my_info_tbl 끝 -->
+			</div><!-- mypage-content 끝  -->
+		</div><!-- flex-wrap 끝  -->
+	</div><!-- page-content 끝  -->
+	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

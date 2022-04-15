@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 공지사항 ::</title>
 	<style>
 		#noticeEview td, #noticeEview th{
 			border: 1px solid #A7A7A7;
