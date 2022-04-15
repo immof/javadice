@@ -1,10 +1,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.herejava.member.vo.Member"%>
 <%@page import="com.herejava.book.vo.BookData"%>
+<%@page import="com.herejava.review.vo.ReviewList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
     	ArrayList<BookData> list = (ArrayList<BookData>)request.getAttribute("list");
+    	ArrayList<ReviewList> reviewList =(ArrayList<ReviewList>)request.getAttribute("reviewList"); 
     %>
 <!DOCTYPE html>
 <html>
@@ -116,9 +118,6 @@
 									<td>
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<!-- 리뷰버튼 
-									<button type="button" onclick="location.href='joinUs.jsp' ">회원가입</button>
-									-->
 									<td>
 										<button type="button" class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
 									</td>	
@@ -137,7 +136,7 @@
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
-										<button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button>
+										<a type="button" class="btn bc4 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
 												}else{
