@@ -40,6 +40,7 @@
 		font-size: 18px;
 		display: inline-block;
 		margin-right: 40px;
+		width: 125px;
 	}
 	.p-1{
 		text-align: right;
@@ -79,6 +80,19 @@
 	.my_book_wrap{
 		margin-bottom: 36px;
 	}
+	.img-box-td{
+		width: 30%;
+	}
+	.info-box-td{
+		width:45%;
+	}
+	.view-box-td{
+		width:10%;
+		text-align: right;
+	}
+	.btn-box-td{
+		text-align: right;
+	}
 </style>
 </head>
 <body>
@@ -99,11 +113,11 @@
 								<table class="my_book_tbl">
 								<tr>
 									<!-- 객실 사진 -->
-									<td>
+									<td class="img-box-td">
 										<img class="img-0" src="/img/<%=bd.getFilePath()%>">
 									</td>
 									<!-- 객실 이름/예약상태/숙박일자 -->
-									<td>
+									<td class="info-box-td">
 										<p class="p-0"><%=bd.getRoomName() %></p>
 									<%	String bookState = null;
 										switch(bd.getBookState()) {
@@ -115,7 +129,7 @@
 													</p>
 									</td>
 									<!-- 상세보기 -->
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
@@ -132,10 +146,10 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<a type="button" class="btn bc4 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
@@ -147,10 +161,10 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<a type="button" class="btn bc4 bs6" href="/review_writeFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
 												<%break;											
@@ -166,7 +180,7 @@
 									<td>
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<button class="btn bc7 bs6">취소완료</button>
 									</td>	
 											<%break;
