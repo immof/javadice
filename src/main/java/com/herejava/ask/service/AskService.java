@@ -124,6 +124,14 @@ public class AskService {
 		return result;
 	}
 
+	public Ask getAsk(int askNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		Ask a = dao.selectOneAsk(conn, askNo);
+		JDBCTemplate.close(conn);
+		return null;
+	}
+
 	
 	
 

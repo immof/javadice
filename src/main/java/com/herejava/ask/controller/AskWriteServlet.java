@@ -55,8 +55,11 @@ public class AskWriteServlet extends HttpServlet {
 				//2-3. 값을 추출
 				int memberNo = Integer.parseInt(mRequest.getParameter("memberNo"));
 				String askTitle = mRequest.getParameter("askTitle");
+				System.out.println(askTitle);
 				String askContent = mRequest.getParameter("askContent");
-				String filepath1 = mRequest.getParameter("filepath1");
+				//파일이렇게안꺼내요 꺼내는거확인해보셔야돼요이건
+				//파일3개인데 컬럼은 1개씩이면 저장은 어떻게해요3개를? 아 3개다있구나 파일꺼내는것만 수업때한거찾아보세요 파일은 getParameter로꺼내는게아니에요
+				String filepath1 = mRequest.getOriginalFileName("filepath1");
 				String filepath2 = mRequest.getParameter("filepath2");
 				String filepath3 = mRequest.getParameter("filepath3");
 				Ask a = new Ask();

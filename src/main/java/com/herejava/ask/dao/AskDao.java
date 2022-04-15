@@ -179,7 +179,7 @@ public class AskDao {
 	public int insertAsk(Connection conn, Ask a) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into values(ask_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),0,?,?,?)";
+		String query = "insert into ask values(ask_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),0,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, a.getMemberNo());//
@@ -188,6 +188,7 @@ public class AskDao {
 			pstmt.setString(4, a.getFilepath1());
 			pstmt.setString(5, a.getFilepath2());
 			pstmt.setString(6, a.getFilepath3());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

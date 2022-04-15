@@ -97,7 +97,7 @@
           <div class="mypage-header">
             <div class="mypage-header-space"></div>
             <div class="mypage-header-profile">
-              <img src="../profile_img/<%=member.getFilepath() %>" alt="" style="width: 50px; height: 50px;">
+              <img src="./profile_img/<%=member.getFilepath() %>" alt="" style="width: 50px; height: 50px;">
               <span class="mypage-header-nick"><%=member.getMemberNick() %></span>
           </div>
         </header>
