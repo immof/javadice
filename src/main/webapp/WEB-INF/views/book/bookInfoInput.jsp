@@ -16,7 +16,8 @@
 <head>
 <meta charset="UTF-8">
 <title>예약 정보 입력</title>
-<link rel="stylesheet" href="/css/bookInfoInput.css">
+<!-- 결제 API 사용을 위한 라이브러리 경로 추가 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style>
 	/* index */
 	.index-wrap{
@@ -312,6 +313,39 @@
 			usePoint = usePoint.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			$("#point").text('-   '+usePoint+' 원');
 		});
+		
+		$("#payment").on("click",function(){
+			const price = $("#totalPrice").text();
+			
+			//거래 고유ID생성을 위해 현재 결제 날짜를 이용해서 처리
+			const d = new Date();
+			//""(공백)을 넣어주는 이유 : date값 생성시 ""를 더하지 않으면 숫자+연산이 되므로 문자덧셈을 위해 추가
+			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			IMP.init("imp32461786");	//결제 API사용을 위한 가맹점식별코드 입력
+			//IMP.request_pay({결제정보},function(rsp){처리할 함수})
+			IMP.request_pay({
+				merchant_uid : "상품코드_"+date,		//거래 ID
+				name : "결제 테스트",					//결제이름
+				amount : price,						//결제금액
+				buyer_email : "gddbwls@naver.com",	//구매자 email주소
+				buyer_name : "구매자",				//구매자 이름
+				buyer_tel : "010-1234-1234",		//구매자 전화번호
+				buyer_addr : "서울시 영등포구 당산동",		//rnaowk wnth
+				buyer_postcode : "12345"			//구매자 우편번호
+				
+			},function(rsp){
+				if(rsp.success){
+					console.log("결제가 완료됐습니다.");
+					console.log("고유ID : " + rsp.imp_uid);
+					console.log("상점거래ID : "+rsp.merchant_uid);
+					console.log("결제금액 : "+rsp.paid_amount);
+					console.log("카드승인번호 : " +rsp.apply_num);
+					//추가 DB작업이 필요한경우 이 부분에 결제내역을 DB에 저장하는 코드 작성
+					//여기서 서블릿으로 보낸다..?그럼 데이터들은 하나하나 제이쿼리로 받아와야되나요?
+				}else{
+					alert("에러내용 : "+rsp.err_msg);
+				}
+			});		
 	</script>
 </body>
 </html>
