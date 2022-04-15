@@ -434,10 +434,9 @@
           	}else{
           		//모든 유효성 검사가 완료되면 결제 API 실행!!
           		console.log("API실행");
-       			const price = $("#stringPayAmount").text();	//총요금(payAmount)
+          		//데이터추출
        			const plusPoint = parseInt(($("#pointRate").val())*price/100);
        			const MemberNo = $("#MemberNo").val();		//비회원은 0
-       			console.log("usepoint: "+usePoint);
        			const payStayDay = $("#payStayDay").val();
        			const payRoomPrice = $("#payRoomPrice").val();
        			const checkIn = $("#checkIn").val();
@@ -446,7 +445,34 @@
        			const bookName = $("#bookName").val();
        			const bookPeople = $("#bookPeople").val();
        			const bookPhone = $("#bookPhone").val();
-        			
+       			
+       			const price = $("#stringPayAmount").text();	//총요금(payAmount)
+       			//거래 고유ID생성을 위해 현재 결제 날짜를 이용해서 처리
+    			const d = new Date();
+    			//""(공백)을 넣어주는 이유 : date값 생성시 ""를 더하지 않으면 숫자+연산이 되므로 문자덧셈을 위해 추가
+    			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+    			IMP.init("imp67773823");	//결제 API사용을 위한 가맹점식별코드 입력
+    			//IMP.request_pay({결제정보},function(rsp){처리할 함수})
+    			IMP.request_pay({
+    				merchant_uid : roomNo+date,			//거래 ID
+    				name : bookName,					//결제이름
+    				amount : price,						//결제금액
+    				buyer_name : bookName,				//구매자 이름
+    				buyer_tel : bookPhone				//구매자 전화번호
+    				
+    			},function(rsp){
+    				if(rsp.success){
+    					console.log("결제가 완료됐습니다.");
+    					console.log("고유ID : " + rsp.imp_uid);
+    					console.log("상점거래ID : "+rsp.merchant_uid);
+    					console.log("결제금액 : "+rsp.paid_amount);
+    					console.log("카드승인번호 : " +rsp.apply_num);
+    					//추가 DB작업이 필요한경우 이 부분에 결제내역을 DB에 저장하는 코드 작성
+    					
+    				}else{
+    					alert("에러내용 : "+rsp.err_msg);
+    				}
+    			});
         			
           	}//else끝
         });//결제버튼 클릭시 이벤트
