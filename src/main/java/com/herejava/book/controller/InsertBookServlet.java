@@ -1,15 +1,20 @@
 package com.herejava.book.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.BookPay;
 import com.herejava.book.vo.BookPayData;
+import com.herejava.member.service.MemberService;
 
 /**
  * Servlet implementation class InsertBookServlet
@@ -48,6 +53,21 @@ public class InsertBookServlet extends HttpServlet {
 		bpay.setRoomNo(Integer.parseInt(request.getParameter("roomNo")));
 		bpay.setRoomName(request.getParameter("roomName"));
 		
+		System.out.println("BookName : "+bpay.getBookName());
+		System.out.println("BookPeople : "+bpay.getBookPeople());
+		System.out.println("BookPhone : "+bpay.getBookPhone());
+		System.out.println("CheckIn : "+bpay.getCheckIn());
+		System.out.println("CheckOut : "+bpay.getCheckOut());
+		System.out.println("MemberNo : "+bpay.getMemberNo());
+		System.out.println("MemberPoint : "+bpay.getMemberPoint());
+		System.out.println("MinusPoint : "+bpay.getMinusPoint());
+		System.out.println("PlusPoint : "+bpay.getPlusPoint());
+		System.out.println("PayAmount : "+bpay.getPayAmount());
+		System.out.println("PayRoomPrice : "+bpay.getPayRoomPrice());
+		System.out.println("PayStayDay : "+bpay.getPayStayDay());
+		System.out.println("RoomNo : "+bpay.getRoomNo());
+		System.out.println("RoomName : "+bpay.getRoomName());
+		
 		//3.비즈니스로직
 		//3-1. 예약테이블 추가
 		BookService serviceB = new BookService();
@@ -56,10 +76,25 @@ public class InsertBookServlet extends HttpServlet {
 		BookPayData bpd = serviceB.searchBookNo(bpay);
 		//3-2. 결제테이블 추가
 		int resultP = serviceB.insertPay(bpay,bpd);
-		//3-3. 적립금테이블 추가
+		//3-3. 멤버테이블에 회원포인트 변경
+		MemberService serviceM = new MemberService();
+		int resultM = serviceM.updateMemberPoint(bpay);
+		//3-4. 적립금테이블 추가
+		System.out.println("resultB : " +resultB);
+		System.out.println("resultP : " +resultP);
+		System.out.println("resultM : " +resultM);
+		//조회결과 m을 js객체타입으로 변환
+		JSONObject result = null;	//HashMap<String,Object>와 같음
+		result = new JSONObject();
+		result.put("resultB", resultB);
+		result.put("resultP", resultP);
+		result.put("resultM", resultM);
 		
-		//3-4. 멤버테이블에 회원포인트 변경
-		
+		//4.결과처리
+		response.setContentType("application/json"); //되돌려주는 데이터의 타입이 json임을 명시(안하면 string으로 취급됨)
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
 		
 	}
 

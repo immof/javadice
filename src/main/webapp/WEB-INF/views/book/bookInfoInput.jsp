@@ -428,9 +428,6 @@
                 }
             }
           	if(count != 3){
-          		console.log(checkArr[0]);
-          		console.log(checkArr[1]);
-          		console.log(checkArr[2]);
           		alert("정보를 확인하세요");
           	}else{
           		requestPay();
@@ -479,12 +476,25 @@
 	  	       		$.ajax({
 	  					url : "/InsertBook.do",
 	  					type : "post",
-	  					data : {price:price, roomNo:roomNo,bookName:bookName,bookPhone:bookPhone,MemberNo:MemberNo,payStayDay:payStayDay,memberPoint:memberPoint,
-	  						payRoomPrice:payRoomPrice,usePoint:usePoint,checkIn:checkIn,checkout:checkout,bookPeople:bookPeople,plusPoint:plusPoint,roomName:roomName},
+	  					data : {
+	  						price:price, 
+	  						roomNo:roomNo,
+	  						bookName:bookName,
+	  						bookPhone:bookPhone,
+	  						MemberNo:MemberNo,
+	  						payStayDay:payStayDay,
+	  						memberPoint:memberPoint,
+	  						payRoomPrice:payRoomPrice,
+	  						usePoint:usePoint,
+	  						checkIn:checkIn,
+	  						checkout:checkout,
+	  						bookPeople:bookPeople,
+	  						plusPoint:plusPoint,
+	  						roomName:roomName
+	  						},
 	  					success : function(data){
-	  						result.text(data);
-	  						console.log(data);
 	  						console.log("서버호출완료");
+	  						
 	  					},
 	  					error : function(){
 	  						console.log("서버호출실패");
