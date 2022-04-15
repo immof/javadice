@@ -5,11 +5,14 @@
     	DecimalFormat formatter = new DecimalFormat("###,###");
     
     	String roomName = "로열스위트";
+    	int roomNo = 9;
     	int roomCapacity = 7;
     	int bookPeople = 3;
     	int payStayDay = 3;
     	int roomPrice = 100000000;
     	
+    	//적립률 선언
+    	double per = 0.1;
     %>
 <!DOCTYPE html>
 <html>
@@ -110,9 +113,9 @@
 	.info-left>input{
 		width: 270px;
 		height: 30px;
-		margin-bottom: 20px;
 		padding-left: 10px;
 		font-size: 17px;
+		margin-bottom:3px;
 	}
 	.box{
 		overflow:hidden;
@@ -203,7 +206,7 @@
 		padding-bottom: 30px;
 		border-bottom: 1px solid #dcdcdc;
 	}
-	
+
 </style>
 </head>
 <body>
@@ -234,25 +237,30 @@
                         <p>예약자 이름</p>
                         <%if(m!=null) {%>
                         <input type="text" id="bookName" value="<%=m.getMemberName() %>" placeholder="예약자 이름" required>
+                        <pre class="chk" id="nameChk" style="font-size: 15px;">   </pre>
                         <%}else{ %>
                         	<input type="text" id="bookName" placeholder="이름 입력" required>
+                        	<pre class="chk" id="nameChk" style="font-size: 15px;">    </pre>
                         <%} %>
                         
                         <p>인원</p>
                         <div class="box">
-	                        <input type="number" id="bookPeople"  value="<%=bookPeople %>" min="1" max="<%=roomCapacity %>" style="text-align:right;" required><span>명</span>
+	                        <input type="number" id="bookPeople"  value="<%=bookPeople %>" min="1" max="<%=roomCapacity %>" style="text-align:right;" readonly><span>명</span>
                         </div>
                         
                         <p>예약자 전화번호</p>
                         <%if(m!=null) { %>
                         <input type="text" id="bookPhone" placeholder="ex) 010-0000-0000" value="<%=m.getMemberPhone() %>" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+                        <pre class="chk" id="phoneChk"  style="font-size: 15px;">   </pre>
                         <%}else{ %>
                         	<input type="text" id="bookPhone" placeholder="ex) 010-0000-0000" pattern="010-[0-9]{4}-[0-9]{4}" required>
+                        	<pre class="chk" id="phoneChk"  style="font-size: 15px;"> </pre>
                         <%} %>
                         <p>적립금</p>
                         <div class="box">
                         <%if(m!=null) { %>
 	                        <input type="number" id="usePoint" placeholder="<%=m.getMemberPoint() %>p 사용가능" style="text-align:right;"><span>point</span>
+	                        <pre class="chk" id="pointChk"  style="font-size: 15px;">   </pre>
 	                        <%}else{ %>
 	                        	<input type="number" id="usePoint" value="0" style="text-align:right;" disabled><span>point</span>
 	                        <%} %>
@@ -260,18 +268,14 @@
                     </div>
                         <%
                         String stringPrice = formatter.format(roomPrice);
-                       	String stringPayAmount = formatter.format(roomPrice*payStayDay);
                        	String stringtotalPrice = formatter.format(roomPrice*payStayDay);
                         %>
                     <div class="info-right" >
                         <p class="title">객실요금</p>
                         <pre class="content" id="sub-title" style="list-style-type: initial;"> -  <%=roomName %> (<%=payStayDay %>박) = <%=stringPrice %> 원 * <%=payStayDay %> 박</pre>
-                        <input type="hidden" id="payStayDay" value="<%=payStayDay %>">
+                        <input type="hidden" id="totalPrice" value="<%= roomPrice*payStayDay%>">
                         <p  class="content" id="totalPrice" ><%=stringtotalPrice %> 원</p>
-                        <input type="hidden" value="<%=roomPrice%>">
                         <p class="title">적립금 사용</p>
-                        <%
-                        %>
                         <%if(m!=null) {%>
                         	<p class="content point"  id="point"></p>
                         <%}else {%>
@@ -280,12 +284,30 @@
                         <hr>
                         <div class="payAmount">
                             <span class="title">총 요금</span>
-                            <span class="content" ><%=stringPayAmount%> 원</span>
-                            <input type="hidden" id="payAmount" value="<%=roomPrice*payStayDay%>">
+                            <span class="content" id="payAmount"></span>
                         </div>
                     </div>
                 </div>
-                <button class="btn bc1" id="payBtn">결제하기</button> 
+                
+                
+                <%if(m !=null) {%>
+                <input type="hidden" id="memberNo" value="<%=m.getMemberNo()%>">
+				<%}else {%>
+				<input type="hidden" id="memberNo" value="0">
+				<%} %>   
+				<%if(m !=null) {%>
+                <input type="hidden" id="memberPoint" value="<%=m.getMemberPoint()%>">
+				<%}else {%>
+				<input type="hidden" id="memberPoint" value="0">
+				<%} %>   
+				<input type="hidden" id="roomNo" value="<%=roomNo%>">
+				<input type="hidden" id="roomCapacity" value="<%=roomCapacity%>">        
+				 
+				     
+                <input type="hidden" id="payAmount" value="<%=roomPrice*payStayDay%>">
+                <input type="hidden" id="payRoomPrice" value="<%=roomPrice%>">
+                <input type="hidden" id="payStayDay" value="<%=payStayDay %>">
+                <div class="btn bc1" id="paymentBtn">결제하기</div> 
             </form>
 		</div>
 		<div class="rule-wrap">
@@ -305,47 +327,90 @@
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
+		
+		const checkArr = [false,false,false];
+		
+		//point입력시 오른쪽 box에 사용 포인트 자동으로 입력(천단위로 콤마)해주게 하는 코드 
 		$(document).ready(function(){
 			$("#point").text('0 원');
 		});
-		$("#usePoint").keyup(function(){
-			let usePoint = $(this).val();
-			usePoint = usePoint.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			$("#point").text('-   '+usePoint+' 원');
+		$(document).ready(function(){
+			let totalPrice = $("#totalPrice").val();
+			totalPrice = totalPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$("#payAmount").text(totalPrice+' 원');
 		});
 		
-		$("#payment").on("click",function(){
-			const price = $("#totalPrice").text();
+		$("#usePoint").keyup(function(){
+			const memberPoint = $("#memberPoint").val();
+			const usePoint = $(this).val();
+			const totalPrice = $("#totalPrice").val();
 			
-			//거래 고유ID생성을 위해 현재 결제 날짜를 이용해서 처리
-			const d = new Date();
-			//""(공백)을 넣어주는 이유 : date값 생성시 ""를 더하지 않으면 숫자+연산이 되므로 문자덧셈을 위해 추가
-			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			IMP.init("imp32461786");	//결제 API사용을 위한 가맹점식별코드 입력
-			//IMP.request_pay({결제정보},function(rsp){처리할 함수})
-			IMP.request_pay({
-				merchant_uid : "상품코드_"+date,		//거래 ID
-				name : "결제 테스트",					//결제이름
-				amount : price,						//결제금액
-				buyer_email : "gddbwls@naver.com",	//구매자 email주소
-				buyer_name : "구매자",				//구매자 이름
-				buyer_tel : "010-1234-1234",		//구매자 전화번호
-				buyer_addr : "서울시 영등포구 당산동",		//rnaowk wnth
-				buyer_postcode : "12345"			//구매자 우편번호
-				
-			},function(rsp){
-				if(rsp.success){
-					console.log("결제가 완료됐습니다.");
-					console.log("고유ID : " + rsp.imp_uid);
-					console.log("상점거래ID : "+rsp.merchant_uid);
-					console.log("결제금액 : "+rsp.paid_amount);
-					console.log("카드승인번호 : " +rsp.apply_num);
-					//추가 DB작업이 필요한경우 이 부분에 결제내역을 DB에 저장하는 코드 작성
-					//여기서 서블릿으로 보낸다..?그럼 데이터들은 하나하나 제이쿼리로 받아와야되나요?
-				}else{
-					alert("에러내용 : "+rsp.err_msg);
-				}
-			});		
+			let payAmount = totalPrice-usePoint;
+			
+			usePointString = usePoint.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$("#point").text('-   '+usePointString+' 원');
+			$("#payAmount").text(payAmount+' 원');
+			
+			if(usePoint>memberPoint || usePoint>totalPrice){
+            	("#pointChk").text("사용 가능한 포인트를 초과하였습니다.");
+            	("#pointChk").css("color","red");
+            }else{
+            	checkArr[2]=true;
+            }
+			
+		});
+		//총 금액
+		
+		//유효성검사
+		//이름
+		$("#bookName").keyup(function(){
+			//1. 정규표현식 변수생성
+			const nameReg = /^[가-힣]{2,6}$/;
+			const name = $("#bookName").val();
+			console.log(name);
+			if(!nameReg.test(name) || name == ""){
+				//정규표현식에 만족하지 않는 경우
+				$("#nameChk").text("이름은 2~6 글자의 한글만 입력가능합니다. ");
+				$("#nameChk").css("color","red");
+			}else{
+				$("#nameChk").text("사용할 수 있는 이름입니다.");
+				$("#nameChk").css("color","green");
+				checkArr[0] = true;
+			}
+		});
+		//휴대폰
+		$("#bookPhone").keyup(function(){
+			//1. 정규표현식 변수생성
+			const phoneReg  = /^010-?([0-9]{4})-?([0-9]{4})$/;
+			const phone = $("#bookPhone").val();
+			if(!phoneReg.test(phone) || phone == ""){
+				//정규표현식에 만족하지 않는 경우
+				$("#phoneChk").text("연락처 형식을 맞춰주세요 010-XXXX-XXXX ");
+				$("#phoneChk").css("color","red");
+			}else{
+				$("#phoneChk").text("사용할 수 있는 연락처입니다.");
+				$("#phoneChk").css("color","green");
+				checkArr[1] = true;
+			}
+		});
+		
+		
+		$("#paymentBtn").on("click",function(e){
+            let count = 0;
+            for(let i = 0;i<checkArr.length;i++){
+                if(checkArr[i]){
+                    count++;
+                }
+            }
+          	if(count != 3){
+          		alert("정보를 확인하세요");
+          	}else{
+          		console.log("결제API실행");
+          	}
+        })
+		
+		
+		
 	</script>
 </body>
 </html>
