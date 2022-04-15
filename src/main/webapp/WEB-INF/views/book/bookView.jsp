@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 내 예약확인 ::</title>
 <style>
 	.mypage-content{
 		min-height: 800px;
@@ -94,14 +94,19 @@
 							</tr>
 							<tr>
 								<th class="th-1">총 결제금액</th>
-								<td class="td-1 pay-1">1,000,000 원</td>
+								<!-- 
+									bookView.do에서 pay끌어와서 여기로 전송
+									p.getPayAmount()로 최종결제금액 출력 
+								
+								-->
+								<td class="td-1 pay-1">#</td><td class="td-1 pay-1">원</td>
 								<%if(bd.getBookState()==0) {%>
 								<td class="td-1"><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								<%} %>
 							</tr>
 						</table>
 						
-						<!-- 모달내용 시작 -->
+								<!-- 모달내용 시작 -->
 								<!--예약취소 modal 시작-->
 								<div id="test-modal" class="modal-bg">
 									<div class="modal-wrap">
@@ -142,9 +147,9 @@
 									</div>
 									</div>
 									</div>
-								</div>
 								<!-- 예약취소 modal 끝 -->
 								<!-- 모달 내용 끝-->
+						</div><!-- mypage-content끝 -->
 					</div>
 				</div>
 			</div>

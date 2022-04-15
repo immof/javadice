@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>::비밀번호 변경::</title>
+<title>:: 비밀번호 변경 ::</title>
 <style>
 	.info-tbl{
 		margin: 15px;
