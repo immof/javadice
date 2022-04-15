@@ -114,4 +114,27 @@ public class ReviewDao {
 		return result;
 	}
 
+	public int reviewWrite(Connection conn, Review rev) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into review values(review_seq.nextval,?,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, rev.getBookNo());
+			pstmt.setInt(2, rev.getMemberNo());
+			pstmt.setInt(3, rev.getReviewScore());
+			pstmt.setString(4, rev.getReviewContent());
+			pstmt.setString(5, rev.getFilepath1());
+			pstmt.setString(6, rev.getFilepath2());
+			pstmt.setString(7, rev.getFilepath3());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }
