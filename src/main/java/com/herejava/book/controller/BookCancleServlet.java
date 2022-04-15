@@ -45,7 +45,6 @@ public class BookCancleServlet extends HttpServlet {
 		Member member = service2.selectOneMember(memberId);
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		
 		if(result>0) {
 			request.setAttribute("title", "예약취소 성공");
 			request.setAttribute("msg", "메인페이지로 돌아갑니다.");

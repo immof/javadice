@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 회원리뷰 ::</title>
 <style>
 .review-wrap{
 	display: flex;
@@ -186,7 +186,7 @@
 							<span class="room-type">객실타입: 스탠다드</span>
 							<%} %>
 							<span class="review-button">
-								<button class="btn bc4 bs6" id="update-btn" onclick="location.href='review_writeFrm.do'">수정</button>
+								<a class="btn bc4 bs6" id="update-btn" href="/reviewUpdateFrm.do?reviewNo=<%=rev.getReviewNo() %>">수정</a>
 								<button class="btn bc3 bs6" id="delete-btn">삭제</button>
 							</span>
 						</div>

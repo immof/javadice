@@ -419,14 +419,27 @@ footer > .footer-content > ul > li > a {
   background-color: #666;
   cursor: pointer;
 }
-.bc11{
-  background-color: yellowgreen;
+.bc6{
+  background-color: #432f31;
   color: #fff;
 }
-.bc11:hover{
-  background-color: green;
-  cursor: pointer;
+.bc7{
+  background-color: #a7a7a7;
+  color: #fff;
 }
+.bc8{
+  background-color: rgb(221,78,34);
+  color: #fff;
+}
+.bc9{
+  background-color: #c87431;
+  color: #fff;
+}
+.bc10{
+  background-color: #998465;
+  color: #fff;
+}
+
 .bs1 {
   padding: 1rem;
 }
@@ -444,14 +457,14 @@ footer > .footer-content > ul > li > a {
   font-size: 1.2em;
 }
 .bs5 {
-  padding: 2.5px 10px;
+  padding: 2px 8px;
   border-radius: 3px;
-  font-size: 1em;
+  font-size: 13px;
 }
 .bs6 {
-  padding: 5px 28px;
+  padding: 4px 21px;
   border-radius: 4px;
-  font-size: 1.2em;
+  font-size: 18px;
 }
 .bs7 {
   padding: 4px 10px;
