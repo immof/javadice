@@ -111,7 +111,7 @@ h3{
 		<%if(m != null){
 			if(m.getMemberLevel() == 0){ %>
 		<div class="detail-button">
-			<button class="bc1 bs2 detail-update" onclick="location.href='/updatePromotion.do?promotionNo=<%=p.getPromotionNo()%>'">수정하기</button>
+			<button class="bc1 bs2 detail-update" onclick="location.href='/promotionModifyFrm.do?promotionNo=<%=p.getPromotionNo()%>'">수정하기</button>
 			<button class="bc2 bs2 detail-delete">삭제</button>
 		</div>
 		<%	}
