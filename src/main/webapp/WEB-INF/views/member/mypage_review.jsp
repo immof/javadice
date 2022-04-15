@@ -189,7 +189,7 @@
 							<%} %>
 							<span class="review-button">
 								<a class="btn bc4 bs6" id="update-btn" href="/reviewUpdateFrm.do?reviewNo=<%=rev.getReviewNo() %>">수정</a>
-								<button class="btn bc3 bs6" id="delete-btn">삭제</button>
+								<a class="btn bc3 bs6" id="delete-btn" href="/reviewDelete.do?reviewNo=<%=rev.getReviewNo() %>">삭제</a>
 							</span>
 						</div>
 						<div class="review-text view-change">
