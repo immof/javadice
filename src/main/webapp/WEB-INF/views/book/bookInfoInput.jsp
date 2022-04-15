@@ -208,6 +208,11 @@
 		padding-bottom: 30px;
 		border-bottom: 1px solid #dcdcdc;
 	}
+	
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	}
 
 </style>
 </head>
@@ -247,7 +252,7 @@
                         
                         <p>인원</p>
                         <div class="box">
-	                        <input type="number" id="bookPeople"  value="<%=bookPeople %>" min="1" max="<%=roomCapacity %>" style="text-align:right;" readonly><span>명</span>
+	                        <input type="number" id="bookPeople"  value="<%=bookPeople %>" min="1" max="<%=roomCapacity %>" style="text-align:center; width:100px;" readonly><span>명</span>
                         </div>
                         
                         <p>예약자 전화번호</p>
@@ -261,10 +266,10 @@
                         <p>적립금</p>
                         <div class="box">
                         <%if(m!=null) { %>
-	                        <input type="number" id="usePoint" placeholder="<%=m.getMemberPoint() %>p 사용가능" style="text-align:right;"><span>point</span>
-	                        <pre class="chk" id="pointChk"  style="font-size: 15px;">   </pre>
+	                        <input type="number" id="usePoint" placeholder="<%=m.getMemberPoint() %>p 사용가능" style="text-align:right;padding-right:10px;box-sizing: border-box; margin-bottom:0 "><span>point</span>
+	                        <pre class="chk" id="pointChk"  style="font-size: 15px;padding-top:15px;">   </pre>
 	                        <%}else{ %>
-	                        	<input type="number" id="usePoint" value="0" style="text-align:right;" disabled><span>point</span>
+	                        	<input type="number" id="usePoint" value="0" style="text-align:right;padding-right:5px;box-sizing: border-box; margin-bottom:0" disabled><span>point</span>
 	                        <%} %>
                          </div>
                     </div>
@@ -309,8 +314,10 @@
                 <input type="hidden" id="payAmount" value="<%=roomPrice*payStayDay%>">
                 <input type="hidden" id="payRoomPrice" value="<%=roomPrice%>">
                 <input type="hidden" id="payStayDay" value="<%=payStayDay %>">
-                <div class="btn bc1" id="paymentBtn">결제하기</div> 
             </form>
+            	<div class=btnBox>
+                	<div class="btn bc1" id="paymentBtn">결제하기</div> 
+            	</div>
 		</div>
 		<div class="rule-wrap">
 			<div class="price">
@@ -330,11 +337,14 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	<script>
 		
-		const checkArr = [false,false,false];
+		let checkArr = [false,false,true];
 		
 		//point입력시 오른쪽 box에 사용 포인트 자동으로 입력(천단위로 콤마)해주게 하는 코드 
 		$(document).ready(function(){
 			$("#point").text('0 원');
+			if($("#bookName").val()!=""||$("#bookPhone").val()!=""){
+				checkArr = [true,true,true];
+			}
 		});
 		$(document).ready(function(){
 			let totalPrice = $("#totalPrice").val();
@@ -344,22 +354,24 @@
 		
 		$("#usePoint").keyup(function(){
 			const memberPoint = $("#memberPoint").val();
-			const usePoint = $(this).val();
+			let usePoint = $(this).val();
 			const totalPrice = $("#totalPrice").val();
 			
-			let payAmount = totalPrice-usePoint;
-			
-			usePointString = usePoint.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			$("#point").text('-   '+usePointString+' 원');
-			$("#payAmount").text(payAmount+' 원');
-			
-			if(usePoint>memberPoint || usePoint>totalPrice){
-            	$("#pointChk").text("사용 가능한 포인트를 초과하였습니다.");
+			//포인트 유효성검사
+			if(usePoint-memberPoint>0 || usePoint-totalPrice>0){
+            	$("#pointChk").text("     사용 가능한 포인트를 초과하였습니다.");
             	$("#pointChk").css("color","red");
+            	usePoint = $(this).val(memberPoint);
+            	$("#pointChk").text("     ");
             }else{
+            	$("#pointChk").text("     ");
             	checkArr[2]=true;
             }
 			
+			let payAmount = totalPrice-usePoint;
+			usePointString = usePoint.replace(/\B(?=(\d{3})+(?!\d))/g, ",").toString();
+			$("#point").text('-   '+usePointString+' 원');
+			$("#payAmount").text(payAmount+' 원');
 		});
 		//총 금액
 		
@@ -374,11 +386,15 @@
 				//정규표현식에 만족하지 않는 경우
 				$("#nameChk").text("이름은 2~6 글자의 한글만 입력가능합니다. ");
 				$("#nameChk").css("color","red");
+				checkArr[0] = false;
 			}else{
-				$("#nameChk").text("사용할 수 있는 이름입니다.");
+				$("#nameChk").text("     ");
 				$("#nameChk").css("color","green");
 				checkArr[0] = true;
 			}
+			console.log(checkArr[0]);
+			console.log(checkArr[1]);
+			console.log(checkArr[2]);
 		});
 		//휴대폰
 		$("#bookPhone").keyup(function(){
@@ -389,8 +405,9 @@
 				//정규표현식에 만족하지 않는 경우
 				$("#phoneChk").text("연락처 형식을 맞춰주세요 010-XXXX-XXXX ");
 				$("#phoneChk").css("color","red");
+				checkArr[1] = false;
 			}else{
-				$("#phoneChk").text("사용할 수 있는 연락처입니다.");
+				$("#phoneChk").text("     ");
 				$("#phoneChk").css("color","green");
 				checkArr[1] = true;
 			}
@@ -398,6 +415,10 @@
 		
 		
 		$("#paymentBtn").on("click",function(e){
+			if($("#usePoint").val().length==0){
+				$("#usePoint").val(0);
+				checkArr[2]=true;
+			}
             let count = 0;
             for(let i = 0;i<checkArr.length;i++){
                 if(checkArr[i]){
@@ -405,6 +426,9 @@
                 }
             }
           	if(count != 3){
+          		console.log(checkArr[0]);
+          		console.log(checkArr[1]);
+          		console.log(checkArr[2]);
           		alert("정보를 확인하세요");
           	}else{
           		console.log("결제API실행");
