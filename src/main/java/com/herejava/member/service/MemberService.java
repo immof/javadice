@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 import com.herejava.book.dao.BookDao;
 import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookCheckPage;
+import com.herejava.book.vo.BookPay;
 import com.herejava.member.dao.MemberDao;
 import com.herejava.member.vo.Member;
 import com.herejava.member.vo.MemberPageData;
@@ -266,6 +267,20 @@ public int passChange(String memberId, String memberPw) {
 	return result;
 }
 
+public int updateMemberPoint(BookPay bpay) {
+	Connection conn = JDBCTemplate.getConnection();
+	MemberDao dao = new MemberDao();
+	int newPoint = bpay.getMemberPoint()-bpay.getMinusPoint()+bpay.getPlusPoint();
+	int result = dao.updateMemberPoint(conn, bpay , newPoint);
+	if(result>0) {
+		JDBCTemplate.commit(conn);
+	}else {
+		JDBCTemplate.rollback(conn);
+	}
+	JDBCTemplate.close(conn);
+	return result;
+}
+  
 public int getPoint(int memberNo) {
 	Connection conn = JDBCTemplate.getConnection();
 	MemberDao dao = new MemberDao();
