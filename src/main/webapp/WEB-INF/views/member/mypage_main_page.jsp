@@ -283,10 +283,10 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<a type="button" class="btn bc4 bs6" href="/reviewWriteFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
 												<%break;											
@@ -299,7 +299,7 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td  class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
@@ -359,17 +359,17 @@
 					<div class="mypage-content-title title1">내 정보</div>
 					<table class="my_info_tbl">
 						<tr class="tr-1">
-							<th class="th-1">이메일</th>
+							<th class="th-1" style="padding-left:10px;">이메일</th>
 							<td class="td-1"><%=m.getMemberId() %></td>
 							<td><pre>                                                                                                                                                  </pre></td>
 							<td><a class="p-1" href="/mypage_info.do">수정하기></a></td>
 						</tr>
 						<tr class="tr-1">
-							<th class="th-1">닉네임</th>
+							<th class="th-1" style="padding-left:10px;">닉네임</th>
 							<td class="td-1"><%=m.getMemberNick() %></td>
 						</tr>	
 						<tr class="tr-1">
-							<th class="th-1">비밀번호</th>
+							<th class="th-1" style="padding-left:10px;">비밀번호</th>
 							<td class="td-1">
 							<!-- 비밀번호 마스킹처리 -->
 							<% int pwCount = (m.getMemberPw()).length();%>
@@ -380,7 +380,7 @@
 							</td>
 						</tr>
 						<tr class="tr-1">
-							<th class="th-1">휴대폰번호</th>
+							<th class="th-1" style="padding-left:10px;">휴대폰번호</th>
 							<td class="td-1"><%=m.getMemberPhone() %></td>
 						</tr>
 					</table><!-- my_info_tbl 끝 -->
