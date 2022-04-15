@@ -266,5 +266,12 @@ public int passChange(String memberId, String memberPw) {
 	return result;
 }
 
+public int getPoint(int memberNo) {
+	Connection conn = JDBCTemplate.getConnection();
+	MemberDao dao = new MemberDao();
+	int totalPoint = dao.getPoint(conn, memberNo);
+	return totalPoint;
+}
+
   
 }//MemberService class

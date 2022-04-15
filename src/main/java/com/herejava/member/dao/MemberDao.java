@@ -341,6 +341,28 @@ public class MemberDao {
 	}
 
 
+	public int getPoint(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalPoint = 0;
+		String query = "select member_point from member where member_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalPoint = rset.getInt("member_point");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return totalPoint;
+	}
+
+
 	
 	
 	

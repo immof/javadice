@@ -107,7 +107,7 @@
               <li class="f-bold"><a href="/bookList.do?memberNo=<%=member.getMemberNo() %>&reqPage=1">예약내역</a></li>
               <hr>
               <li class="f-bold">활동정보</li>
-              <li><a href="#">적립금</a></li>
+              <li><a href="/mypage_point.do?memberNo=<%=member.getMemberNo() %>">적립금</a></li>
               <li><a href="/review.do?memberNo=<%=member.getMemberNo() %>">방문후기</a></li>
               <li><a href="/askList.do?reqPage=1">문의하기</a></li>
               <hr>
