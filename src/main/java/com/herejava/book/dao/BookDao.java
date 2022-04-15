@@ -121,12 +121,22 @@ public class BookDao {
 		return list;
 	}
 
-	// 멤버번호로 예약리스트 가져오는 메소드
+	// 멤버번호로 예약리스트 가져오는 메소드(최신순 정렬)
 	public ArrayList<BookData> selectAllBook(Connection conn, int memberNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<BookData> list = new ArrayList<BookData>();
-		String query = "SELECT BOOK_NO, FILEPATH, ROOM_NAME, CHECK_IN, CHECK_OUT, BOOK_STATE, BOOK_PEOPLE, BOOK_NAME, BOOK_PHONE FROM BOOK JOIN ROOM USING(ROOM_NO) WHERE MEMBER_NO=?";
+		String query = "SELECT * FROM \r\n"
+				+ "(SELECT ROWNUM AS RNUM,N.* \r\n"
+				+ "FROM \r\n"
+				+ "(SELECT B.BOOK_NO, R.FILEPATH, R.ROOM_NAME, B.CHECK_IN, B.CHECK_OUT, B.BOOK_STATE, B.BOOK_PEOPLE, B.BOOK_NAME, B.BOOK_PHONE, NVL(V.REVIEW_NO,0) AS REVIEW_NO \r\n"
+				+ "FROM BOOK B\r\n"
+				+ "INNER JOIN ROOM R\r\n"
+				+ "ON B.ROOM_NO = R.ROOM_NO \r\n"
+				+ "LEFT JOIN REVIEW V\r\n"
+				+ "ON B.BOOK_NO = V.BOOK_NO\r\n"
+				+ "WHERE B.MEMBER_NO=?\r\n"
+				+ "ORDER BY B.BOOK_NO DESC)N)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memberNo);
@@ -142,6 +152,7 @@ public class BookDao {
 				bd.setBookPeople(rset.getInt("book_people"));
 				bd.setBookName(rset.getString("book_name"));
 				bd.setBookPhone(rset.getString("book_phone"));
+				bd.setReviewNo(rset.getInt("review_no"));
 				list.add(bd);
 			}
 		} catch (SQLException e) {
