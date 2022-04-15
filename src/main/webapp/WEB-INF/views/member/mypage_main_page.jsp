@@ -152,7 +152,7 @@
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
-										<button type="button" class="btn bc4 bs6" onclick="#">리뷰쓰기</button>
+										<a type="button" class="btn bc4 bs6" href="/review_writeFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
 												<%break;											
 											 }//예약취소
@@ -274,7 +274,7 @@
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
-										<button type="button" class="btn bc4 bs6" onclick="#">리뷰쓰기</button>
+										<a type="button" class="btn bc4 bs6" href="/reviewWriteFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
 												<%break;											
 											 }//예약취소

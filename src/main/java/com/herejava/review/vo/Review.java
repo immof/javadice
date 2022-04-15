@@ -2,7 +2,7 @@ package com.herejava.review.vo;
 
 public class Review {
 	private int reviewNo;
-	private int bookNo;
+	private long bookNo;
 	private int memberNo;
 	private int reviewScore;
 	private String reviewContent;
@@ -33,10 +33,10 @@ public class Review {
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
-	public int getBookNo() {
+	public long getBookNo() {
 		return bookNo;
 	}
-	public void setBookNo(int bookNo) {
+	public void setBookNo(long bookNo) {
 		this.bookNo = bookNo;
 	}
 	public int getMemberNo() {

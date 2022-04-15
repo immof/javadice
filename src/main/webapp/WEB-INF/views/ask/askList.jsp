@@ -66,6 +66,7 @@
 		width: 80px;
 		height: 40px;
 		line-height: 10px;
+		border-radius: 5px;
 	}
 	
 </style>
@@ -81,7 +82,7 @@
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
 		<div class="page1-title">문의사항
-			<%if(m!=null){ %>
+			<%if(m!=null && m.getMemberLevel() == 1){ %>
 			<a class="btn bc1 writeBtn" href="askWriteFrm.do">글쓰기</a>
 			<%} %>
 		</div>

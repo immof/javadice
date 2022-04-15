@@ -1,4 +1,4 @@
-package com.herejava.review.controller;
+package com.herejava.ask.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.book.service.BookService;
-import com.herejava.book.vo.Book;
+import com.herejava.ask.service.AskService;
+import com.herejava.ask.vo.Ask;
 
 /**
- * Servlet implementation class Review_writeFrmServlet
+ * Servlet implementation class AskUpdateFrmServlet
  */
-@WebServlet(name = "Review_writeFrm", urlPatterns = { "/review_writeFrm.do" })
-public class Review_writeFrmServlet extends HttpServlet {
+@WebServlet(name = "AskUpdateFrm", urlPatterns = { "/askUpdateFrm.do" })
+public class AskUpdateFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Review_writeFrmServlet() {
+    public AskUpdateFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +32,14 @@ public class Review_writeFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		long bookNo = Long.parseLong(request.getParameter("bookNo"));
-		BookService service = new BookService();
-		Book b = service.selectOneBook(bookNo);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/review_writeFrm.jsp");
-		request.setAttribute("b", b);
+		int askNo = Integer.parseInt(request.getParameter("askNo"));
+		
+		AskService service = new AskService();
+		Ask a = service.getAsk(askNo);
+		
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askUpdateFrm.jsp");
+		request.setAttribute("a", a);
 		view.forward(request, response);
 	}
 
