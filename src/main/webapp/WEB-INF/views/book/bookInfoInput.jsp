@@ -13,7 +13,7 @@
 		int payStayDay = (int)(request.getAttribute("payStayDay"));
 		String roomName = (String)request.getAttribute("roomName");
 		int totalPrice = roomPrice*payStayDay;
-		
+		int pointRate = 10;	//최종결제금액의 10%
     	
     %>
 <!DOCTYPE html>
@@ -309,11 +309,12 @@
 				<%} %>   
 				<input type="hidden" id="roomNo" value="<%=roomNo%>">
 				<input type="hidden" id="roomCapacity" value="<%=roomCapacity%>">        
-				 
-				     
+				<input type="hidden" id="checkIn" value="<%=checkIn%>">        
+				<input type="hidden" id="checkOut" value="<%=checkOut%>">        
                 <input type="hidden" id="payAmount" >
                 <input type="hidden" id="payRoomPrice" value="<%=roomPrice%>">
                 <input type="hidden" id="payStayDay" value="<%=payStayDay %>">
+                <input type="hidden" id="pointRate" value="<%=pointRate %>">
             </form>
             	<div class=btnBox>
                 	<div class="btn bc1" id="paymentBtn">결제하기</div> 
@@ -349,7 +350,6 @@
 		});
 		$(document).ready(function(){
 			let totalPrice = $("#totalPrice").val();
-			totalPrice = totalPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			$("#stringPayAmount").text(totalPrice);
 		});
 		
@@ -433,10 +433,19 @@
           		alert("정보를 확인하세요");
           	}else{
           		//모든 유효성 검사가 완료되면 결제 API 실행!!
-          		
-       			const price = $("#stringPayAmount").text();
-				
-          		
+          		console.log("API실행");
+       			const price = $("#stringPayAmount").text();	//총요금(payAmount)
+       			const plusPoint = parseInt(($("#pointRate").val())*price/100);
+       			const MemberNo = $("#MemberNo").val();		//비회원은 0
+       			console.log("usepoint: "+usePoint);
+       			const payStayDay = $("#payStayDay").val();
+       			const payRoomPrice = $("#payRoomPrice").val();
+       			const checkIn = $("#checkIn").val();
+       			const checkout = $("#checkOut").val();
+       			const roomNo = $("#roomNo").val();
+       			const bookName = $("#bookName").val();
+       			const bookPeople = $("#bookPeople").val();
+       			const bookPhone = $("#bookPhone").val();
         			
         			
           	}//else끝
