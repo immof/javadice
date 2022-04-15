@@ -116,9 +116,6 @@
 									<td>
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<!-- 리뷰버튼 
-									<button type="button" onclick="location.href='joinUs.jsp' ">회원가입</button>
-									-->
 									<td>
 										<button type="button" class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
 									</td>	
@@ -171,7 +168,7 @@
 										<button class="btn bc7 bs6">취소완료</button>
 									</td>	
 											<%break;
-										}; 
+										};//switch문 끝
 										list.add(bd); %>
 								</tr>
 								</table>
@@ -247,7 +244,7 @@
 											<%	break;
 											case 1: bookState = "이용완료";
 												//리뷰o
-												if(1 == 0){
+												if(bd.getReviewNo() != 0){
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
 													<p class="p-2">
@@ -339,7 +336,7 @@
 								<!-- 모달 내용 끝-->
 							<%}else { %>
 								<h3 class="h3-0">최근 예약내역이 없습니다.</h3>
-						<%} %>
+						<%}; %>
 				<!-- 최근예약내역 끝 -->
 					</div><!-- my_book_wrap 끝 -->
 					<!-- my_info_tbl 시작 -->

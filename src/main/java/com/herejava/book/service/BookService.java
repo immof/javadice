@@ -360,6 +360,66 @@ public class BookService {
 		return result;
 	}
 	
+	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 - 이신영 (reviewNo추가)
+	public BookPageData selectBookList2(int memberNo, int reqPage) {
+		Connection conn= JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		
+		//numPerPage = 한 페이지당 게시물 수 
+		int numPerPage = 4;
+		
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage + 1;
+		ArrayList<BookData> list = dao.selectBookList2(conn,memberNo,start,end);
+		//페이징처리
+		int totalCount = dao.totalBookCount(conn,memberNo);
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		int pageNaviSize = 5; 
+		
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		//페이지 네비게이션 제작 시작
+		String pageNavi = "<ul class='pagination circle-style'>";
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/bookList.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		//페이지숫자
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/bookList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/bookList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo<=totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/bookList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul>";
+		BookPageData bpd = new BookPageData(list, pageNavi);
+		JDBCTemplate.close(conn);
+		return bpd;
+	}
 }
 
 

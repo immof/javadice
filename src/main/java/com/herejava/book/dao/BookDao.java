@@ -439,6 +439,7 @@ public class BookDao {
 				bd.setBookPeople(rset.getInt("book_people"));
 				bd.setBookName(rset.getString("book_name"));
 				bd.setBookPhone(rset.getString("book_phone"));
+				bd.setReviewNo(rset.getInt("review_no"));
 				list.add(bd);
 			}
 		} catch (SQLException e) {
@@ -475,5 +476,50 @@ public class BookDao {
 		return result;
 	}
 
+	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 (최신 예약 날짜 순으로 정렬) - 이신영(reviewNo 추가)
+	public ArrayList<BookData> selectBookList2(Connection conn, int memberNo, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<BookData> list = new ArrayList<BookData>();
+		String query = "SELECT * FROM \r\n"
+				+ "(SELECT ROWNUM AS RNUM,N.* \r\n"
+				+ "FROM \r\n"
+				+ "(SELECT B.BOOK_NO, R.FILEPATH, R.ROOM_NAME, B.CHECK_IN, B.CHECK_OUT, B.BOOK_STATE, B.BOOK_PEOPLE, B.BOOK_NAME, B.BOOK_PHONE, NVL(V.REVIEW_NO,0) AS REVIEW_NO \r\n"
+				+ "FROM BOOK B\r\n"
+				+ "INNER JOIN ROOM R\r\n"
+				+ "ON B.ROOM_NO = R.ROOM_NO \r\n"
+				+ "LEFT JOIN REVIEW V\r\n"
+				+ "ON B.BOOK_NO = V.BOOK_NO\r\n"
+				+ "WHERE B.MEMBER_NO=?\r\n"
+				+ "ORDER BY B.BOOK_NO DESC)N) where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				BookData bd = new BookData();
+				bd.setBookNo(rset.getLong("book_no"));
+				bd.setFilePath(rset.getString("filepath"));
+				bd.setRoomName(rset.getString("room_name"));
+				bd.setCheckIn(rset.getString("check_in"));
+				bd.setCheckOut(rset.getString("check_out"));
+				bd.setBookState(rset.getInt("book_state"));
+				bd.setBookPeople(rset.getInt("book_people"));
+				bd.setBookName(rset.getString("book_name"));
+				bd.setBookPhone(rset.getString("book_phone"));
+				bd.setReviewNo(rset.getInt("review_no"));
+				list.add(bd);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 
 }
