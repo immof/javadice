@@ -108,6 +108,7 @@ public class BookDao {
 				bd.setBookPeople(rset.getInt("book_people"));
 				bd.setBookName(rset.getString("book_name"));
 				bd.setBookPhone(rset.getString("book_phone"));
+				bd.setBookDay(rset.getString("book_day"));
 				list.add(bd);
 			}
 		} catch (SQLException e) {
