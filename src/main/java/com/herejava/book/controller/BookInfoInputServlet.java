@@ -33,6 +33,7 @@ public class BookInfoInputServlet extends HttpServlet {
 		//2.값추출
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 		int roomPrice = Integer.parseInt(request.getParameter("roomPrice"));
+		int roomCapacity = Integer.parseInt(request.getParameter("roomCapacity"));
 		int bookPeople = Integer.parseInt(request.getParameter("bookPeople"));
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
@@ -51,6 +52,7 @@ public class BookInfoInputServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookInfoInput.jsp");
 		request.setAttribute("roomNo", roomNo);
 		request.setAttribute("roomPrice", roomPrice);
+		request.setAttribute("roomCapacity", roomCapacity);
 		request.setAttribute("bookPeople", bookPeople);
 		request.setAttribute("checkIn", checkIn);
 		request.setAttribute("checkOut", checkOut);

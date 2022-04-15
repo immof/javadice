@@ -4,15 +4,17 @@
     <%
     	DecimalFormat formatter = new DecimalFormat("###,###");
     
-    	String roomName = "로열스위트";
-    	int roomNo = 9;
-    	int roomCapacity = 7;
-    	int bookPeople = 3;
-    	int payStayDay = 3;
-    	int roomPrice = 100000000;
+    	int roomNo = (int)request.getAttribute("roomNo");
+		int roomPrice = (int)(request.getAttribute("roomPrice"));
+		int roomCapacity = (int)(request.getAttribute("roomCapacity"));
+		int bookPeople = (int)(request.getAttribute("bookPeople"));
+		String checkIn = (String)request.getAttribute("checkIn");
+		String checkOut = (String)request.getAttribute("checkOut");
+		int payStayDay = (int)(request.getAttribute("payStayDay"));
+		String roomName = (String)request.getAttribute("roomName");
+		
+		
     	
-    	//적립률 선언
-    	double per = 0.1;
     %>
 <!DOCTYPE html>
 <html>
@@ -352,8 +354,8 @@
 			$("#payAmount").text(payAmount+' 원');
 			
 			if(usePoint>memberPoint || usePoint>totalPrice){
-            	("#pointChk").text("사용 가능한 포인트를 초과하였습니다.");
-            	("#pointChk").css("color","red");
+            	$("#pointChk").text("사용 가능한 포인트를 초과하였습니다.");
+            	$("#pointChk").css("color","red");
             }else{
             	checkArr[2]=true;
             }
