@@ -367,7 +367,7 @@
 							</td>
 						</tr>
 						<tr class="tr-1">
-							<th>휴대폰번호</th>
+							<th class="th-1">휴대폰번호</th>
 							<td class="td-1"><%=m.getMemberPhone() %></td>
 						</tr>
 					</table><!-- my_info_tbl 끝 -->
