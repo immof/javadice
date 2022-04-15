@@ -19,4 +19,25 @@ public class ReviewService {
 		return reviewList;
 	}
 
+	public ReviewList getReview(int reviewNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ReviewDao dao = new ReviewDao();
+		ReviewList list = dao.getReview(conn, reviewNo);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	public int reviewUpdate(Review rev) {
+		Connection conn = JDBCTemplate.getConnection();
+		ReviewDao dao = new ReviewDao();
+		int result = dao.reviewUpdate(conn, rev);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }
