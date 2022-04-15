@@ -36,14 +36,21 @@ public class ReviewServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		int memberNo= Integer.parseInt(request.getParameter("memberNo")); 
+		int memberNo= Integer.parseInt(request.getParameter("memberNo"));
+		boolean masterCheck = Boolean.parseBoolean(request.getParameter("masterCheck"));
 		//3.비즈니스로직
 		ReviewService service = new ReviewService();
 		ArrayList<ReviewList> reviewList = service.myReview(memberNo);
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_review.jsp");
-		request.setAttribute("reviewList", reviewList);
-		view.forward(request, response);
+		if(masterCheck) {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_review.jsp");
+			request.setAttribute("reviewList", reviewList);
+			view.forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_review.jsp");
+			request.setAttribute("reviewList", reviewList);
+			view.forward(request, response);
+		}
 	}
 
 	/**
