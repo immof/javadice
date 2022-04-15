@@ -25,7 +25,7 @@ public class ReviewDao {
 			while(rset.next()) {
 				ReviewList rv = new ReviewList();
 				rv.setReviewNo(rset.getInt("review_no"));
-				rv.setBookNo(rset.getInt("book_no"));
+				rv.setBookNo(rset.getLong("book_no"));
 				rv.setMemberNo(rset.getInt("member_no"));
 				rv.setReviewScore(rset.getInt("review_score"));
 				rv.setReviewContent(rset.getString("review_content"));
@@ -65,7 +65,7 @@ public class ReviewDao {
 			if(rset.next()) {
 				list = new ReviewList();
 				list.setReviewNo(rset.getInt("review_no"));
-				list.setBookNo(rset.getInt("book_no"));
+				list.setBookNo(rset.getLong("book_no"));
 				list.setMemberNo(rset.getInt("member_no"));
 				list.setReviewScore(rset.getInt("review_score"));
 				list.setReviewContent(rset.getString("review_content"));
