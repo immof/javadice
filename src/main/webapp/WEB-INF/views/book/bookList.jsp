@@ -123,7 +123,9 @@
 													</p>
 													</td>
 													<td><%=bookState %></td>
-													<td><button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button></td>	
+													<td>
+														<a class="btn bc2 bs6" href="#">리뷰보기</a>
+													</td>	
 											<% 	//리뷰x
 												}else{
 											%>
@@ -134,7 +136,7 @@
 													</p>
 													</td>
 													<td><%=bookState %></td>
-													<td><button type="button" class="btn bc2 bs6" onclick="#">리뷰쓰기</button></td>	
+													<td><a class="btn bc4 bs6" href="/review_writeFrm.do">리뷰쓰기</a></td>	
 												<%break;											
 											 }//예약취소
 											case 2: bookState = "취소완료";

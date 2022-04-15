@@ -137,7 +137,7 @@
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
-										<button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button>
+										<a class="btn bc2 bs6" href="#">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
 												}else{
@@ -152,7 +152,6 @@
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
-										<!-- <button class="btn bc4 bs6" onclick="/review_writeFrm.do">리뷰쓰기</button> -->
 											<a class="btn bc4 bs6" href="/review_writeFrm.do">리뷰쓰기</a>
 									</td>	
 												<%break;											
