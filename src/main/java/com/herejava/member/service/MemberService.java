@@ -280,6 +280,13 @@ public int updateMemberPoint(BookPay bpay) {
 	JDBCTemplate.close(conn);
 	return result;
 }
+  
+public int getPoint(int memberNo) {
+	Connection conn = JDBCTemplate.getConnection();
+	MemberDao dao = new MemberDao();
+	int totalPoint = dao.getPoint(conn, memberNo);
+	return totalPoint;
+}
 
   
 }//MemberService class

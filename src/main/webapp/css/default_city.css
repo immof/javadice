@@ -122,6 +122,7 @@ header {
   top: 40px;
   margin-left: 40px;
   background-color: white;
+
 }
 
 .login-sub-navi>li{
@@ -195,11 +196,12 @@ nav>ul{
   position: absolute;
   list-style-type: none;
   display: none;
-  min-width: 110px;
-  box-shadow: 0px 3px 5px 0px rgb(0 0 0 / 20%);
+  min-width: 120px;
+  box-shadow: 0px 3px 5px 0px rgb(0 0 0 / 40%);
   padding: 15px;
   background-color: #fff;
   border-radius: 0 0 8px 8px;
+  z-index: 99;
 }
 .sub-navi>li{
   height: 30px;
@@ -213,6 +215,131 @@ nav>ul{
   color: #998465;
   transition-duration: 0.5s;
 }
+
+/* 이미지 슬라이드 */
+
+   .main-img-title{
+        position: absolute;
+        left: 340px;
+        z-index: 15;
+        width: 80%;
+        white-space: nowrap;
+        letter-spacing: -1px;
+        text-align: left;
+        padding: 0 86px;
+        bottom: 200px;
+        top: 300px;
+    }
+    .main-img-title *{
+        color: #fff;
+        width: 80%;
+        display: block;
+    }
+    .main-img-title span{
+        font-size: 22px;
+    }
+    .main-strong-title{
+        font-size: 54px;
+    }
+    .main-strong-content{
+        margin-top: 20px;
+        font-size: 16px;
+    }
+    .main-img-title a{
+        width: 186px;
+        height: 46px;
+        font-size: 16px;
+        margin-top: 55px;
+        background-color: transparent;
+        border: 2px solid #fff;
+        text-align: center;
+        line-height: 46px;
+    }  
+    .main-img-title a:hover{
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.33);
+        transition-duration: 1.5s;
+    }
+    .main-img-icon{
+        margin-top: 55px;
+        display: flex;
+    }
+
+.con{
+  position: relative;
+}
+.slick-track{
+    height: 780px;
+    z-index: 8;
+}
+
+.slick-prev:before, .slick-next:before{
+  color: #fff !important;
+  opacity: 0.7 ; 
+}
+.slick-prev{
+  left: 20px !important ;
+  z-index: 9 ;
+}
+.slick-next{
+  right: 20px !important ;
+  z-index: 9 ;  
+}
+.slick-dots{
+  top : 700px !important;
+}
+.slick-dots li button:hover:before, .slick-dots li button:focus:before{
+  color: #fff ;
+}
+.slick-dots li.slick-active button:before{
+  color: #fff !important;  
+}
+.slick-dots li button:before{
+  color: #fff !important;  
+}
+.slider-items{
+  background-repeat: no-repeat ;
+  background-size: cover ;
+}
+.item1{
+  background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("../img/main_item1.jpg") !important;
+    background-size: cover;
+    position: relative;
+}
+.item2{
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+        ),
+        url("../img/main_item2.jpg") !important;
+        background-size: cover;
+        position: relative;
+}
+.item3{
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+        ),
+        url("../img/main_item3.jpg") !important;
+        background-size: cover;
+        position: relative;
+}
+.item4{
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+          ),
+          url("../img/main_item4.jpg") !important;
+    background-size: cover;
+          position: relative;
+}
+
+
+
 
 /* page - content */
 
