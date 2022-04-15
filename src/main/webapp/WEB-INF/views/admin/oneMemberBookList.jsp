@@ -65,7 +65,7 @@
 					<input type="hidden" class="check" value="<%=check%>">
 					<div class="subMenuTab">
 						<ul>
-							<li style="margin-left:100px;"><a class="btn3" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=3">전체보기</a></li>
+							<li style="margin-left:154px;"><a class="btn3" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=3">전체보기</a></li>
 							<li><a class="btn0" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=0">이용예정</a></li>
 							<li><a class="btn1" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=1">이용완료</a></li>
 							<li><a class="btn2" href="/adminBookList.do?memberNo=<%=mem.getMemberNo() %>&memberNick=<%=mem.getMemberNick() %>&reqPage=1&chk=2">취소내역</a></li>
@@ -74,13 +74,14 @@
 					<% if(list.size()!=0){ %>
 						<table class="tbl tbl-hover">
 							<tr>
-								<th> </th><th>객실명</th><th>체크인 / 체크아웃</th><th> </th><th> </th>
+								<th> </th><th>객실명</th><th>체크인 / 체크아웃</th><th>예약날짜</th><th> </th><th> </th>
 							</tr>
 						<%for (BookData bd : list) {%>
 							<tr class="tr-1">
 								<td><img class="img-0" src="/img/<%=bd.getFilePath()%>"></td>
 								<td><%=bd.getRoomName()%></td>
 								<td><%=bd.getCheckIn()%> / <%=bd.getCheckOut()%></td>
+								<td><%=bd.getBookDay() %></td>
 								<td><a class="detailBtn" style="text-decoration: underline;" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">상세보기></a></td>
 								<%if(bd.getBookState()==0){%>
 									<td><a class="btn bc3 delbookbtn" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">예약취소</a></td>
