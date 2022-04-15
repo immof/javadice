@@ -73,7 +73,7 @@
 				<%} %>
 			</div>
 		</div>
-		 <div class="header-bottom">
+		 <div class="header-bottom" style="z-index:20;">
          <nav>
             <ul class="navi">
                <li>

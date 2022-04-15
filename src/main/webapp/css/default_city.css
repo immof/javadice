@@ -122,6 +122,7 @@ header {
   top: 40px;
   margin-left: 40px;
   background-color: white;
+
 }
 
 .login-sub-navi>li{
@@ -195,11 +196,12 @@ nav>ul{
   position: absolute;
   list-style-type: none;
   display: none;
-  min-width: 110px;
-  box-shadow: 0px 3px 5px 0px rgb(0 0 0 / 20%);
+  min-width: 120px;
+  box-shadow: 0px 3px 5px 0px rgb(0 0 0 / 40%);
   padding: 15px;
   background-color: #fff;
   border-radius: 0 0 8px 8px;
+  z-index: 99;
 }
 .sub-navi>li{
   height: 30px;
@@ -284,7 +286,7 @@ nav>ul{
   z-index: 9 ;  
 }
 .slick-dots{
-  top : 800px !important;
+  top : 700px !important;
 }
 .slick-dots li button:hover:before, .slick-dots li button:focus:before{
   color: #fff ;
