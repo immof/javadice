@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 회원리뷰 ::</title>
 <style>
 .review-wrap{
 	display: flex;

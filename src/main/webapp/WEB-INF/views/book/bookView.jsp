@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 내 예약확인 ::</title>
 <style>
 	.mypage-content{
 		min-height: 800px;
@@ -101,7 +101,7 @@
 							</tr>
 						</table>
 						
-						<!-- 모달내용 시작 -->
+								<!-- 모달내용 시작 -->
 								<!--예약취소 modal 시작-->
 								<div id="test-modal" class="modal-bg">
 									<div class="modal-wrap">
@@ -142,9 +142,9 @@
 									</div>
 									</div>
 									</div>
-								</div>
 								<!-- 예약취소 modal 끝 -->
 								<!-- 모달 내용 끝-->
+						</div><!-- mypage-content끝 -->
 					</div>
 				</div>
 			</div>
