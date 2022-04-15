@@ -56,8 +56,8 @@ public class InsertBookServlet extends HttpServlet {
 		BookPayData bpd = serviceB.searchBookNo(bpay);
 		//3-2. 결제테이블 추가
 		int resultP = serviceB.insertPay(bpay,bpd);
-		
 		//3-3. 적립금테이블 추가
+		
 		//3-4. 멤버테이블에 회원포인트 변경
 		
 		

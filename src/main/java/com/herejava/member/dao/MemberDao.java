@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookPay;
 import com.herejava.member.vo.Member;
 
 import common.JDBCTemplate;
@@ -330,6 +331,25 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberPw);
 			pstmt.setString(2, memberId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int updateMemberPoint(Connection conn, BookPay bpay, int newPoint) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member set member_point = ? where member_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, newPoint);
+			pstmt.setInt(2, bpay.getMemberNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
