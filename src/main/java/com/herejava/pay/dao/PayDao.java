@@ -45,4 +45,28 @@ public class PayDao {
 		}
 		return pay;
 	}
+
+	public Pay getPayAmount(Connection conn, long bookNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Pay pay = null;
+		String query = "select use_point, pay_amount from pay where book_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bookNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				pay = new Pay();
+				pay.setUsePoint(rset.getInt("use_point"));
+				pay.setPayAmount(rset.getInt("pay_amount"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return pay;
+	}
 }

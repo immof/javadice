@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.herejava.book.vo.BookData"%>
 <%@page import="com.herejava.room.vo.Room"%>
 <%@page import="com.herejava.pay.vo.Pay"%>
@@ -100,10 +101,24 @@
 								<%if(bd.getBookState() == 0 || bd.getBookState() == 1) {%>
 									<!-- #안에 pay.getPayAmount() 넣기 -->
 									<th class="th-1">총 결제금액</th>
-									<td class="td-1 pay-1">#</td><td class="td-1 pay-1">원</td>
+									<%if(pay == null){ %>
+									<td class="td-1 pay-1">0</td><td class="td-1 pay-1">원</td>
+									<%}else{ 
+										DecimalFormat decFormat = new DecimalFormat("###,###");
+										String payAmount = decFormat.format(pay.getPayAmount());
+									%>
+									<td class="td-1 pay-1"><%=payAmount %></td><td class="td-1 pay-1">원</td>
+									<%} %>
 								<%}else {%>	
 									<th class="th-1" style="color:rgb(221, 78, 34)">취소 금액</th>
-									<td class="td-1 pay-1">#</td><td class="td-1 pay-1">원</td>
+									<%if(pay == null){ %>
+									<td class="td-1 pay-1">0</td><td class="td-1 pay-1">원</td>
+									<%}else{ 
+										DecimalFormat decFormat = new DecimalFormat("###,###");
+										String payAmount = decFormat.format(pay.getPayAmount());
+									%>
+									<td class="td-1 pay-1"><%=payAmount %></td><td class="td-1 pay-1">원</td>
+									<%} %>
 								<%} %>					
 							</tr>
 							<!-- 결제정보 끝 -->
