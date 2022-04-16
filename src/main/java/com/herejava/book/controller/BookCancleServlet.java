@@ -54,6 +54,7 @@ public class BookCancleServlet extends HttpServlet {
 			memberPoint += point.getUsePoint();
 		};
 		int totalResult = bookService.updateBook(bookNo, memberNo, memberPoint);
+		System.out.println("bookCancle의 memberPoint작동???" +memberPoint);
 		
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");

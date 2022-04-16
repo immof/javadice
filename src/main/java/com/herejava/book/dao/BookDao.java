@@ -326,6 +326,7 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
+			System.out.println("updateBookStateInBook 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -345,6 +346,7 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
+			System.out.println("updateBookStateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -365,6 +367,7 @@ public class BookDao {
 			pstmt.setInt(1, memberPoint);
 			pstmt.setInt(2, memberNo);
 			result = pstmt.executeUpdate();
+			System.out.println("memberPointUpdateInMember 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -384,6 +387,7 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
+			System.out.println("payAmountUpdateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -403,6 +407,7 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
+			System.out.println("payAmountUpdateInPoint 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -422,6 +427,7 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
+			System.out.println("usePointUpdateInPoint 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -441,6 +447,7 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
+			System.out.println("usePointUpdateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -449,27 +456,8 @@ public class BookDao {
 		}
 		return result;
 	}	
-
-	// 8. 예약취소시 예약번호로 pay테이블 plus_point update하는 메소드
-	public int plusPointUpdateInPoint(Connection conn, long bookNo) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = "update Pay set use_point=0 where book_no=?";
-								
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setLong(1, bookNo);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
-	}
 		
-	// 9. 예약취소시 예약번호로 point테이블 plus_point update하는 메소드
+	// 8. 예약취소시 예약번호로 point테이블 plus_point update하는 메소드
 	public int plusPointUpdateInPay(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -479,6 +467,7 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
+			System.out.println("plusPointUpdateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
