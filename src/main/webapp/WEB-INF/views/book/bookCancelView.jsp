@@ -13,6 +13,9 @@
 	.mypage-content{
 		min-height: 800px;
 	}
+	.tr-0{
+		padding-bottom : 30px;
+	}
 	.th-1{
 		text-align: left;
 		padding: 10px 20px;
@@ -42,15 +45,10 @@
 		margin: 22px 0px;
 		border-bottom: solid 1px #ac9e89;
 	}
-	.p-1{
-		color: #c87431;
-		font-size: 26px;
-		text-align: center;
-		font-weight: bold;
-		padding: 70px 0px;
-	}
 	.info_wrap{
 		display: hidden;
+		margin-top: 50px;
+		margin-bottom: 50px;
 	}
 	.my_info_tbl{
 		margin: 0 auto;
@@ -59,9 +57,30 @@
 		margin: 0 auto;
 	}
 	.pay-th{
-		background-color: purple;
+		color: rgb(221, 78, 34);
+		font-size: 18px;
+		text-align: left;
 	}
-	
+	.pay-td{
+		color: rgb(221, 78, 34);
+		font-size: 18px;
+		text-align: left;
+		font-weight: bold;
+		padding: 29px 0px;
+	}
+	.p-1{
+		text-align: center;
+		padding: 17px 0px;
+		font-size: 31px;
+		font-weight: bold;
+		color: rgb(221,78,34);
+	}
+	.btn_tbl{
+		padding: 40px 0;
+	}
+	.btn_tbl>tr>td{
+		margin: 20px 0px;
+	}
 </style>
 </head>
 <body>
@@ -71,13 +90,14 @@
 				<%@include file="/WEB-INF/views/member/mypage_common.jsp"%>
 				<div class="mypage-content">
 					<div class="mypage-content-title">예약취소</div>
+					<h3 class="belt"></h3>
 					<p class="p-1">예약을 취소하시겠습니까?</p>
 					<tr class="tr-1">
 					<!-- 
 								<td><img class="img-1" src="/img/<%=bd.getFilePath()%>"></td>
 							</tr>
 					 -->
-					<hr id="hr-0"  />
+					
 					<div class="info_wrap">
 						<table class="my_info_tbl">
 						
@@ -102,9 +122,9 @@
 								<td class="td-1"><%=bd.getBookPhone() %></td>
 							</tr>
 							<!-- 결제정보 시작 -->
-							<tr>
+							<tr class="tr-1 tr-0">
 								<th class="th-1 pay-th" style="color:rgb(221, 78, 34)">총 취소금액</th>
-								<td class="td-1 pay-1">#</td><td class="td-1 pay-1">원</td>
+								<td class="td-1 pay-td">#</td><td class="td-1 pay-td">원</td>
 							</tr>
 							<!-- 결제정보 끝 -->
 						</table>
@@ -114,9 +134,9 @@
 						<table class="btn_tbl">
 							<tr>
 							<td><button class="btn bc2 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
-							<td><a type="button" class="btn bc3 bs6 modal-open-btn" href="/">홈으로</button></td>
+							<td><a type="button" class="btn bc3 bs6 modal-open-btn" href="/">메인으로</button></td>
 							</tr>
-						</table>
+						</table>						
 								<!-- 모달내용 시작 -->
 								<!--예약취소 modal 시작-->
 								<div id="test-modal" class="modal-bg">
