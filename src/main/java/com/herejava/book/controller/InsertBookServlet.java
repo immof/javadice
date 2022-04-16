@@ -15,6 +15,7 @@ import com.herejava.book.service.BookService;
 import com.herejava.book.vo.BookPay;
 import com.herejava.book.vo.BookPayData;
 import com.herejava.member.service.MemberService;
+import com.herejava.point.service.PointService;
 
 /**
  * Servlet implementation class InsertBookServlet
@@ -70,25 +71,30 @@ public class InsertBookServlet extends HttpServlet {
 		
 		//3.비즈니스로직
 		//3-1. 예약테이블 추가
-		BookService serviceB = new BookService();
-		int resultB = serviceB.insertBook(bpay);
+		BookService serviceBook = new BookService();
+		int resultBook = serviceBook.insertBook(bpay);
 		//생성된 예약번호,예약날짜 가져오기
-		BookPayData bpd = serviceB.searchBookNo(bpay);
+		BookPayData bpd = serviceBook.searchBookNo(bpay);
 		//3-2. 결제테이블 추가
-		int resultP = serviceB.insertPay(bpay,bpd);
+		int resultPay = serviceBook.insertPay(bpay,bpd);
 		//3-3. 멤버테이블에 회원포인트 변경
-		MemberService serviceM = new MemberService();
-		int resultM = serviceM.updateMemberPoint(bpay);
+		MemberService serviceMember = new MemberService();
+		int resultMember = serviceMember.updateMemberPoint(bpay);
 		//3-4. 적립금테이블 추가
-		System.out.println("resultB : " +resultB);
-		System.out.println("resultP : " +resultP);
-		System.out.println("resultM : " +resultM);
+		PointService servicePoint = new PointService();
+		int resultPoint = servicePoint.insertPoint(bpay,bpd);
+		
+		System.out.println("resultBook : " +resultBook);
+		System.out.println("resultPay : " +resultPay);
+		System.out.println("resultMember : " +resultMember);
+		System.out.println("resultPoint : " +resultPoint);
 		//조회결과 m을 js객체타입으로 변환
 		JSONObject result = null;	//HashMap<String,Object>와 같음
 		result = new JSONObject();
-		result.put("resultB", resultB);
-		result.put("resultP", resultP);
-		result.put("resultM", resultM);
+		result.put("resultBook", resultBook);
+		result.put("resultPay", resultPay);
+		result.put("resultMember", resultMember);
+		result.put("resultPoint", resultPoint);
 		
 		//4.결과처리
 		response.setContentType("application/json"); //되돌려주는 데이터의 타입이 json임을 명시(안하면 string으로 취급됨)

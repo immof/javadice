@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.herejava.book.vo.BookPay;
+import com.herejava.book.vo.BookPayData;
 import com.herejava.point.vo.Point;
 
 import common.JDBCTemplate;
@@ -42,6 +44,33 @@ public class PointDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+
+	public int insertPoint(Connection conn, BookPay bpay, BookPayData bpd) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into point values(point_seq.nextval,?,?,?,0,?,?,?,?,?,?) ";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bpd.getBookNo());
+			pstmt.setInt(2, bpay.getRoomNo());
+			pstmt.setString(3, bpay.getRoomName());
+			pstmt.setString(4, bpd.getBookDay());
+			pstmt.setInt(5, bpay.getPayAmount());
+			pstmt.setInt(6, bpay.getMinusPoint());
+			pstmt.setInt(7, bpay.getPayStayDay());
+			pstmt.setInt(8, bpay.getMemberNo());
+			pstmt.setInt(9, bpay.getPayRoomPrice());
+			
+			result = pstmt.executeUpdate(); 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

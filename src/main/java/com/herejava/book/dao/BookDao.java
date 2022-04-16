@@ -579,7 +579,6 @@ public class BookDao {
 		//결제후 예약번호(시퀀스)와 예약날짜 데이터 받아오기
 				PreparedStatement pstmt = null;
 				ResultSet rset = null;
-				int result = 0;
 				BookPayData bpd = new BookPayData();
 				String query = "select book_no, book_day from book where room_no=? and member_no =? and book_people = ? and book_name = ? and book_phone = ? and check_in = ? and check_out=?  ;";
 				try {

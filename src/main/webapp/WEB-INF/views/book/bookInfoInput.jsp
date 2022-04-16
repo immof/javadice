@@ -360,14 +360,17 @@
 			const totalPrice = $("#totalPrice").val();
 			
 			//포인트 유효성검사
-			if(usePoint-memberPoint>0 || usePoint-totalPrice>0){
+			if(usePoint-memberPoint>0){
             	$("#pointChk").text("     사용 가능한 포인트를 초과하였습니다.");
             	$("#pointChk").css("color","red");
             	usePoint = $(this).val(memberPoint);
             	$("#pointChk").text("     ");
+            }else if(usePoint-totalPrice>0){
+            	$("#pointChk").text("     사용 가능한 포인트를 초과하였습니다.");
+            	$("#pointChk").css("color","red");
+            	usePoint = $(this).val(0);
             }else{
             	$("#pointChk").text("     ");
-            	checkArr[2]=true;
             }
 			
 			let payAmount = totalPrice-$("#usePoint").val();
@@ -501,7 +504,8 @@
 	  					}
 	  				});
   				}else{
-  					alert("에러내용 : "+rsp.err_msg);
+  					alert("결제가 취소되었습니다.");
+  					console.log("에러내용 : "+rsp.err_msg);
   				}
   			});
         }
