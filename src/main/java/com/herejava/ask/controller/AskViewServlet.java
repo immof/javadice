@@ -38,7 +38,7 @@ public class AskViewServlet extends HttpServlet {
 		
 		AskService service = new AskService();
 		AskViewData avd = service.selectAskView(askNo);
-		Notice n = service.selectOneAsk(askNo);
+		//Notice n = service.selectOneAsk(askNo);
 		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askView.jsp");
 		request.setAttribute("a", avd.getA());

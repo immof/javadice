@@ -8,6 +8,7 @@
     	ArrayList<AskComment> commentList = (ArrayList<AskComment>)request.getAttribute("commentList");
 		ArrayList<AskComment> reCommentList = (ArrayList<AskComment>)request.getAttribute("reCommentList");
     %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,33 +84,6 @@
 		}
 		
 		
-		.inputCommentBox{
-			margin: 50px;
-		}
-		.inputCommentBox>form>ul{
-			list-style-type: none;
-			display: flex;
-		}
-		.inputCommentBox>form>ul>li:first-child{
-			width: 15%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.inputCommentBox>form>ul>li:first-child>span{
-			font-size: 80px;
-			color: #ccc;
-		}
-		.inputCommentBox>form>ul>li:nth-child(2){
-			width:75%;
-		}
-		.inputCommentBox>form>ul>li:nth-child(2)>textarea.input-form{
-			height: 96px;
-			min-height: 96px;
-		}
-		.inputCommentBox>form>ul>li:last-child{
-			width:10%;
-		}
 		.inputRecommentBox{
 			margin: 30px 0px;
 			display: none;
@@ -137,7 +111,7 @@
 		}
 		.inputRecomentBox>form>ul>li:last-child{
 			width:10%;
-		}s
+		}
 	</style>
 </head>
 <body>
@@ -208,21 +182,21 @@
 		<br>
 		</span>
 		
-		<%if(m!=null) {%>
+		<%if(m!=null && m.getMemberLevel() == 0) {%>
 		<div class="inputCommentBox">
 			<form action="/insertCommentAsk.do" method="post">
-				<ul>
+				<ul class="ask-comment-write">
 					<li>
-						<span class="material-icons">account_box</span>
+						<span class="material-icons">account_circle</span>
 					</li>
 					<li>
-						<input type="hidden" name="ncWriter"	value="<%=m.getMemberId() %>">
-						<input type="hidden" name="noticeRef"	value="<%=a.getAskNo() %>">
-						<input type="hidden" name="ncRef"		value="0">
-						<textarea class="input-form" name="ncContent"></textarea>
+						<input type="hidden" name="askWriter"	value="<%=m.getMemberNick() %>">
+						<input type="hidden" name="askRef"	value="<%=a.getAskNo() %>">
+						<input type="hidden" name="askCommentRef"		value="0">
+						<textarea class="input-form1" placeholder="내용을 입력해주세요." name="askContent"></textarea>
 					</li>
 					<li>
-						<button type="submit" class="btn bc1 bs4">등록</button>
+						<button type="submit" class="bc2">등록</button>
 					</li>
 				</ul>
 			</form>
@@ -230,31 +204,32 @@
 		<%} %>
 		
 		<div class="commentBox">
-			<%for(AskComment ac : commentList) {%>
+			<%for(NoticeComment nc : commentList) {%>
 				<ul class="posting-comment">
 					<li>
 						<span class="material-icons">account_box</span>
 					</li>
 					<li>
 						<p class="comment-info">
-							<span><%=ac.getAskCommentWriter() %></span>
-							<span><%=ac.getAskCommentEnrollDate() %></span>
+							<span><%=nc.getNcWriter() %></span>
+							<span><%=nc.getNcDate() %></span>
 						</p>
-						<textarea name="ncContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea>
+						<p class="comment-content"><%=nc.getNcContent() %></p>
+						<textarea name="ncContent" class="input-form" style="display:none;min-height:90px;"><%=nc.getNcContent() %></textarea>
 						<p class="comment-link">
 							<%if(m != null) {%>
-								<%if(m.getMemberId().equals(ac.getAskCommentWriter())) {%>
-									<a href="javascript:void(0)" onclick="modifyComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">수정</a>
-									<a href="javascript:void(0)" onclick="deleteComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">삭제</a>
+								<%if(m.getMemberId().equals(nc.getNcWriter())) {%>
+									<a href="javascript:void(0)" onclick="modifyComment(this,'<%=nc.getNcNo()%>','<%=n.getNoticeNo()%>')">수정</a>
+									<a href="javascript:void(0)" onclick="deleteComment(this,'<%=nc.getNcNo()%>','<%=n.getNoticeNo()%>')">삭제</a>
 								<%} %>
 								<a href="javascript:void(0)" class="recShow">답급 달기</a>
 							<%} //댓글 링크 모음 로그인 체크 %>
 						</p>
 					</li>
 				</ul>
-			
-				<%for(AskComment acc : reCommentList){ %>
-					<%if(acc.getAskRef() == ac.getAskCommentNo()) {%>
+			</div>
+				<%for(NoticeComment ncc : reCommentList){ %>
+					<%if(ncc.getNcRef() == nc.getNcNo()) {%>
 						<ul class="posting-comment reply">
 							<li>
 								<span class="material-icons">subdirectory_arrow_right</span>
@@ -262,16 +237,16 @@
 							</li>
 							<li>
 								<p class="comment-info">
-									<span><%=acc.getAskCommentWriter() %></span>
-									<span><%=acc.getAskCommentEnrollDate() %></span>
+									<span><%=ncc.getNcWriter() %></span>
+									<span><%=ncc.getNcDate() %></span>
 								</p>
-								<p class="comment-content"><%=acc.getAskCommentContent() %></p>
-								<textarea name="ncContent" class="input-form" style="display:none;min-height:90px;"><%=acc.getAskCommentContent() %></textarea>
+								<p class="comment-content"><%=ncc.getNcContent() %></p>
+								<textarea name="ncContent" class="input-form" style="display:none;min-height:90px;"><%=ncc.getNcContent() %></textarea>
 								<p class="comment-link">
 									<%if(m!=null) {%>
-										<%if(m.getMemberId().equals(acc.getAskCommentWriter())) {%>
-											<a href="javascript:void(0)" onclick="modifyComment(this,'<%=acc.getAskCommentNo()%>','<%=a.getAskNo()%>')">수정</a>
-											<a href="javascript:void(0)" onclick="deleteComment(this,'<%=acc.getAskCommentNo()%>','<%=a.getAskNo()%>')">삭제</a>
+										<%if(m.getMemberId().equals(ncc.getNcWriter())) {%>
+											<a href="javascript:void(0)" onclick="modifyComment(this,'<%=ncc.getNcNo()%>','<%=n.getNoticeNo()%>')">수정</a>
+											<a href="javascript:void(0)" onclick="deleteComment(this,'<%=ncc.getNcNo()%>','<%=n.getNoticeNo()%>')">삭제</a>
 										<%} %>
 									<%} %>
 								</p>
@@ -279,33 +254,34 @@
 						</ul>
 					<%} //해당 댓글의 대댓글인지%>
 				<%} //대댓글 출력용 for문 종료%>
+				
 				<%if(m != null) {%>
 					<div class="inputRecommentBox">
-					<form action="/insertComment.do" method="post">
-						<ul>
-							<li>
-								<span class="material-icons">subdirectory_arrow_right</span>
-							</li>
-							<li>
-								<input type="hidden" name="ncWriter" value="<%=m.getMemberId() %>">
-								<input type="hidden" name="noticeRef" value="<%=a.getAskNo() %>">
-								<input type="hidden" name="ncRef" value="<%=ac.getAskCommentNo()%>"> 
-								<textarea class="input-form" name="ncContent"></textarea>
-							</li>
-							<li>
-								<button type="submit" class="btn bc1 bs4">등록</button>
-							</li>
-						</ul>
-					</form>
+						<form action="/insertComment.do" method="post">
+							<ul>
+								<li>
+									<span class="material-icons">subdirectory_arrow_right</span>
+								</li>
+								<li>
+									<input type="hidden" name="askWriter" value="<%=m.getMemberNick() %>">
+									<input type="hidden" name="askRef" value="<%=a.getAskNo() %>">
+									<input type="hidden" name="askCommentRef" value="<%=ac.getAskCommentNo()%>"> 
+									<textarea class="input-form" name="ncContent"></textarea>
+								</li>
+								<li>
+									<button type="submit" class="btn bc1 bs4">등록</button>
+								</li>
+							</ul>
+						</form>
 					</div>
 				<%} //대댓글 입력 form 작성 조건%> 
 			<%} //댓글 출력용 for문 종료 %>
 		</div>
 		
 	<script>
-		function noticeDelete(noticeNo) {
+		function noticeDelete(askNo) {
 			if(confirm("삭제하시겠습니까?")){
-				location.href="/noticeDelete.do?noticeNo="+noticeNo;
+				location.href="/noticeDelete.do?askNo="+askNo;
 			}
 		}
 		$(".recShow").on("click",function(){
@@ -318,15 +294,15 @@
 			$(".inputRecommentBox").eq(idx).toggle();
 			$(".inputRecommentBox").eq(idx).find("textarea").focus();
 		});
-		function modifyComment(obj,ncNo,noticeNo){
+		function modifyComment(obj,askCommentNo,askNo){
 			$(obj).parent().prev().show(); //textarea를 화면에 보여 줌
 			$(obj).parent().prev().prev().hide(); //기존 댓글은 화면에서 숨김
 			//수정 -> 수정 완료
 			$(obj).text("수정완료");
-			$(obj).attr("onclick","modifyComplete(this,'"+ncNo+"','"+noticeNo+"')");
+			$(obj).attr("onclick","modifyComplete(this,'"+askNo+"','"+askNo+"')");
 			//삭제 -> 수정 취소
 			$(obj).next().text("수정취소");
-			$(obj).next().attr("onclick","modifyCancel(this,'"+ncNo+"','"+noticeNo+"')");
+			$(obj).next().attr("onclick","modifyCancel(this,'"+askNo+"','"+askNo+"')");
 			//답글 달기 버튼 숨김
 			$(obj).next().next().hide();
 		}
@@ -361,8 +337,7 @@
 				location.href="/deleteComment.do?ncNo="+ncNo+"&noticeNo="+noticeNo;
 			}
 		}
-		
-		<script>
+			
 			function home(){
 				history.back();
 			}

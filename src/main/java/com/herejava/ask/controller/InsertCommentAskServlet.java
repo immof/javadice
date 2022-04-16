@@ -36,10 +36,10 @@ public class InsertCommentAskServlet extends HttpServlet {
 				request.setCharacterEncoding("utf-8");
 				//2. 값추출
 				AskComment ac = new AskComment();
-				ac.setAskCommentWriter(request.getParameter("askCommentWriter"));
+				ac.setAskCommentWriter(request.getParameter("askWriter"));
 				ac.setAskRef(Integer.parseInt(request.getParameter("askRef")));
 				ac.setAskCommentRef(Integer.parseInt(request.getParameter("askCommentRef")));
-				ac.setAskCommentContent(request.getParameter("askCommentContent"));
+				ac.setAskCommentContent(request.getParameter("askContent"));
 				//3. 비즈니스로직
 				AskService service = new AskService();
 				int result = service.insertAskComment(ac);

@@ -902,7 +902,7 @@ textarea.input-form {
 
 .ask-comment-write{
   display: flex;
-  width: 75%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 30px;
   list-style-type: none;

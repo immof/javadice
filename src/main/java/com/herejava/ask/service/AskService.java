@@ -8,7 +8,6 @@ import com.herejava.ask.vo.Ask;
 import com.herejava.ask.vo.AskComment;
 import com.herejava.ask.vo.AskPageData;
 import com.herejava.ask.vo.AskViewData;
-import com.herejava.member.vo.Member;
 import com.herejava.notice.vo.Notice;
 
 import common.JDBCTemplate;
@@ -134,11 +133,24 @@ public class AskService {
 	}
 
 
+	public int insertAskComment(AskComment ac) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.insertAskComment(conn,ac);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+		
+		
 	public int UpdateAsk(Ask a) {
 		Connection conn = JDBCTemplate.getConnection();
 		AskDao dao = new AskDao();
 		int result = dao.UpdateAsk(conn, a);
-
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {
