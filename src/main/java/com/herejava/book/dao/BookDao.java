@@ -315,7 +315,7 @@ public class BookDao {
 		return list;
 	}
 
-	// 예약번호로 예약취소(update)하는 메소드
+	// 예약번호로 book테이블 예약취소(update)하는 메소드
 	public int updateBook(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -333,7 +333,7 @@ public class BookDao {
 		}
 		return result;
 	}
-
+	
 	// 예약번호로 예약(방사진/방이름/체크인/체크아웃/예약상태/이용자숫자/예약자명/예약자전화번호) 1개 가져오는 메소드
 	public BookData getBook(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
