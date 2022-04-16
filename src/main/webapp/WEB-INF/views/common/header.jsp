@@ -79,7 +79,7 @@
                <li>
                   <a href="/bookSearch.do?checkIn=2020-01-01&checkOut=2020-01-02&bookPeople=1"><i class="fa-solid fa-magnifying-glass searchIcon"></i>숙소예약</a>
                </li>
-               <li><a href="#">객실정보</a></li>
+               <li><a href="/hotelListFrm.do">객실정보</a></li>
                <li><a href="/promotionList.do">프로모션</a></li>
                <li><a href="/location.do">오시는길</a></li>
                <li><a href="/noticeList.do?reqPage=1">게시판<span class="material-icons">expand_more</span>

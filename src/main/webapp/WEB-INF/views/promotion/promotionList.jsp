@@ -43,18 +43,21 @@ h3{
 	background-color: #eee;
 	transition: 0.5s;
 }
+.page-content{
+	position: relative;
+}
 .list-button{
 	width: 300px;
 	text-align: right;
-	position: relative;
+	position: absolute;
+	top: 50px;
+	right: 170px;
 }
 .list-button>button{
 	width: 140px;
 	height: 50px;
 	padding: 0;
 	border: none;
-	position: absolute;
-	left: 880px;
 	
 }
 
