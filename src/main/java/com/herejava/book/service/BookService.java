@@ -244,9 +244,9 @@ public class BookService {
 		return list;
 	}
 
-
+	/*
 	//예약번호로 book/pay/point테이블 예약취소(update) 및 결제금액/결제포인트 취소하는 메소드
-	public int updateBook(long bookNo) {
+	public int updateBook(long bookNo, int memberNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
 		int result = dao.updateBook(conn,bookNo);
@@ -258,7 +258,7 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	
+	*/
 	
 	//예약번호로 예약(방사진/방이름/체크인/체크아웃/예약상태/이용자숫자/예약자명/예약자전화번호) 1개 가져오는 메소드
 	public BookData getBook(long bookNo) {
