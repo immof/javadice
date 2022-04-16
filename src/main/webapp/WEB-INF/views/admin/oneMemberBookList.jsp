@@ -86,7 +86,7 @@
 								<%if(bd.getBookState()==0){%>
 									<td><a class="btn bc3 delbookbtn" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">예약취소</a></td>
 								<%}else if(bd.getBookState()==1){%>
-									<td><div class="btn bc1 reviewBtn">리뷰보기</div></td>
+									<td><a class="btn bc1 reviewBtn" href="/review.do?memberNo=<%=mem.getMemberNo()%>&masterCheck=true">리뷰보기</a></td>
 								<%}else if(bd.getBookState()==2){%>
 									<td><div class="btn" style="background-color: #a7a7a7;color: #fff;">취소완료</div></td>
 								<%}%>

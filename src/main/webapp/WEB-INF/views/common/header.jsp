@@ -32,6 +32,9 @@
 <script src="./summernote/summernote-lite.js"></script>
 <script src="./summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="./summernote/summernote-lite.css">
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css">
 <style>
 .flex-wrap {
 	display: flex;
@@ -52,6 +55,7 @@
 }
 </style>
 </head>
+  <div class="con">
 	<header>
 		<div class="header-top">
 			<div class="site-logo">
@@ -69,7 +73,7 @@
 				<%} %>
 			</div>
 		</div>
-		<div class="header-bottom">
+		 <div class="header-bottom" style="z-index:20;">
          <nav>
             <ul class="navi">
                <li>
@@ -83,7 +87,7 @@
                   <ul class="sub-navi">
                      <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
                      <li><a href="/askList.do?reqPage=1">문의사항</a></li>
-                     <li><a href="#">자주묻는 질문</a></li>
+                     <li><a href="/fAQList.do">자주묻는 질문</a></li>
                   </ul></li>
             </ul>
          </nav>

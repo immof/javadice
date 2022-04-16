@@ -126,6 +126,7 @@
 													<td>
 														<a class="btn bc2 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 													</td>	
+
 											<% 	//리뷰x
 												}else{
 											%>

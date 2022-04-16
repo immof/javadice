@@ -12,6 +12,8 @@ import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookCheckPage;
 import com.herejava.book.vo.BookData;
 import com.herejava.book.vo.BookPageData;
+import com.herejava.book.vo.BookPay;
+import com.herejava.book.vo.BookPayData;
 import com.herejava.member.vo.MemberPageData;
 import com.herejava.room.dao.RoomDao;
 import com.herejava.room.vo.Room;
@@ -359,7 +361,7 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	
+
 	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 - 이신영 (reviewNo추가)
 	public BookPageData selectBookList2(int memberNo, int reqPage) {
 		Connection conn= JDBCTemplate.getConnection();
@@ -420,6 +422,44 @@ public class BookService {
 		JDBCTemplate.close(conn);
 		return bpd;
 	}
+	
+	//결제완료시 예약테이블에 예약 추가
+	public int insertBook(BookPay bpay) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		int result = dao.insertBook(conn,bpay);
+		JDBCTemplate.close(conn);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int insertPay(BookPay bpay, BookPayData bpd) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		int result = dao.insertPay(conn,bpay,bpd);
+		JDBCTemplate.close(conn);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public BookPayData searchBookNo(BookPay bpay) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		BookPayData bpd = dao.searchBookNo(conn, bpay);
+		JDBCTemplate.close(conn);
+		return bpd;
+	}
+
 }
 
 

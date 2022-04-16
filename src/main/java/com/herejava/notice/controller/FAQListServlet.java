@@ -1,7 +1,6 @@
-package com.herejava.review.controller;
+package com.herejava.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.review.service.ReviewService;
-import com.herejava.review.vo.Review;
-import com.herejava.review.vo.ReviewList;
-
 /**
- * Servlet implementation class ReviewServlet
+ * Servlet implementation class FAQListServlet
  */
-@WebServlet(name = "Review", urlPatterns = { "/review.do" })
-public class ReviewServlet extends HttpServlet {
+@WebServlet(asyncSupported = true, name = "FAQList", urlPatterns = { "/fAQList.do" })
+public class FAQListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewServlet() {
+    public FAQListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,21 +31,10 @@ public class ReviewServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		int memberNo= Integer.parseInt(request.getParameter("memberNo"));
-		boolean masterCheck = Boolean.parseBoolean(request.getParameter("masterCheck"));
 		//3.비즈니스로직
-		ReviewService service = new ReviewService();
-		ArrayList<ReviewList> reviewList = service.myReview(memberNo);
 		//4.결과처리
-		if(masterCheck) {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_review.jsp");
-			request.setAttribute("reviewList", reviewList);
-			view.forward(request, response);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_review.jsp");
-			request.setAttribute("reviewList", reviewList);
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/etc/FAQList.jsp");
+		view.forward(request, response);
 	}
 
 	/**

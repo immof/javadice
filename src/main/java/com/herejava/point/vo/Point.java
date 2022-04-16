@@ -2,7 +2,7 @@ package com.herejava.point.vo;
 
 public class Point {
 	private int pointNo;
-	private int payNo;
+	private long payNo;
 	private long bookNo;
 	private int memberNo;
 	private String bookDay;
@@ -13,7 +13,7 @@ public class Point {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Point(int pointNo, int payNo, long bookNo, int memberNo, String bookDay, int payAmount, int usePoint,
+	public Point(int pointNo, long payNo, long bookNo, int memberNo, String bookDay, int payAmount, int usePoint,
 			int plusPoint) {
 		super();
 		this.pointNo = pointNo;
@@ -31,10 +31,10 @@ public class Point {
 	public void setPointNo(int pointNo) {
 		this.pointNo = pointNo;
 	}
-	public int getPayNo() {
+	public long getPayNo() {
 		return payNo;
 	}
-	public void setPayNo(int payNo) {
+	public void setPayNo(long payNo) {
 		this.payNo = payNo;
 	}
 	public long getBookNo() {
@@ -73,5 +73,4 @@ public class Point {
 	public void setPlusPoint(int plusPoint) {
 		this.plusPoint = plusPoint;
 	}
-	
 }

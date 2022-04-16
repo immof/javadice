@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookData;
+import com.herejava.book.vo.BookPay;
+import com.herejava.book.vo.BookPayData;
 import com.herejava.member.vo.Member;
 
 import common.JDBCTemplate;
@@ -520,6 +522,88 @@ public class BookDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return list;
+	}
+
+	public int insertBook(Connection conn, BookPay bpay) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query ="INSERT INTO BOOK VALUES(BOOK_SEQ.NEXTVAL,?,?,?,?,?, TO_CHAR(SYSDATE,'YYYY-MM-DD'),0,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bpay.getRoomNo());
+			pstmt.setInt(2, bpay.getMemberNo());
+			pstmt.setInt(3, bpay.getBookPeople());
+			pstmt.setString(4, bpay.getBookName());
+			pstmt.setString(5, bpay.getBookPhone());
+			pstmt.setString(6, bpay.getCheckIn());
+			pstmt.setString(7, bpay.getCheckOut());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertPay(Connection conn, BookPay bpay, BookPayData bpd) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query ="insert into pay VALUES(pay_SEQ.NEXTVAL,?,?,?,0,?,?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bpd.getBookNo());
+			pstmt.setInt(2, bpay.getRoomNo());
+			pstmt.setString(3, bpay.getRoomName());
+			pstmt.setString(4, bpd.getBookDay());
+			pstmt.setInt(5, bpay.getPayAmount());
+			pstmt.setInt(6, bpay.getMinusPoint());
+			pstmt.setInt(7, bpay.getPayStayDay());
+			pstmt.setInt(8, bpay.getMemberNo());
+			pstmt.setInt(9, bpay.getPayRoomPrice());
+			
+			
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public BookPayData searchBookNo(Connection conn, BookPay bpay) {
+		//결제후 예약번호(시퀀스)와 예약날짜 데이터 받아오기
+				PreparedStatement pstmt = null;
+				ResultSet rset = null;
+				int result = 0;
+				BookPayData bpd = new BookPayData();
+				String query = "select book_no, book_day from book where room_no=? and member_no =? and book_people = ? and book_name = ? and book_phone = ? and check_in = ? and check_out=?  ;";
+				try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, bpay.getRoomNo());
+					pstmt.setInt(2, bpay.getMemberNo());
+					pstmt.setInt(3, bpay.getBookPeople());
+					pstmt.setString(4, bpay.getBookName());
+					pstmt.setString(5, bpay.getBookPhone());
+					pstmt.setString(6, bpay.getCheckIn());
+					pstmt.setString(7, bpay.getCheckOut());
+					rset = pstmt.executeQuery();
+					if (rset.next()) {
+						bpd.setBookNo(rset.getLong("bookNo"));
+						bpd.setBookDay(rset.getString("bookDay"));
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					JDBCTemplate.close(rset);
+					JDBCTemplate.close(pstmt);
+				}
+				return bpd;
 	}
 
 }
