@@ -96,11 +96,11 @@ public class AskWriteServlet extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 				if(result>0) {
 					request.setAttribute("title", "성공");
-					request.setAttribute("msg", "공지사항이 등록되었습니다.");
+					request.setAttribute("msg", "문의사항이 등록되었습니다.");
 					request.setAttribute("icon", "success");
 				}else {
 					request.setAttribute("title", "실패");
-					request.setAttribute("msg", "공지사항 등록 중 문제가 발생했습니다.");
+					request.setAttribute("msg", "문의사항 등록 중 문제가 발생했습니다.");
 					request.setAttribute("icon", "error");
 				}
 				request.setAttribute("loc", "/askList.do?reqPage=1");
