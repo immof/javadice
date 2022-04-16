@@ -120,7 +120,7 @@ h3 {
 			const form = new FormData();
 			form.append("file",file);
 			$.ajax({
-				url : "/uploadImage.do",
+				url : "/uploadImage2.do",
 				type : "post",
 				data : form,
 				processData : false,
