@@ -637,4 +637,38 @@ public class BookDao {
 		return payNo;
 	}
 
+	public Book selectOneBook(Connection conn, Long bookNo, String bookName) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Book b = null;
+		String query = "select * from book where book_no=? and book_name=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bookNo);
+			pstmt.setString(2, bookName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				b = new Book();
+				b.setBookNo(rset.getLong("book_no"));
+				b.setRoomNo(rset.getInt("room_no"));
+				b.setMemberNo(rset.getInt("member_no"));
+				b.setBookPeople(rset.getInt("book_people"));
+				b.setBookName(rset.getString("book_name"));
+				b.setBookPhone(rset.getString("book_phone"));
+				b.setBookDay(rset.getString("book_day"));
+				b.setBookState(rset.getInt("book_state"));
+				b.setCheckIn(rset.getString("check_in"));
+				b.setCheckOut(rset.getString("check_out"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return b;
+	}
+
 }

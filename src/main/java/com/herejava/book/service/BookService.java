@@ -468,6 +468,14 @@ public class BookService {
 		return result;
 	}
 
+	public Book selectOneBook(Long bookNo, String bookName) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		Book b = dao.selectOneBook(conn, bookNo, bookName);
+		JDBCTemplate.close(conn);
+		return b;
+	}
+
 }
 
 
