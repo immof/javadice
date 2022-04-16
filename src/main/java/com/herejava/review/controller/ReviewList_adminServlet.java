@@ -11,20 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.review.service.ReviewService;
-import com.herejava.review.vo.Review;
-import com.herejava.review.vo.ReviewList;
+import com.herejava.review.vo.ReviewListAdmin;
 
 /**
- * Servlet implementation class ReviewServlet
+ * Servlet implementation class ReviewList_adminServlet
  */
-@WebServlet(name = "Review", urlPatterns = { "/review.do" })
-public class ReviewServlet extends HttpServlet {
+@WebServlet(name = "ReviewList_admin", urlPatterns = { "/reviewList_admin.do" })
+public class ReviewList_adminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewServlet() {
+    public ReviewList_adminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +32,14 @@ public class ReviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.인코딩
 		request.setCharacterEncoding("utf-8");
-		//2.값추출
-		int memberNo= Integer.parseInt(request.getParameter("memberNo"));
-		boolean masterCheck = Boolean.parseBoolean(request.getParameter("masterCheck"));
-		//3.비즈니스로직
 		ReviewService service = new ReviewService();
-		ArrayList<ReviewList> reviewList = service.myReview(memberNo);
+		ArrayList<ReviewListAdmin> reviewList = service.getAllReview();
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_review.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_review.jsp");
 		request.setAttribute("reviewList", reviewList);
 		view.forward(request, response);
+		
 	}
 
 	/**

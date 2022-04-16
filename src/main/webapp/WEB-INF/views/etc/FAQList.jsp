@@ -55,7 +55,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page1-content">
-		<div class="belt">NOTICE</div>
+		<div class="belt">FAQ</div>
 		<br>
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
