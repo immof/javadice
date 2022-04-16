@@ -198,6 +198,25 @@ public class AskDao {
 		return result;
 	}
 
+<<<<<<< HEAD
+	public int insertAskComment(Connection conn, AskComment ac) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into ask_comment values(ask_seq.nextval, ?,?,?,?,to_char(sysdate,'yyyy-mm-dd'))";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, ac.getAskCommentWriter());
+			pstmt.setInt(3, ac.getAskCommentRef());
+			pstmt.setString(2, ac.getAskCommentContent());
+			/* 밑이랑 같은 코드
+			if(nc.getNcRef() == 0) {
+				pstmt.setString(4, null);
+			}else {
+				pstmt.setInt(4, nc.getNcRef());
+			}
+			*/
+			pstmt.setString(4, (ac.getAskRef() == 0)?null:String.valueOf(ac.getAskRef()));
+=======
 	public int UpdateAsk(Connection conn, Ask a) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -210,6 +229,7 @@ public class AskDao {
 			pstmt.setString(4, a.getFilepath2());
 			pstmt.setString(5, a.getFilepath3());
 			pstmt.setInt(6, a.getAskNo());
+>>>>>>> branch 'master' of https://github.com/Pyseon/javadice.git
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
