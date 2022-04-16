@@ -64,8 +64,7 @@
 	border-bottom: 1px solid #ac9e89;
 }
 .rv-wrap{
-	/*height:605px;*/
-	overflow: hidden;
+	min-height: 500px;
 }
 #view-change-btn{
 	width: 120px;
@@ -108,6 +107,10 @@
     	margin-bottom: 30px;
     	border-bottom: 2px solid #ccc;
 	}
+		#pageNavi{
+			margin:10px;
+			margin-bottom: 50px;
+		}
 </style>
 </head>
 <body>
@@ -244,14 +247,6 @@
 			$(".review-text").on("click",function(){
 				$(this).toggleClass("view-change");
 			});
-			$("#view-change-btn").on("click", function(){
-				$(".review-all-wrap").toggleClass("rv-wrap");
-				if($("#view-change-btn>span").text() == "전체보기 "){
-					$("#view-change-btn>span").text("간략히 보기 ");
-				}else{
-					$("#view-change-btn>span").text("전체보기 ");
-				}
-			})
 		});
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
