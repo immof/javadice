@@ -63,6 +63,20 @@ public class PromotionService {
 		return result;
 	}
 
+	public int updatePromotion(Promotion p) {
+		Connection conn = JDBCTemplate.getConnection();
+		PromotionDao dao = new PromotionDao();
+		int result = dao.updatePromotion(conn, p);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		//System.out.println("서비스"+result);
+		return result;
+	}
+
 	
 
 }

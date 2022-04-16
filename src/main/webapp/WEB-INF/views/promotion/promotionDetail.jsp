@@ -56,7 +56,7 @@ h3{
 	padding-top: 50px;
 }
 .detail-bottom>.bottom-content{
-	width: 800px;
+	width: 850px;
 	min-height: 500px;
 	margin: 0 auto;
 	margin-top: 35px;
