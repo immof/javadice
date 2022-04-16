@@ -148,6 +148,11 @@ public class AskService {
 		return result;
 	}
 
+	public int insertAskComment(AskComment ac) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 	
 
