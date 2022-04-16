@@ -87,6 +87,9 @@
 			</form>
 	</div>
 	<script>
+		
+		
+		/*
 		$("#askContent").summernote({
 			height: 400,
 			lang : "ko-KR",
@@ -97,7 +100,6 @@
 			}
 		});
 		
-		/*
 		function uploadImage(file,editor){
 			//ajax통해 서버에 이미지를 업로드하고 업로드 경로를 받아옴
 			//form태그와 동일한 효과를 내는 FormData 객체 생성
