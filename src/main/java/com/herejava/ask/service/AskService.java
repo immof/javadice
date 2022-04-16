@@ -132,6 +132,19 @@ public class AskService {
 		return a;
 	}
 
+	public int UpdateAsk(Ask a) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.UpdateAsk(conn, a);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 	
 	
 
