@@ -104,7 +104,7 @@ h3{
 						contentWrap.addClass("promo3-1");
 						//프로모션  이미지
 						const img = $("<img>");
-						img.attr("src","/img/promotion/"+p.filepath);
+						img.attr("src","/img/"+p.filepath);
 						img.attr("style","height: 300px;");
 						contentWrap.append(img);
 						//프로모션 컨텐츠를 감싸는 div
