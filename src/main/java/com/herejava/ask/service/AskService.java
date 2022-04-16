@@ -133,17 +133,12 @@ public class AskService {
 		return a;
 	}
 
-<<<<<<< HEAD
-	public int insertAskComment(AskComment ac) {
-		Connection conn = JDBCTemplate.getConnection();
-		AskDao dao = new AskDao();
-		int result = dao.insertAskComment(conn,ac);
-=======
+
 	public int UpdateAsk(Ask a) {
 		Connection conn = JDBCTemplate.getConnection();
 		AskDao dao = new AskDao();
 		int result = dao.UpdateAsk(conn, a);
->>>>>>> branch 'master' of https://github.com/Pyseon/javadice.git
+
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {
