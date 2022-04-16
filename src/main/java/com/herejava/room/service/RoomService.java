@@ -32,4 +32,12 @@ public class RoomService {
 		return result;
 	}
 
+	public Room selectOneRoom(int roomNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		RoomDao dao = new RoomDao();
+		Room r = dao.selectOneRoom(conn, roomNo);
+		JDBCTemplate.close(conn);
+		return r;
+	}
+
 }
