@@ -61,6 +61,7 @@
 		font-size: 20px;
 		text-align: left;
 		border: 1px solid #555555;
+		margin-bottom: 50px;
 	}
 	
 	.mainBtn{
@@ -96,7 +97,7 @@
 				</tr>
 				<tr class="tr-1">
 					<th>체크아웃</th>
-					<td><%=bpay.getCheckIn() %> 11:00 </td>
+					<td><%=bpay.getCheckOut() %> 11:00 </td>
 				</tr>
 				<tr class="tr-1">
 					<th>예약인원</th>
