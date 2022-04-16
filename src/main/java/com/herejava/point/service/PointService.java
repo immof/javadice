@@ -3,6 +3,8 @@ package com.herejava.point.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.herejava.book.vo.BookPay;
+import com.herejava.book.vo.BookPayData;
 import com.herejava.point.dao.PointDao;
 import com.herejava.point.vo.Point;
 
@@ -16,6 +18,19 @@ public class PointService {
 		ArrayList<Point> list = dao.pointList(conn, memberNo);
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public int insertPoint(BookPay bpay, BookPayData bpd) {
+		Connection conn = JDBCTemplate.getConnection();
+		PointDao dao = new PointDao();
+		int result = dao.insertPoint(conn, bpay,bpd);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }
