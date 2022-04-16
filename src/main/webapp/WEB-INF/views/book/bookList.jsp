@@ -47,10 +47,6 @@
 		#pageNavi {
 			margin: 30px;
 		}
-		.img-0{
-			width: 150px;
-			height: 90px;
-		}
 		.hr-0{
 			color: #ac9e89;
 		}
@@ -63,6 +59,21 @@
 		.test-modal{
 			top: 0px;
 			left: 0px;
+		}
+		.my_book_list_tbl tr>th:nth-child(1){
+			width: 25%;
+		} 
+		.my_book_list_tbl tr>th:nth-child(2){
+			width: 18%;
+		}
+		.my_book_list_tbl tr>th:nth-child(3){
+			width: 24%;
+		}
+		.my_book_list_tbl tr>th:nth-child(4){
+			width: 16%;
+		}
+		.my_book_list_tbl tr>th:nth-child(5){
+			width: 17%;
 		}
 </style>
 </head>
