@@ -46,7 +46,7 @@
             <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
             <li><a href="/askList.do?reqPage=1">문의사항</a></li>
             <li><a href="/fAQList.do">자주하는 질문</a></li>
-            <li><a href="#">고객 후기</a></li>
+            <li><a href="/reviewList_admin.do">고객 후기</a></li>
         </ul>
     </div>
 </body>

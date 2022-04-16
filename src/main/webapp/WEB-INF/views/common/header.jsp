@@ -82,12 +82,13 @@
                <li><a href="/hotelListFrm.do">객실정보</a></li>
                <li><a href="/promotionList.do">프로모션</a></li>
                <li><a href="/location.do">오시는길</a></li>
-               <li><a href="#">게시판<span class="material-icons">expand_more</span>
+               <li><a href="/noticeList.do?reqPage=1">게시판<span class="material-icons">expand_more</span>
                </a>
                   <ul class="sub-navi">
                      <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
                      <li><a href="/askList.do?reqPage=1">문의사항</a></li>
                      <li><a href="/fAQList.do">자주묻는 질문</a></li>
+                     <li><a href="/reviewList_admin.do">고객후기</a></li>
                   </ul></li>
             </ul>
          </nav>
