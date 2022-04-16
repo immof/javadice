@@ -71,6 +71,29 @@ public class RoomDao {
 		return result;
 	}
 
+	public Room selectOneRoom(Connection conn, int roomNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Room r = null;
+		String query = "select * from room where room_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, roomNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				r = setRoom(rset);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return r;
+	}
+
 	
 
 }

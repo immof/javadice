@@ -263,15 +263,15 @@ table{
 						String price = formatter.format(r.getRoomPrice());
 						switch(r.getRoomNo()){
 						case 6:
-							engRoomName = "Royal Sweet";
+							engRoomName = "Royal Suite";
 							roomSize = "60~65m²";
 							break;
 						case 7:
-							engRoomName = "Premium Sweet";
+							engRoomName = "Premier Suite";
 							roomSize = "55~60m²";
 							break;
 						case 8:
-							engRoomName = "Sweet";
+							engRoomName = "Premier";
 							roomSize = "50~55m²";
 							break;
 						case 9:

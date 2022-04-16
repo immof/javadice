@@ -50,6 +50,7 @@ public class BookViewServlet extends HttpServlet {
 		if(masterCheck) {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/adminBookView.jsp");
 			request.setAttribute("bd", bd);
+			request.setAttribute("pay", pay);
 			view.forward(request, response);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookView.jsp");
