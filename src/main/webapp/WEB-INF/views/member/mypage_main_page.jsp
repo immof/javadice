@@ -50,10 +50,6 @@
 		font-size: 16px;
 		margin-top: 5px;
 	}
-	.img-0{
-		width: 150px;
-		height: 90px;
-	}
 	.h3-0{
 		text-align : center;
 		padding: 100px;
@@ -84,14 +80,10 @@
 		width: 30%;
 	}
 	.info-box-td{
-		width:45%;
+		width:42%;
 	}
 	.view-box-td{
 		width:10%;
-		text-align: right;
-	}
-	.btn-box-td{
-		text-align: right;
 	}
 </style>
 </head>
@@ -132,13 +124,13 @@
 									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<button type="button" class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
 									</td>	
 											<%	break;
 											case 1: bookState = "이용완료";
 												//리뷰o
-												if(1 == 0){
+												if(bd.getReviewNo() != 0){
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
 													<p class="p-2">
@@ -150,7 +142,7 @@
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td class="btn-box-td">
-										<a type="button" class="btn bc4 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
+										<a type="button" class="btn bc2 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
 												}else{
@@ -167,8 +159,9 @@
 									<td class="btn-box-td">
 										<a type="button" class="btn bc4 bs6" href="/review_writeFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
-												<%break;											
-											 }//예약취소
+																							
+											<% }//예약취소
+											break;
 											case 2: bookState = "취소완료";
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
@@ -177,14 +170,14 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td class="btn-box-td">
 										<button class="btn bc7 bs6">취소완료</button>
 									</td>	
 											<%break;
-										}; 
+										};//switch문 끝
 										list.add(bd); %>
 								</tr>
 								</table>
@@ -251,16 +244,16 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
 									</td>	
 											<%	break;
 											case 1: bookState = "이용완료";
 												//리뷰o
-												if(1 == 0){
+												if(bd.getReviewNo() != 0){
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
 													<p class="p-2">
@@ -268,11 +261,11 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
-										<button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button>
+									<td class="btn-box-td">
+										<a type="button" class="btn bc2 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
 												}else{

@@ -137,7 +137,8 @@ $(document).ready(function(){
      dots: true,           // 점 네비게이션 표시
      arrows: true,        //화살표 표시
     autoplay: true ,      //자동스크롤
-     autoplaySpeed: 5000   //자동스크롤 속도
+     autoplaySpeed: 3500,   //자동스크롤 속도
+     speed: 1500
   	});
 });
 

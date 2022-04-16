@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.herejava.review.dao.ReviewDao;
 import com.herejava.review.vo.Review;
 import com.herejava.review.vo.ReviewList;
+import com.herejava.review.vo.ReviewListAdmin;
 
 import common.JDBCTemplate;
 
@@ -64,6 +65,14 @@ public class ReviewService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
+	}
+
+	public ArrayList<ReviewListAdmin> getAllReview() {
+		Connection conn = JDBCTemplate.getConnection();
+		ReviewDao dao = new ReviewDao();
+		ArrayList<ReviewListAdmin> reviewList = dao.getAllReview(conn);
+		JDBCTemplate.close(conn);
+		return reviewList;
 	}
 
 }

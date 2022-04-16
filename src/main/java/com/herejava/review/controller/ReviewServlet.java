@@ -42,15 +42,9 @@ public class ReviewServlet extends HttpServlet {
 		ReviewService service = new ReviewService();
 		ArrayList<ReviewList> reviewList = service.myReview(memberNo);
 		//4.결과처리
-		if(masterCheck) {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_review.jsp");
-			request.setAttribute("reviewList", reviewList);
-			view.forward(request, response);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_review.jsp");
-			request.setAttribute("reviewList", reviewList);
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/mypage_review.jsp");
+		request.setAttribute("reviewList", reviewList);
+		view.forward(request, response);
 	}
 
 	/**

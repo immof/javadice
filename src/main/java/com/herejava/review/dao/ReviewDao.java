@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.herejava.review.vo.Review;
 import com.herejava.review.vo.ReviewList;
+import com.herejava.review.vo.ReviewListAdmin;
 
 import common.JDBCTemplate;
 
@@ -152,6 +153,46 @@ public class ReviewDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<ReviewListAdmin> getAllReview(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ReviewListAdmin> reviewList = new ArrayList<ReviewListAdmin>();
+		String query = "select r.*,b.*,m.filepath memberProfile from review r,book b,member m where r.book_no=b.book_no and r.member_no=m.member_no order by review_enroll_date desc";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				ReviewListAdmin rv = new ReviewListAdmin();
+				rv.setReviewNo(rset.getInt("review_no"));
+				rv.setBookNo(rset.getLong("book_no"));
+				rv.setMemberNo(rset.getInt("member_no"));
+				rv.setReviewScore(rset.getInt("review_score"));
+				rv.setReviewContent(rset.getString("review_content"));
+				rv.setReviewEnrollDate(rset.getString("review_enroll_date"));
+				rv.setFilepath1(rset.getString("filepath1"));
+				rv.setFilepath2(rset.getString("filepath2"));
+				rv.setFilepath3(rset.getString("filepath3"));
+				rv.setRoomNo(rset.getInt("room_no"));
+				rv.setBookPeople(rset.getInt("book_people"));
+				rv.setBookName(rset.getString("book_name"));
+				rv.setBookPhone(rset.getString("book_phone"));
+				rv.setBookDay(rset.getString("book_day"));
+				rv.setBookState(rset.getInt("book_state"));
+				rv.setCheckIn(rset.getString("check_in"));
+				rv.setCheckOut(rset.getString("check_out"));
+				rv.setMemberProfile(rset.getString("memberProfile"));
+				reviewList.add(rv);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return reviewList;
 	}
 
 }
