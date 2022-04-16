@@ -1,9 +1,11 @@
+<%@page import="com.herejava.pay.vo.Pay"%>
 <%@page import="com.herejava.notice.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
     	Book b = (Book)request.getAttribute("b");
     	int d = (Integer)request.getAttribute("d");
+    	Pay pay = (Pay)request.getAttribute("pay");
     %>
 <!DOCTYPE html>
 <html>
@@ -46,9 +48,19 @@
 			<div class="mypage-content">
 				<div class="page1-title">예약 정보 </div>
 				<table class="tbl1">
-					<tr><td class="tdtd">객실정보</td><td>db 구현 아직</td></tr>
+					<%if(b.getRoomNo() == 6){ %>
+					<tr><td class="tdtd">객실정보</td><td>로열 스위트</td></tr>
+					<%}else if(b.getRoomNo() == 7){ %>
+					<tr><td class="tdtd">객실정보</td><td>프리미어 스위트</td></tr>
+					<%}else if(b.getRoomNo() == 8){ %>
+					<tr><td class="tdtd">객실정보</td><td>프리미어</td></tr>
+					<%}else if(b.getRoomNo() == 9){ %>
+					<tr><td class="tdtd">객실정보</td><td>디럭스</td></tr>
+					<%}else if(b.getRoomNo() == 10){ %>
+					<tr><td class="tdtd">객실정보</td><td>스탠다드</td></tr>
+					<%} %>
 					<tr><td class="tdtd">숙박일</td><td><%=d%>박 <%=d+1 %>일</td></tr>
-					<tr><td class="tdtd">예약인원</td><td><%=b.getBookPeople() %></td></tr>
+					<tr><td class="tdtd">예약인원</td><td><%=b.getBookPeople() %>명</td></tr>
 					<tr><td class="tdtd">예약자명</td><td><%=b.getBookName() %></td></tr>
 					<tr><td class="tdtd">전화번호</td><td><%=b.getBookPhone() %></td></tr>
 					<tr><td class="tdtd">예약번호</td><td><%=b.getBookNo() %></td></tr>
@@ -56,8 +68,13 @@
 				<br>
 				<div class="page1-title title2">결제 정보</div>
 				<table class="tbl1 table2">
-					<tr><td class="tdtd">적립금사용</td><td>db 구현 아직</td></tr>
-					<tr><td class="tdtd">결제금액</td><td>db 구현 아직</td></tr>
+					<%if(pay == null){ %>
+					<tr><td class="tdtd">적립금사용</td><td>0 포인트</td></tr>
+					<tr><td class="tdtd">결제금액</td><td>0 원</td></tr>					
+					<%}else{%>
+					<tr><td class="tdtd">적립금사용</td><td><%=pay.getUsePoint() %></td></tr>
+					<tr><td class="tdtd">결제금액</td><td><%=pay.getPayAmount() %></td></tr>
+					<%} %>
 				</table>
 				
 			</div>

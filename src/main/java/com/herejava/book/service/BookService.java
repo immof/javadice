@@ -244,20 +244,33 @@ public class BookService {
 		return list;
 	}
 
-
-	//예약번호로 예약취소(update)하는 메소드
-	public int updateBook(long bookNo) {
+	//예약번호로 book/pay/point테이블 예약취소(update) 및 결제금액/결제포인트 취소하는 메소드
+	public int updateBook(long bookNo, int memberNo, int memberPoint) {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
-		int result = dao.updateBook(conn,bookNo);
-		if(result>0) {
+		//일단 메소드 8개 가져오기
+		int result1 = dao.updateBookStateInBook(conn, bookNo);
+		int result2 = dao.updateBookStateInPay(conn, bookNo);
+		int result3 = dao.payAmountUpdateInPay(conn, bookNo);
+		int result4 = dao.payAmountUpdateInPoint(conn, bookNo);
+		int result5 = dao.usePointUpdateInPay(conn, bookNo);
+		int result6 = dao.usePointUpdateInPoint(conn, bookNo);
+		int result7 = dao.plusPointUpdateInPay(conn, bookNo);
+		int result8 = dao.plusPointUpdateInPoint(conn, bookNo);
+		int result9 = 0;//member_point 결과값
+		int totalResult = result1 + result2 + result3 + result4 + result5
+				 	+ result6 + result7 + result8 + result9;
+		if(totalResult == 9) {
 			JDBCTemplate.commit(conn);
+			System.out.println("메소드 9개 모두 성공");
 		}else {
 			JDBCTemplate.rollback(conn);
+			System.out.println("메소드 실패 -> 작동한 메소드 갯수 : "+totalResult);
 		}
 		JDBCTemplate.close(conn);
-		return result;
+		return totalResult;
 	}
+
 	
 	//예약번호로 예약(방사진/방이름/체크인/체크아웃/예약상태/이용자숫자/예약자명/예약자전화번호) 1개 가져오는 메소드
 	public BookData getBook(long bookNo) {

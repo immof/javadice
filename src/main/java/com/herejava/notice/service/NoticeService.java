@@ -87,7 +87,6 @@ public class NoticeService {
 		}else {
 			JDBCTemplate.rollback(conn);
 			JDBCTemplate.close(conn);
-			return null;
 		}
 		Notice n = dao.selectOneNotice(conn,noticeNo);
 		JDBCTemplate.close(conn);
@@ -101,6 +100,23 @@ public class NoticeService {
 		return null;
 	}
 
+	public int writeNotice(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		NoticeDao dao = new NoticeDao();
+		int result = dao.writeNotice(conn,n);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
+	
+	
+	
+	
+
+}//
 	
 

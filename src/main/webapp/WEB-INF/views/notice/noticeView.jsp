@@ -116,8 +116,8 @@
 			<tr class="tr-1">
 				<th class="td-3 file">첨부파일</th>
 				<td colspan="5">
-					<%if(n.getFilename() != null) {%>
-						<a href="/fileDown.do?noticeNo=<%=n.getNoticeNo() %>"><%=n.getFilename() %></a>
+					<%if(n.getFilepath() != null) {%>
+						<a href="/fileDown.do?filename=<%=n.getFilepath() %>"><%=n.getFilepath() %></a>
 					<%} %>
 				</td>
 			</tr>
@@ -125,16 +125,6 @@
 		<span style="line-height:150%;">
 		<br>
 		</span>
-		<table class="tbl" id="noticeEview">
-			<tr class="tr-1 eview">
-				<th class="td-3 eTitle">이전글<span class="material-icons icon1">expand_less</span></th>
-				<td colspan="5" onclick=""><%=n.getNoticeTitle() %></td>
-			</tr>
-			<tr class="tr-1 eview">
-				<th class="td-3 eTitle">다음글<span class="material-icons icon1">expand_more</span></th>
-				<td colspan="5" onclick=""><%=n.getNoticeTitle() %></td>
-			</tr>
-		</table>
 		
 		<script>
 			function home(){

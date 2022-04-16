@@ -13,8 +13,6 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-
 <script>
 	window.onload = function() {
 		function navigo() {
@@ -609,7 +607,7 @@ a:hover{
 	<script>
 		$(function() {
 			 $('#carousel-example-generic').carousel({
-				interval : 1000,
+				interval : 3000,
 				pause : "hover",
 				wrap : true,
 				keyboard : true
