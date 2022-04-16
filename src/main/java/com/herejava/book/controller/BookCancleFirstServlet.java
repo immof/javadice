@@ -11,20 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
-import com.herejava.member.service.MemberService;
-import com.herejava.member.vo.Member;
+import com.herejava.book.vo.BookData;
 
 /**
- * Servlet implementation class BookCancleServlet
+ * Servlet implementation class BookCancleFirstServlet
  */
-@WebServlet(name = "BookCancle", urlPatterns = { "/bookCancle.do" })
-public class BookCancleServlet extends HttpServlet {
+@WebServlet(name = "BookCancleFirst", urlPatterns = { "/bookCancleFirst.do" })
+public class BookCancleFirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookCancleServlet() {
+    public BookCancleFirstServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,22 +38,15 @@ public class BookCancleServlet extends HttpServlet {
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
 		//3. 비즈니스로직
 		BookService service = new BookService();
-		int result = service.updateBook(bookNo);
+		BookData bd = service.getBook(bookNo);
 		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		if(result>0) {
-			request.setAttribute("title", "예약취소 성공");
-			request.setAttribute("msg", "메인페이지로 돌아갑니다.");
-			request.setAttribute("icon", "success");
-		}else {
-			request.setAttribute("title", "예약취소 실패");
-			request.setAttribute("msg", "관리자에게 문의하세요.");
-			request.setAttribute("icon", "warning");
-		}
-		request.setAttribute("loc", "/index.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookCancelView.jsp");
+		request.setAttribute("bd", bd);
 		view.forward(request, response);
 	}
 	
+	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

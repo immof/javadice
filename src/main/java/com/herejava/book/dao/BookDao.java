@@ -319,7 +319,8 @@ public class BookDao {
 	public int updateBook(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update Book set book_state = 2 where book_no=?";
+		String query = "update Book set book_state=2 where book_no=?";
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
