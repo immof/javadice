@@ -90,6 +90,8 @@ public class BookData {
 	}
 	public void setBookDay(String bookDay) {
 		this.bookDay = bookDay;
+	}
+
 	public int getReviewNo() {
 		return reviewNo;
 	}

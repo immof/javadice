@@ -1,10 +1,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.herejava.member.vo.Member"%>
 <%@page import="com.herejava.book.vo.BookData"%>
+<%@page import="com.herejava.review.vo.ReviewList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
     	ArrayList<BookData> list = (ArrayList<BookData>)request.getAttribute("list");
+    	ArrayList<ReviewList> reviewList =(ArrayList<ReviewList>)request.getAttribute("reviewList"); 
     %>
 <!DOCTYPE html>
 <html>
@@ -38,6 +40,7 @@
 		font-size: 18px;
 		display: inline-block;
 		margin-right: 40px;
+		width: 125px;
 	}
 	.p-1{
 		text-align: right;
@@ -46,10 +49,6 @@
 	.p-2{
 		font-size: 16px;
 		margin-top: 5px;
-	}
-	.img-0{
-		width: 150px;
-		height: 90px;
 	}
 	.h3-0{
 		text-align : center;
@@ -77,6 +76,15 @@
 	.my_book_wrap{
 		margin-bottom: 36px;
 	}
+	.img-box-td{
+		width: 30%;
+	}
+	.info-box-td{
+		width:42%;
+	}
+	.view-box-td{
+		width:10%;
+	}
 </style>
 </head>
 <body>
@@ -97,11 +105,11 @@
 								<table class="my_book_tbl">
 								<tr>
 									<!-- 객실 사진 -->
-									<td>
+									<td class="img-box-td">
 										<img class="img-0" src="/img/<%=bd.getFilePath()%>">
 									</td>
 									<!-- 객실 이름/예약상태/숙박일자 -->
-									<td>
+									<td class="info-box-td">
 										<p class="p-0"><%=bd.getRoomName() %></p>
 									<%	String bookState = null;
 										switch(bd.getBookState()) {
@@ -113,19 +121,16 @@
 													</p>
 									</td>
 									<!-- 상세보기 -->
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<!-- 리뷰버튼 
-									<button type="button" onclick="location.href='joinUs.jsp' ">회원가입</button>
-									-->
-									<td>
+									<td class="btn-box-td">
 										<button type="button" class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
 									</td>	
 											<%	break;
 											case 1: bookState = "이용완료";
 												//리뷰o
-												if(1 == 0){
+												if(bd.getReviewNo() != 0){
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
 													<p class="p-2">
@@ -133,11 +138,11 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
-										<button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button>
+									<td class="btn-box-td">
+										<a type="button" class="btn bc2 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
 												}else{
@@ -148,14 +153,15 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
-										<button type="button" class="btn bc4 bs6" onclick="#">리뷰쓰기</button>
+									<td class="btn-box-td">
+										<a type="button" class="btn bc4 bs6" href="/review_writeFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
-												<%break;											
-											 }//예약취소
+																							
+											<% }//예약취소
+											break;
 											case 2: bookState = "취소완료";
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
@@ -164,14 +170,14 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<button class="btn bc7 bs6">취소완료</button>
 									</td>	
 											<%break;
-										}; 
+										};//switch문 끝
 										list.add(bd); %>
 								</tr>
 								</table>
@@ -238,16 +244,16 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
+									<td class="btn-box-td">
 										<button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button>
 									</td>	
 											<%	break;
 											case 1: bookState = "이용완료";
 												//리뷰o
-												if(1 == 0){
+												if(bd.getReviewNo() != 0){
 											%>
 													<button class="btn bc7 bs5"><%=bookState %></button><br>
 													<p class="p-2">
@@ -255,11 +261,11 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
-										<button type="button" class="btn bc2 bs6" onclick="#">리뷰보기</button>
+									<td class="btn-box-td">
+										<a type="button" class="btn bc2 bs6" href="/review.do?memberNo=<%=m.getMemberNo()%>">리뷰보기</a>
 									</td>	
 											<% 	//리뷰x
 												}else{
@@ -270,11 +276,11 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
-									<td>
-										<button type="button" class="btn bc4 bs6" onclick="#">리뷰쓰기</button>
+									<td class="btn-box-td">
+										<a type="button" class="btn bc4 bs6" href="/reviewWriteFrm.do?bookNo=<%=bd.getBookNo()%>">리뷰쓰기</a>
 									</td>	
 												<%break;											
 											 }//예약취소
@@ -286,7 +292,7 @@
 														<%=bd.getCheckOut() %>
 													</p>
 									</td>
-									<td>
+									<td  class="view-box-td">
 										<a class="view-0" href="/bookView.do?bookNo=<%=bd.getBookNo()%>">상세보기></a>
 									</td>
 									<td>
@@ -346,17 +352,17 @@
 					<div class="mypage-content-title title1">내 정보</div>
 					<table class="my_info_tbl">
 						<tr class="tr-1">
-							<th class="th-1">이메일</th>
+							<th class="th-1" style="padding-left:10px;">이메일</th>
 							<td class="td-1"><%=m.getMemberId() %></td>
 							<td><pre>                                                                                                                                                  </pre></td>
 							<td><a class="p-1" href="/mypage_info.do">수정하기></a></td>
 						</tr>
 						<tr class="tr-1">
-							<th class="th-1">닉네임</th>
+							<th class="th-1" style="padding-left:10px;">닉네임</th>
 							<td class="td-1"><%=m.getMemberNick() %></td>
 						</tr>	
 						<tr class="tr-1">
-							<th class="th-1">비밀번호</th>
+							<th class="th-1" style="padding-left:10px;">비밀번호</th>
 							<td class="td-1">
 							<!-- 비밀번호 마스킹처리 -->
 							<% int pwCount = (m.getMemberPw()).length();%>
@@ -367,7 +373,7 @@
 							</td>
 						</tr>
 						<tr class="tr-1">
-							<th class="th-1">휴대폰번호</th>
+							<th class="th-1" style="padding-left:10px;">휴대폰번호</th>
 							<td class="td-1"><%=m.getMemberPhone() %></td>
 						</tr>
 					</table><!-- my_info_tbl 끝 -->

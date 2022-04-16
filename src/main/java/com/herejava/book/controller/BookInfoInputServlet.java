@@ -30,7 +30,34 @@ public class BookInfoInputServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//예약정보입력 서블릿
 		request.setCharacterEncoding("utf-8");
+		//2.값추출
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		int roomPrice = Integer.parseInt(request.getParameter("roomPrice"));
+		int roomCapacity = Integer.parseInt(request.getParameter("roomCapacity"));
+		int bookPeople = Integer.parseInt(request.getParameter("bookPeople"));
+		String checkIn = request.getParameter("checkIn");
+		String checkOut = request.getParameter("checkOut");
+		int payStayDay = Integer.parseInt(request.getParameter("payStayDay"));
+		String roomName = request.getParameter("roomName");
+		/*
+		System.out.println(roomNo);
+		System.out.println(roomPrice);
+		System.out.println(bookPeople);
+		System.out.println(checkIn);
+		System.out.println(checkOut);
+		System.out.println(payStayDay);
+		System.out.println(roomName);
+		*/
+		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookInfoInput.jsp");
+		request.setAttribute("roomNo", roomNo);
+		request.setAttribute("roomPrice", roomPrice);
+		request.setAttribute("roomCapacity", roomCapacity);
+		request.setAttribute("bookPeople", bookPeople);
+		request.setAttribute("checkIn", checkIn);
+		request.setAttribute("checkOut", checkOut);
+		request.setAttribute("payStayDay", payStayDay);
+		request.setAttribute("roomName", roomName);
 		view.forward(request, response);
 	}
 

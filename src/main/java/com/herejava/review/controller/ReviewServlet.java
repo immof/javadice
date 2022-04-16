@@ -36,7 +36,8 @@ public class ReviewServlet extends HttpServlet {
 		//1.인코딩
 		request.setCharacterEncoding("utf-8");
 		//2.값추출
-		int memberNo= Integer.parseInt(request.getParameter("memberNo")); 
+		int memberNo= Integer.parseInt(request.getParameter("memberNo"));
+		boolean masterCheck = Boolean.parseBoolean(request.getParameter("masterCheck"));
 		//3.비즈니스로직
 		ReviewService service = new ReviewService();
 		ArrayList<ReviewList> reviewList = service.myReview(memberNo);

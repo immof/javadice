@@ -1,9 +1,11 @@
 <%@page import="com.herejava.book.vo.BookData"%>
 <%@page import="com.herejava.room.vo.Room"%>
+<%@page import="com.herejava.pay.vo.Pay"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
     	BookData bd = (BookData)request.getAttribute("bd");
+    	Pay pay = (Pay)request.getAttribute("pay");
     	Room r = (Room)request.getAttribute("r");
     %>
 <!DOCTYPE html>
@@ -92,18 +94,19 @@
 							<tr>
 								<th class="th-1">결제정보</th>
 							</tr>
+							
+							<!-- 결제정보 시작 -->
 							<tr>
-								<th class="th-1">총 결제금액</th>
-								<!-- 
-									bookView.do에서 pay끌어와서 여기로 전송
-									p.getPayAmount()로 최종결제금액 출력 
-								
-								-->
-								<td class="td-1 pay-1">#</td><td class="td-1 pay-1">원</td>
-								<%if(bd.getBookState()==0) {%>
-								<td class="td-1"><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
-								<%} %>
+								<%if(bd.getBookState() == 0 || bd.getBookState() == 1) {%>
+									<!-- #안에 pay.getPayAmount() 넣기 -->
+									<th class="th-1">총 결제금액</th>
+									<td class="td-1 pay-1">#</td><td class="td-1 pay-1">원</td>
+								<%}else {%>	
+									<th class="th-1" style="color:rgb(221, 78, 34)">취소 금액</th>
+									<td class="td-1 pay-1">#</td><td class="td-1 pay-1">원</td>
+								<%} %>					
 							</tr>
+							<!-- 결제정보 끝 -->
 						</table>
 						
 								<!-- 모달내용 시작 -->

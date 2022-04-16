@@ -10,7 +10,7 @@
 <title>객실 관리</title>
 <style>
 	.page-content{
-		float: left;
+	
 	}
 	.tbl tr>th{
 		border-top: 1px solid #ccc;

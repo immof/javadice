@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.herejava.review.vo.Review;
 import com.herejava.review.vo.ReviewList;
+import com.herejava.review.vo.ReviewListAdmin;
 
 import common.JDBCTemplate;
 
@@ -25,7 +26,7 @@ public class ReviewDao {
 			while(rset.next()) {
 				ReviewList rv = new ReviewList();
 				rv.setReviewNo(rset.getInt("review_no"));
-				rv.setBookNo(rset.getInt("book_no"));
+				rv.setBookNo(rset.getLong("book_no"));
 				rv.setMemberNo(rset.getInt("member_no"));
 				rv.setReviewScore(rset.getInt("review_score"));
 				rv.setReviewContent(rset.getString("review_content"));
@@ -65,7 +66,7 @@ public class ReviewDao {
 			if(rset.next()) {
 				list = new ReviewList();
 				list.setReviewNo(rset.getInt("review_no"));
-				list.setBookNo(rset.getInt("book_no"));
+				list.setBookNo(rset.getLong("book_no"));
 				list.setMemberNo(rset.getInt("member_no"));
 				list.setReviewScore(rset.getInt("review_score"));
 				list.setReviewContent(rset.getString("review_content"));
@@ -112,6 +113,86 @@ public class ReviewDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public int reviewWrite(Connection conn, Review rev) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into review values(review_seq.nextval,?,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, rev.getBookNo());
+			pstmt.setInt(2, rev.getMemberNo());
+			pstmt.setInt(3, rev.getReviewScore());
+			pstmt.setString(4, rev.getReviewContent());
+			pstmt.setString(5, rev.getFilepath1());
+			pstmt.setString(6, rev.getFilepath2());
+			pstmt.setString(7, rev.getFilepath3());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int reviewDelete(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete review where review_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<ReviewListAdmin> getAllReview(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ReviewListAdmin> reviewList = new ArrayList<ReviewListAdmin>();
+		String query = "select r.*,b.*,m.filepath memberProfile from review r,book b,member m where r.book_no=b.book_no and r.member_no=m.member_no order by review_enroll_date desc";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				ReviewListAdmin rv = new ReviewListAdmin();
+				rv.setReviewNo(rset.getInt("review_no"));
+				rv.setBookNo(rset.getLong("book_no"));
+				rv.setMemberNo(rset.getInt("member_no"));
+				rv.setReviewScore(rset.getInt("review_score"));
+				rv.setReviewContent(rset.getString("review_content"));
+				rv.setReviewEnrollDate(rset.getString("review_enroll_date"));
+				rv.setFilepath1(rset.getString("filepath1"));
+				rv.setFilepath2(rset.getString("filepath2"));
+				rv.setFilepath3(rset.getString("filepath3"));
+				rv.setRoomNo(rset.getInt("room_no"));
+				rv.setBookPeople(rset.getInt("book_people"));
+				rv.setBookName(rset.getString("book_name"));
+				rv.setBookPhone(rset.getString("book_phone"));
+				rv.setBookDay(rset.getString("book_day"));
+				rv.setBookState(rset.getInt("book_state"));
+				rv.setCheckIn(rset.getString("check_in"));
+				rv.setCheckOut(rset.getString("check_out"));
+				rv.setMemberProfile(rset.getString("memberProfile"));
+				reviewList.add(rv);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return reviewList;
 	}
 
 }
