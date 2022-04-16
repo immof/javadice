@@ -75,6 +75,21 @@
 		.my_book_list_tbl tr>th:nth-child(5){
 			width: 17%;
 		}
+		#my_book_list_tbl tr>td:nth-child(1){
+			width: 25%;
+		} 
+		#my_book_list_tbl tr>td:nth-child(2){
+			width: 18%;
+		}
+		#my_book_list_tbl tr>td:nth-child(3){
+			width: 24%;
+		}
+		#my_book_list_tbl tr>td:nth-child(4){
+			width: 16%;
+		}
+		#my_book_list_tbl tr>td:nth-child(5){
+			width: 17%;
+		}
 </style>
 </head>
 <body>
@@ -103,7 +118,7 @@
 						for (BookData bd : list) {
 						%>
 						<!-- 예약리스트 시작 -->
-						<table class="tbl tbl-hover my_book_tbl">
+						<table class="tbl tbl-hover my_book_tbl" id="my_book_list_tbl">
 							<tr>
 								<td>
 									<a href="/bookView.do?bookNo=<%=bd.getBookNo() %>"><img class="img-0" src="/img/<%=bd.getFilePath()%>"></a>
