@@ -1,7 +1,6 @@
 package com.herejava.review.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.ask.vo.AskPageData;
 import com.herejava.review.service.ReviewService;
-import com.herejava.review.vo.ReviewListAdmin;
 import com.herejava.review.vo.ReviewPageData;
 
 /**
- * Servlet implementation class ReviewList_adminServlet
+ * Servlet implementation class ReviewList_admin2Servlet
  */
-@WebServlet(name = "ReviewList_admin", urlPatterns = { "/reviewList_admin.do" })
-public class ReviewList_adminServlet extends HttpServlet {
+@WebServlet("/ReviewList_admin2Servlet")
+public class ReviewList_admin2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewList_adminServlet() {
+    public ReviewList_admin2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,11 +36,10 @@ public class ReviewList_adminServlet extends HttpServlet {
 		ReviewService service = new ReviewService();
 		ReviewPageData rpd = service.selectAllReview(reqPage);
 		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_review.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admion/admin_review.jsp");
 		request.setAttribute("list", rpd.getList());
 		request.setAttribute("pageNavi", rpd.getPageNavi());
 		view.forward(request, response);
-		
 	}
 
 	/**
