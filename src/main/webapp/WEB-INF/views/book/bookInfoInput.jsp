@@ -336,7 +336,7 @@
             </form>
             	<div class=btnBox>
                 	<button class="btn bc1" id="paymentBtn">결제하기</button> 
-                	<button class="btn bc1" id="test">서블릿test</button> 
+                	<button class="btn bc1" id="test">test</button> 
             	</div>
 		</div>
 		<div class="rule-wrap">

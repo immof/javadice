@@ -97,9 +97,9 @@
               <li><a href="/bookcheck.do?reqPage=1">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
               <li><a href="/roomInfo.do">객실관리</a></li>
-              <li><a href="#">공지사항</a></li>
-              <li><a href="#">문의내역</a></li>
-              <li><a href="#">프로모션</a></li>                  
+              <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
+              <li><a href="/askList.do?reqPage=1">문의내역</a></li>
+              <li><a href="/promotionList.do">프로모션</a></li>                  
           </ul>
       </div>
 
