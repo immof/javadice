@@ -398,7 +398,6 @@
 			//1. 정규표현식 변수생성
 			const nameReg = /^[가-힣]{2,6}$/;
 			const name = $("#bookName").val();
-			console.log(name);
 			if(!nameReg.test(name) || name == ""){
 				//정규표현식에 만족하지 않는 경우
 				$("#nameChk").text("이름은 2~6 글자의 한글만 입력가능합니다. ");
@@ -409,9 +408,6 @@
 				$("#nameChk").css("color","green");
 				checkArr[0] = true;
 			}
-			console.log(checkArr[0]);
-			console.log(checkArr[1]);
-			console.log(checkArr[2]);
 		});
 		//휴대폰
 		$("#bookPhone").keyup(function(){
@@ -480,53 +476,52 @@
   					console.log("결제금액 : "+rsp.paid_amount);
   					console.log("카드승인번호 : " +rsp.apply_num);
   					//추가 DB작업이 필요한경우 이 부분에 결제내역을 DB에 저장하는 코드 작성
-  					const payAmount = $("#stringPayAmount").text();	//총요금(payAmount)
-		   			const roomNo = $("#roomNo").val();
-		   			const bookName = $("#bookName").val();
-		   			const bookPhone = $("#bookPhone").val();
-  	       			const memberNo = $("#memberNo").val();		//비회원은 0
-  	       			const payStayDay = $("#payStayDay").val();
-  	       			const memberPoint= $("#memberPoint").val();
-  	       			const payRoomPrice = $("#payRoomPrice").val();
-  	       			const usePoint= $("#usePoint").val();
-  	       			const checkIn = $("#checkIn").val();
-  	       			const checkOut = $("#checkOut").val();
-  	       			const bookPeople = $("#bookPeople").val();
-	  	       		let plusPoint = 0;
+  		        	const payAmount = $("#stringPayAmount").text();	//총요금(payAmount)
+  		   			const roomNo = $("#roomNo").val();
+  		   			const bookName = $("#bookName").val();
+  		   			const bookPhone = $("#bookPhone").val();
+	     			const memberNo = $("#memberNo").val();		//비회원은 0
+	     			const payStayDay = $("#payStayDay").val();
+	     			const memberPoint= $("#memberPoint").val();
+	     			const payRoomPrice = $("#payRoomPrice").val();
+	     			const usePoint= $("#usePoint").val();
+	     			const checkIn = $("#checkIn").val();
+	     			const checkOut = $("#checkOut").val();
+	     			const bookPeople = $("#bookPeople").val();
+	     			let plusPoint = 0;
 	     			if(memberNo!=0){	//회원이면
 						plusPoint = parseInt(($("#pointRate").val())*payAmount/100);
 	     			}else{
 	     				plusPoint = 0;	//비회원이면 적립금 0
 	     			}
-  					const roomName = $("#roomName").val();
+					const roomName = $("#roomName").val();
   	       			
-	  	       		$.ajax({
-	  					url : "/insertBook.do",
-	  					method : "post",
-	  					data : {
-	  						payAmount:payAmount, 
-	  						roomNo:roomNo,
-	  						bookName:bookName,
-	  						bookPhone:bookPhone,
-	  						memberNo:memberNo,
-	  						payStayDay:payStayDay,
-	  						memberPoint:memberPoint,
-	  						payRoomPrice:payRoomPrice,
-	  						usePoint:usePoint,
-	  						checkIn:checkIn,
-	  						checkOut:checkOut,
-	  						bookPeople:bookPeople,
-	  						plusPoint:plusPoint,
-	  						roomName:roomName
-	  						},
-	  					success : function(data){
-	  						console.log("서버호출완료");
-	  						
-	  					},
-	  					error : function(){
-	  						console.log("서버호출실패");
-	  					}
-	  				});
+  		        	$.ajax({
+  						url : "/insertBook.do",
+  						method : "post",
+  						data : {
+  							payAmount:payAmount, 
+  							roomNo:roomNo,
+  							bookName:bookName,
+  							bookPhone:bookPhone,
+  							memberNo:memberNo,
+  							payStayDay:payStayDay,
+  							memberPoint:memberPoint,
+  							payRoomPrice:payRoomPrice,
+  							usePoint:usePoint,
+  							checkIn:checkIn,
+  							checkOut:checkOut,
+  							bookPeople:bookPeople,
+  							plusPoint:plusPoint,
+  							roomName:roomName
+  							},
+  						success : function(data){
+  							console.log("서버호출성공");
+  						},
+  						error : function(){
+  							console.log("서버호출실패");
+  						}
+  					});
   				}else{
   					alert("결제가 취소되었습니다.");
   					console.log("에러내용 : "+rsp.err_msg);
@@ -548,10 +543,19 @@
           	if(count != 3){
           		alert("정보를 확인하세요");
           	}
-        	const payAmount = $("#stringPayAmount").text();	//총요금(payAmount)
-   			const roomNo = $("#roomNo").val();
-   			const bookName = $("#bookName").val();
-   			const bookPhone = $("#bookPhone").val();
+
+				
+				/*
+				console.log("멤버넘버"+memberNo);
+				console.log(" 원래있던 포인트 : "+ memberPoint);
+				console.log(" 사용한 포인트 : "+usePoint);
+				console.log(plusPoint);
+				*/
+				
+	        	const payAmount = $("#stringPayAmount").text();	//총요금(payAmount)
+		   			const roomNo = $("#roomNo").val();
+		   			const bookName = $("#bookName").val();
+		   			const bookPhone = $("#bookPhone").val();
      			const memberNo = $("#memberNo").val();		//비회원은 0
      			const payStayDay = $("#payStayDay").val();
      			const memberPoint= $("#memberPoint").val();
@@ -567,41 +571,34 @@
      				plusPoint = 0;	//비회원이면 적립금 0
      			}
 				const roomName = $("#roomName").val();
-				
-				/*
-				console.log("멤버넘버"+memberNo);
-				console.log(" 원래있던 포인트 : "+ memberPoint);
-				console.log(" 사용한 포인트 : "+usePoint);
-				console.log(plusPoint);
-				*/
-				
-        	$.ajax({
-					url : "/insertBook.do",
-					method : "post",
-					data : {
-						payAmount:payAmount, 
-						roomNo:roomNo,
-						bookName:bookName,
-						bookPhone:bookPhone,
-						memberNo:memberNo,
-						payStayDay:payStayDay,
-						memberPoint:memberPoint,
-						payRoomPrice:payRoomPrice,
-						usePoint:usePoint,
-						checkIn:checkIn,
-						checkOut:checkOut,
-						bookPeople:bookPeople,
-						plusPoint:plusPoint,
-						roomName:roomName
+	       			
+		        	$.ajax({
+						url : "/insertBook.do",
+						method : "post",
+						data : {
+							payAmount:payAmount, 
+							roomNo:roomNo,
+							bookName:bookName,
+							bookPhone:bookPhone,
+							memberNo:memberNo,
+							payStayDay:payStayDay,
+							memberPoint:memberPoint,
+							payRoomPrice:payRoomPrice,
+							usePoint:usePoint,
+							checkIn:checkIn,
+							checkOut:checkOut,
+							bookPeople:bookPeople,
+							plusPoint:plusPoint,
+							roomName:roomName
+							},
+						success : function(data){
+							console.log("서버호출완료");
+							
 						},
-					success : function(data){
-						console.log("서버호출완료");
-						
-					},
-					error : function(){
-						console.log("서버호출실패");
-					}
-				});
+						error : function(){
+							console.log("서버호출실패");
+						}
+					});
         });
 	</script>
 </body>

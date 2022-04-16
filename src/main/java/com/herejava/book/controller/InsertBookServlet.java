@@ -3,6 +3,7 @@ package com.herejava.book.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import com.google.gson.Gson;
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.BookPay;
 import com.herejava.book.vo.BookPayData;
@@ -70,6 +72,7 @@ public class InsertBookServlet extends HttpServlet {
 		System.out.println("RoomNo : "+bpay.getRoomNo());
 		System.out.println("RoomName : "+bpay.getRoomName());
 		
+		int memberNo = bpay.getMemberNo();
 		//3.비즈니스로직
 		
 		//3-1. 예약테이블 추가
@@ -93,11 +96,11 @@ public class InsertBookServlet extends HttpServlet {
 		
 		//3-3. 멤버테이블에 회원포인트 변경 (회원시)
 		int resultMember = 0;
-		if(bpay.getMemberNo()!=0) {
+		if(memberNo==0) {
+			resultMember = 1;
+		}else{
 			MemberService serviceMember = new MemberService();
 			resultMember = serviceMember.updateMemberPoint(bpay);
-		}else {
-			resultMember = 1;
 		}
 		
 		System.out.println("resultBook : " +resultBook);
@@ -105,19 +108,23 @@ public class InsertBookServlet extends HttpServlet {
 		System.out.println("resultPoint : " +resultPoint);
 		System.out.println("resultMember : " +resultMember);
 		//조회결과 m을 js객체타입으로 변환
-		JSONObject result = null;	//HashMap<String,Object>와 같음
+	
+		/*
+		 * JSONObject result = null;	//HashMap<String,Object>와 같음
+		 
 		result = new JSONObject();
 		result.put("resultBook", resultBook);
 		result.put("resultPay", resultPay);
 		result.put("resultMember", resultMember);
 		result.put("resultPoint", resultPoint);
 		
-		//4.결과처리
-		response.setContentType("application/json"); //되돌려주는 데이터의 타입이 json임을 명시(안하면 string으로 취급됨)
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(result);
+		*/
 		
+		//4.결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/payComplete.jsp");
+		request.setAttribute("bpay", bpay);
+		request.setAttribute("bpd", bpd);
+		view.forward(request, response);
 	}
 
 	/**
