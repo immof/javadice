@@ -198,6 +198,7 @@ public class AskDao {
 		return result;
 	}
 
+<<<<<<< HEAD
 	public int insertAskComment(Connection conn, AskComment ac) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -215,6 +216,20 @@ public class AskDao {
 			}
 			*/
 			pstmt.setString(4, (ac.getAskRef() == 0)?null:String.valueOf(ac.getAskRef()));
+=======
+	public int UpdateAsk(Connection conn, Ask a) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update ask set ask_title=?, ask_content=?, filepath1=?, filepath2=?, filepath3=? where ask_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, a.getAskTitle());
+			pstmt.setString(2, a.getAskContent());
+			pstmt.setString(3, a.getFilepath1());
+			pstmt.setString(4, a.getFilepath2());
+			pstmt.setString(5, a.getFilepath3());
+			pstmt.setInt(6, a.getAskNo());
+>>>>>>> branch 'master' of https://github.com/Pyseon/javadice.git
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

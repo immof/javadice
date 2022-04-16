@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.herejava.ask.vo.AskPageData;
 import com.herejava.review.service.ReviewService;
 import com.herejava.review.vo.ReviewListAdmin;
+import com.herejava.review.vo.ReviewPageData;
 
 /**
  * Servlet implementation class ReviewList_adminServlet
@@ -33,11 +35,13 @@ public class ReviewList_adminServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		int reqPage= Integer.parseInt(request.getParameter("reqPage"));
 		ReviewService service = new ReviewService();
-		ArrayList<ReviewListAdmin> reviewList = service.getAllReview();
-		//4.결과처리
+		ReviewPageData rpd = service.selectAllReview(reqPage);
+		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_review.jsp");
-		request.setAttribute("reviewList", reviewList);
+		request.setAttribute("list", rpd.getList());
+		request.setAttribute("pageNavi", rpd.getPageNavi());
 		view.forward(request, response);
 		
 	}

@@ -5,7 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	ArrayList<ReviewListAdmin> reviewList = (ArrayList<ReviewListAdmin>)request.getAttribute("reviewList");
+    	ArrayList<ReviewListAdmin> list = (ArrayList<ReviewListAdmin>)request.getAttribute("list");
+    	String pageNavi = (String)request.getAttribute("pageNavi");
     %>
 <!DOCTYPE html>
 <html>
@@ -63,8 +64,7 @@
 	border-bottom: 1px solid #ac9e89;
 }
 .rv-wrap{
-	/*height:605px;*/
-	overflow: hidden;
+	min-height: 500px;
 }
 #view-change-btn{
 	width: 120px;
@@ -107,6 +107,10 @@
     	margin-bottom: 30px;
     	border-bottom: 2px solid #ccc;
 	}
+		#pageNavi{
+			margin:10px;
+			margin-bottom: 50px;
+		}
 </style>
 </head>
 <body>
@@ -120,11 +124,9 @@
 					고객후기
 				</div>
 				<div class="review-all-wrap rv-wrap">
-			<%if(reviewList.size() == 0){ %>
-				<div class="empty-msg">아직 작성된 리뷰가 없습니다.</div>
-			<%}else{ %>
-			<%for(ReviewListAdmin rev : reviewList){ %>
-			<%
+<%for(ReviewListAdmin rev : list){ %>
+				
+			   	<%
 				Date today = new Date();
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 				Date regDay = formatter.parse(rev.getReviewEnrollDate());
@@ -147,7 +149,7 @@
 				} // 중간 글자 수 만큼 * 표시
 				String lastName = rev.getBookName().substring(rev.getBookName().length()-1,rev.getBookName().length());
 				String maskingName = firstName + cnvMidName + lastName;
-			%>
+				%>
 				<div class="review-wrap">
 					<div class="review-profile">
 						<img src="../profile_img/<%=rev.getMemberProfile() %>" style="width: 72px; height: 72px;">
@@ -235,25 +237,16 @@
 						</div>
 					</div>
 				</div>
-				<%} %>
-			<%} %>	
+<%} %>
 			</div>
 			</div> <!-- my page-content -->
-		</div> <!--  f l e x - wrap -->
-	</div>
+			<br>
+		<div id="pageNavi"><%=pageNavi %></div>
 	<script>
 		$(function(){
 			$(".review-text").on("click",function(){
 				$(this).toggleClass("view-change");
 			});
-			$("#view-change-btn").on("click", function(){
-				$(".review-all-wrap").toggleClass("rv-wrap");
-				if($("#view-change-btn>span").text() == "전체보기 "){
-					$("#view-change-btn>span").text("간략히 보기 ");
-				}else{
-					$("#view-change-btn>span").text("전체보기 ");
-				}
-			})
 		});
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

@@ -96,7 +96,7 @@ h3{
 					<p>기간 : <%=p.getStartDate() %> ~ <%=p.getEndDate() %></p>	
 				</div>
 				<div class="head-right">
-					<img src="/img/promotion/<%=p.getFilepath() %>">
+					<img src="/img/<%=p.getFilepath() %>">
 				</div>
 			</div>
 			<br><hr>
