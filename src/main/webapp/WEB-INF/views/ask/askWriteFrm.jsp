@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 문의하기 ::</title>
 <style>
 	#askWrite tr{
 		border : 1px solid #ccc;
@@ -47,7 +47,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page1-content">
-		<div class="belt">NOTICE</div>
+		<div class="belt">Q & A</div>
 		<br>
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
