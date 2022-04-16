@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>::  예약정보 ::</title>
 <style>
 	#pageNavi {
 		margin: 30px;

@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.herejava.pay.vo.Pay"%>
 <%@page import="com.herejava.notice.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>예약 정보</title>
+<title>:: 예약 정보 ::</title>
 	<style>
 		.page1-title{
 		font-family: ns-bold;
@@ -44,7 +45,8 @@
 	<div class="page-content">
 		<div class="flex-wrap">
 			<%@include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
-			
+		
+						
 			<div class="mypage-content">
 				<div class="page1-title">예약 정보 </div>
 				<table class="tbl1">
@@ -69,11 +71,15 @@
 				<div class="page1-title title2">결제 정보</div>
 				<table class="tbl1 table2">
 					<%if(pay == null){ %>
-					<tr><td class="tdtd">적립금사용</td><td>0 포인트</td></tr>
-					<tr><td class="tdtd">결제금액</td><td>0 원</td></tr>					
-					<%}else{%>
-					<tr><td class="tdtd">적립금사용</td><td><%=pay.getUsePoint() %></td></tr>
-					<tr><td class="tdtd">결제금액</td><td><%=pay.getPayAmount() %></td></tr>
+						<tr><td class="tdtd">결제금액</td><td>0 원</td></tr>
+						<tr><td class="tdtd">적립금사용</td><td>0 포인트</td></tr>
+					<%}else{ 
+						DecimalFormat decFormat = new DecimalFormat("###,###");
+						String usePoint = decFormat.format(pay.getUsePoint());
+						String payAmount = decFormat.format(pay.getPayAmount());
+					%>
+						<tr><td class="tdtd">결제금액</td><td><%=payAmount %> 원</td></tr>
+						<tr><td class="tdtd">적립금사용</td><td><%=usePoint %> 포인트</td></tr>
 					<%} %>
 				</table>
 				

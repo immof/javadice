@@ -18,8 +18,11 @@ public class PayService {
 		return pay;
 	}
 
-	public Pay getPayInfo(long bookNo) {
-		
-		return null;
+	public Pay getPayAmount(long bookNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		PayDao dao = new PayDao();
+		Pay pay = dao.getPayAmount(conn, bookNo);
+		return pay;
 	}
+	
 }

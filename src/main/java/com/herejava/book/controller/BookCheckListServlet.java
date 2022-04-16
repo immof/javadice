@@ -37,17 +37,11 @@ public class BookCheckListServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
-		
 		BookService service = new BookService();
 		Book b = service.selectOneBook(bookNo);
 		int d = service.diffDays(b.getCheckIn(), b.getCheckOut());
-		
-		PayService service2 = new PayService();
-		Pay pay = service2.selectOnePay(bookNo);
-		
-		
-		
-		
+		PayService payService = new PayService();
+		Pay pay = payService.selectOnePay(bookNo);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/bookcheckList.jsp");
 		request.setAttribute("b", b);
 		request.setAttribute("d", d);

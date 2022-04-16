@@ -1,8 +1,11 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.herejava.pay.vo.Pay"%>
 <%@page import="com.herejava.book.vo.BookData"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
     	BookData bd = (BookData)request.getAttribute("bd");
+    	Pay pay = (Pay)request.getAttribute("pay");
     %>
 <!DOCTYPE html>
 <html>
@@ -92,7 +95,15 @@
 							</tr>
 							<tr>
 								<th class="th-1">총 결제금액</th>
-								<td class="td-1 pay-1"> 원</td>
+								<%if(pay == null){ %>
+								<td class="td-1 pay-1">0 원</td>
+								<%}else{ 
+									DecimalFormat decFormat = new DecimalFormat("###,###");
+									String usePoint = decFormat.format(pay.getUsePoint());
+									String payAmount = decFormat.format(pay.getPayAmount());
+								%>
+								<td class="td-1 pay-1"><%=payAmount %> 원</td>
+								<%} %>
 								<%if(bd.getBookState()==0) {%>
 								<td class="td-1"><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>
 								<%} %>
