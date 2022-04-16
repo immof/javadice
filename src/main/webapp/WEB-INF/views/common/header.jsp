@@ -68,7 +68,7 @@
 					<li><a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2">마이페이지</a></li>
 					<li><a href="/logout.do" class="f-light fc-1">로그아웃</a></li>
 				<%}else {%>
-					<li><a href="#" class="f-light fc-1">예약조회</a></li>
+					<li><a href="/bookSelectFrm.do" class="f-light fc-1">예약조회</a></li>
 					<li><a href="/loginFrm.do" class="f-light fc-1">로그인</a></li>
 				<%} %>
 			</div>
