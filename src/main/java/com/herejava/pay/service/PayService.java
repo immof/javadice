@@ -17,4 +17,9 @@ public class PayService {
 		JDBCTemplate.close(conn);
 		return pay;
 	}
+
+	public Pay getPayInfo(long bookNo) {
+		
+		return null;
+	}
 }
