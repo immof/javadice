@@ -202,7 +202,13 @@
 		font-weight: bold;
 		float:right;
 	}
-	
+	.btnBox{
+		margin-top: 40px;
+		text-align: center;
+	}
+	.btnBox>button{
+		width: 250px;
+	}
 	/*rule*/
 	.rule-wrap{
 		width: 950px;
@@ -224,7 +230,7 @@
 	input[type="number"]::-webkit-inner-spin-button {
 	    -webkit-appearance: none;
 	}
-
+	
 </style>
 </head>
 <body>
@@ -292,7 +298,7 @@
                         <p class="title">객실요금</p>
                         <pre class="content" id="sub-title" style="list-style-type: initial;"> -  <%=roomName %> (<%=payStayDay %>박) = <%=stringPrice %> 원 * <%=payStayDay %> 박</pre>
                         <input type="hidden" id="totalPrice" value="<%= totalPrice%>">
-                        <p  class="content" id="stringTotalPrice" ><%=stringTotalPrice %> 원</p>
+                        <p  class="content" id="stringTotalPrice" style="text-align:right"><%=stringTotalPrice %> 원</p>
                         <p class="title">적립금 사용</p>
                         <%if(m!=null) {%>
                         	<p class="content point"  id="point"></p>
@@ -329,8 +335,8 @@
                 <input type="hidden" id="roomName" value="<%=roomName %>">
             </form>
             	<div class=btnBox>
-                	<div class="btn bc1" id="paymentBtn">결제하기</div> 
-                	<div class="btn bc1" id="test">서블릿test</div> 
+                	<button class="btn bc1" id="paymentBtn">결제하기</button> 
+                	<button class="btn bc1" id="test">서블릿test</button> 
             	</div>
 		</div>
 		<div class="rule-wrap">
@@ -496,32 +502,11 @@
 	     			}
 					const roomName = $("#roomName").val();
   	       			
-  		        	$.ajax({
-  						url : "/insertBook.do",
-  						method : "post",
-  						data : {
-  							payAmount:payAmount, 
-  							roomNo:roomNo,
-  							bookName:bookName,
-  							bookPhone:bookPhone,
-  							memberNo:memberNo,
-  							payStayDay:payStayDay,
-  							memberPoint:memberPoint,
-  							payRoomPrice:payRoomPrice,
-  							usePoint:usePoint,
-  							checkIn:checkIn,
-  							checkOut:checkOut,
-  							bookPeople:bookPeople,
-  							plusPoint:plusPoint,
-  							roomName:roomName
-  							},
-  						success : function(data){
-  							console.log("서버호출성공");
-  						},
-  						error : function(){
-  							console.log("서버호출실패");
-  						}
-  					});
+					location.href="/insertBook.do?payAmount="+payAmount+"&roomNo="+roomNo+"&bookName="+bookName+"&bookPhone="+bookPhone+
+					"&memberNo="+memberNo+"&payStayDay="+payStayDay+"&memberPoint="+memberPoint+"&payRoomPrice="+payRoomPrice+
+					"&usePoint="+usePoint+"&checkIn="+checkIn+"&checkOut="+checkOut+"&bookPeople="+bookPeople+
+					"&plusPoint="+plusPoint+"&roomName="+roomName;
+					
   				}else{
   					alert("결제가 취소되었습니다.");
   					console.log("에러내용 : "+rsp.err_msg);
