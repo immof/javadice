@@ -82,13 +82,13 @@
 								<td><%=bd.getRoomName()%></td>
 								<td><%=bd.getCheckIn()%> / <%=bd.getCheckOut()%></td>
 								<td><%=bd.getBookDay() %></td>
-								<td><a class="detailBtn" style="text-decoration: underline;" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">상세보기></a></td>
+								<td><a class="detailBtn" style="text-decoration: underline; " href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">상세보기></a></td>
 								<%if(bd.getBookState()==0){%>
-									<td><a class="btn bc3 delbookbtn" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">예약취소</a></td>
+									<td><a class="btn bs6 bc3 delbookbtn " style="background-color: rgb(160, 202, 87); font-weight:bold;" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">숙박예정</a></td>
 								<%}else if(bd.getBookState()==1){%>
-									<td><a class="btn bc1 reviewBtn" href="/review.do?memberNo=<%=mem.getMemberNo()%>&masterCheck=true">리뷰보기</a></td>
+									<td><div class="btn bs6 bc1 reviewBtn">숙박완료</div></td>
 								<%}else if(bd.getBookState()==2){%>
-									<td><div class="btn" style="background-color: #a7a7a7;color: #fff;">취소완료</div></td>
+									<td><div class="btn bs6" style="background-color: #a7a7a7;color: #fff;">취소완료</div></td>
 								<%}%>
 							</tr>
 							

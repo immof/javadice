@@ -1,6 +1,7 @@
 package com.herejava.ask.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,13 +56,32 @@ public class AskWriteServlet extends HttpServlet {
 				//2-3. 값을 추출
 				int memberNo = Integer.parseInt(mRequest.getParameter("memberNo"));
 				String askTitle = mRequest.getParameter("askTitle");
-				System.out.println(askTitle);
 				String askContent = mRequest.getParameter("askContent");
-				//파일이렇게안꺼내요 꺼내는거확인해보셔야돼요이건
-				//파일3개인데 컬럼은 1개씩이면 저장은 어떻게해요3개를? 아 3개다있구나 파일꺼내는것만 수업때한거찾아보세요 파일은 getParameter로꺼내는게아니에요
-				String filepath1 = mRequest.getOriginalFileName("filepath1");
-				String filepath2 = mRequest.getParameter("filepath2");
-				String filepath3 = mRequest.getParameter("filepath3");
+				
+				String name1 = request.getParameter("file1");
+				String name2 = request.getParameter("file2");
+				String name3 = request.getParameter("file3");
+				
+				Enumeration files = mRequest.getFileNames(); //파일명정보를 배열로 만들다(files에 name들이 담겨있다)
+                String arr[] = new String[3];
+                int i = 0;
+                while(files.hasMoreElements()){
+                    String name = (String)files.nextElement(); //각각의 파일 name을 String name에 담는다.
+                    String filename = mRequest.getFilesystemName(name); //각각의 파일 name을 통해서 파일의 정보를 얻는다.
+                    arr[i] = filename;
+                    i++;
+                    System.out.println("이름>"+filename);
+                }
+
+                System.out.println("-----------");
+                String filepath1 = arr[0];
+                String filepath2 = arr[1];
+                String filepath3 = arr[2];
+                
+                System.out.println(filepath1);
+                System.out.println(filepath2);
+                System.out.println(filepath3);
+	
 				Ask a = new Ask();
 				a.setMemberNo(memberNo);
 				a.setAskTitle(askTitle);
@@ -85,6 +105,8 @@ public class AskWriteServlet extends HttpServlet {
 				}
 				request.setAttribute("loc", "/askList.do?reqPage=1");
 				view.forward(request, response);
+				
+		
 	}
 
 	/**

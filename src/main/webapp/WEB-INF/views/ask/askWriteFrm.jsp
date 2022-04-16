@@ -39,7 +39,7 @@
 	.td-3{
 		width: 40px;
 	}
-	#file{
+	.file{
 		text-align: left;
 	}
 </style>
@@ -66,15 +66,15 @@
 						</tr>
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
-							<td id="file"><input type="file" name="file1" ></td>
+							<td class="file"><input type="file" name="file1" ></td>
 						</tr>
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
-							<td id="file"><input type="file" name="file2"></td>
+							<td class="file"><input type="file" name="file2"></td>
 						</tr>
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
-							 <td id="file"><input type="file" name="file3"></td>
+							 <td class="file"><input type="file" name="file3"></td>
 						</tr>
 						<tr class="button">
 							<td colspan="6">
@@ -97,7 +97,7 @@
 			}
 		});
 		
-		
+		/*
 		function uploadImage(file,editor){
 			//ajax통해 서버에 이미지를 업로드하고 업로드 경로를 받아옴
 			//form태그와 동일한 효과를 내는 FormData 객체 생성
@@ -114,13 +114,14 @@
 					$(editor).summernote("insetImage",data);
 				}
 			});
+			*/
 			//processData : 기본값 true {key1:value1,key2:value2,key3:value3}
 			//					-> 파일 전송 시 String이 아니라 파일 형태로 전송하기 위해서 기본값 제거
 			//cotentType : 기본값 "application/x-www-form-urlencoded;charset=UTF-8"
 			//				-> form 태그 전송 시 enctype의 기본값임
-			//				-> enctype="multipart/form-data"로 설정하기 위해 기본값을 제거
+			//				-> enctype="multipart/form-data"로 설정하기 위해 기본값을 제거}
 		
-		}
+		
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

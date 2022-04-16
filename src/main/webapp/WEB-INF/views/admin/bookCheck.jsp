@@ -12,7 +12,7 @@
 <title>예약 관리</title>
 <style>
 	.page-content{
-		float: left;
+	
 	}
 	.page-content>div{
 	}
@@ -72,6 +72,6 @@
 			</div>
 	</div>
 	</div>
-	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
+	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </html>

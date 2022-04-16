@@ -1,11 +1,11 @@
+<%@page import="com.herejava.review.vo.ReviewListAdmin"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page import="com.herejava.review.vo.ReviewList"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    	ArrayList<ReviewList> reviewList = (ArrayList<ReviewList>)request.getAttribute("reviewList");
+    	ArrayList<ReviewListAdmin> reviewList = (ArrayList<ReviewListAdmin>)request.getAttribute("reviewList");
     %>
 <!DOCTYPE html>
 <html>
@@ -15,8 +15,8 @@
 <style>
 .review-wrap{
 	display: flex;
-	width: 800px;
-	margin: 15px 0 15px 15px;
+	width: 900px;
+	margin: 15px 0 15px 35px;
 }
 .review-profile{
 	text-align: center;
@@ -28,8 +28,6 @@
 	width: 708px;
 }
 .review-info{
-	display: flex;
-	justify-content: space-between;
 	align-content: center;
 	align-items: baseline;
 	height: 45px;
@@ -57,19 +55,16 @@
     -webkit-box-orient: vertical; 
 }
 .room-type{
-	width: 45%;
+	margin-left: 20px;
+	width: 180px;
 }
 .empty-msg{
 	padding: 50px;
 	border-bottom: 1px solid #ac9e89;
 }
 .rv-wrap{
-	height:605px;
+	/*height:605px;*/
 	overflow: hidden;
-}
-#review-page-title{
-	display: flex;
-	justify-content: space-between;
 }
 #view-change-btn{
 	width: 120px;
@@ -97,23 +92,38 @@
 	width: 150px;
 	height: 84px;
 }
+.page1-content{
+		width: 900px;
+		margin: 0 auto;
+		overflow: hidden;
+		margin-bottom: 10px;
+		flex-grow: 1;
+	}
+		.page1-title{
+		font-family: ns-bold;
+   	    padding: 20px 0px;
+    	font-size: 1.3rem;
+    	margin-top: 50px;
+    	margin-bottom: 30px;
+    	border-bottom: 2px solid #ccc;
+	}
 </style>
 </head>
 <body>
-	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	<div class="page-content">
-		<div class="flex-wrap">
-			<%@include file="/WEB-INF/views/admin/mypage_admin.jsp"%>
-			<div class="mypage-content">
-				<div class="mypage-content-title" id="review-page-title">
-					<h4>나의 리뷰</h4>
-					<button class="view-change-btn" id="view-change-btn"><span>전체보기 </span><i class="fa-solid fa-caret-down"></i></button>
+		<%@include file="/WEB-INF/views/common/header.jsp" %>
+	<div class="page1-content">
+		<div class="belt">REVIEWS</div>
+		<br>
+		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
+		<br>
+				<div class="page1-title" id="review-page-title2">
+					고객후기
 				</div>
 				<div class="review-all-wrap rv-wrap">
 			<%if(reviewList.size() == 0){ %>
 				<div class="empty-msg">아직 작성된 리뷰가 없습니다.</div>
 			<%}else{ %>
-			<%for(ReviewList rev : reviewList){ %>
+			<%for(ReviewListAdmin rev : reviewList){ %>
 			<%
 				Date today = new Date();
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -128,10 +138,19 @@
 				     }else if(diffDays >=360){
 				    	 msg = (int)(Math.floor((diffDays/30)/12)) + "년 전";
 				     }
+			/** 사용자 이름 마스킹 처리 */
+				String firstName = rev.getBookName().substring(0,1);
+				String midName = rev.getBookName().substring(1, rev.getBookName().length()-1);
+				String cnvMidName = "";
+				for(int i=0; i< midName.length(); i++){ 
+					cnvMidName += "*"; 
+				} // 중간 글자 수 만큼 * 표시
+				String lastName = rev.getBookName().substring(rev.getBookName().length()-1,rev.getBookName().length());
+				String maskingName = firstName + cnvMidName + lastName;
 			%>
 				<div class="review-wrap">
 					<div class="review-profile">
-						<img src="../profile_img/<%=m.getFilepath() %>" style="width: 72px; height: 72px;">
+						<img src="../profile_img/<%=rev.getMemberProfile() %>" style="width: 72px; height: 72px;">
 						<p><%=msg %></p>
 					</div>
 					<div class="review-content">
@@ -185,9 +204,13 @@
 					 		<%}else if(rev.getRoomNo() == 10){ %>
 							<span class="room-type">객실타입: 스탠다드</span>
 							<%} %>
+							<span style="margin: 0 15px; font-size: 12px;">|</span>
 							<span class="review-button">
-								<a class="btn bc4 bs6" id="update-btn" href="/reviewUpdateFrm.do?reviewNo=<%=rev.getReviewNo() %>">수정</a>
-								<button class="btn bc3 bs6" id="delete-btn">삭제</button>
+								인원: <%=rev.getBookPeople() %>명
+							</span>
+							<span style="margin: 0 15px; font-size: 12px;"">|</span>
+							<span class="review-button">
+								<%=maskingName %>님
 							</span>
 						</div>
 						<div class="review-text view-change">
