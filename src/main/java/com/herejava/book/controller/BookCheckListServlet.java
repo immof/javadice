@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookData;
+import com.herejava.pay.service.PayService;
+import com.herejava.pay.vo.Pay;
 
 /**
  * Servlet implementation class BookCheckListServlet
@@ -39,9 +41,17 @@ public class BookCheckListServlet extends HttpServlet {
 		BookService service = new BookService();
 		Book b = service.selectOneBook(bookNo);
 		int d = service.diffDays(b.getCheckIn(), b.getCheckOut());
+		
+		PayService service2 = new PayService();
+		Pay pay = service2.selectOnePay(bookNo);
+		
+		
+		
+		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/bookcheckList.jsp");
 		request.setAttribute("b", b);
 		request.setAttribute("d", d);
+		request.setAttribute("pay", pay);
 		view.forward(request, response);
 		
 	}
