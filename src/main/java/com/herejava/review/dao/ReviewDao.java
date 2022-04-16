@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.herejava.ask.vo.Ask;
 import com.herejava.review.vo.Review;
 import com.herejava.review.vo.ReviewList;
 import com.herejava.review.vo.ReviewListAdmin;
@@ -258,5 +259,6 @@ public class ReviewDao {
 		}
 		return result;
 	}
+
 
 }

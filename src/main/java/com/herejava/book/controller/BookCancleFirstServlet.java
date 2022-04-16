@@ -1,4 +1,4 @@
-package com.herejava.review.controller;
+package com.herejava.book.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.review.service.ReviewService;
-import com.herejava.review.vo.ReviewPageData;
+import com.herejava.book.service.BookService;
+import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookData;
 
 /**
- * Servlet implementation class ReviewList_admin2Servlet
+ * Servlet implementation class BookCancleFirstServlet
  */
-@WebServlet("/ReviewList_admin2Servlet")
-public class ReviewList_admin2Servlet extends HttpServlet {
+@WebServlet(name = "BookCancleFirst", urlPatterns = { "/bookCancleFirst.do" })
+public class BookCancleFirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewList_admin2Servlet() {
+    public BookCancleFirstServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +32,20 @@ public class ReviewList_admin2Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		int reqPage= Integer.parseInt(request.getParameter("reqPage"));
-		ReviewService service = new ReviewService();
-		ReviewPageData rpd = service.selectAllReview(reqPage);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admion/admin_review.jsp");
-		request.setAttribute("list", rpd.getList());
-		request.setAttribute("pageNavi", rpd.getPageNavi());
+		//2. 값추출
+		long bookNo = Long.parseLong(request.getParameter("bookNo"));
+		//3. 비즈니스로직
+		BookService service = new BookService();
+		BookData bd = service.getBook(bookNo);
+		//4. 결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookCancelView.jsp");
+		request.setAttribute("bd", bd);
 		view.forward(request, response);
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

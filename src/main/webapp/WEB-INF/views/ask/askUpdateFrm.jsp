@@ -43,8 +43,12 @@
 	.td-3{
 		width: 40px;
 	}
-	#file{
+	.tr-1>.file-box{
 		text-align: left;
+	}
+
+	.delFile{
+		margin-left: 100px;
 	}
 </style>
 </head>
@@ -57,7 +61,7 @@
 		<br>
 		<div class="page1-title">문의사항 수정</div>
 			<form class="form1" action="/askUpdate.do" method="post" enctype="multipart/form-data">				
-					<input type="hidden" name="askNo" value="<%=a.getMemberNo() %>">
+					<input type="hidden" name="askNo" value="<%=a.getAskNo() %>">
 					<table class="tbl" id="askWrite">
 						<tr class="tr-1">
 							<th class="td-3">제목</th>
@@ -71,20 +75,44 @@
 						</tr>
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
-							<td id="file"><input type="file" name="file1" ></td>
+							<td class=file-box>
+							<%if(a.getFilepath1() !=null) {%>
+								<span class="delFile"><%=a.getFilepath1() %></span>
+								<button type="button" class="btn bc1 bs7 delFile" id="fileDelBtn">삭제</button>
+								<input type="file" name="file1" style="display:none;">
+								<input type="hidden" name="oldFilepath1" value="<%=a.getFilepath1() %>">
+							<%} else { %>
+								<input type="file" name="file1">
+							<%} %>
+							</td>
 						</tr>
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
-							<td id="file"><input type="file" name="file2"></td>
+							<td class="file-box"><%if(a.getFilepath2() !=null) {%>
+								<span class="delFile"><%=a.getFilepath2() %></span>
+								<button type="button" class="btn bc1 bs7 delFile" id="fileDelBtn">삭제</button>
+								<input type="file" name="file2" style="display:none;">
+								<input type="hidden" name="oldFilepath2" value="<%=a.getFilepath2() %>">
+							<%} else { %>
+								<input type="file" name="file2">
+							<%} %></td>
 						</tr>
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
-							 <td id="file"><input type="file" name="file3"></td>
+							 <td class="file-box">
+							 	<%if(a.getFilepath3() !=null) {%>
+								<span class="delFile"><%=a.getFilepath3() %></span>
+								<button type="button" class="btn bc1 bs7 delFile" id="fileDelBtn">삭제</button>
+								<input type="file" name="file3" style="display:none;">
+								<input type="hidden" name="oldFilepath3" value="<%=a.getFilepath3() %>">
+							<%} else { %>
+								<input type="file" name="file1">
+							<%} %>
+							 </td>
 						</tr>
 						<tr class="button">
 							<td colspan="6">
 							<button type="submit" class="btn bc1 bs1">수정완료</button>
-							<button type="button" href="/askList.do?reqPage=1" class="btn bc1 bs1">취소</button>
 							
 							</td>
 						</tr>
@@ -92,16 +120,11 @@
 			</form>
 	</div>
 	<script>
-		$("#askContent").summernote({
-			height: 400,
-			lang : "ko-KR",
-			callbakcs:{
-				onImageUpload : function(files){
-					uploadImage(files[0],this);
-				}
-			}
+		$("#fileDelBtn").on("click",function(){
+			$(".delFile").hide();
+			$(this).next().show();
+			$("[name=status]").val("delete");
 		});
-	
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
