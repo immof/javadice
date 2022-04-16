@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>::  예약정보 ::</title>
 <style>
 	#pageNavi {
 		margin: 30px;
@@ -52,6 +52,10 @@
 	.subMenuTab>ul>li>a:hover{
 		background-color: rgba(172,158,137,0.5);
 	}
+	.bc-1 {
+	  background-color: #ac9e89;
+	  color: #fff;
+	}
 	
 </style>
 </head>
@@ -86,7 +90,7 @@
 								<%if(bd.getBookState()==0){%>
 									<td><a class="btn bs6 bc3 delbookbtn " style="background-color: rgb(160, 202, 87); font-weight:bold;" href="/bookView.do?bookNo=<%=bd.getBookNo()%>&masterCheck=true">숙박예정</a></td>
 								<%}else if(bd.getBookState()==1){%>
-									<td><div class="btn bs6 bc1 reviewBtn">숙박완료</div></td>
+									<td><div class="btn bs6 bc-1 reviewBtn">숙박완료</div></td>
 								<%}else if(bd.getBookState()==2){%>
 									<td><div class="btn bs6" style="background-color: #a7a7a7;color: #fff;">취소완료</div></td>
 								<%}%>

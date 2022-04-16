@@ -195,10 +195,11 @@ nav>ul{
 .sub-navi {
   position: absolute;
   list-style-type: none;
-  display: none;
-  min-width: 120px;
+  display:none;
+  min-width: 135px !important;
+  height: 165px !important;
   box-shadow: 0px 3px 5px 0px rgb(0 0 0 / 40%);
-  padding: 15px;
+  padding: 15px 0 0 15px;
   background-color: #fff;
   border-radius: 0 0 8px 8px;
   z-index: 99;
@@ -209,11 +210,11 @@ nav>ul{
   
 }
 .sub-navi>li>a{
-  font-size: 18px;
+  font-size: 18px !important;
 }
 .sub-navi>li:hover>a{
-  color: #998465;
-  transition-duration: 0.5s;
+  color: #998465 !important; 
+  transition-duration: 0.5s !important;
 }
 
 /* 이미지 슬라이드 */

@@ -13,7 +13,7 @@ h3{
 	color: rgb(102, 102, 102);
 }
 .content-wrap{
-	width: 950px;
+	width: 1000px;
 	margin: 0 auto;
 	margin-bottom: 100px;
 	overflow: hidden;
