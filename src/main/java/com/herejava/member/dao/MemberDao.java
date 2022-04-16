@@ -340,16 +340,6 @@ public class MemberDao {
 		}
 		return result;
 	}
-
-  	public int updateMemberPoint(Connection conn, BookPay bpay, int newPoint) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = "update member set member_point = ? where member_no = ?";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, newPoint);
-			pstmt.setInt(2, bpay.getMemberNo());
-			result = pstmt.executeUpdate();
   
  	public int updateMemberPoint(Connection conn, BookPay bpay, int newPoint) {
 		PreparedStatement pstmt = null;
