@@ -33,23 +33,18 @@ public class PromotionModifyFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1.인코딩
 		request.setCharacterEncoding("utf-8");
-
-
-		
-	
-		int Value = Integer.parseInt(request.getParameter("promotionNo"));
-		System.out.println(Value);
-		PromotionService p = new PromotionService();
-		Promotion pro  =p.selectModify(Value);
-		System.out.println(pro.getStartDate());
-		request.setAttribute("pro", pro);
+		//2.값추출
+		int promotionNo = Integer.parseInt(request.getParameter("promotionNo"));
+		//System.out.println(promotionNo);
+		//3.비즈니스로직
+		PromotionService service = new PromotionService();
+		Promotion p  =service.selectOnePromotion(promotionNo);
+		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/promotion/promotionModifyFrm.jsp");
+		request.setAttribute("p", p);
 		view.forward(request, response);
-		
-
-
-
 	}
 
 	/**
