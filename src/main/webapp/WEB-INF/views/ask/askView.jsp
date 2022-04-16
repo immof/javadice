@@ -139,7 +139,7 @@
 			<table class="bss6">
 				<tr>
 					<td>
-						<a class="btn bc1 bs6" href="/askUpdateFrm.do?noticeNo=<%=a.getAskNo() %>">수정</a>
+						<a class="btn bc1 bs6" href="/askUpdateFrm.do?askNo=<%=a.getAskNo() %>">수정</a>
 						<button class="btn bc1 bs6" onclick="askDelete('<%=a.getAskNo() %>');">삭제</button>
 					</td>
 				</tr>
