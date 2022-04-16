@@ -198,6 +198,7 @@ public class AskDao {
 		return result;
 	}
 
+
 	public int UpdateAsk(Connection conn, Ask a) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -210,6 +211,7 @@ public class AskDao {
 			pstmt.setString(4, a.getFilepath2());
 			pstmt.setString(5, a.getFilepath3());
 			pstmt.setInt(6, a.getAskNo());
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
