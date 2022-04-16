@@ -50,6 +50,19 @@ public class PromotionService {
 		return result;
 	}
 
+	public int InsertPromotion(Promotion p) {
+		Connection conn = JDBCTemplate.getConnection();
+		PromotionDao dao = new PromotionDao();
+		int result = dao.insertPromotion(conn, p);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 	
 
 }

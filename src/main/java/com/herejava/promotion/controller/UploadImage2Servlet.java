@@ -1,31 +1,28 @@
-package com.herejava.review.controller;
+package com.herejava.promotion.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.ask.vo.AskPageData;
-import com.herejava.review.service.ReviewService;
-import com.herejava.review.vo.ReviewListAdmin;
-import com.herejava.review.vo.ReviewPageData;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
- * Servlet implementation class ReviewList_adminServlet
+ * Servlet implementation class UploadImage2Servlet
  */
-@WebServlet(name = "ReviewList_admin", urlPatterns = { "/reviewList_admin.do" })
-public class ReviewList_adminServlet extends HttpServlet {
+@WebServlet(name = "UploadImage2", urlPatterns = { "/uploadImage2.do" })
+public class UploadImage2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewList_adminServlet() {
+    public UploadImage2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +31,19 @@ public class ReviewList_adminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1.인코딩
 		request.setCharacterEncoding("utf-8");
-		int reqPage= Integer.parseInt(request.getParameter("reqPage"));
-		ReviewService service = new ReviewService();
-		ReviewPageData rpd = service.selectAllReview(reqPage);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/admin_review.jsp");
-		request.setAttribute("list", rpd.getList());
-		request.setAttribute("pageNavi", rpd.getPageNavi());
-		view.forward(request, response);
-		
+		//2.값추출
+		String root = getServletContext().getRealPath("/");
+		String saveDirectory = root+"img";
+		int maxSize = 10*1024*1024;
+		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		String filepath = mRequest.getFilesystemName("file");
+		//3.비즈니스로직
+		//4.결과처리
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print("/img/"+filepath);
 	}
 
 	/**

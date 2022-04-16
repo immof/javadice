@@ -196,5 +196,69 @@ public class ReviewDao {
 		return reviewList;
 	}
 
+	public ArrayList<ReviewListAdmin> selectAllReview(Connection conn, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ReviewListAdmin> list = new ArrayList<ReviewListAdmin>();
+		String query = "select * from (select * from (select rownum as rnum,n.* from (select r.*,b.room_no,b.book_people,b.book_name,b.book_phone,b.book_day,b.book_state,b.check_in,b.check_out,m.filepath memberProfile from review r,book b,member m where r.book_no=b.book_no and r.member_no=m.member_no order by review_enroll_date desc)n) where rnum between ? and ?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				ReviewListAdmin rv = new ReviewListAdmin();
+				rv.setReviewNo(rset.getInt("review_no"));
+				rv.setBookNo(rset.getLong("book_no"));
+				rv.setMemberNo(rset.getInt("member_no"));
+				rv.setReviewScore(rset.getInt("review_score"));
+				rv.setReviewContent(rset.getString("review_content"));
+				rv.setReviewEnrollDate(rset.getString("review_enroll_date"));
+				rv.setFilepath1(rset.getString("filepath1"));
+				rv.setFilepath2(rset.getString("filepath2"));
+				rv.setFilepath3(rset.getString("filepath3"));
+				rv.setRoomNo(rset.getInt("room_no"));
+				rv.setBookPeople(rset.getInt("book_people"));
+				rv.setBookName(rset.getString("book_name"));
+				rv.setBookPhone(rset.getString("book_phone"));
+				rv.setBookDay(rset.getString("book_day"));
+				rv.setBookState(rset.getInt("book_state"));
+				rv.setCheckIn(rset.getString("check_in"));
+				rv.setCheckOut(rset.getString("check_out"));
+				rv.setMemberProfile(rset.getString("memberProfile"));
+				list.add(rv);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public int selectAllReviewCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) as cnt from review";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			};
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 
 }
