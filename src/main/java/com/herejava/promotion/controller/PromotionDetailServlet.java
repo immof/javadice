@@ -38,7 +38,6 @@ public class PromotionDetailServlet extends HttpServlet {
 		//3.비즈니스로직
 		PromotionService service = new PromotionService();
 		Promotion p = service.selectOnePromotion(promotionNo);
-		System.out.println(p.getFilepath());
 		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/promotion/promotionDetail.jsp");
 		request.setAttribute("p", p);
