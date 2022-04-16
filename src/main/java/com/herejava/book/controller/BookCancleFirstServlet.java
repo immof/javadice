@@ -1,4 +1,4 @@
-package com.herejava.promotion.controller;
+package com.herejava.book.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.promotion.service.PromotionService;
-import com.herejava.promotion.vo.Promotion;
+import com.herejava.book.service.BookService;
+import com.herejava.book.vo.Book;
+import com.herejava.book.vo.BookData;
 
 /**
- * Servlet implementation class PromotionDetailServlet
+ * Servlet implementation class BookCancleFirstServlet
  */
-@WebServlet(name = "PromotionDetail", urlPatterns = { "/promotionDetail.do" })
-public class PromotionDetailServlet extends HttpServlet {
+@WebServlet(name = "BookCancleFirst", urlPatterns = { "/bookCancleFirst.do" })
+public class BookCancleFirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PromotionDetailServlet() {
+    public BookCancleFirstServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +32,20 @@ public class PromotionDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.인코딩
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		//2.값추출
-		int promotionNo = Integer.parseInt(request.getParameter("promotionNo"));
-		//3.비즈니스로직
-		PromotionService service = new PromotionService();
-		Promotion p = service.selectOnePromotion(promotionNo);
-		System.out.println(p.getFilepath());
-		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/promotion/promotionDetail.jsp");
-		request.setAttribute("p", p);
+		//2. 값추출
+		long bookNo = Long.parseLong(request.getParameter("bookNo"));
+		//3. 비즈니스로직
+		BookService service = new BookService();
+		BookData bd = service.getBook(bookNo);
+		//4. 결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookCancelView.jsp");
+		request.setAttribute("bd", bd);
 		view.forward(request, response);
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
