@@ -48,11 +48,12 @@ public class InsertBookServlet extends HttpServlet {
 		bpay.setMemberPoint(Integer.parseInt(request.getParameter("memberPoint")));
 		bpay.setMinusPoint(Integer.parseInt(request.getParameter("usePoint")));
 		bpay.setPlusPoint(Integer.parseInt(request.getParameter("plusPoint")));
-		bpay.setPayAmount(Integer.parseInt(request.getParameter("price")));
+		bpay.setPayAmount(Integer.parseInt(request.getParameter("payAmount")));
 		bpay.setPayRoomPrice(Integer.parseInt(request.getParameter("payRoomPrice")));
 		bpay.setPayStayDay(Integer.parseInt(request.getParameter("payStayDay")));
 		bpay.setRoomNo(Integer.parseInt(request.getParameter("roomNo")));
 		bpay.setRoomName(request.getParameter("roomName"));
+		
 		
 		System.out.println("BookName : "+bpay.getBookName());
 		System.out.println("BookPeople : "+bpay.getBookPeople());
@@ -70,24 +71,39 @@ public class InsertBookServlet extends HttpServlet {
 		System.out.println("RoomName : "+bpay.getRoomName());
 		
 		//3.비즈니스로직
+		
 		//3-1. 예약테이블 추가
 		BookService serviceBook = new BookService();
 		int resultBook = serviceBook.insertBook(bpay);
 		//생성된 예약번호,예약날짜 가져오기
 		BookPayData bpd = serviceBook.searchBookNo(bpay);
+		System.out.println("bookNo : " +bpd.getBookNo());
+		System.out.println("bookDay : " +bpd.getBookDay());
+		
 		//3-2. 결제테이블 추가
 		int resultPay = serviceBook.insertPay(bpay,bpd);
-		//3-3. 멤버테이블에 회원포인트 변경
-		MemberService serviceMember = new MemberService();
-		int resultMember = serviceMember.updateMemberPoint(bpay);
+		//생성된 결제번호 가져오기
+		long payNo = serviceBook.searchPayNo(bpd);
+		System.out.println("payNo : "+payNo);
+		
 		//3-4. 적립금테이블 추가
 		PointService servicePoint = new PointService();
-		int resultPoint = servicePoint.insertPoint(bpay,bpd);
+		int resultPoint = servicePoint.insertPoint(bpay,bpd,payNo);
+		
+		
+		//3-3. 멤버테이블에 회원포인트 변경 (회원시)
+		int resultMember = 0;
+		if(bpay.getMemberNo()!=0) {
+			MemberService serviceMember = new MemberService();
+			resultMember = serviceMember.updateMemberPoint(bpay);
+		}else {
+			resultMember = 1;
+		}
 		
 		System.out.println("resultBook : " +resultBook);
 		System.out.println("resultPay : " +resultPay);
-		System.out.println("resultMember : " +resultMember);
 		System.out.println("resultPoint : " +resultPoint);
+		System.out.println("resultMember : " +resultMember);
 		//조회결과 m을 js객체타입으로 변환
 		JSONObject result = null;	//HashMap<String,Object>와 같음
 		result = new JSONObject();

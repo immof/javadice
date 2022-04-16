@@ -20,10 +20,10 @@ public class PointService {
 		return list;
 	}
 
-	public int insertPoint(BookPay bpay, BookPayData bpd) {
+	public int insertPoint(BookPay bpay, BookPayData bpd, long payNo) {
 		Connection conn = JDBCTemplate.getConnection();
 		PointDao dao = new PointDao();
-		int result = dao.insertPoint(conn, bpay,bpd);
+		int result = dao.insertPoint(conn, bpay,bpd,payNo);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {

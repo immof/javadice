@@ -460,6 +460,14 @@ public class BookService {
 		return bpd;
 	}
 
+	public long searchPayNo(BookPayData bpd) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		long result = dao.searchPayNo(conn, bpd);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }
 
 

@@ -46,21 +46,19 @@ public class PointDao {
 		return list;
 	}
 
-	public int insertPoint(Connection conn, BookPay bpay, BookPayData bpd) {
+	public int insertPoint(Connection conn, BookPay bpay, BookPayData bpd, long payNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into point values(point_seq.nextval,?,?,?,0,?,?,?,?,?,?) ";
+		String query = "insert into point values(point_seq.nextval,?,?,?,?,?,?,?) ";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setLong(1, bpd.getBookNo());
-			pstmt.setInt(2, bpay.getRoomNo());
-			pstmt.setString(3, bpay.getRoomName());
+			pstmt.setLong(1, payNo);
+			pstmt.setLong(2, bpd.getBookNo());
+			pstmt.setInt(3, bpay.getMemberNo());
 			pstmt.setString(4, bpd.getBookDay());
 			pstmt.setInt(5, bpay.getPayAmount());
 			pstmt.setInt(6, bpay.getMinusPoint());
-			pstmt.setInt(7, bpay.getPayStayDay());
-			pstmt.setInt(8, bpay.getMemberNo());
-			pstmt.setInt(9, bpay.getPayRoomPrice());
+			pstmt.setInt(7, bpay.getPlusPoint());
 			
 			result = pstmt.executeUpdate(); 
 		} catch (SQLException e) {
