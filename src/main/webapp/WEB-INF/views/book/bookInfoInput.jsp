@@ -553,9 +553,9 @@
 				*/
 				
 	        	const payAmount = $("#stringPayAmount").text();	//총요금(payAmount)
-		   			const roomNo = $("#roomNo").val();
-		   			const bookName = $("#bookName").val();
-		   			const bookPhone = $("#bookPhone").val();
+	   			const roomNo = $("#roomNo").val();
+	   			const bookName = $("#bookName").val();
+	   			const bookPhone = $("#bookPhone").val();
      			const memberNo = $("#memberNo").val();		//비회원은 0
      			const payStayDay = $("#payStayDay").val();
      			const memberPoint= $("#memberPoint").val();
@@ -571,34 +571,12 @@
      				plusPoint = 0;	//비회원이면 적립금 0
      			}
 				const roomName = $("#roomName").val();
-	       			
-		        	$.ajax({
-						url : "/insertBook.do",
-						method : "post",
-						data : {
-							payAmount:payAmount, 
-							roomNo:roomNo,
-							bookName:bookName,
-							bookPhone:bookPhone,
-							memberNo:memberNo,
-							payStayDay:payStayDay,
-							memberPoint:memberPoint,
-							payRoomPrice:payRoomPrice,
-							usePoint:usePoint,
-							checkIn:checkIn,
-							checkOut:checkOut,
-							bookPeople:bookPeople,
-							plusPoint:plusPoint,
-							roomName:roomName
-							},
-						success : function(data){
-							console.log("서버호출완료");
-							
-						},
-						error : function(){
-							console.log("서버호출실패");
-						}
-					});
+				
+				location.href="/insertBook.do?payAmount="+payAmount+"&roomNo="+roomNo+"&bookName="+bookName+"&bookPhone="+bookPhone+
+						"&memberNo="+memberNo+"&payStayDay="+payStayDay+"&memberPoint="+memberPoint+"&payRoomPrice="+payRoomPrice+
+						"&usePoint="+usePoint+"&checkIn="+checkIn+"&checkOut="+checkOut+"&bookPeople="+bookPeople+
+						"&plusPoint="+plusPoint+"&roomName="+roomName;
+	       		
         });
 	</script>
 </body>

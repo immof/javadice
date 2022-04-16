@@ -121,7 +121,7 @@ public class InsertBookServlet extends HttpServlet {
 		*/
 		
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/payComplete.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/payComplete.jsp");
 		request.setAttribute("bpay", bpay);
 		request.setAttribute("bpd", bpd);
 		view.forward(request, response);
