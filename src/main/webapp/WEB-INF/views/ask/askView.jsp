@@ -82,34 +82,6 @@
 			margin-top: 30px;
 		}
 		
-		
-		.inputCommentBox{
-			margin: 50px;
-		}
-		.inputCommentBox>form>ul{
-			list-style-type: none;
-			display: flex;
-		}
-		.inputCommentBox>form>ul>li:first-child{
-			width: 15%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.inputCommentBox>form>ul>li:first-child>span{
-			font-size: 80px;
-			color: #ccc;
-		}
-		.inputCommentBox>form>ul>li:nth-child(2){
-			width:75%;
-		}
-		.inputCommentBox>form>ul>li:nth-child(2)>textarea.input-form{
-			height: 96px;
-			min-height: 96px;
-		}
-		.inputCommentBox>form>ul>li:last-child{
-			width:10%;
-		}
 		.inputRecommentBox{
 			margin: 30px 0px;
 			display: none;
@@ -130,14 +102,17 @@
 		}
 		.inputRecommentBox>form>ul>li:nth-child(2) {
 			width: 70%;
+			margin-top: 25px;
 		}
 		.inputRecommentBox>form>ul>li:nth-child(2)>textarea.input-form{
-			height: 96px;
+			height: 100px;
 			min-height: 96px;
 		}
 		.inputRecomentBox>form>ul>li:last-child{
 			width:10%;
 		}s
+		
+		
 	</style>
 </head>
 <body>
@@ -208,21 +183,21 @@
 		<br>
 		</span>
 		
-		<%if(m!=null) {%>
+		<%if(m!=null && m.getMemberLevel() == 0) {%>
 		<div class="inputCommentBox">
 			<form action="/insertCommentAsk.do" method="post">
-				<ul>
+				<ul class="ask-comment-write">
 					<li>
-						<span class="material-icons">account_box</span>
+						<span class="material-icons">account_circle</span>
+						<input type="hidden" name="askCommentWriter" value="<%=m.getMemberNick() %>">
+						<input type="hidden" name="askRef"	value="<%=a.getAskNo() %>">
+						<input type="hidden" name="askCommentRef" value="0">
 					</li>
 					<li>
-						<input type="hidden" name="ncWriter"	value="<%=m.getMemberId() %>">
-						<input type="hidden" name="noticeRef"	value="<%=a.getAskNo() %>">
-						<input type="hidden" name="ncRef"		value="0">
-						<textarea class="input-form" name="ncContent"></textarea>
+						<textarea class="input-form1" name="askCommentContent" placeholder="내용을 입력해주세요."></textarea>
 					</li>
 					<li>
-						<button type="submit" class="btn bc1 bs4">등록</button>
+						<button type="submit" class="bc2">등록</button>
 					</li>
 				</ul>
 			</form>
@@ -231,34 +206,36 @@
 		
 		<div class="commentBox">
 			<%for(AskComment ac : commentList) {%>
-				<ul class="posting-comment">
-					<li>
-						<span class="material-icons">account_box</span>
-					</li>
-					<li>
-						<p class="comment-info">
-							<span><%=ac.getAskCommentWriter() %></span>
-							<span><%=ac.getAskCommentEnrollDate() %></span>
-						</p>
-						<textarea name="ncContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea>
-						<p class="comment-link">
+				<table class="ask-comment">
+					<tr class="comment-info">
+						<td><span class="material-icons">account_circle </span><%=ac.getAskCommentWriter() %> </td>
+						<td><%=ac.getAskCommentEnrollDate() %></td>
+					</tr>
+					<tr class="comment-content">
+						<td>
+							<%=ac.getAskCommentContent() %>
+							<textarea name="askContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea>
+						</td>
+					</tr>
+						<tr class="comment-link">
+							<td colspan="2">
 							<%if(m != null) {%>
-								<%if(m.getMemberId().equals(ac.getAskCommentWriter())) {%>
+								<%if(m.getMemberNick().equals(ac.getAskCommentWriter())) {%>
 									<a href="javascript:void(0)" onclick="modifyComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">수정</a>
 									<a href="javascript:void(0)" onclick="deleteComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">삭제</a>
 								<%} %>
 								<a href="javascript:void(0)" class="recShow">답급 달기</a>
 							<%} //댓글 링크 모음 로그인 체크 %>
-						</p>
-					</li>
-				</ul>
+							</td>
+						</tr>
+				</table>
 			
 				<%for(AskComment acc : reCommentList){ %>
 					<%if(acc.getAskRef() == ac.getAskCommentNo()) {%>
 						<ul class="posting-comment reply">
 							<li>
 								<span class="material-icons">subdirectory_arrow_right</span>
-								<span class="material-icons">account_box</span>
+								<span class="material-icons">account_circle</span>
 							</li>
 							<li>
 								<p class="comment-info">
@@ -282,18 +259,18 @@
 				<%if(m != null) {%>
 					<div class="inputRecommentBox">
 					<form action="/insertComment.do" method="post">
-						<ul>
+						<ul class="ask-comment-write">
 							<li>
 								<span class="material-icons">subdirectory_arrow_right</span>
 							</li>
 							<li>
-								<input type="hidden" name="ncWriter" value="<%=m.getMemberId() %>">
-								<input type="hidden" name="noticeRef" value="<%=a.getAskNo() %>">
-								<input type="hidden" name="ncRef" value="<%=ac.getAskCommentNo()%>"> 
-								<textarea class="input-form" name="ncContent"></textarea>
+								<input type="hidden" name="askWriter" value="<%=m.getMemberNick() %>">
+								<input type="hidden" name="askRef" value="<%=a.getAskNo() %>">
+								<input type="hidden" name="askCommentRef" value="<%=ac.getAskCommentNo()%>"> 
+								<textarea class="input-form" name="askContent" placeholder="내용을 입력해주세요."></textarea>
 							</li>
 							<li>
-								<button type="submit" class="btn bc1 bs4">등록</button>
+								<button type="submit" class="bc2">등록</button>
 							</li>
 						</ul>
 					</form>
@@ -303,9 +280,9 @@
 		</div>
 		
 	<script>
-		function noticeDelete(noticeNo) {
+		function noticeDelete(askNo) {
 			if(confirm("삭제하시겠습니까?")){
-				location.href="/noticeDelete.do?noticeNo="+noticeNo;
+				location.href="/askDelete.do?askNo="+askNo;
 			}
 		}
 		$(".recShow").on("click",function(){
@@ -318,37 +295,37 @@
 			$(".inputRecommentBox").eq(idx).toggle();
 			$(".inputRecommentBox").eq(idx).find("textarea").focus();
 		});
-		function modifyComment(obj,ncNo,noticeNo){
+		function modifyComment(obj,askCommentNo,askNo){
 			$(obj).parent().prev().show(); //textarea를 화면에 보여 줌
 			$(obj).parent().prev().prev().hide(); //기존 댓글은 화면에서 숨김
 			//수정 -> 수정 완료
 			$(obj).text("수정완료");
-			$(obj).attr("onclick","modifyComplete(this,'"+ncNo+"','"+noticeNo+"')");
+			$(obj).attr("onclick","modifyComplete(this,'"+askCommentNo+"','"+askNo+"')");
 			//삭제 -> 수정 취소
 			$(obj).next().text("수정취소");
-			$(obj).next().attr("onclick","modifyCancel(this,'"+ncNo+"','"+noticeNo+"')");
+			$(obj).next().attr("onclick","modifyCancel(this,'"+askCommentNo+"','"+askNo+"')");
 			//답글 달기 버튼 숨김
 			$(obj).next().next().hide();
 		}
-		function modifyCancel(obj,ncNo,noticeNo){
+		function modifyCancel(obj,askCommentNo,askNo){
 			$(obj).parent().prev().hide();		//textarea 숨김
 			$(obj).parent().prev().prev().show();	//기존 댓글 보여 줌
 			//수정 완료 -> 수정
 			$(obj).prev().text("수정");
-			$(obj).prev().attr("onclick","modifyComment(this,'"+ncNo+"','"+noticeNo+"')");
+			$(obj).prev().attr("onclick","modifyComment(this,'"+askCommentNo+"','"+askNo+"')");
 			//수정 취소 -> 삭제
 			$(obj).text("삭제");
-			$(obj).attr("onclick","deleteComment(this,'"+ncNo+"','"+noticeNo+"')");
+			$(obj).attr("onclick","deleteComment(this,'"+askCommentNo+"','"+askNo+"')");
 			//답글 달기 버튼 보여 줌
 			$(obj).next().show();
 		}
-		function modifyComplete(obj,ncNo,noticeNo){
+		function modifyComplete(obj,askCommentNo,askNo){
 			//form 태그 생성
 			const form = $("<form action='/noticeCommentUpdate.do' method='post'></form>");
 			//form 태그 자식으로 input 태그 추가(ncNo)
 			form.append($("<input type='text' name='ncNo' value='"+ncNo+"'>"));
 			//form태그 자식으로 input태그 추가(noticeNo)
-			form.append($("<input type='text' name='noticeNo' value='"+noticeNo+"'>"));
+			form.append($("<input type='text' name='noticeNo' value='"+askNo+"'>"));
 			//form태그 자식으로 수정한 댓글 내용이 들어있는 textarea를 추가
 			form.append($(obj).parent().prev());
 			//생성된 form태그를 html 본문으로 삽입
@@ -362,7 +339,7 @@
 			}
 		}
 		
-		<script>
+		
 			function home(){
 				history.back();
 			}
