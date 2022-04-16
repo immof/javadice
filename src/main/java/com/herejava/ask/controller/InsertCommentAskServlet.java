@@ -40,6 +40,7 @@ public class InsertCommentAskServlet extends HttpServlet {
 				ac.setAskRef(Integer.parseInt(request.getParameter("askRef")));
 				ac.setAskCommentRef(Integer.parseInt(request.getParameter("askCommentRef")));
 				ac.setAskCommentContent(request.getParameter("askCommentContent"));
+				
 				//3. 비즈니스로직
 				AskService service = new AskService();
 				int result = service.insertAskComment(ac);

@@ -105,7 +105,7 @@ public class AskDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<AskComment> list = new ArrayList<AskComment>();
-		String query = "select * from ask_comment where ask_comment_ref=? and ask_ref is null";
+		String query = "select * from ask_comment where ask_ref=? and ask_comment_ref is null";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, askNo);
@@ -134,7 +134,7 @@ public class AskDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<AskComment> list = new ArrayList<AskComment>();
-		String query = "select * from ask_comment where ask_comment_ref=? and ask_ref is null";
+		String query = "select * from ask_comment where ask_ref=? and ask_comment_ref is not null";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, askNo);
@@ -212,6 +212,26 @@ public class AskDao {
 			pstmt.setString(5, a.getFilepath3());
 			pstmt.setInt(6, a.getAskNo());
 
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertAskComment(Connection conn, AskComment ac) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into ask_comment values(ask_seq.nextval, ?,?,?,?,to_char(sysdate,'yyyy-mm-dd'))";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, ac.getAskCommentWriter());
+			pstmt.setInt(2, ac.getAskRef());
+			pstmt.setString(3, (ac.getAskCommentRef() == 0)?null:String.valueOf(ac.getAskCommentRef()));
+			pstmt.setString(4, ac.getAskCommentContent());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
