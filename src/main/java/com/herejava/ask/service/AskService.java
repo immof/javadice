@@ -13,6 +13,7 @@ import com.herejava.notice.vo.Notice;
 
 import common.JDBCTemplate;
 
+
 public class AskService {
 
 	//문의사항 전체 불러오는 메소드
@@ -130,6 +131,21 @@ public class AskService {
 		Ask a = dao.selectOneAsk(conn, askNo);
 		JDBCTemplate.close(conn);
 		return a;
+	}
+
+
+	public int UpdateAsk(Ask a) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.UpdateAsk(conn, a);
+
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 	

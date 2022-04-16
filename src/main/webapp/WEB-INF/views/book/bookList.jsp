@@ -136,7 +136,7 @@
 												</p>
 											</td>
 											<td><%=bookState %></td>
-												<td><button class="btn bc3 bs6 modal-open-btn" id="modal-btn-1" target="#test-modal">예약취소</button></td>	
+												<td><input type="button" class="btn bs6 bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancleFirst.do?bookNo=<%=bd.getBookNo()%>'"/></td>	
 											<%	break;
 											case 1: bookState = "이용완료";
 												//리뷰o

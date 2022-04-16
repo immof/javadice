@@ -254,7 +254,7 @@ table{
 			<div class="room-wrap">
 				<table class="room-show">
 					<tr class="tr-1 room-name">
-						<td class="room-image" rowspan="4"><img src="/img/room/<%=r.getFilepath()%>"></td>
+						<td class="room-image" rowspan="4"><img src="/img/<%=r.getFilepath()%>"></td>
 						<th><span></span><%=r.getRoomName() %></th>
 						<td>
 						<%

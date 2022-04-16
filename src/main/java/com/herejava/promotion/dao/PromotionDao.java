@@ -119,4 +119,27 @@ public class PromotionDao {
 		return result;
 	}
 
+	public int insertPromotion(Connection conn, Promotion p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into promotion values(promotion_seq.nextval,?,?,?,?,?,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p.getPromotionTitle());
+			pstmt.setString(2, p.getPromotionSubTitle());
+			pstmt.setString(3, p.getPromotionContent());
+			pstmt.setString(4, p.getStartDate());
+			pstmt.setString(5, p.getEndDate());
+			pstmt.setString(6, p.getFilepath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }
