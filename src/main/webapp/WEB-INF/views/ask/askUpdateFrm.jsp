@@ -43,7 +43,7 @@
 	.td-3{
 		width: 40px;
 	}
-	#file{
+	.file{
 		text-align: left;
 	}
 </style>
@@ -57,7 +57,7 @@
 		<br>
 		<div class="page1-title">문의사항 수정</div>
 			<form class="form1" action="/askUpdate.do" method="post" enctype="multipart/form-data">				
-					<input type="hidden" name="askNo" value="<%=a.getMemberNo() %>">
+					<input type="hidden" name="askNo" value="<%=a.getAskNo() %>">
 					<table class="tbl" id="askWrite">
 						<tr class="tr-1">
 							<th class="td-3">제목</th>

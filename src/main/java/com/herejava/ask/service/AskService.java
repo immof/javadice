@@ -129,7 +129,7 @@ public class AskService {
 		AskDao dao = new AskDao();
 		Ask a = dao.selectOneAsk(conn, askNo);
 		JDBCTemplate.close(conn);
-		return null;
+		return a;
 	}
 
 	
