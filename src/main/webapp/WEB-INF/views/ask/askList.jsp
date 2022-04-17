@@ -71,7 +71,7 @@
 	
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>:: 문의 사항 ::</title>
 </head>
 <body>
 	
