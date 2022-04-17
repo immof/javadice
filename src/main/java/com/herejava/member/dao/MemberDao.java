@@ -256,7 +256,7 @@ public class MemberDao {
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into member values(member_seq.nextval,?,?,?,?,?,'0','1','sun.png')";
+		String query = "insert into member values(member_seq.nextval,?,?,?,?,?,'0','1','boy (1).png')";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMemberId());
