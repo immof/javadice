@@ -74,7 +74,11 @@
 							<td><%=mem.getMemberNick() %></td>
 							<td><%=mem.getMemberPhone() %></td>
 							<td><%=mem.getMemberPoint() %></td>
-							<td><%=mem.getMemberLevel() %></td>
+							<%if(mem.getMemberLevel()==0){%>
+							<td>관리자</td>
+							<%} else{%>
+							<td>회원</td>
+							<%} %>
 							<td><button class="btn bc2 searchBtn" style="padding: 0 10px;" >예약조회</button></td>
 							<td><input type="checkbox" id="delMemberChk"></td>
 						</tr>
