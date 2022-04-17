@@ -36,7 +36,7 @@ public class InsertCommentAskServlet extends HttpServlet {
 				request.setCharacterEncoding("utf-8");
 				//2. 값추출
 				AskComment ac = new AskComment();
-				ac.setAskCommentWriter(request.getParameter("askWriter"));
+				ac.setAskCommentWriter(request.getParameter("askCommentWriter"));
 				ac.setAskRef(Integer.parseInt(request.getParameter("askRef")));
 				ac.setAskCommentRef(Integer.parseInt(request.getParameter("askCommentRef")));
 				ac.setAskCommentContent(request.getParameter("askCommentContent"));
