@@ -89,10 +89,14 @@ public class InsertBookServlet extends HttpServlet {
 		long payNo = serviceBook.searchPayNo(bpd);
 		System.out.println("payNo : "+payNo);
 		
-		//3-4. 적립금테이블 추가
+		//3-4. 적립금테이블 추가 (회원시)
 		PointService servicePoint = new PointService();
-		int resultPoint = servicePoint.insertPoint(bpay,bpd,payNo);
-		
+		int resultPoint = 0;
+		if(memberNo==0) {
+			resultPoint = 1;
+		}else {
+			resultPoint = servicePoint.insertPoint(bpay,bpd,payNo);
+		}
 		
 		//3-3. 멤버테이블에 회원포인트 변경 (회원시)
 		int resultMember = 0;
