@@ -51,6 +51,9 @@
 	height: 60px;
 	font-size: 20px;
 }
+.page-content{
+	height: 885px;
+}
 </style>
 </head>
 <body>
