@@ -66,6 +66,7 @@ System.out.println(str);
 					<th class="point-amount"style="text-align: right;">금액</th>
 				</tr>
 			<%for(Point p : list){ %>
+				<%if(p.getPayAmount() > 0 ) {%> 
 					<tr class="tr-1">
 					<th class="point-date1"style="text-align: left;"><%=p.getBookDay() %></th>
 					<th class="point-date2"style="text-align: left;"><%=p.getBookNo() %></th>
@@ -93,6 +94,7 @@ System.out.println(str);
 					<th class="point-amount"style="text-align: right;">- <%=use %>원</th>
 				</tr>
 				<%} %>
+			<%} %>
 			<%} %>
 			</table>
 			</div>

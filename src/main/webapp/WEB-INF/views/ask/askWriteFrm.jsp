@@ -68,6 +68,7 @@
 							<th class="td-3"><span class="material-icons">file_download</span></th>
 							<td class="file"><input type="file" name="file1" ></td>
 						</tr>
+						<!-- 
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
 							<td class="file"><input type="file" name="file2"></td>
@@ -75,7 +76,7 @@
 						<tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
 							 <td class="file"><input type="file" name="file3"></td>
-						</tr>
+						</tr> -->
 						<tr class="button">
 							<td colspan="6">
 							<button type="submit" class="btn bc1 bs1">등록</button>

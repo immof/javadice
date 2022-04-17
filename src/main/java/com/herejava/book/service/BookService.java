@@ -489,6 +489,20 @@ public class BookService {
 		return b;
 	}
 
+	public int updateMemberPoint(int memberNo, int newPoint) {
+		Connection conn = JDBCTemplate.getConnection();
+		BookDao dao = new BookDao();
+		int result = dao.updateMemberPoint(conn,memberNo,newPoint);
+		JDBCTemplate.close(conn);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 }
 

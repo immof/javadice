@@ -94,7 +94,7 @@
 								<th class="th-1">결제정보</th>
 							</tr>
 							<tr>
-								<th class="th-1">총 결제금액</th>
+								<th class="th-1">최종 결제금액</th>
 								<%if(pay == null){ %>
 								<td class="td-1 pay-1">0 원</td>
 								<%}else{ 

@@ -95,7 +95,6 @@
 							<tr>
 								<th class="th-1">결제정보</th>
 							</tr>
-							
 							<!-- 결제정보 시작 -->
 							<tr>
 								<%if(bd.getBookState() == 0 || bd.getBookState() == 1) {%>

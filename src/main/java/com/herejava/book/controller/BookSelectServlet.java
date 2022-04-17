@@ -1,6 +1,7 @@
 package com.herejava.book.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,14 +46,24 @@ public class BookSelectServlet extends HttpServlet {
 		//3.비즈니스로직
 		BookService service = new BookService();
 		Book b = service.selectOneBook(bookNo, bookName);
-		RoomService rService = new RoomService();
-		Room r = rService.selectOneRoom(b.getRoomNo());
 		//System.out.println(b.getBookName());
 		//4.결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookSelect.jsp");
-		request.setAttribute("b", b);
-		request.setAttribute("roomName", r.getRoomName());
-		view.forward(request, response);
+		if(b != null) {
+			RoomService rService = new RoomService();
+			Room r = rService.selectOneRoom(b.getRoomNo());
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookSelect.jsp");
+			request.setAttribute("b", b);
+			request.setAttribute("roomName", r.getRoomName());
+			view.forward(request, response);
+		}else {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('해당 에약은 존재하지 않습니다. 다시 확인하여 주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
 	}
 
 	/**
