@@ -1,6 +1,7 @@
 package com.herejava.book.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,10 @@ import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
 import com.herejava.member.service.MemberService;
 import com.herejava.member.vo.Member;
+import com.herejava.pay.service.PayService;
+import com.herejava.pay.vo.Pay;
+import com.herejava.point.service.PointService;
+import com.herejava.point.vo.Point;
 
 /**
  * Servlet implementation class BookCancleServlet
@@ -37,12 +42,22 @@ public class BookCancleServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		//3. 비즈니스로직
-		BookService service = new BookService();
-		int result = service.updateBook(bookNo);
+		BookService bookService = new BookService();
+		PointService pointService = new PointService();
+		//list에서 use-point랑 plus-point 받아서 다 더해서 최신 member-point 만듬
+		ArrayList<Point> list = pointService.pointList(memberNo);
+		int memberPoint = 0;
+		for(Point point : list) {
+			memberPoint += point.getPlusPoint();
+			memberPoint += point.getUsePoint();
+		};
+		int totalResult = bookService.updateBook(bookNo, memberNo, memberPoint);
+		
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		if(result>0) {
+		if(totalResult>0) {
 			request.setAttribute("title", "예약취소 성공");
 			request.setAttribute("msg", "메인페이지로 돌아갑니다.");
 			request.setAttribute("icon", "success");
@@ -51,6 +66,7 @@ public class BookCancleServlet extends HttpServlet {
 			request.setAttribute("msg", "관리자에게 문의하세요.");
 			request.setAttribute("icon", "warning");
 		}
+		
 		request.setAttribute("loc", "/index.jsp");
 		view.forward(request, response);
 	}

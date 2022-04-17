@@ -14,6 +14,17 @@
 		String roomName = (String)request.getAttribute("roomName");
 		int totalPrice = roomPrice*payStayDay;
 		int pointRate = 10;	//최종결제금액의 10%
+		
+		
+		//System.out.println("checkOut1 : "+checkOut);
+		//System.out.println("roomName1 : "+roomName);
+		//System.out.println("roomNo1 : "+roomNo);
+		//System.out.println("roomPrice1 : "+roomPrice);
+		//System.out.println("roomCapacity1 : "+roomCapacity);
+		//System.out.println("bookPeople1 : "+bookPeople);
+		//System.out.println("checkIn1 : "+checkIn);
+		//System.out.println("payStayDay1 : "+payStayDay);
+		//System.out.println("totalPrice1 : "+totalPrice);
     	
     %>
 <!DOCTYPE html>
@@ -191,7 +202,13 @@
 		font-weight: bold;
 		float:right;
 	}
-	
+	.btnBox{
+		margin-top: 40px;
+		text-align: center;
+	}
+	.btnBox>button{
+		width: 250px;
+	}
 	/*rule*/
 	.rule-wrap{
 		width: 950px;
@@ -213,7 +230,7 @@
 	input[type="number"]::-webkit-inner-spin-button {
 	    -webkit-appearance: none;
 	}
-
+	
 </style>
 </head>
 <body>
@@ -281,7 +298,7 @@
                         <p class="title">객실요금</p>
                         <pre class="content" id="sub-title" style="list-style-type: initial;"> -  <%=roomName %> (<%=payStayDay %>박) = <%=stringPrice %> 원 * <%=payStayDay %> 박</pre>
                         <input type="hidden" id="totalPrice" value="<%= totalPrice%>">
-                        <p  class="content" id="stringTotalPrice" ><%=stringTotalPrice %> 원</p>
+                        <p  class="content" id="stringTotalPrice" style="text-align:right"><%=stringTotalPrice %> 원</p>
                         <p class="title">적립금 사용</p>
                         <%if(m!=null) {%>
                         	<p class="content point"  id="point"></p>
@@ -318,7 +335,8 @@
                 <input type="hidden" id="roomName" value="<%=roomName %>">
             </form>
             	<div class=btnBox>
-                	<div class="btn bc1" id="paymentBtn">결제하기</div> 
+                	<button class="btn bc1" id="paymentBtn">결제하기</button> 
+                	<button class="btn bc1" id="test">test</button> 
             	</div>
 		</div>
 		<div class="rule-wrap">
@@ -376,6 +394,7 @@
 			let payAmount = totalPrice-$("#usePoint").val();
 			$("#point").text('-   '+$("#usePoint").val()+' 원');
 			$("#stringPayAmount").text(payAmount);
+			$(this).val(usePoint);
 		});
 		//총 금액
 		
@@ -385,7 +404,6 @@
 			//1. 정규표현식 변수생성
 			const nameReg = /^[가-힣]{2,6}$/;
 			const name = $("#bookName").val();
-			console.log(name);
 			if(!nameReg.test(name) || name == ""){
 				//정규표현식에 만족하지 않는 경우
 				$("#nameChk").text("이름은 2~6 글자의 한글만 입력가능합니다. ");
@@ -396,9 +414,6 @@
 				$("#nameChk").css("color","green");
 				checkArr[0] = true;
 			}
-			console.log(checkArr[0]);
-			console.log(checkArr[1]);
-			console.log(checkArr[2]);
 		});
 		//휴대폰
 		$("#bookPhone").keyup(function(){
@@ -420,10 +435,9 @@
 		
 		$("#paymentBtn").on("click",function(e){
 			if($("#usePoint").val().length==0){
-				$("#usePoint").val(0);
-				checkArr[2]=true;
+				let usePoint = $("#usePoint").val(0);
 			}
-			$("#payAmount").val($("#totalPrice").val()-usePoint);
+			$("#payAmount").val($("#totalPrice").val()-$("#usePoint"));
             let count = 0;
             for(let i = 0;i<checkArr.length;i++){
                 if(checkArr[i]){
@@ -468,41 +482,31 @@
   					console.log("결제금액 : "+rsp.paid_amount);
   					console.log("카드승인번호 : " +rsp.apply_num);
   					//추가 DB작업이 필요한경우 이 부분에 결제내역을 DB에 저장하는 코드 작성
-  					const plusPoint = parseInt(($("#pointRate").val())*price/100);
-  	       			const MemberNo = $("#MemberNo").val();		//비회원은 0
-  	       			const payStayDay = $("#payStayDay").val();
-  	       			const payRoomPrice = $("#payRoomPrice").val();
-  	       			const checkIn = $("#checkIn").val();
-  	       			const checkout = $("#checkOut").val();
-  	       			const bookPeople = $("#bookPeople").val();
-  	       			const memberPoint= $("#memberPoint").val();
-	  	       		$.ajax({
-	  					url : "/InsertBook.do",
-	  					type : "post",
-	  					data : {
-	  						price:price, 
-	  						roomNo:roomNo,
-	  						bookName:bookName,
-	  						bookPhone:bookPhone,
-	  						MemberNo:MemberNo,
-	  						payStayDay:payStayDay,
-	  						memberPoint:memberPoint,
-	  						payRoomPrice:payRoomPrice,
-	  						usePoint:usePoint,
-	  						checkIn:checkIn,
-	  						checkout:checkout,
-	  						bookPeople:bookPeople,
-	  						plusPoint:plusPoint,
-	  						roomName:roomName
-	  						},
-	  					success : function(data){
-	  						console.log("서버호출완료");
-	  						
-	  					},
-	  					error : function(){
-	  						console.log("서버호출실패");
-	  					}
-	  				});
+  		        	const payAmount = $("#stringPayAmount").text();	//총요금(payAmount)
+  		   			const roomNo = $("#roomNo").val();
+  		   			const bookName = $("#bookName").val();
+  		   			const bookPhone = $("#bookPhone").val();
+	     			const memberNo = $("#memberNo").val();		//비회원은 0
+	     			const payStayDay = $("#payStayDay").val();
+	     			const memberPoint= $("#memberPoint").val();
+	     			const payRoomPrice = $("#payRoomPrice").val();
+	     			const usePoint= $("#usePoint").val();
+	     			const checkIn = $("#checkIn").val();
+	     			const checkOut = $("#checkOut").val();
+	     			const bookPeople = $("#bookPeople").val();
+	     			let plusPoint = 0;
+	     			if(memberNo!=0){	//회원이면
+						plusPoint = parseInt(($("#pointRate").val())*payAmount/100);
+	     			}else{
+	     				plusPoint = 0;	//비회원이면 적립금 0
+	     			}
+					const roomName = $("#roomName").val();
+  	       			
+					location.href="/insertBook.do?payAmount="+payAmount+"&roomNo="+roomNo+"&bookName="+bookName+"&bookPhone="+bookPhone+
+					"&memberNo="+memberNo+"&payStayDay="+payStayDay+"&memberPoint="+memberPoint+"&payRoomPrice="+payRoomPrice+
+					"&usePoint="+usePoint+"&checkIn="+checkIn+"&checkOut="+checkOut+"&bookPeople="+bookPeople+
+					"&plusPoint="+plusPoint+"&roomName="+roomName;
+					
   				}else{
   					alert("결제가 취소되었습니다.");
   					console.log("에러내용 : "+rsp.err_msg);
@@ -510,6 +514,55 @@
   			});
         }
         
+        $("#test").on("click",function(){
+        	if($("#usePoint").val().length==0){
+				let usePoint = $("#usePoint").val(0);
+			}
+			$("#payAmount").val($("#totalPrice").val()-$("#usePoint"));
+            let count = 0;
+            for(let i = 0;i<checkArr.length;i++){
+                if(checkArr[i]){
+                    count++;
+                }
+            }
+          	if(count != 3){
+          		alert("정보를 확인하세요");
+          	}
+
+				
+				/*
+				console.log("멤버넘버"+memberNo);
+				console.log(" 원래있던 포인트 : "+ memberPoint);
+				console.log(" 사용한 포인트 : "+usePoint);
+				console.log(plusPoint);
+				*/
+				
+	        	const payAmount = $("#stringPayAmount").text();	//총요금(payAmount)
+	   			const roomNo = $("#roomNo").val();
+	   			const bookName = $("#bookName").val();
+	   			const bookPhone = $("#bookPhone").val();
+     			const memberNo = $("#memberNo").val();		//비회원은 0
+     			const payStayDay = $("#payStayDay").val();
+     			const memberPoint= $("#memberPoint").val();
+     			const payRoomPrice = $("#payRoomPrice").val();
+     			const usePoint= $("#usePoint").val();
+     			const checkIn = $("#checkIn").val();
+     			const checkOut = $("#checkOut").val();
+     			const bookPeople = $("#bookPeople").val();
+     			let plusPoint = 0;
+     			if(memberNo!=0){	//회원이면
+					plusPoint = parseInt(($("#pointRate").val())*payAmount/100);
+     			}else{
+     				plusPoint = 0;	//비회원이면 적립금 0
+     			}
+				const roomName = $("#roomName").val();
+				
+				location.href="/insertBook.do?payAmount="+payAmount+"&roomNo="+roomNo+"&bookName="+bookName+"&bookPhone="+bookPhone+
+						"&memberNo="+memberNo+"&payStayDay="+payStayDay+"&memberPoint="+memberPoint+"&payRoomPrice="+payRoomPrice+
+						"&usePoint="+usePoint+"&checkIn="+checkIn+"&checkOut="+checkOut+"&bookPeople="+bookPeople+
+						"&plusPoint="+plusPoint+"&roomName="+roomName;
+	       		
+        });
 	</script>
 </body>
 </html>

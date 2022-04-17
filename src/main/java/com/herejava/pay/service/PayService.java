@@ -17,4 +17,12 @@ public class PayService {
 		JDBCTemplate.close(conn);
 		return pay;
 	}
+
+	public Pay getPayAmount(long bookNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		PayDao dao = new PayDao();
+		Pay pay = dao.getPayAmount(conn, bookNo);
+		return pay;
+	}
+	
 }

@@ -61,7 +61,13 @@
 			margin:10px;
 			margin-bottom: 20px;
 		}
-	
+		.writeBtn{
+		margin-left: 730px;
+		width: 80px;
+		height: 40px;
+		line-height: 10px;
+		border-radius: 5px;
+	}
 	
 </style>
 <meta charset="UTF-8">
@@ -75,7 +81,11 @@
 		<br>
 		<%@include file="/WEB-INF/views/common/notice_submenu.jsp" %>
 		<br>
-		<div class="page1-title">공지사항</div>
+		<div class="page1-title">공지사항
+		<%if(m!=null && m.getMemberLevel() == 0){ %>
+			<a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a>
+		<%} %>
+		</div>
 		<!-- <a class="btn bc1 writeBtn" href="noticeWriteFrm.do">글쓰기</a> -->
 			<table class="tbl tr-1 notice-tbl">
 					<tr class="tr-2">

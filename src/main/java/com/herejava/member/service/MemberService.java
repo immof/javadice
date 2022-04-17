@@ -271,6 +271,7 @@ public int updateMemberPoint(BookPay bpay) {
 	Connection conn = JDBCTemplate.getConnection();
 	MemberDao dao = new MemberDao();
 	int newPoint = bpay.getMemberPoint()-bpay.getMinusPoint()+bpay.getPlusPoint();
+	System.out.println("newPoint: "+newPoint);
 	int result = dao.updateMemberPoint(conn, bpay , newPoint);
 	if(result>0) {
 		JDBCTemplate.commit(conn);

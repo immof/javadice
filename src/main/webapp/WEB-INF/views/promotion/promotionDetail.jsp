@@ -29,6 +29,12 @@ h3{
 	flex-direction: column;
 	justify-content: space-between;
 }
+.left-title>h3{
+	text-align: left;
+	font-size: 16px;
+	color: #666;
+	padding-top: 15px;
+}
 .head-right{
 	width: 450px;
 	height: 300px;
@@ -56,7 +62,7 @@ h3{
 	padding-top: 50px;
 }
 .detail-bottom>.bottom-content{
-	width: 800px;
+	width: 850px;
 	min-height: 500px;
 	margin: 0 auto;
 	margin-top: 35px;
@@ -91,7 +97,7 @@ h3{
 				<div class="head-left">
 					<div class="left-title">
 						<h1><%=p.getPromotionTitle() %></h1><hr>
-						<h2><%=p.getPromotionSubTitle() %></h3>
+						<h3><%=p.getPromotionSubTitle() %></h3>
 					</div>
 					<p>기간 : <%=p.getStartDate() %> ~ <%=p.getEndDate() %></p>	
 				</div>
