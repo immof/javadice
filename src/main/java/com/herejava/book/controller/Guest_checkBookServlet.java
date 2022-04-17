@@ -44,9 +44,6 @@ public class Guest_checkBookServlet extends HttpServlet {
 			out.print(0);
 		}
 		
-		
-		
-		
 	}
 
 	/**
