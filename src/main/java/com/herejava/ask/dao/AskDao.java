@@ -111,14 +111,14 @@ public class AskDao {
 			pstmt.setInt(1, askNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				AskComment a = new AskComment();
-				a.setAskCommentNo(rset.getInt("ask_comment_no"));
-				a.setAskCommentWriter(rset.getString("ask_comment_writer"));
-				a.setAskRef(rset.getInt("ask_ref"));
-				a.setAskCommentRef(rset.getInt("ask_comment_ref"));
-				a.setAskCommentContent(rset.getString("ask_comment_content"));
-				a.setAskCommentEnrollDate(rset.getString("ask_comment_enroll_date"));
-				list.add(a);
+				AskComment ac = new AskComment();
+				ac.setAskCommentNo(rset.getInt("ask_comment_no"));
+				ac.setAskCommentWriter(rset.getString("ask_comment_writer"));
+				ac.setAskRef(rset.getInt("ask_ref"));
+				ac.setAskCommentRef(rset.getInt("ask_comment_ref"));
+				ac.setAskCommentContent(rset.getString("ask_comment_content"));
+				ac.setAskCommentEnrollDate(rset.getString("ask_comment_enroll_date"));
+				list.add(ac);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -140,14 +140,14 @@ public class AskDao {
 			pstmt.setInt(1, askNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				AskComment a = new AskComment();
-				a.setAskCommentNo(rset.getInt("ask_comment_no"));
-				a.setAskCommentWriter(rset.getString("ask_comment_writer"));
-				a.setAskRef(rset.getInt("ask_ref"));
-				a.setAskCommentRef(rset.getInt("ask_comment_ref"));
-				a.setAskCommentContent(rset.getString("ask_comment_content"));
-				a.setAskCommentEnrollDate(rset.getString("ask_comment_enroll_date"));
-				list.add(a);
+				AskComment ac = new AskComment();
+				ac.setAskCommentNo(rset.getInt("ask_comment_no"));
+				ac.setAskCommentWriter(rset.getString("ask_comment_writer"));
+				ac.setAskRef(rset.getInt("ask_ref"));
+				ac.setAskCommentRef(rset.getInt("ask_comment_ref"));
+				ac.setAskCommentContent(rset.getString("ask_comment_content"));
+				ac.setAskCommentEnrollDate(rset.getString("ask_comment_enroll_date"));
+				list.add(ac);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -232,6 +232,7 @@ public class AskDao {
 			pstmt.setInt(2, ac.getAskRef());
 			pstmt.setString(3, (ac.getAskCommentRef() == 0)?null:String.valueOf(ac.getAskCommentRef()));
 			pstmt.setString(4, ac.getAskCommentContent());
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
