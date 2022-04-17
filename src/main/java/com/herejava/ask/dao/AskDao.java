@@ -270,5 +270,24 @@ public class AskDao {
 		return askCo;
 	}
 
+	public int delComment(Connection conn, int askNo, int askCommentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete ask_comment where ask_comment_no=? and ask_ref=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, askCommentNo);
+			pstmt.setInt(2, askNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+
 
 }
