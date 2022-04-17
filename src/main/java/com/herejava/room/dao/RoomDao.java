@@ -74,7 +74,7 @@ public class RoomDao {
 	public Room selectOneRoom(Connection conn, int roomNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Room r = null;
+		Room r = new Room();
 		String query = "select * from room where room_no = ?";
 		
 		try {

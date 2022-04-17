@@ -74,7 +74,7 @@
        <div class="promotion-main-content">
           <p class="promotion-title">Breakfast Promotion</p>
           <hr>
-          <p class="promotion-subTitle">신선한 식재료로 최고의 퀄티를 제공합니다.</p>
+          <p class="promotion-subTitle">신선한 식재료로 최고의 퀄리티를 제공합니다.</p>
           <button class="go-promo" onclick="location.href='/promotionDetail.do?promotionNo=105'">자세히 보기</button>
        </div>
     </div>
