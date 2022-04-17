@@ -8,8 +8,10 @@
     %>
     <%
     	//예약상태 최신화 시켜주는 코드 (check_in 당일(오전12시)이 되면 예약상태가 1로 바뀜)
+    	/*
     	BookService service = new BookService();
     	int result = service.updateBookState();
+    	*/
     %>
 <!-- 구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
