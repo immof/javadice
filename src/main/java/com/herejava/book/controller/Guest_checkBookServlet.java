@@ -37,7 +37,6 @@ public class Guest_checkBookServlet extends HttpServlet {
 		String bookName = request.getParameter("bookName");
 		BookService service = new BookService();
 		Book book = service.selectOneBook(bookNo, bookName);
-		
 		PrintWriter out = response.getWriter();
 		if (book != null) {
 			out.print(1);
