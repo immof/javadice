@@ -36,14 +36,14 @@
 
 .mypage-nav {
 	background-color: aquamarine;
-	flex-grow: 1;
 	height: 500px;
+	width:181px !important;
 }
 
 .mypage-content {
-	flex-grow: 15;
 	min-height: 680px;
 	margin: 27px 0 27px 57px;
+	width:960px;
 }
 
 .mypage-content-title {
@@ -55,8 +55,8 @@
 
 .left-menu {
 	margin-top: 60px;
-	flex-grow: 1;
 	color: rgb(51, 51, 51);
+	width:181px !important;
 }
 
 .left-menu>ul {
