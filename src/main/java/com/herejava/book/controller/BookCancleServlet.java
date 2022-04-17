@@ -46,13 +46,12 @@ public class BookCancleServlet extends HttpServlet {
 		//3. 비즈니스로직
 		BookService bookService = new BookService();
 		PointService pointService = new PointService();
+		Point p = pointService.getPayPoint(bookNo);
 		//list에서 use-point랑 plus-point 받아서 다 더해서 최신 member-point 만듬
-		ArrayList<Point> list = pointService.pointList(memberNo);
-		int memberPoint = 0;
-		for(Point point : list) {
-			memberPoint += point.getPlusPoint();
-			memberPoint += point.getUsePoint();
-		};
+		MemberService service = new MemberService();
+		int currentPoint = service.getPoint(memberNo);
+		
+		
 		int totalResult = bookService.updateBook(bookNo, memberNo, memberPoint);
 		System.out.println("bookCancle의 memberPoint작동???" +memberPoint);
 		
