@@ -683,7 +683,7 @@ public class BookDao {
 	public int insertBook(Connection conn, BookPay bpay) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query ="INSERT INTO BOOK VALUES(BOOK_SEQ.NEXTVAL,?,?,?,?,?, TO_CHAR(SYSDATE,'YYYY-MM-DD'),0,?,?)";
+		String query ="INSERT INTO BOOK VALUES(to_char(sysdate,'yymmdd')||book_seq.nextval,?,?,?,?,?, TO_CHAR(SYSDATE,'YYYY-MM-DD'),0,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bpay.getRoomNo());
