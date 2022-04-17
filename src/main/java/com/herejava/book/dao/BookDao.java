@@ -82,16 +82,16 @@ public class BookDao {
 		String query ="";
 		switch(chk) {
 			case 0:
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=0 order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=? and book_state=0) where rnum between ? and ?";
 				break;
 			case 1:
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=1 order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=? and book_state=1) where rnum between ? and ?";
 				break;
 			case 2: 
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=2 order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=? and book_state=2) where rnum between ? and ?";
 				break;
 			case 3:
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=?) where rnum between ? and ?";
 				break;
 		}
 		try {

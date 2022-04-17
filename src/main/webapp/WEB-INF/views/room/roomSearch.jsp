@@ -242,7 +242,7 @@ table{
 		<div class="calendar-wrap">
 				<div id="calendar"></div>
 		</div>
-		<div class="belt">숙소예약</div><br>
+		<div class="belt">객실예약</div><br>
 		<div class="index-wrap">
 		<ul class= "index">
 			<li class="selected">───<span>1</span>객실 선택</li>
