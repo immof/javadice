@@ -39,15 +39,6 @@ public class BookInfoInputServlet extends HttpServlet {
 		String checkOut = request.getParameter("checkOut");
 		int payStayDay = Integer.parseInt(request.getParameter("payStayDay"));
 		String roomName = request.getParameter("roomName");
-		/*
-		System.out.println(roomNo);
-		System.out.println(roomPrice);
-		System.out.println(bookPeople);
-		System.out.println(checkIn);
-		System.out.println(checkOut);
-		System.out.println(payStayDay);
-		System.out.println(roomName);
-		*/
 		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookInfoInput.jsp");
 		request.setAttribute("roomNo", roomNo);

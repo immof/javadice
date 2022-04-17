@@ -212,7 +212,7 @@ table{
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="search-head">
-			<p id="call">▲ 달력 숨기기</p>
+			<p id="call">▲ 달력 숨기기     (원하시는 날짜를 달력에서 드래그 하십시오.)</p>
 			<div class="search-tab">
 				<div class="search-content">
 					<span>
@@ -228,10 +228,10 @@ table{
 							<span id="checkOut" class="checkDate"><%=checkOut %></span>
 						</span>
 						<span>
-							<p>숙박인원</p>
-							<p class="peopleBtn">&lt</p>
+							<p>예약인원</p>
+							<p class="peopleBtn" style="font-size: 33px;">-</p>
 							<span id="peopleVal"><%=bookPeople %></span><span style="padding-left:0;">인</span>
-							<p class="peopleBtn">&gt</p>
+							<p class="peopleBtn" style="font-size: 33px;">+</p>
 						</span>
 						<button class="searchBtn">검색</button>	
 					</span>
@@ -242,7 +242,7 @@ table{
 		<div class="calendar-wrap">
 				<div id="calendar"></div>
 		</div>
-		<div class="belt">객실예약</div><br>
+		<div class="belt">RESERVATION</div><br>
 		<div class="index-wrap">
 		<ul class= "index">
 			<li class="selected">───<span>1</span>객실 선택</li>
@@ -256,7 +256,7 @@ table{
 					<tr class="tr-1 room-name">
 						<td class="room-image" rowspan="4"><img src="/img/<%=r.getFilepath()%>"></td>
 						<th><span></span><%=r.getRoomName() %></th>
-						<td>
+						<td style="color:#998465;">
 						<%
 						String engRoomName = "";
 						String roomSize = "";
@@ -293,10 +293,10 @@ table{
 						<td colspan="4"><%=r.getRoomOption() %></td>
 					</tr>
 					<tr class="tr-1 room-count">
-						<td colspan="4">예약 가능한 객실 수 : <span><%=r.getRoomCount() %></span></td>
+						<td colspan="4">예약 가능한 객실 수 : <span style="color:#998465;"><%=r.getRoomCount() %></span></td>
 					</tr>
 					<tr class="tr-1 room-capacity">
-						<td colspan="3">객실 최대 인원 : <span><%=r.getRoomCapacity() %></span></td>
+						<td colspan="3">객실 최대 인원 : <span style="color:#998465;"><%=r.getRoomCapacity() %></span></td>
 						<td>
 							<a href="/bookInfoInput.do?roomNo=<%=r.getRoomNo() %>&roomPrice=<%=r.getRoomPrice() %>&bookPeople=<%=bookPeople %>&checkIn=<%=checkIn %>&checkOut=<%=checkOut %>&payStayDay=<%=diffDays %>&roomName=<%=r.getRoomName() %>&roomCapacity=<%=r.getRoomCapacity() %>" >
 								<button class="bc1 bs4">
@@ -322,10 +322,10 @@ table{
 		$("#call").on("click",function(){
 			const calendar = $(".calendar-wrap");
 			calendar.slideToggle();
-			if($(this).text()=="▲ 달력 숨기기"){
+			if($(this).text()=="▲ 달력 숨기기     (원하시는 날짜를 달력에서 드래그 하십시오.)"){
 				$(this).text("▼ 달력 보이기");
 			}else{
-				$(this).text("▲ 달력 숨기기");
+				$(this).text("▲ 달력 숨기기     (원하시는 날짜를 달력에서 드래그 하십시오.)");
 			}
 		});
 		//달력 만들기
@@ -384,7 +384,7 @@ table{
 		});
 		$(".peopleBtn").on("click",function(){
 			const peopleVal = Number($("#peopleVal").text());
-			if($(this).text() == "<"){
+			if($(this).text() == "-"){
 				if(peopleVal > 1){
 					$("#peopleVal").text(peopleVal-1);
 				}
