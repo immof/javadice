@@ -155,7 +155,7 @@
 				$(".pwChkMsg").css("color","green");
 				checkArr[1] = true;
 			}else{
-				$(".pwChkMsg").text("1개 이상의 영어, 숫자, 특수기호를 사용해야 합니다.");
+				$(".pwChkMsg").text("6자~15자 영어, 숫자, 특수기호를 사용하세요.");
 				$(".pwChkMsg").css("color","red");
 				checkArr[1] = false;
 			};
