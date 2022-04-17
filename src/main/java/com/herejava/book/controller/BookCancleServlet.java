@@ -43,17 +43,52 @@ public class BookCancleServlet extends HttpServlet {
 		//2. 값추출
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		//3. 비즈니스로직
-		BookService bookService = new BookService();
-		PointService pointService = new PointService();
-		Point p = pointService.getPayPoint(bookNo);
+		
+		
+		PointService pointService2 = new PointService();
+		Point p = pointService2.getPayPoint(bookNo);
+		int usepoint = p.getUsePoint();
+		int pluspoint = p.getPlusPoint();
+		
+		
 		//list에서 use-point랑 plus-point 받아서 다 더해서 최신 member-point 만듬
 		MemberService service = new MemberService();
 		int currentPoint = service.getPoint(memberNo);
+
+
+		System.out.println(usepoint);
+		System.out.println(pluspoint);
+		System.out.println(currentPoint);
+		
+		int newPoint = currentPoint + usepoint - pluspoint;
+		System.out.println("총 : "+newPoint);
 		
 		
+		
+		
+		
+		//3. 비즈니스로직
+		BookService bookService = new BookService();
+		PointService pointService = new PointService();
+		//list에서 use-point랑 plus-point 받아서 다 더해서 최신 member-point 만듬
+		ArrayList<Point> list = pointService.pointList(memberNo);
+		int memberPoint = 0;
+		for(Point point : list) {
+			memberPoint += point.getPlusPoint();
+			memberPoint += point.getUsePoint();
+		};
 		int totalResult = bookService.updateBook(bookNo, memberNo, memberPoint);
-		System.out.println("bookCancle의 memberPoint작동???" +memberPoint);
+
+		
+		BookService bookService2 = new BookService();
+		int result = bookService2.updateMemberPoint(memberNo, newPoint);
+		if(result>0) {
+			System.out.println("업데이트성공");
+		}else {
+			System.out.println("업데이트 실패");
+		}
+		
+		
 		
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
