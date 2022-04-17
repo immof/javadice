@@ -47,31 +47,31 @@ table{
 			<table>
 				<tr class="tr-1">
 					<th>객실정보</th>
-					<td><%=roomName %>
+					<td><%=roomName %> </td>
 				</tr>
 				<tr class="tr-1">
 					<th>체크인</th>
-					<td><%=b.getCheckIn() %>
+					<td><%=b.getCheckIn()%> 15:00 </td>
 				</tr>
 				<tr class="tr-1">
 					<th>체크아웃</th>
-					<td><%=b.getCheckOut() %>
+					<td><%=b.getCheckOut() %> 11:00 </td>
 				</tr>
 				<tr class="tr-1">
 					<th>예약인원</th>
-					<td><%=b.getBookPeople() %>
+					<td><%=b.getBookPeople() %> </td>
 				</tr>
 				<tr class="tr-1">
 					<th>예약자명</th>
-					<td><%=b.getBookName() %>
+					<td><%=b.getBookName() %> </td>
 				</tr>
 				<tr class="tr-1">
 					<th>전화번호</th>
-					<td><%=b.getBookPhone() %>
+					<td><%=b.getBookPhone() %> </td>
 				</tr>
 				<tr class="tr-1">
 					<th>예약번호</th>
-					<td><%=b.getBookNo() %>
+					<td><%=b.getBookNo() %> </td>
 				</tr>
 			</table>
 		</div><br><br>
