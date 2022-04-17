@@ -290,7 +290,7 @@
 							<td class="td-1"><%=m.getMemberNick() %></td>
 						</tr>	
 						<tr class="tr-1">
-							<th class="th-1" style="padding-left:10px;">비밀번호</th>
+							<th class="th-1">비밀번호</th>
 							<td class="td-1">
 							<!-- 비밀번호 마스킹처리 -->
 							<% int pwCount = (m.getMemberPw()).length();%>
@@ -301,7 +301,7 @@
 							</td>
 						</tr>
 						<tr class="tr-1">
-							<th class="th-1" style="padding-left:10px;">휴대폰번호</th>
+							<th class="th-1">휴대폰번호</th>
 							<td class="td-1"><%=m.getMemberPhone() %></td>
 						</tr>
 					</table><!-- my_info_tbl 끝 -->
