@@ -214,11 +214,11 @@
 					</tr>
 					<tr class="comment-content">
 						<td>
-							<%=ac.getAskCommentContent() %>
-							<textarea name="askCommentContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea>
+							<p><%=ac.getAskCommentContent() %>
+							<textarea name="askCommentContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea></p>
 						</td>
 					</tr>
-					
+					<!--  
 						<tr class="comment-link">
 							<td colspan="2">
 							<%if(m != null) {%>
@@ -228,6 +228,7 @@
 								<%} %>
 								<a href="javascript:void(0)" class="recShow">답급 달기</a>
 							<%} //댓글 링크 모음 로그인 체크 %>
+							-->
 							</td>
 						</tr> 
 				</table>
