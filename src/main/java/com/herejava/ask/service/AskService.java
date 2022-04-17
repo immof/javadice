@@ -160,6 +160,13 @@ public class AskService {
 		return result;
 	}
 
+	public ArrayList<AskComment> getAskComment() {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		ArrayList<AskComment> askCo = dao.getAskComment(conn);
+		return askCo;
+	}
+
 	
 	
 	
