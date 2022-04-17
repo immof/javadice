@@ -239,6 +239,7 @@ html {
 }
 a {
 	font-size: 16px !important;
+	
 }
 .navi > li:hover > a {
   text-decoration:none !important;
