@@ -240,7 +240,7 @@
 				const title = "입력하신 아이디를 조회중입니다.";
 				const icon = "info";
 				const msgTime = 6500;
-				toastShow(title,icon, msgTime);
+				toastShow(title,icon,msgTime);
 				$.ajax({
 					url : "/sendMail.do",
 					data : {email:email},
