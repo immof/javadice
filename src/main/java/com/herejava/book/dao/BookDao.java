@@ -547,8 +547,8 @@ public class BookDao {
 		return list;
 	}
 	
-	//현재날짜 기준 예약상태(숙박완료로) 최신화 시켜주는 메소드
-	public int updateBookState(Connection conn) {
+	//헤더에서 매번 현재날짜 기준 예약상태(숙박완료로) 최신화 시켜주는 메소드 (Book테이블)
+	public int updateBookStateInBook(Connection conn) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query ="update book set book_state = 1 where book_state = 0 and (to_date(check_in) < SYSDATE)";
@@ -563,7 +563,7 @@ public class BookDao {
 		}
 		return result;
 	}
-	
+
 	// 멤버번호&요청페이지로 예약리스트 + 페이지번호 가져오는 메소드 (최신 예약 날짜 순으로 정렬)
 	public ArrayList<BookData> selectBookList(Connection conn, int memberNo, int start, int end) {
 		PreparedStatement pstmt = null;

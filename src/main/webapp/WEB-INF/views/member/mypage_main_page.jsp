@@ -354,13 +354,11 @@
 				<!-- 최근예약내역 끝 -->
 					</div><!-- my_book_wrap 끝 -->
 					<!-- my_info_tbl 시작 -->
-					<div class="mypage-content-title title1">내 정보</div>
+					<div class="mypage-content-title" style="display:flex; justify-content: space-between;"><h4>내 정보</h4><a style="color: #c87431; text-align: right; margin-left: 50px;"  href="/mypage_info.do">수정하기</a></div>
 					<table class="my_info_tbl">
 						<tr class="tr-1">
 							<th class="th-1" style="padding-left:10px;">이메일</th>
 							<td class="td-1"><%=m.getMemberId() %></td>
-							<td><pre>                                                                                                                                                  </pre></td>
-							<td><a class="p-1" href="/mypage_info.do">수정하기></a></td>
 						</tr>
 						<tr class="tr-1">
 							<th class="th-1" style="padding-left:10px;">닉네임</th>

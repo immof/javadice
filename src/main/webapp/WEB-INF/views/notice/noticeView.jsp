@@ -75,6 +75,22 @@
 		.tr-2>.nc_title{
 			text-align: left;
 		}
+		.btn-wrap{
+			margin-top: 25px;
+			margin-bottom: 100px;
+		}
+		#update-btn, #del-btn{
+			padding:0;
+			text-align:center;
+			vertical-align: middle;
+			margin: 0 auto;
+			float:right;
+			margin-left:15px;
+		
+		}
+		#del-btn{
+			background-color: #c87431;
+		}
 	</style>
 </head>
 <body>
@@ -105,8 +121,8 @@
 			<%if(m!= null && m.getMemberId().equals(n.getNoticeWriter())) {%>
 			<tr class="tr-1">
 				<th colspan=6>
-					<a class="btn bc1" href="/noticeUpdateFrm.do?noticeNo=<%=n.getNoticeNo() %>">수정</a>
 					<button class="btn bc1" onclick="noticeDelete('<%=n.getNoticeNo() %>');">삭제</button>
+					<a class="btn bc1" href="/noticeUpdateFrm.do?noticeNo=<%=n.getNoticeNo() %>">수정</a>
 				</th>
 			</tr>
 			<%} %>
@@ -122,6 +138,10 @@
 				</td>
 			</tr>
 		</table>
+		<div class="btn-wrap">
+			<a id="del-btn" href="/noticeDelete.do?noticeNo=<%=n.getNoticeNo() %>" class="btn bc1 bs1">삭제</a>
+			<a class="btn bc1 bs1" id="update-btn"  href="/noticeUpdateFrm.do?noticeNo=<%=n.getNoticeNo() %>">수정</a>
+		</div>
 		<span style="line-height:150%;">
 		<br>
 		</span>

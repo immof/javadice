@@ -1,4 +1,4 @@
-package com.herejava.ask.controller;
+package com.herejava.notice.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.herejava.ask.service.AskService;
-import com.herejava.ask.vo.AskViewData;
+import com.herejava.notice.service.NoticeService;
 import com.herejava.notice.vo.Notice;
 
 /**
- * Servlet implementation class AskViewServlet
+ * Servlet implementation class NoticeUpdateFrmServlet
  */
-@WebServlet(name = "AskView", urlPatterns = { "/askView.do" })
-public class AskViewServlet extends HttpServlet {
+@WebServlet(name = "NoticeUpdateFrm", urlPatterns = { "/noticeUpdateFrm.do" })
+public class NoticeUpdateFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AskViewServlet() {
+    public NoticeUpdateFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +32,14 @@ public class AskViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		int askNo = Integer.parseInt(request.getParameter("askNo"));
-		
-		AskService service = new AskService();
-		AskViewData avd = service.selectAskView(askNo);
-		//Notice n = service.selectOneAsk(askNo);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askView.jsp");
-		request.setAttribute("a", avd.getA());
-		request.setAttribute("commentList", avd.getCommentList());
-		request.setAttribute("reCommentList", avd.getReCommentList());
-	
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		NoticeService service = new NoticeService();
+		Notice n = service.selectOneNotice(noticeNo);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeUpdateFrm.jsp");
+		request.setAttribute("n", n);
 		view.forward(request, response);
-	}
+		
+	}	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

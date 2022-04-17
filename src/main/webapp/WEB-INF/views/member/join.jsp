@@ -155,7 +155,7 @@
 				$(".pwChkMsg").css("color","green");
 				checkArr[1] = true;
 			}else{
-				$(".pwChkMsg").text("1개 이상의 영어, 숫자, 특수기호를 사용해야 합니다.");
+				$(".pwChkMsg").text("6자~15자 영어, 숫자, 특수기호를 사용하세요.");
 				$(".pwChkMsg").css("color","red");
 				checkArr[1] = false;
 			};
@@ -237,16 +237,25 @@
 		function sendMail(){
 			if(checkArr[0]){
 				const email = $("[name=memberId]").val();
-				alert("아이디를 조회하는 중입니다.");
+				const title = "입력하신 아이디를 조회중입니다.";
+				const icon = "info";
+				const msgTime = 6500;
+				toastShow(title,icon,msgTime);
 				$.ajax({
 					url : "/sendMail.do",
 					data : {email:email},
 					type : "post",
 					success : function(data){
 						if(data == "null"){
-							alert("이미 가입된 이메일입니다.");
+							const title = "이미 가입된 이메일입니다.";
+							const icon = "warning";
+							const msgTime = 2500;
+							toastShow(title,icon,msgTime);
 						}else{
-							alert("이메일로 인증번호가 발송되었습니다. 메일함을 확인해주세요.");
+							const title = "입력하신 이메일로 인증번호가 발송되었습니다.";
+							const icon = "success";
+							const msgTime = 2500;
+							toastShow(title,icon,msgTime);
 							mailCode = data;
 							authTime();	
 						}
@@ -296,7 +305,10 @@
 								authChk++;
 							}
 						}else{
-							alert("인증코드를 확인하세요");
+							const title = "인증코드를 확인하세요";
+							const icon = "warning";
+							const msgTime = 2500;
+							toastShow(title,icon,msgTime);
 						}
 					}
 				});
@@ -313,7 +325,10 @@
 					type : "post",
 					success : function(data){
 						if(data == 1){
-							alert("해당 닉네임은 사용중입니다.")
+							const title = "해당 닉네임은 사용중 입니다.";
+							const icon = "warning";
+							const msgTime = 2500;
+							toastShow(title,icon,msgTime);
 						}else{
 							if(confirm("해당 닉네임은 사용가능합니다. 사용하시겠습니까?")){
 								$("[name=memberNick]").attr("readonly",true);
@@ -339,6 +354,26 @@
 				e.preventDefault();
 			}
 		})
+		
+		//토스트 알림 함수		
+		function toastShow(title,icon,msgTime){
+			const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: msgTime,
+		    timerProgressBar: true,
+		    didOpen: (toast) => {
+		     // toast.addEventListener('mouseenter', Swal.stopTimer)
+		      toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		 	})
+		
+		  Toast.fire({
+		    title: title,
+		    icon: icon
+		  })
+		}//토스트 끝
 	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
