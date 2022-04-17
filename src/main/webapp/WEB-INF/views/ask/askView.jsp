@@ -214,7 +214,7 @@
 					<tr class="comment-content">
 						<td>
 							<%=ac.getAskCommentContent() %>
-							<textarea name="askContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea>
+							<textarea name="askCommentContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea>
 						</td>
 					</tr>
 						<tr class="comment-link">
@@ -243,7 +243,7 @@
 									<span><%=acc.getAskCommentEnrollDate() %></span>
 								</p>
 								<p class="comment-content"><%=acc.getAskCommentContent() %></p>
-								<textarea name="ncContent" class="input-form" style="display:none;min-height:90px;"><%=acc.getAskCommentContent() %></textarea>
+								<textarea name="askcommentContent" class="input-form" style="display:none;min-height:90px;"><%=acc.getAskCommentContent() %></textarea>
 								<p class="comment-link">
 									<%if(m!=null) {%>
 										<%if(m.getMemberId().equals(acc.getAskCommentWriter())) {%>
@@ -280,7 +280,7 @@
 		</div>
 		
 	<script>
-		function noticeDelete(askNo) {
+		function askDelete(askNo) {
 			if(confirm("삭제하시겠습니까?")){
 				location.href="/askDelete.do?askNo="+askNo;
 			}
@@ -296,7 +296,7 @@
 			$(".inputRecommentBox").eq(idx).find("textarea").focus();
 		});
 		function modifyComment(obj,askCommentNo,askNo){
-			$(obj).parent().prev().show(); //textarea를 화면에 보여 줌
+			$(obj).parent().prev().prev().show(); //textarea를 화면에 보여 줌
 			$(obj).parent().prev().prev().hide(); //기존 댓글은 화면에서 숨김
 			//수정 -> 수정 완료
 			$(obj).text("수정완료");
