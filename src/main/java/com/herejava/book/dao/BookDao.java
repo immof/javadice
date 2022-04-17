@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import com.herejava.book.vo.Book;
@@ -675,7 +676,11 @@ public class BookDao {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bpay.getRoomNo());
-			pstmt.setInt(2, bpay.getMemberNo());
+			if(bpay.getMemberNo()==0) {
+				pstmt.setNull(2, Types.INTEGER);
+			}else {
+				pstmt.setInt(2, bpay.getMemberNo());
+			}
 			pstmt.setInt(3, bpay.getBookPeople());
 			pstmt.setString(4, bpay.getBookName());
 			pstmt.setString(5, bpay.getBookPhone());
@@ -694,7 +699,7 @@ public class BookDao {
 	public int insertPay(Connection conn, BookPay bpay, BookPayData bpd) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query ="insert into pay VALUES(pay_SEQ.NEXTVAL,?,?,?,0,?,?,?,?,?,?)";
+		String query ="insert into pay values(pay_seq.nextval,?,?,?,0,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bpd.getBookNo());
@@ -704,10 +709,12 @@ public class BookDao {
 			pstmt.setInt(5, bpay.getPayAmount());
 			pstmt.setInt(6, bpay.getMinusPoint());
 			pstmt.setInt(7, bpay.getPayStayDay());
-			pstmt.setInt(8, bpay.getMemberNo());
+			if(bpay.getMemberNo()==0) {	//비회원이면
+				pstmt.setNull(8, Types.INTEGER);
+			}else {
+				pstmt.setInt(8, bpay.getMemberNo());
+			}
 			pstmt.setInt(9, bpay.getPayRoomPrice());
-			
-			
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -721,32 +728,90 @@ public class BookDao {
 
 	public BookPayData searchBookNo(Connection conn, BookPay bpay) {
 		//결제후 예약번호(시퀀스)와 예약날짜 데이터 받아오기
-				PreparedStatement pstmt = null;
-				ResultSet rset = null;
-				BookPayData bpd = new BookPayData();
-				String query = "select book_no, book_day from book where room_no=? and member_no =? and book_people = ? and book_name = ? and book_phone = ? and check_in = ? and check_out=?  ;";
-				try {
-					pstmt = conn.prepareStatement(query);
-					pstmt.setInt(1, bpay.getRoomNo());
-					pstmt.setInt(2, bpay.getMemberNo());
-					pstmt.setInt(3, bpay.getBookPeople());
-					pstmt.setString(4, bpay.getBookName());
-					pstmt.setString(5, bpay.getBookPhone());
-					pstmt.setString(6, bpay.getCheckIn());
-					pstmt.setString(7, bpay.getCheckOut());
-					rset = pstmt.executeQuery();
-					if (rset.next()) {
-						bpd.setBookNo(rset.getLong("bookNo"));
-						bpd.setBookDay(rset.getString("bookDay"));
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					JDBCTemplate.close(rset);
-					JDBCTemplate.close(pstmt);
-				}
-				return bpd;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		BookPayData bpd = new BookPayData();
+		String query = "select book_no, book_day from book where room_no=? and book_people = ? "
+				+ "and book_name = ? and book_phone = ? and check_in = ? and check_out=? ";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bpay.getRoomNo());
+			pstmt.setInt(2, bpay.getBookPeople());
+			pstmt.setString(3, bpay.getBookName());
+			pstmt.setString(4, bpay.getBookPhone());
+			pstmt.setString(5, bpay.getCheckIn());
+			pstmt.setString(6, bpay.getCheckOut());
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				System.out.println("bookNo서치동작");
+				bpd.setBookNo(rset.getLong("book_no"));
+				bpd.setBookDay(rset.getString("book_day"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return bpd;
+	}
+
+	public long searchPayNo(Connection conn, BookPayData bpd) {
+		//결제후 결제번호 데이터 받아오기
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		long payNo = 0;
+		String query = "select pay_no from pay where book_no =? ";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bpd.getBookNo());
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				payNo = rset.getLong("pay_No");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return payNo;
+	}
+
+	public Book selectOneBook(Connection conn, Long bookNo, String bookName) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Book b = null;
+		String query = "select * from book where book_no=? and book_name=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setLong(1, bookNo);
+			pstmt.setString(2, bookName);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				b = new Book();
+				b.setBookNo(rset.getLong("book_no"));
+				b.setRoomNo(rset.getInt("room_no"));
+				b.setMemberNo(rset.getInt("member_no"));
+				b.setBookPeople(rset.getInt("book_people"));
+				b.setBookName(rset.getString("book_name"));
+				b.setBookPhone(rset.getString("book_phone"));
+				b.setBookDay(rset.getString("book_day"));
+				b.setBookState(rset.getInt("book_state"));
+				b.setCheckIn(rset.getString("check_in"));
+				b.setCheckOut(rset.getString("check_out"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return b;
 	}
 
 }

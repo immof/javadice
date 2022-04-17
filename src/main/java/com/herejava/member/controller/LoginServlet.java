@@ -53,6 +53,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("m", m);
 		}else {
 			request.setAttribute("title", "로그인 실패");
+			request.setAttribute("msg", "아이디 또는 비밀번호를 확인하세요.");
 			request.setAttribute("icon", "error");
 		}
 		request.setAttribute("loc", "/");

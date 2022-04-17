@@ -342,20 +342,28 @@ public class MemberDao {
 	}
   
  	public int updateMemberPoint(Connection conn, BookPay bpay, int newPoint) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = "update member set member_point = ? where member_no = ?";
-		try {
+ 		PreparedStatement pstmt = null;
+ 		int result = 0;
+ 		System.out.println("dao도착");
+ 		System.out.println("dao도착하고 넘버:"+bpay.getMemberNo());
+ 		System.out.println("dao도착하고 포인트:"+newPoint);
+ 		System.out.println("---------------그다음에 query---------");
+ 		String query = "update member set member_point = ? where member_no = ?";
+ 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, newPoint);
 			pstmt.setInt(2, bpay.getMemberNo());
 			result = pstmt.executeUpdate();
+			System.out.println("newPoint- "+newPoint);
+			System.out.println("bpay.getMemberNo()- "+bpay.getMemberNo());
+			System.out.println("result- "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		}finally {
 			JDBCTemplate.close(pstmt);
 		}
+ 		System.out.println("다오에서 result출력?>"+result);
 		return result;
 	} 
   

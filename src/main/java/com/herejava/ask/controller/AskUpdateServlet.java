@@ -103,7 +103,7 @@ public class AskUpdateServlet extends HttpServlet {
 			request.setAttribute("msg", "공지사항 등록 중 문제가 발생했습니다.");
 			request.setAttribute("icon", "error");
 		}
-		request.setAttribute("loc", "/askList.do?askNo="+a.getAskNo());
+		request.setAttribute("loc", "askList.do?reqPage=1");
 		view.forward(request, response);
 	}
 

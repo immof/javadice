@@ -142,4 +142,37 @@ public class PromotionDao {
 		return result;
 	}
 
+	public int updatePromotion(Connection conn, Promotion p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update promotion set promotion_title =?,promotion_sub_title =?, promotion_content =?, start_date=?, end_date=?, filepath=? where promotion_no=?";
+		/*
+		System.out.println(p.getPromotionNo());
+		System.out.println(p.getPromotionTitle());
+		System.out.println(p.getPromotionSubTitle());
+		System.out.println(p.getPromotionContent());
+		System.out.println(p.getStartDate());
+		System.out.println(p.getEndDate());
+		System.out.println(p.getFilepath());
+		*/
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p.getPromotionTitle());
+			pstmt.setString(2, p.getPromotionSubTitle());
+			pstmt.setString(3, p.getPromotionContent());
+			pstmt.setString(4, p.getStartDate());
+			pstmt.setString(5, p.getEndDate());
+			pstmt.setString(6, p.getFilepath());
+			pstmt.setInt(7, p.getPromotionNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			JDBCTemplate.close(pstmt);
+		}
+		//System.out.println("다오"+result);
+		return result;
+	}
+
 }
