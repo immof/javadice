@@ -1,8 +1,8 @@
 package com.herejava.ask.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.ask.service.AskService;
-import com.herejava.ask.vo.AskViewData;
-import com.herejava.notice.vo.Notice;
 
 /**
- * Servlet implementation class AskViewServlet
+ * Servlet implementation class DeleteAskCommentServlet
  */
-@WebServlet(name = "AskView", urlPatterns = { "/askView.do" })
-public class AskViewServlet extends HttpServlet {
+@WebServlet(name = "DeleteAskComment", urlPatterns = { "/deleteAskComment.do" })
+public class DeleteAskCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AskViewServlet() {
+    public DeleteAskCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,20 +31,18 @@ public class AskViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
 		int askNo = Integer.parseInt(request.getParameter("askNo"));
-		
+		int	askCommentNo= Integer.parseInt(request.getParameter("askCommentNo"));
 		AskService service = new AskService();
-		AskViewData avd = service.selectAskView(askNo);
-		//Notice n = service.selectOneAsk(askNo);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askView.jsp");
-		request.setAttribute("a", avd.getA());
-		request.setAttribute("commentList", avd.getCommentList());
-		request.setAttribute("reCommentList", avd.getReCommentList());
-		request.setAttribute("askNo", askNo);
-		view.forward(request, response);
-	}
+		int result = service.delComment(askNo, askCommentNo);
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			out.print(1);
+		}else {
+			out.print(0);
+		}
+	
+	}//
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
