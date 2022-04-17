@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.herejava.book.vo.BookData"%>
+<%@page import="com.herejava.pay.vo.Pay"%>
     <%
     	BookData bd = (BookData)request.getAttribute("bd");  
+    	Pay pay = (Pay)request.getAttribute("pay");
     %>
 <!DOCTYPE html>
 <html>
@@ -93,10 +95,6 @@
 					<h3 class="belt"></h3>
 					<p class="p-1">예약을 취소하시겠습니까?</p>
 					<tr class="tr-1">
-					<!-- 
-								<td><img class="img-1" src="/img/<%=bd.getFilePath()%>"></td>
-							</tr>
-					 -->
 					
 					<div class="info_wrap">
 						<table class="my_info_tbl">
@@ -125,7 +123,7 @@
 							<tr class="tr-1 tr-0">
 								<!-- #안에 pay.getPayAmount() 넣기 -->
 								<th class="th-1 pay-th" style="color:rgb(221, 78, 34)">총 취소금액</th>
-								<td class="td-1 pay-td">#</td><td class="td-1 pay-td">원</td>
+								<td class="td-1 pay-td"><%=pay.getPayAmount() %></td><td class="td-1 pay-td">원</td>
 							</tr>
 							<!-- 결제정보 끝 -->
 						</table>
