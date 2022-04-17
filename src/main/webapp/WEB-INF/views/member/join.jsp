@@ -356,7 +356,7 @@
 		})
 		
 		//토스트 알림 함수		
-		function toastShow(title, icon, msgTime){
+		function toastShow(title,icon,msgTime){
 			const Toast = Swal.mixin({
 		    toast: true,
 		    position: 'center-center',
