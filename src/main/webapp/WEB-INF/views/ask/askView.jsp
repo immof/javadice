@@ -146,11 +146,12 @@
 		<table class="tbl" id="noticeView" style="line-height:140%">
 			<tr class="tr-1">
 				<th class="td-3 file">첨부파일</th>
-				<td>
+				<td colspan="5">
 					<%if(a.getFilepath1() != null) {%>
 						<a href="/fileDown.do?askNo=<%=a.getFilepath1() %>"><%=a.getFilepath1() %></a>
 					<%} %>
 				</td>
+				<!--
 				<td colspan="5">
 					<%if(a.getFilepath2() != null) {%>
 						<a href="/fileDown.do?noticeNo=<%=a.getFilepath2() %>"><%=a.getFilepath2() %></a>
@@ -160,7 +161,7 @@
 					<%if(a.getFilepath3() != null) {%>
 						<a href="/fileDown.do?noticeNo=<%=a.getFilepath3() %>"><%=a.getFilepath3() %></a>
 					<%} %>
-				</td>
+				</td>  -->
 			</tr>
 		</table>
 		<%if(m != null && m.getMemberNo() == a.getMemberNo()) {%>
@@ -321,11 +322,11 @@
 		}
 		function modifyComplete(obj,askCommentNo,askNo){
 			//form 태그 생성
-			const form = $("<form action='/noticeCommentUpdate.do' method='post'></form>");
+			const form = $("<form action='/askCommentUpdate.do' method='post'></form>");
 			//form 태그 자식으로 input 태그 추가(ncNo)
-			form.append($("<input type='text' name='ncNo' value='"+ncNo+"'>"));
+			form.append($("<input type='text' name='askCommentNo' value='"+askNo+"'>"));
 			//form태그 자식으로 input태그 추가(noticeNo)
-			form.append($("<input type='text' name='noticeNo' value='"+askNo+"'>"));
+			form.append($("<input type='text' name=askNo' value='"+askNo+"'>"));
 			//form태그 자식으로 수정한 댓글 내용이 들어있는 textarea를 추가
 			form.append($(obj).parent().prev());
 			//생성된 form태그를 html 본문으로 삽입
@@ -335,14 +336,10 @@
 		}
 		function deleteComment(obj,ncNo,noticeNo){
 			if(confirm("댓글을 삭제하시겠습니까?")){
-				location.href="/deleteComment.do?ncNo="+ncNo+"&noticeNo="+noticeNo;
+				location.href="/deleteAsk.do?ncNo="+askCommentNo+"&askNo="+askNo;
 			}
 		}
 		
-		
-			function home(){
-				history.back();
-			}
 		</script>
 		</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

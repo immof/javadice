@@ -86,11 +86,13 @@
 							<%} %>
 							</td>
 						</tr>
-						<tr class="tr-1">
+						
+						<!-- <tr class="tr-1">
 							<th class="td-3"><span class="material-icons">file_download</span></th>
-							<td class="file-box"><%if(a.getFilepath2() !=null) {%>
+							<td class="file-box">
+							<%if(a.getFilepath2() !=null) {%>
 								<span class="delFile"><%=a.getFilepath2() %></span>
-								<button type="button" class="btn bc1 bs7 delFile" id="fileDelBtn">삭제</button>
+								<button type="button" class="btn bc1 bs7 delFile" id="fileDelBtn2">삭제</button>
 								<input type="file" name="file2" style="display:none;">
 								<input type="hidden" name="oldFilepath2" value="<%=a.getFilepath2() %>">
 							<%} else { %>
@@ -102,14 +104,14 @@
 							 <td class="file-box">
 							 	<%if(a.getFilepath3() !=null) {%>
 								<span class="delFile"><%=a.getFilepath3() %></span>
-								<button type="button" class="btn bc1 bs7 delFile" id="fileDelBtn">삭제</button>
+								<button type="button" class="btn bc1 bs7 delFile" id="fileDelBtn3">삭제</button>
 								<input type="file" name="file3" style="display:none;">
 								<input type="hidden" name="oldFilepath3" value="<%=a.getFilepath3() %>">
 							<%} else { %>
-								<input type="file" name="file1">
+								<input type="file" name="file3">
 							<%} %>
 							 </td>
-						</tr>
+						</tr>  -->
 						<tr class="button">
 							<td colspan="6">
 							<button type="submit" class="btn bc1 bs1">수정완료</button>
