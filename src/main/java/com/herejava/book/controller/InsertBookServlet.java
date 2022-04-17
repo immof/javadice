@@ -55,23 +55,6 @@ public class InsertBookServlet extends HttpServlet {
 		bpay.setPayStayDay(Integer.parseInt(request.getParameter("payStayDay")));
 		bpay.setRoomNo(Integer.parseInt(request.getParameter("roomNo")));
 		bpay.setRoomName(request.getParameter("roomName"));
-		
-		
-		System.out.println("BookName : "+bpay.getBookName());
-		System.out.println("BookPeople : "+bpay.getBookPeople());
-		System.out.println("BookPhone : "+bpay.getBookPhone());
-		System.out.println("CheckIn : "+bpay.getCheckIn());
-		System.out.println("CheckOut : "+bpay.getCheckOut());
-		System.out.println("MemberNo : "+bpay.getMemberNo());
-		System.out.println("MemberPoint : "+bpay.getMemberPoint());
-		System.out.println("MinusPoint : "+bpay.getMinusPoint());
-		System.out.println("PlusPoint : "+bpay.getPlusPoint());
-		System.out.println("PayAmount : "+bpay.getPayAmount());
-		System.out.println("PayRoomPrice : "+bpay.getPayRoomPrice());
-		System.out.println("PayStayDay : "+bpay.getPayStayDay());
-		System.out.println("RoomNo : "+bpay.getRoomNo());
-		System.out.println("RoomName : "+bpay.getRoomName());
-		
 		int memberNo = bpay.getMemberNo();
 		//3.비즈니스로직
 		
@@ -80,14 +63,11 @@ public class InsertBookServlet extends HttpServlet {
 		int resultBook = serviceBook.insertBook(bpay);
 		//생성된 예약번호,예약날짜 가져오기
 		BookPayData bpd = serviceBook.searchBookNo(bpay);
-		System.out.println("bookNo : " +bpd.getBookNo());
-		System.out.println("bookDay : " +bpd.getBookDay());
 		
 		//3-2. 결제테이블 추가
 		int resultPay = serviceBook.insertPay(bpay,bpd);
 		//생성된 결제번호 가져오기
 		long payNo = serviceBook.searchPayNo(bpd);
-		System.out.println("payNo : "+payNo);
 		
 		//3-4. 적립금테이블 추가 (회원시)
 		PointService servicePoint = new PointService();
@@ -107,22 +87,7 @@ public class InsertBookServlet extends HttpServlet {
 			resultMember = serviceMember.updateMemberPoint(bpay);
 		}
 		
-		System.out.println("resultBook : " +resultBook);
-		System.out.println("resultPay : " +resultPay);
-		System.out.println("resultPoint : " +resultPoint);
-		System.out.println("resultMember : " +resultMember);
 		//조회결과 m을 js객체타입으로 변환
-	
-		/*
-		 * JSONObject result = null;	//HashMap<String,Object>와 같음
-		 
-		result = new JSONObject();
-		result.put("resultBook", resultBook);
-		result.put("resultPay", resultPay);
-		result.put("resultMember", resultMember);
-		result.put("resultPoint", resultPoint);
-		
-		*/
 		
 		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/payComplete.jsp");

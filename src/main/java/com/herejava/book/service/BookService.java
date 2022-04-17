@@ -262,10 +262,8 @@ public class BookService {
 				 	+ result6 + result7 + result8;
 		if(totalResult == 8) {
 			JDBCTemplate.commit(conn);
-			System.out.println("메소드 8개 모두 성공");
 		}else {
 			JDBCTemplate.rollback(conn);
-			System.out.println("메소드 실패 -> 작동한 메소드 갯수(BookServlet) : "+totalResult);
 		}
 		JDBCTemplate.close(conn);
 		return totalResult;
