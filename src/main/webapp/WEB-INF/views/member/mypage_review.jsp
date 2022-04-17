@@ -107,7 +107,9 @@
 			<div class="mypage-content">
 				<div class="mypage-content-title" id="review-page-title">
 					<h4>나의 리뷰</h4>
+					<%if(reviewList.size() > 3){ %>	
 					<button class="view-change-btn" id="view-change-btn"><span>전체보기 </span><i class="fa-solid fa-caret-down"></i></button>
+					<%} %>	
 				</div>
 				<div class="review-all-wrap rv-wrap">
 			<%if(reviewList.size() == 0){ %>
