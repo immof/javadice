@@ -112,6 +112,34 @@ public class NoticeService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int updateNotice(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		NoticeDao dao = new NoticeDao();
+		int result = dao.updateNotice(conn,n);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+		
+	}
+
+	public int noticeDelete(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		NoticeDao dao = new NoticeDao();
+		int result= dao.noticeDelete(conn, noticeNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	
+	}
 	
 	
 	

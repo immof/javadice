@@ -15,6 +15,7 @@ import com.herejava.book.vo.BookPageData;
 import com.herejava.book.vo.BookPay;
 import com.herejava.book.vo.BookPayData;
 import com.herejava.member.vo.MemberPageData;
+import com.herejava.point.dao.PointDao;
 import com.herejava.room.dao.RoomDao;
 import com.herejava.room.vo.Room;
 
@@ -359,12 +360,12 @@ public class BookService {
 		return diffDays;
 	}
 	
-	//현재날짜 기준 예약상태(숙박완료로) 최신화 시켜주는 메소드
-	public int updateBookState() {
+	//현재날짜 기준 예약상태(숙박완료로) 최신화 시켜주는 메소드 -Book테이블
+	public int updateBookStateInBook() {
 		Connection conn = JDBCTemplate.getConnection();
 		BookDao dao = new BookDao();
-		int result = dao.updateBookState(conn);
-		JDBCTemplate.close(conn);
+		//book 예약상태 변경
+		int result = dao.updateBookStateInBook(conn);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {
