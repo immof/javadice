@@ -126,7 +126,7 @@
 		<Br>
 		<br>
 		<div class="page1-title">문의사항
-			<button class="btn bc1 home" onclick="home();">목록으로</button> 
+			<button class="btn bc1 home" onclick="location.href ='askList.do?reqPage=1'">목록으로</button> 
 		</div>
 		<br>
 		<br>
@@ -341,7 +341,9 @@
 				location.href="/deleteAsk.do?ncNo="+askCommentNo+"&askNo="+askNo;
 			}
 		}
-		
+		function home(){
+			history.back();
+		}
 		</script>
 		</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
