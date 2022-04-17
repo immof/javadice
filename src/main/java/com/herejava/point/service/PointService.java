@@ -34,5 +34,10 @@ public class PointService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public Point getPayPoint(long bookNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		PointDao dao = new PointDao();
+	}
 	
 }

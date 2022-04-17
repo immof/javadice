@@ -10,8 +10,7 @@
 <style>
 		 .mypage-header{
           display: flex;
-          height: 150px;
-          background-color: #ac9e89;
+          height: 30px;
         }
         .mypage-header-space{
           flex-grow: 2;
@@ -85,10 +84,6 @@
 </head>
         <header>
           <div class="mypage-header">
-            <div class="mypage-header-space"></div>
-            <div class="mypage-header-profile">
-              <img src="/profile_img/<%=loginM.getFilepath() %>" alt="" style="width: 50px; height: 50px;">
-              <span class="mypage-header-nick"><%=loginM.getMemberNick() %></span>
           </div>
         </header>
         <div class="left-menu">
