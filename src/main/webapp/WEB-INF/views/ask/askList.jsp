@@ -1,3 +1,4 @@
+<%@page import="com.herejava.ask.vo.AskComment"%>
 <%@page import="com.herejava.ask.vo.Ask"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,8 @@
     <%
     	ArrayList<Ask> list = (ArrayList<Ask>)request.getAttribute("list");
     	String pageNavi = (String)request.getAttribute("pageNavi");
+    	ArrayList<AskComment> askCo = (ArrayList<AskComment>)request.getAttribute("askCo");
+    	boolean done = false;
     %>
 <!DOCTYPE html>
 <html>
@@ -43,19 +46,17 @@
 		width:9%;
 	}
 	.notice-tbl tr>th:nth-child(2) {
-		width:45%;
-	}
-	.notice-tbl tr>th:nth-child(2) {
-		text-align: center;
+		width:6%;
 	}
 	.notice-tbl tr>th:nth-child(3) {
-		width:15%;
+		width:52%;
 	}
 	.notice-tbl tr>th:nth-child(4) {
-		width:20%;
+	}
+	.notice-tbl tr>th:nth-child(5) {
+		width:15%;
 	}
 	.notice-tbl tr>th:last-child {
-		width:10%;
 	}
 	#pageNavi{
 			margin:10px;
@@ -71,7 +72,12 @@
 		#noti-title{
 		text-align: left;
 	}
-	
+	.wait-answer{
+		background-color:#a7a7a7; color:#fff; font-size:13px; width: 30px; display:block;
+	}
+	.done-answer{
+		background-color:#ac9e89; color:#fff; font-size:13px; width: 30px; display:block;
+	}
 </style>
 <meta charset="UTF-8">
 <title>:: 문의 사항 ::</title>
@@ -91,17 +97,36 @@
 		</div>
 			<table class="tbl tr-1 notice-tbl">
 					<tr class="tr-2">
-						<th>No.</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회</th>
+						<th>No.</th>
+						<th style="padding-left:5px; padding-right:5px;"></th>
+						<th>제목</th>
+						<th style="padding-left:5px; padding-right:5px;">작성자</th>
+						<th>등록일</th>
 					</tr>	
 						<%for(Ask a : list) { %>
+							<%
+							done = false;
+								for(AskComment aco : askCo){
+									if(a.getAskNo() == aco.getAskRef()){
+										done = true;
+										break;
+									}
+								}
+							%>
 					<tr class="tr-1">
 							<td><%=a.getAskNo() %></td>
-							<td id="noti-title"><a href="/askView.do?askNo=<%=a.getAskNo() %>">
-								<%=a.getAskTitle() %>							
-							</a>
-							<td><%=a.getMemberNick() %>
+							<%if(done){ %>
+							<td style="padding-left:5px; padding-right:5px;"><span class="done-answer"> 완료 </span></td>
+							<%}else{ %>
+							<td style="padding-left:5px; padding-right:5px;"><span class="wait-answer"> 대기 </span></td>
+							<%} %>
+							<td id="noti-title">
+								<a href="/askView.do?askNo=<%=a.getAskNo() %>">
+									<%=a.getAskTitle() %>							
+								</a>
+							</td>
+							<td style="padding-left:5px; padding-right:5px;"><%=a.getMemberNick() %></td>
 							<td><%=a.getAskEnrollDate() %></td>
-							<td><%=a.getAskReadCount() %></td>	
 					</tr>					
 						<%} %>
 					

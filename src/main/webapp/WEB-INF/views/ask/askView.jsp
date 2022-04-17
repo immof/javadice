@@ -110,7 +110,8 @@
 		}
 		.inputRecomentBox>form>ul>li:last-child{
 			width:10%;
-		}s
+		}
+		
 		
 		
 	</style>
@@ -207,18 +208,22 @@
 		
 		<div class="commentBox">
 			<%for(AskComment ac : commentList) {%>
-				<table class="ask-comment">
+				<table class="ask-comment" style="width:100%;">
 					<tr class="comment-info">
-						<td><span class="material-icons">account_circle </span><%=ac.getAskCommentWriter() %> </td>
+						<td><i class="fa-solid fa-square-h"></i> <span><%=ac.getAskCommentWriter() %> </span></td>
 						<td><%=ac.getAskCommentEnrollDate() %></td>
 					</tr>
 					<tr class="comment-content">
-						<td>
+						<td colspan="2">
 							<p><%=ac.getAskCommentContent() %>
 							<textarea name="askCommentContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea></p>
 						</td>
 					</tr>
-					<!--  
+					
+					
+					
+					
+					
 						<tr class="comment-link">
 							<td colspan="2">
 							<%if(m != null) {%>
@@ -226,9 +231,16 @@
 									<a href="javascript:void(0)" onclick="modifyComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">수정</a>
 									<a href="javascript:void(0)" onclick="deleteComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">삭제</a>
 								<%} %>
-								<a href="javascript:void(0)" class="recShow">답급 달기</a>
 							<%} //댓글 링크 모음 로그인 체크 %>
-							-->
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							</td>
 						</tr> 
 				</table>

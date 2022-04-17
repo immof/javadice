@@ -1,6 +1,7 @@
 package com.herejava.ask.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.herejava.ask.service.AskService;
+import com.herejava.ask.vo.Ask;
+import com.herejava.ask.vo.AskComment;
 import com.herejava.ask.vo.AskPageData;
 import com.herejava.book.vo.Book;
 import com.herejava.member.vo.Member;
@@ -39,9 +42,14 @@ public class AskListServlet extends HttpServlet {
 		AskService service = new AskService();
 		AskPageData apd = service.selecetAllAsk(reqPage);
 		
+		AskService coService = new AskService();
+		ArrayList<AskComment> askCo = coService.getAskComment();
+		
+		
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/ask/askList.jsp");
 		request.setAttribute("list", apd.getList());
 		request.setAttribute("pageNavi", apd.getPageNavi());
+		request.setAttribute("askCo", askCo);
 		view.forward(request, response);
 	}
 
