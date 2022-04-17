@@ -118,7 +118,7 @@ h3 {
 		</div>
 		<div class="button">
 			<button class="btn bc1" type="submit">수정</button>
-			<button class="btn bc2">취소</button>
+			<button class="btn bc2" type="button" onclick="location.href='/promotionList.do'">취소</button>
 		</div>
 	</form>
 	<script>
