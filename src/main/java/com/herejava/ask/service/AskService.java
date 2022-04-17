@@ -133,20 +133,6 @@ public class AskService {
 	}
 
 
-	public int UpdateAsk(Ask a) {
-		Connection conn = JDBCTemplate.getConnection();
-		AskDao dao = new AskDao();
-		int result = dao.UpdateAsk(conn, a);
-
-		if(result>0) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
-		}
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
 	public int insertAskComment(AskComment ac) {
 		Connection conn = JDBCTemplate.getConnection();
 		AskDao dao = new AskDao();
@@ -159,7 +145,22 @@ public class AskService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+		
+		
+	public int UpdateAsk(Ask a) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.UpdateAsk(conn, a);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
+	
 	
 	
 
