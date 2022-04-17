@@ -68,6 +68,9 @@
 		line-height: 10px;
 		border-radius: 5px;
 	}
+		#noti-title{
+		text-align: left;
+	}
 	
 </style>
 <meta charset="UTF-8">
@@ -93,7 +96,7 @@
 						<%for(Ask a : list) { %>
 					<tr class="tr-1">
 							<td><%=a.getAskNo() %></td>
-							<td><a href="/askView.do?askNo=<%=a.getAskNo() %>">
+							<td id="noti-title"><a href="/askView.do?askNo=<%=a.getAskNo() %>">
 								<%=a.getAskTitle() %>							
 							</a>
 							<td><%=a.getMemberNick() %>

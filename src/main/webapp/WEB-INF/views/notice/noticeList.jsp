@@ -68,6 +68,9 @@
 		line-height: 10px;
 		border-radius: 5px;
 	}
+	#noti-title{
+		text-align: left;
+	}
 	
 </style>
 <meta charset="UTF-8">
@@ -94,8 +97,8 @@
 					<%for(Notice n : list){ %>
 				<tr class="tr-1">
 					<td><%=n.getNoticeNo() %></td>
-					<td><a href="/noticeView.do?noticeNo=<%=n.getNoticeNo() %>">
-							<%=n.getNoticeTitle() %>
+					<td id="noti-title"><a href="/noticeView.do?noticeNo=<%=n.getNoticeNo() %>">
+							<span><%=n.getNoticeTitle() %></span>
 						</a>
 					</td>
 					<td><%=n.getNoticeWriter() %></td>
