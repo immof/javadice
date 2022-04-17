@@ -357,29 +357,8 @@ public class BookDao {
 		}
 		return result;
 	}	
-	
-	// 3. 예약취소시 멤버번호로 member테이블 member_point 0으로 update하는 메소드 - 미완성
-	public int memberPointUpdateInMember(Connection conn, int memberPoint, int memberNo) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = "update Member set member_point=? where member_no=?";
-					
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, memberPoint);
-			pstmt.setInt(2, memberNo);
-			result = pstmt.executeUpdate();
-			System.out.println("memberPointUpdateInMember 메소드 : "+result);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
-	}		
 		
-	// 4. 예약취소시 예약번호로 pay테이블 pay_amount 0으로 update하는 메소드
+	// 3. 예약취소시 예약번호로 pay테이블 pay_amount 0으로 update하는 메소드
 	public int payAmountUpdateInPay(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -399,7 +378,7 @@ public class BookDao {
 		return result;
 	}				
 	
-	// 5. 예약취소시 예약번호로 point테이블 pay_amount 0으로 update하는 메소드
+	// 4. 예약취소시 예약번호로 point테이블 pay_amount 0으로 update하는 메소드
 	public int payAmountUpdateInPoint(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -419,7 +398,7 @@ public class BookDao {
 		return result;
 	}
 	
-	// 6. 예약취소시 예약번호로 Pay테이블 use_point 0으로 update하는 메소드
+	// 5. 예약취소시 예약번호로 Pay테이블 use_point 0으로 update하는 메소드
 	public int usePointUpdateInPay(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -439,7 +418,7 @@ public class BookDao {
 		return result;
 	}
 	
-	// 7. 예약취소시 예약번호로 Point테이블 use_point 0으로 update하는 메소드
+	// 6. 예약취소시 예약번호로 Point테이블 use_point 0으로 update하는 메소드
 	public int usePointUpdateInPoint(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -459,7 +438,7 @@ public class BookDao {
 		return result;
 	}	
 		
-	// 8. 예약취소시 예약번호로 Point테이블 plus_point update하는 메소드
+	// 7. 예약취소시 예약번호로 Point테이블 plus_point update하는 메소드
 	public int plusPointUpdateInPay(Connection conn, long bookNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -477,7 +456,30 @@ public class BookDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
-	}	
+	}
+	
+
+	// 8. 예약취소시 멤버번호로 member테이블 member_point 0으로 update하는 메소드 - 미완성
+	public int memberPointUpdateInMember(Connection conn, int memberPoint, int memberNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update Member set member_point=? where member_no=?";
+					
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberPoint);
+			pstmt.setInt(2, memberNo);
+			result = pstmt.executeUpdate();
+			System.out.println("memberPointUpdateInMember 메소드 : "+result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}		
+	
 		
 	// 예약번호로 예약(방사진/방이름/체크인/체크아웃/예약상태/이용자숫자/예약자명/예약자전화번호) 1개 가져오는 메소드
 	public BookData getBook(Connection conn, long bookNo) {

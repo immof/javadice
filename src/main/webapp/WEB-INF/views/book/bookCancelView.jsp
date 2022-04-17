@@ -83,6 +83,11 @@
 	.btn_tbl>tr>td{
 		margin: 20px 0px;
 	}
+	.pay-1{
+		font-weight: bold;
+		color: rgb(221, 78, 34);
+		font-size: 18px;
+	}	
 </style>
 </head>
 <body>
@@ -121,7 +126,6 @@
 							</tr>
 							<!-- 결제정보 시작 -->
 							<tr class="tr-1 tr-0">
-								<!-- #안에 pay.getPayAmount() 넣기 -->
 								<th class="th-1 pay-th" style="color:rgb(221, 78, 34)">총 취소금액</th>
 								<td class="td-1 pay-td"><%=pay.getPayAmount() %></td><td class="td-1 pay-td">원</td>
 							</tr>
