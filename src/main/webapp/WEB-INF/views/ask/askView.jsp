@@ -218,6 +218,7 @@
 							<textarea name="askCommentContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea>
 						</td>
 					</tr>
+					
 						<tr class="comment-link">
 							<td colspan="2">
 							<%if(m != null) {%>
@@ -228,9 +229,9 @@
 								<a href="javascript:void(0)" class="recShow">답급 달기</a>
 							<%} //댓글 링크 모음 로그인 체크 %>
 							</td>
-						</tr>
+						</tr> 
 				</table>
-			
+			<!-- 
 				<%for(AskComment acc : reCommentList){ %>
 					<%if(acc.getAskRef() == ac.getAskCommentNo()) {%>
 						<ul class="posting-comment reply">
@@ -276,7 +277,7 @@
 						</ul>
 					</form>
 					</div>
-				<%} //대댓글 입력 form 작성 조건%> 
+				<%} //대댓글 입력 form 작성 조건%>  -->
 			<%} //댓글 출력용 for문 종료 %>
 		</div>
 		
