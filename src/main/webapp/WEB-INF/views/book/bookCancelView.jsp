@@ -123,6 +123,7 @@
 							</tr>
 							<!-- 결제정보 시작 -->
 							<tr class="tr-1 tr-0">
+								<!-- #안에 pay.getPayAmount() 넣기 -->
 								<th class="th-1 pay-th" style="color:rgb(221, 78, 34)">총 취소금액</th>
 								<td class="td-1 pay-td">#</td><td class="td-1 pay-td">원</td>
 							</tr>
@@ -172,7 +173,7 @@
 									영업일 2-3일 내로 처리될 예정입니다.
 									</p>
 									<div class="modal-btns-container">
-									<input type="button" class="btn bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberId=<%=m.getMemberId() %>'"/>
+									<input type="button" class="btn bc3" id="modal-btns-item" value="예약취소" onclick=" location='/bookCancle.do?bookNo=<%=bd.getBookNo()%>&memberNo=<%=m.getMemberNo() %>'"/>
 									<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 									</div>
 									</div>

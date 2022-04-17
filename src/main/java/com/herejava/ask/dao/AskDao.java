@@ -226,14 +226,13 @@ public class AskDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = "insert into ask_comment values(ask_seq.nextval, ?,?,?,?,to_char(sysdate,'yyyy-mm-dd'))";
-		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, ac.getAskCommentWriter());
 			pstmt.setInt(2, ac.getAskRef());
 			pstmt.setString(3, (ac.getAskCommentRef() == 0)?null:String.valueOf(ac.getAskCommentRef()));
 			pstmt.setString(4, ac.getAskCommentContent());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

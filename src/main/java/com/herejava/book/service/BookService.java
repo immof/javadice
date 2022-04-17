@@ -256,16 +256,15 @@ public class BookService {
 		int result5 = dao.usePointUpdateInPay(conn, bookNo);
 		int result6 = dao.usePointUpdateInPoint(conn, bookNo);
 		int result7 = dao.plusPointUpdateInPay(conn, bookNo);
-		int result8 = dao.plusPointUpdateInPoint(conn, bookNo);
-		int result9 = 0;//member_point 결과값
+		int result8 = dao.memberPointUpdateInMember(conn, memberPoint, memberNo);//member_point 결과값
 		int totalResult = result1 + result2 + result3 + result4 + result5
-				 	+ result6 + result7 + result8 + result9;
-		if(totalResult == 9) {
+				 	+ result6 + result7 + result8;
+		if(totalResult == 8) {
 			JDBCTemplate.commit(conn);
-			System.out.println("메소드 9개 모두 성공");
+			System.out.println("메소드 8개 모두 성공");
 		}else {
 			JDBCTemplate.rollback(conn);
-			System.out.println("메소드 실패 -> 작동한 메소드 갯수 : "+totalResult);
+			System.out.println("메소드 실패 -> 작동한 메소드 갯수(BookServlet) : "+totalResult);
 		}
 		JDBCTemplate.close(conn);
 		return totalResult;
