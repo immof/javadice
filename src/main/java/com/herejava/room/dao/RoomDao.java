@@ -53,14 +53,15 @@ public class RoomDao {
 		return list;
 	}
 
-	public int priceChange(Connection conn, int roomPrice, String roomNo) {
+	public int priceChange(Connection conn, int roomPrice, String roomNo, int roomCapacity) {
 		PreparedStatement pstmt = null;
 		int result =0;
-		String query = "update room set room_price = ? where room_no =?";
+		String query = "update room set room_price = ?, room_capacity = ? where room_no =?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, roomPrice);
-			pstmt.setString(2, roomNo);
+			pstmt.setInt(2, roomCapacity);
+			pstmt.setString(3, roomNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
