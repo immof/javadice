@@ -298,8 +298,8 @@ table{
 					<tr class="tr-1 room-capacity">
 						<td colspan="3">객실 최대 인원 : <span style="color:#998465;"><%=r.getRoomCapacity() %></span></td>
 						<td>
-							<a href="/bookInfoInput.do?roomNo=<%=r.getRoomNo() %>&roomPrice=<%=r.getRoomPrice() %>&bookPeople=<%=bookPeople %>&checkIn=<%=checkIn %>&checkOut=<%=checkOut %>&payStayDay=<%=diffDays %>&roomName=<%=r.getRoomName() %>&roomCapacity=<%=r.getRoomCapacity() %>&memberNo=<%=m.getMemberNo() %>" >
-								<button class="bc1 bs4">
+                            <a href="/bookInfoInput.do?roomNo=<%=r.getRoomNo() %>&roomPrice=<%=r.getRoomPrice() %>&bookPeople=<%=bookPeople %>&checkIn=<%=checkIn %>&checkOut=<%=checkOut %>&payStayDay=<%=diffDays %>&roomName=<%=r.getRoomName() %>&roomCapacity=<%=r.getRoomCapacity() %>">
+                                <button class="bc1 bs4">
 							<%if(r.getRoomCount() != 0){ %>
 							<%=price %> KRW
 							<%}else{ %>
