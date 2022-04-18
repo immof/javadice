@@ -92,6 +92,12 @@ table{
 	height: 50px;
 	line-height: 50px;
 }
+.room-capacity>td>button{
+	border: none;
+	padding: 0;
+	height: 50px;
+	line-height: 50px;
+}
 .index-wrap{
 	width: 565px;
 	padding-top: 20px;
@@ -298,15 +304,18 @@ table{
 					<tr class="tr-1 room-capacity">
 						<td colspan="3">객실 최대 인원 : <span style="color:#998465;"><%=r.getRoomCapacity() %></span></td>
 						<td>
-                            <a href="/bookInfoInput.do?roomNo=<%=r.getRoomNo() %>&roomPrice=<%=r.getRoomPrice() %>&bookPeople=<%=bookPeople %>&checkIn=<%=checkIn %>&checkOut=<%=checkOut %>&payStayDay=<%=diffDays %>&roomName=<%=r.getRoomName() %>&roomCapacity=<%=r.getRoomCapacity() %>">
-                                <button class="bc1 bs4">
 							<%if(r.getRoomCount() != 0){ %>
+							<a href="/bookInfoInput.do?roomNo=<%=r.getRoomNo() %>&roomPrice=<%=r.getRoomPrice() %>&bookPeople=<%=bookPeople %>&checkIn=<%=checkIn %>&checkOut=<%=checkOut %>&payStayDay=<%=diffDays %>&roomName=<%=r.getRoomName() %>&roomCapacity=<%=r.getRoomCapacity() %>">
+                            	<button class="bc1 bs4">
 							<%=price %> KRW
-							<%}else{ %>
-							예약불가
-							<%} %>
 								</button>
 							</a>
+							<%}else{ %>
+							<button class="bc1 bs4">
+							예약불가
+							</button>
+							<%} %>
+							
 						</td> 
 					</tr>
 				</table>
@@ -389,7 +398,9 @@ table{
 					$("#peopleVal").text(peopleVal-1);
 				}
 			}else{
-				$("#peopleVal").text(peopleVal+1);
+				if(peopleVal < 9){
+					$("#peopleVal").text(peopleVal+1);	
+				}
 			}
 		})
 		$(".searchBtn").on("click",function(){
