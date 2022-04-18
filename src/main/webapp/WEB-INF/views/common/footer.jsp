@@ -21,7 +21,7 @@
                 <li><a href="/askList.do?reqPage=1">문의하기</a></li>
                 <li><a href="/termsOfService.do">이용약관</a></li>
                 <li><a href="/fAQList.do">자주 묻는 질문</a></li>
-                <li><a href="#">사이트 가이드</a></li>
+                <li><a href="/reviewList_admin.do?reqPage=1">고객 후기</a></li>
               </ul>
             </div>
           </div>

@@ -527,7 +527,7 @@
             }
           	if(count != 3){
           		alert("정보를 확인하세요");
-          	}
+          	}else{
 
 				
 				/*
@@ -561,6 +561,7 @@
 						"&memberNo="+memberNo+"&payStayDay="+payStayDay+"&memberPoint="+memberPoint+"&payRoomPrice="+payRoomPrice+
 						"&usePoint="+usePoint+"&checkIn="+checkIn+"&checkOut="+checkOut+"&bookPeople="+bookPeople+
 						"&plusPoint="+plusPoint+"&roomName="+roomName;
+          	}
 	       		
         });
 	</script>
