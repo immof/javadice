@@ -315,7 +315,7 @@
                 
                 
                 <%if(m !=null) {%>
-                <input type="hidden" id="memberNo" value="<%=m.getMemberNo()%>">
+                <input type="hidden" name="memberNo" id="memberNo" value="<%=m.getMemberNo()%>">
 				<%}else {%>
 				<input type="hidden" id="memberNo" value="0">
 				<%} %>   

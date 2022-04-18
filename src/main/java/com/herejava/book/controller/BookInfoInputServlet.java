@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.herejava.member.service.MemberService;
+import com.herejava.member.vo.Member;
 
 /**
  * Servlet implementation class BookInsertServlet
@@ -39,6 +43,10 @@ public class BookInfoInputServlet extends HttpServlet {
 		String checkOut = request.getParameter("checkOut");
 		int payStayDay = Integer.parseInt(request.getParameter("payStayDay"));
 		String roomName = request.getParameter("roomName");
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		MemberService mService = new MemberService();
+		Member m = mService.getMemberInfo(memberNo);
+		
 		//4.결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookInfoInput.jsp");
 		request.setAttribute("roomNo", roomNo);
@@ -49,6 +57,10 @@ public class BookInfoInputServlet extends HttpServlet {
 		request.setAttribute("checkOut", checkOut);
 		request.setAttribute("payStayDay", payStayDay);
 		request.setAttribute("roomName", roomName);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("m", m);
+		
 		view.forward(request, response);
 	}
 

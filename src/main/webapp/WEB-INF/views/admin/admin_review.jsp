@@ -133,7 +133,9 @@
 				     long diffSec = (today.getTime() - regDay.getTime()) / 1000; //초 차이
 				     long diffDays = diffSec / (24*60*60); //일자수 차이
 				     String msg = null;
-				     if(diffDays < 30){
+				     if(diffDays < 1){
+				    	 msg = "오늘";
+					 }else if(diffDays < 30){
 				    	 msg = diffDays + "일 전";
 				     }else if(diffDays >= 30 && diffDays < 360){
 				    	 msg = (int)(Math.floor(diffDays/30)) + "개월 전";

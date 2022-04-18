@@ -68,7 +68,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<div class="belt">로그인</div>
+		<div class="belt">LOG IN</div>
 		<br><br><hr>
 		<form action="/login.do" method="post">
 			<div class=input-wrap>

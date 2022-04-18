@@ -289,5 +289,13 @@ public int getPoint(int memberNo) {
 	return totalPoint;
 }
 
+public Member getMemberInfo(int memberNo) {
+	Connection conn = JDBCTemplate.getConnection();
+	MemberDao dao = new MemberDao();
+	Member m = dao.getMemberInfo(conn,memberNo);
+	JDBCTemplate.close(conn);
+	return m;
+}
+
   
 }//MemberService class
