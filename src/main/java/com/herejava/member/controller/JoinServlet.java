@@ -2,6 +2,7 @@ package com.herejava.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,13 +41,35 @@ public class JoinServlet extends HttpServlet {
 		String memberName = request.getParameter("memberName");
 		String memberNick = request.getParameter("memberNick");
 		String memberPhone = request.getParameter("memberPhone");
+		String filepath = null;
 		//3.비즈니스로직
+		Random r = new Random();
+		int fileRandom = r.nextInt(5)+1;
+		switch(fileRandom) {
+		case 1:
+			filepath = "banana.png";
+			break;
+		case 2:
+			filepath = "octopus.png";
+			break;
+		case 3:
+			filepath = "pearl.png";
+			break;
+		case 4:
+			filepath = "sun.png";
+			break;
+		case 5:
+			filepath = "volcano.png";
+			break;
+		}
+		System.out.println(fileRandom);
 		Member m = new Member();
 		m.setMemberId(memberId);
 		m.setMemberPw(memberPw);
 		m.setMemberName(memberName);
 		m.setMemberNick(memberNick);
 		m.setMemberPhone(memberPhone);
+		m.setFilepath(filepath);
 		MemberService service = new MemberService();
 		int result = service.insertMember(m);
 		//4.결과처리

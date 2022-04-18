@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.herejava.book.service.BookService;
 import com.herejava.book.vo.Book;
 import com.herejava.book.vo.BookData;
+import com.herejava.pay.service.PayService;
+import com.herejava.pay.vo.Pay;
 
 /**
  * Servlet implementation class BookCancleFirstServlet
@@ -38,10 +40,13 @@ public class BookCancleFirstServlet extends HttpServlet {
 		long bookNo = Long.parseLong(request.getParameter("bookNo"));
 		//3. 비즈니스로직
 		BookService service = new BookService();
+		PayService payService = new PayService();
 		BookData bd = service.getBook(bookNo);
+		Pay pay = payService.getPayAmount(bookNo);
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/book/bookCancelView.jsp");
 		request.setAttribute("bd", bd);
+		request.setAttribute("pay", pay);
 		view.forward(request, response);
 	}
 	

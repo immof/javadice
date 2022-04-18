@@ -256,7 +256,7 @@ public class MemberDao {
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into member values(member_seq.nextval,?,?,?,?,?,'0','1','sun.png')";
+		String query = "insert into member values(member_seq.nextval,?,?,?,?,?,'0','1',?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, m.getMemberId());
@@ -264,6 +264,7 @@ public class MemberDao {
 			pstmt.setString(3, m.getMemberName());
 			pstmt.setString(4, m.getMemberNick());
 			pstmt.setString(5, m.getMemberPhone());
+			pstmt.setString(6, m.getFilepath());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
