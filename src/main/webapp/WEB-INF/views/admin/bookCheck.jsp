@@ -30,7 +30,7 @@
 		border-bottom: 1px solid #A7A7A7;
 		}
 	#pageNavi {
-		margin-top: 10px;
+		margin-top: 30px;
 	}
 	#btnbutton{
 		height: 40px;
