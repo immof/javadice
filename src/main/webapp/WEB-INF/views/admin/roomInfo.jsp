@@ -25,6 +25,9 @@
 	#roomPrice{
 		width:100px;
 	}
+	#roomCapacity{
+		width:35px;
+	}
 	.mypage-content{
 	margin-bottom: 100px;
 	}
@@ -56,7 +59,7 @@
 								<td><%=r.getRoomName()%></td>
 								<td><input id="roomPrice" name="roomPrice" type="number" value="<%=r.getRoomPrice()%>" required style="text-align:right; padding-right:3px"> 원</td>
 								<td><%=r.getRoomCount() %></td>
-								<td><%=r.getRoomCapacity()%>인</td>
+								<td><input id="roomCapacity" name="roomCapacity" type="number" value="<%=r.getRoomCapacity()%>" required style="text-align:right; padding-right:3px">인</td>
 								<td><button class="btn bc2 priceChgBtn">수정</button></td>
 						</tr>
 					<%} %>
@@ -69,8 +72,9 @@
 		$(".priceChgBtn").on("click",function(){
 			const roomNo = $(this).parent().parent().children().first().val();
 			const roomPrice = $(this).parent().parent().children().eq(3).children().val();
-			if(confirm("가격을 수정하시겠습니까?")){
-				location.href="/priceChange.do?roomNo="+roomNo+"&roomPrice="+roomPrice;
+			const roomCapacity = $(this).parent().parent().children().eq(5).children().val();
+			if(confirm("수정하시겠습니까?")){
+				location.href="/priceChange.do?roomNo="+roomNo+"&roomPrice="+roomPrice+"&roomCapacity="+roomCapacity;
 			}
 		});
 	</script>

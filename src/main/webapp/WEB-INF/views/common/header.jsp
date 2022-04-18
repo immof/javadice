@@ -51,7 +51,7 @@
 }
 .header-link>li{
 	text-align: center;
-	margin-right:40px;
+	margin-right:20px;
 }
 </style>
 </head>
@@ -65,7 +65,11 @@
 			</div>
 			<div class="header-link">
 				<%if(m!=null) { %>
+					<%if(m.getMemberLevel()==1){ %>
 					<li><a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2">마이페이지</a></li>
+					<%}else {%>
+					<li><a href="/mypage_main.do?memberId=<%=m.getMemberId() %>&memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel() %>" class="f-light fc-2">관리자페이지</a></li>
+					<%} %>
 					<li><a href="/logout.do" class="f-light fc-1">로그아웃</a></li>
 				<%}else {%>
 					<li><a href="/bookSelectFrm.do" class="f-light fc-1">예약조회</a></li>

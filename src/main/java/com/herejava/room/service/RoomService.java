@@ -20,10 +20,10 @@ public class RoomService {
 	}
 	
 	//가격변경 메소드
-	public int priceChange(int roomPrice,String roomNo) {
+	public int priceChange(int roomPrice,String roomNo, int roomCapacity) {
 		Connection conn = JDBCTemplate.getConnection();
 		RoomDao dao = new RoomDao();
-		int result = dao.priceChange(conn,roomPrice,roomNo);
+		int result = dao.priceChange(conn,roomPrice,roomNo,roomCapacity);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {

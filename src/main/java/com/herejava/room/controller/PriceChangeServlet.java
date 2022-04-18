@@ -32,9 +32,10 @@ public class PriceChangeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int roomPrice = Integer.parseInt(request.getParameter("roomPrice"));
+		int roomCapacity = Integer.parseInt(request.getParameter("roomCapacity"));
 		String roomNo = request.getParameter("roomNo");
 		RoomService service = new RoomService();
-		int result = service.priceChange(roomPrice,roomNo);
+		int result = service.priceChange(roomPrice,roomNo,roomCapacity);
 		RequestDispatcher view = request.getRequestDispatcher("/roomInfo.do");
 		view.forward(request, response);
 		

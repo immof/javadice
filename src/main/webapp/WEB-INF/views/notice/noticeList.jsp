@@ -21,7 +21,7 @@
 		width: 900px;
 		margin: 0 auto;
 		overflow: hidden;
-		margin-bottom: 10px;
+		margin-bottom: 80px;
 		flex-grow: 1;
 	}
 	.page1-title{
@@ -58,8 +58,7 @@
 		width:10%;
 	}
 	#pageNavi{
-			margin:10px;
-			margin-bottom: 20px;
+			margin-top:30px;
 		}
 		.writeBtn{
 		margin-left: 730px;
@@ -107,7 +106,6 @@
 				</tr>
 				<%} %>
 		</table>
-		<br>
 		<div id="pageNavi"><%=pageNavi %></div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
