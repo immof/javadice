@@ -64,7 +64,7 @@
 							<tr class="tr-3">
 								<td>비밀번호</td>
 								<td><input class="input-form" type="text" placeholder="*************" disabled></td>
-								<td  style="text-decoration: underline; padding-left: 10px;"><button class="btn bc2 pwChgBtn" style="padding: 5px 9px;">변경하기</button></td>
+								<td  style="text-decoration: underline; padding-left: 10px;"><a href="/mypage_changePw.do?masterChk=1">변경하기</a></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -104,6 +104,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script>
 	$(function(){
 //정보 전송 ajax
