@@ -35,7 +35,7 @@ h3{
 	padding: 0;
 	width: 250px;
 	height: 50px;
-	color: #ccc;
+	color: #333;
 	background-color: #fff;
 	border: 1px solid #ccc
 }
@@ -43,6 +43,7 @@ h3{
 	cursor: pointer;
 	background-color: #eee;
 	transition: 0.5s;
+	color: #ac9e89;
 }
 .page-content{
 	position: relative;
