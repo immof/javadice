@@ -82,16 +82,16 @@ public class BookDao {
 		String query ="";
 		switch(chk) {
 			case 0:
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=0 order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=? and book_state=0) where rnum between ? and ?";
 				break;
 			case 1:
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=1 order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=? and book_state=1) where rnum between ? and ?";
 				break;
 			case 2: 
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? and book_state=2 order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=? and book_state=2) where rnum between ? and ?";
 				break;
 			case 3:
-				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in)b where member_no=? order by book_day desc) where rnum between ? and ?";
+				query = "select * from (select rownum rnum, b.* from (select * from book join room using(room_no) order by check_in desc)b where member_no=?) where rnum between ? and ?";
 				break;
 		}
 		try {
@@ -328,7 +328,6 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
-			System.out.println("updateBookStateInBook 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -348,7 +347,6 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
-			System.out.println("updateBookStateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -369,7 +367,6 @@ public class BookDao {
 			pstmt.setInt(1, memberPoint);
 			pstmt.setInt(2, memberNo);
 			result = pstmt.executeUpdate();
-			System.out.println("memberPointUpdateInMember 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -389,7 +386,6 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
-			System.out.println("payAmountUpdateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -409,7 +405,6 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
-			System.out.println("payAmountUpdateInPoint 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -429,7 +424,6 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
-			System.out.println("usePointUpdateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -449,7 +443,6 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
-			System.out.println("usePointUpdateInPoint 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -469,7 +462,6 @@ public class BookDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setLong(1, bookNo);
 			result = pstmt.executeUpdate();
-			System.out.println("plusPointUpdateInPay 메소드 : "+result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -744,7 +736,6 @@ public class BookDao {
 			pstmt.setString(6, bpay.getCheckOut());
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				System.out.println("bookNo서치동작");
 				bpd.setBookNo(rset.getLong("book_no"));
 				bpd.setBookDay(rset.getString("book_day"));
 			}

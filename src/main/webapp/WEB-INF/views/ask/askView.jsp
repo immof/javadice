@@ -7,6 +7,7 @@
     	Ask a = (Ask)request.getAttribute("a");
     	ArrayList<AskComment> commentList = (ArrayList<AskComment>)request.getAttribute("commentList");
 		ArrayList<AskComment> reCommentList = (ArrayList<AskComment>)request.getAttribute("reCommentList");
+		int askNo = (int)request.getAttribute("askNo");
     %>
 <!DOCTYPE html>
 <html>
@@ -110,7 +111,8 @@
 		}
 		.inputRecomentBox>form>ul>li:last-child{
 			width:10%;
-		}s
+		}
+		
 		
 		
 	</style>
@@ -203,32 +205,42 @@
 				</ul>
 			</form>
 		</div>
-		<%} %>
+		<%} 	%>
 		
 		<div class="commentBox">
 			<%for(AskComment ac : commentList) {%>
-				<table class="ask-comment">
+				<table class="ask-comment" style="width:100%;">
 					<tr class="comment-info">
-						<td><span class="material-icons">account_circle </span><%=ac.getAskCommentWriter() %> </td>
+						<td><i class="fa-solid fa-square-h"></i> <span><%=ac.getAskCommentWriter() %> </span></td>
 						<td><%=ac.getAskCommentEnrollDate() %></td>
 					</tr>
 					<tr class="comment-content">
-						<td>
+						<td colspan="2">
 							<p><%=ac.getAskCommentContent() %>
 							<textarea name="askCommentContent" class="input-form" style="display:none;min-height:90px;"><%=ac.getAskCommentContent() %></textarea></p>
 						</td>
 					</tr>
-					<!--  
+					
+					
+					
+					
+					
 						<tr class="comment-link">
 							<td colspan="2">
 							<%if(m != null) {%>
-								<%if(m.getMemberNick().equals(ac.getAskCommentWriter())) {%>
-									<a href="javascript:void(0)" onclick="modifyComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">수정</a>
+								<%if(m.getMemberLevel() == 0){%>
 									<a href="javascript:void(0)" onclick="deleteComment(this,'<%=ac.getAskCommentNo()%>','<%=a.getAskNo()%>')">삭제</a>
 								<%} %>
-								<a href="javascript:void(0)" class="recShow">답급 달기</a>
 							<%} //댓글 링크 모음 로그인 체크 %>
-							-->
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							</td>
 						</tr> 
 				</table>
@@ -336,11 +348,51 @@
 			//form태그 submit
 			form.submit();
 		}
-		function deleteComment(obj,ncNo,noticeNo){
+		function deleteComment(obj,askCommentNo,askNo){
 			if(confirm("댓글을 삭제하시겠습니까?")){
-				location.href="/deleteAsk.do?ncNo="+askCommentNo+"&askNo="+askNo;
+				$.ajax({
+					url: "/deleteAskComment.do",
+					type: "get",
+					data: {askNo:askNo, askCommentNo:askCommentNo},
+					success: function(data){
+						if(data == "1"){
+							const title = "댓글을 삭제했습니다.";
+							const icon = "success";
+							toastShow(title,icon);
+							setTimeout(function(){
+								location.href="/askView.do?askNo="+askNo;
+							},1000)
+						}else if(data == "0"){
+							const title = "삭제를 실패했습니다.";
+							const icon = "error";
+							toastShow(title,icon);
+						}
+						   
+					},
+				})
 			}
 		}
+	//토스트 알림 함수		
+		function toastShow(title, icon){
+			const Toast = Swal.mixin({
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 1500,
+		    timerProgressBar: true,
+		    didOpen: (toast) => {
+		     // toast.addEventListener('mouseenter', Swal.stopTimer)
+		      toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		 	})
+		
+		  Toast.fire({
+		    title: title,
+		    icon: icon
+		  })
+		}//토스트 끝
+		
+		
 		function home(){
 			history.back();
 		}

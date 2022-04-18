@@ -160,6 +160,26 @@ public class AskService {
 		return result;
 	}
 
+	public ArrayList<AskComment> getAskComment() {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		ArrayList<AskComment> askCo = dao.getAskComment(conn);
+		return askCo;
+	}
+
+	public int delComment(int askNo, int askCommentNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		AskDao dao = new AskDao();
+		int result = dao.delComment(conn,askNo,askCommentNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 	
 	
 	

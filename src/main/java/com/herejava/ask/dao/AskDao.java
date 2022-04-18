@@ -243,5 +243,51 @@ public class AskDao {
 		return result;
 	}
 
+	public ArrayList<AskComment> getAskComment(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AskComment> askCo = new ArrayList<AskComment>();
+		String query = "select * from ask_comment";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				AskComment ac = new AskComment();
+				ac.setAskCommentNo(rset.getInt("ask_comment_no"));
+				ac.setAskCommentWriter(rset.getString("ask_comment_writer"));
+				ac.setAskRef(rset.getInt("ask_ref"));
+				ac.setAskCommentContent(rset.getString("ask_comment_content"));
+				ac.setAskCommentEnrollDate(rset.getString("ask_comment_enroll_date"));
+				askCo.add(ac);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return askCo;
+	}
+
+	public int delComment(Connection conn, int askNo, int askCommentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete ask_comment where ask_comment_no=? and ask_ref=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, askCommentNo);
+			pstmt.setInt(2, askNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+
 
 }

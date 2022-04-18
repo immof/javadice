@@ -88,7 +88,7 @@
         </header>
         <div class="left-menu">
           <ul >
-       		  <li style="font-weight: bold; font-size:18px;">관리자</li>
+       		  <li style="font-size:18px;"><a href="/mypage_main.do?memberId=<%=loginM.getMemberId() %>&memberNo=<%=loginM.getMemberNo()%>&memberLevel=<%=loginM.getMemberLevel() %>">관리자</a></li>
               <li><a href="/bookcheck.do?reqPage=1">예약관리</a></li>
               <li><a href="/memberList.do?reqPage=1">회원관리</a></li>
               <li><a href="/roomInfo.do">객실관리</a></li>

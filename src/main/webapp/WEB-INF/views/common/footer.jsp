@@ -18,7 +18,7 @@
             <img class="footerLogo" src="img/javadice_logo.png">
             <div class="footer-right-bottom">
               <ul>
-                <li><a href="#">문의하기</a></li>
+                <li><a href="/askList.do?reqPage=1">문의하기</a></li>
                 <li><a href="/termsOfService.do">이용약관</a></li>
                 <li><a href="/fAQList.do">자주 묻는 질문</a></li>
                 <li><a href="#">사이트 가이드</a></li>
