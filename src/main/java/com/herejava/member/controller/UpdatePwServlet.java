@@ -38,12 +38,10 @@ public class UpdatePwServlet extends HttpServlet {
 		Member member = new Member();
 		member.setMemberId(request.getParameter("memberId"));
 		member.setMemberPw(request.getParameter("memberPw"));
-		System.out.println("입력한 pw> "+member.getMemberPw());
 		//3.비즈니스로직
 		MemberService service = new MemberService();
 		int result = service.updatePw(member);
 		Member m = service.selectOneMember2(member);
-		System.out.println("거쳐나온 pw> "+m.getMemberPw());
 		//4.결과처리
 		PrintWriter out = response.getWriter();
 		if(result > 0 && m!=null) {
